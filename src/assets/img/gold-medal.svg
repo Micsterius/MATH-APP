@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="gold-medal.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.35545034"
+     inkscape:cx="367.1399"
+     inkscape:cy="599.23983"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4410" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#cfcfd0;stroke:#000000;stroke-width:3;stroke-linecap:square;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path874"
+       cx="106.25751"
+       cy="141.61467"
+       rx="100.77715"
+       ry="101.8937" />
+    <path
+       style="fill:#ffc293;fill-opacity:1;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 36.845864,92.30075 106.07143,215.1203 171.20301,89.695488 148.87218,90.067667 107.18797,185.34587 53.593983,90.067667 Z"
+       id="path4412" />
+    <path
+       style="fill:#f3ff34;stroke-width:7.43783;stroke-linecap:square"
+       d="m 370.65656,912.81765 c -2.32099,-0.31433 -9.91699,-1.26636 -16.87999,-2.11562 C 249.88201,898.03024 151.42619,836.56819 91.469087,746.95389 57.805877,696.63949 37.073001,640.27067 29.378009,578.13984 c -2.244264,-18.12062 -2.244264,-67.68602 0,-85.80664 9.179146,-74.11418 36.922168,-140.05155 82.987081,-197.23699 13.26138,-16.46281 44.05328,-46.73888 60.65486,-59.63877 52.18649,-40.55037 112.04716,-65.72394 180.75662,-76.0147 17.03318,-2.5511 78.62012,-2.5511 95.65331,0 68.68356,10.28688 128.23268,35.3034 180.75661,75.93564 16.28087,12.5948 47.1376,42.98317 60.63821,59.71783 21.67256,26.86417 40.79727,58.25819 53.51176,87.8418 56.59933,131.69317 36.32246,281.03631 -53.2416,392.13511 -13.53911,16.79446 -44.27371,47.06243 -60.90837,59.98364 -50.84564,39.49508 -109.09908,64.45353 -175.37882,75.14037 -13.11111,2.11401 -73.91076,4.00735 -84.15111,2.62052 z M 524.68652,577.91297 c 67.69582,-130.44065 123.32069,-237.79408 123.61082,-238.56316 0.58079,-1.53956 -84.85279,-0.88684 -86.39974,0.66012 -0.48543,0.48542 -35.71078,80.53272 -78.27859,177.8829 C 441.05121,615.243 405.81655,695.31361 405.31978,695.82752 404.82301,696.34143 359.25701,616.4252 304.062,518.2359 209.70478,350.37887 203.48401,339.71384 199.9687,339.7757 c -5.57054,0.098 -60.6447,7.84127 -61.44197,8.63854 -0.7405,0.7405 261.20335,466.62664 262.37316,466.6497 0.38683,0.007 56.09082,-106.71031 123.78663,-237.15097 z"
+       id="path18514"
+       transform="scale(0.26458333)" />
+  </g>
+</svg>
