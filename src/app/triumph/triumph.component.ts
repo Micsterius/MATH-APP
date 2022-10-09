@@ -9,7 +9,7 @@ import {FormControl} from '@angular/forms';
 export class TriumphComponent implements OnInit {
 
   constructor() { }
-  fontStyleControl = new FormControl('');
+
   ngOnInit(): void {
   }
 
