@@ -1,6 +1,8 @@
-mat-card-title {
+mat-card {
     font-size: 38px;
+    font-weight: 600;
     text-align: center;
+    padding: 0;
 }
 
 .card-img-top {
@@ -12,7 +14,5 @@ mat-card-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
     padding: 12px;
-    margin-bottom: 24px;
 }

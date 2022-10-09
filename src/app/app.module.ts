@@ -7,6 +7,7 @@ import { StartsceenComponent } from './startsceen/startsceen.component';
 import {MatCardModule} from '@angular/material/card';
 import { HeaderComponent } from './header/header.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MatSliderModule } from '@angular/material/slider';
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
-    MatSliderModule
+    MatSliderModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
