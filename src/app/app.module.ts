@@ -13,6 +13,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TriumphComponent } from './triumph/triumph.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
     StartsceenComponent,
     HeaderComponent,
     TriumphComponent,
-    SettingsComponent
+    SettingsComponent,
+    ArithmeticAreaComponent
   ],
   imports: [
     BrowserAnimationsModule,
