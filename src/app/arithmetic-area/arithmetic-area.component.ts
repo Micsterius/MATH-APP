@@ -37,6 +37,11 @@ export class ArithmeticAreaComponent implements OnInit {
   chosenOperator: number = 1;
   workingOperator: number = 1;
 
+  result1: number = 0;
+  result2: number = 0;
+  result3: number = 0;
+  result4: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -167,7 +172,46 @@ export class ArithmeticAreaComponent implements OnInit {
     this.results.push(result)
   }
 
-  generateRandomizedAnswers(){
-    //
+  generateRandomizedAnswers() {
+    let result = this.results[0]
+    let x = Math.floor(Math.random() * 4 + 1); // generate a randomize number between 1 and 4
+    if (x == 1) this.showAnswers1(result)
+    if (x == 2) this.showAnswers2(result)
+    if (x == 3) this.showAnswers3(result)
+    if (x == 4) this.showAnswers4(result)
+  }
+
+  showAnswers1(result) {
+    this.result1 = result;
+    this.result2 = result + 1;
+    if (result < 1) this.result3 = result + 3;//make sure there is no negative number in the result options
+    else this.result3 = result - 1;
+    this.result4 = result + 2;
+  }
+
+  showAnswers2(result) {
+    if (result < 2) this.result1 = result + 3; //make sure there is no negative number in the result options
+    else this.result1 = result - 2;
+    this.result2 = result;
+    if (result < 1) this.result3 = result + 2;//make sure there is no negative number in the result options
+    else this.result3 = result - 1;
+    this.result4 = result + 1;
+  }
+
+  showAnswers3(result) {
+    this.result1 = result + 2;
+    this.result2 = result + 3;
+    this.result3 = result;
+    if (result < 1) this.result4 = result + 1;//make sure there is no negative number in the result options
+    else this.result4 = result - 1;
+  }
+
+  showAnswers4(result) {
+    if (result < 1) this.result1 = result + 2;//make sure there is no negative number in the result options
+    else this.result1 = result - 1;
+    this.result2 = result + 4;
+    if (result < 2) this.result3 = result + 1; //make sure there is no negative number in the result options
+    else this.result3 = result - 2;
+    this.result4 = result;
   }
 }
