@@ -3,40 +3,40 @@
         <h3>
             Rechnen mit Zahlen von
         </h3>
-        <mat-button-toggle-group>
-            <mat-button-toggle class="color-white bg-c-1 border-round-left">2 - 7</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1">5 - 15</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right">10 - 20</mat-button-toggle>
+        <mat-button-toggle-group value="middle">
+            <mat-button-toggle class="color-white bg-c-1 border-round-left"  value="low">2 - 7</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1"  value="middle">5 - 15</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1 border-round-right"  value="high">10 - 20</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
         <h3>
             Anzahl Aufgaben richtig zu lösen
         </h3>
-        <mat-button-toggle-group>
-            <mat-button-toggle class="color-white bg-c-1 border-round-left">5</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1">10</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right">20</mat-button-toggle>
+        <mat-button-toggle-group  value="10">
+            <mat-button-toggle class="color-white bg-c-1 border-round-left"  value="5">5</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1"  value="10">10</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1 border-round-right"  value="20">20</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
         <h3>
             Mengen bildlich darstellen
         </h3>
-        <mat-button-toggle-group>
-            <mat-button-toggle class="color-white bg-c-1 border-round-left">Ja</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1">Teilweise</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right">Nein</mat-button-toggle>
+        <mat-button-toggle-group value="yes">
+            <mat-button-toggle class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1" value="partly">Teilweise</mat-button-toggle>
+            <mat-button-toggle class="color-white bg-c-1 border-round-right" value="no">Nein</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
         <h3>
             Rechenarten
         </h3>
-        <mat-button-toggle-group>
-            <mat-button-toggle class="color-white bg-c-1 border-round-left">+</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1">-</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right">+/-</mat-button-toggle>
+        <mat-button-toggle-group value="plus">
+            <mat-button-toggle (click)="getOperator('plus')" class="color-white bg-c-1 border-round-left" value="plus">+</mat-button-toggle>
+            <mat-button-toggle (click)="getOperator('minus')" class="color-white bg-c-1" value="minus">-</mat-button-toggle>
+            <mat-button-toggle (click)="getOperator('both')" class="color-white bg-c-1 border-round-right" value="both">+/-</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
 
