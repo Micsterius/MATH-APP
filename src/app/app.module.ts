@@ -14,6 +14,7 @@ import { TriumphComponent } from './triumph/triumph.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.compo
     MatSliderModule,
     MatButtonModule,
     MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,61 @@
-<p>arithmetic-area works!</p>
+<div class="card-body w450 bg-c-1-light">
+    <mat-progress-bar class="arit-progress-bar" mode="determinate" value="40"></mat-progress-bar>
+
+
+    <div class="question-text">
+        <h5 class="card-title" id="question-text">
+            Wieviel ist
+        </h5>
+        <div class="help"><img src="img/help.svg" onclick="help()"></div>
+    </div>
+    <div class="question-box">
+        <div id="integer-1" class="nbr-size"></div>
+
+        <div id="arithmetic-operator" class="nbr-size">+</div>
+
+        <div id="integer-2" class="nbr-size"></div>
+    </div>
+    <div class="pic-amount" id="amount-image-box">
+        <div id="picture-of-amount-1" class="image-amount-1"></div>
+        <div id="picture-of-amount-2" class="image-amount-2"></div>
+    </div>
+
+
+
+    <div class="answer-container">
+        <div class="transparency-box" id="transparent-box" style="display:none"></div>
+        <div class="card quiz-answer-card mb-2" onclick="answer('answer-1')">
+            <div class="card-body nbr-size" id="answer-1">
+                Antwort
+            </div>
+        </div>
+
+        <div class="card quiz-answer-card mb-2" onclick="answer('answer-2')">
+            <div class="card-body nbr-size" id="answer-2">
+                Antwort
+            </div>
+        </div>
+
+        <div class="card quiz-answer-card mb-2" onclick="answer('answer-3')">
+            <div class="card-body nbr-size" id="answer-3">
+                Antwort
+            </div>
+        </div>
+
+        <div class="card quiz-answer-card mb-2" onclick="answer('answer-4')">
+            <div class="card-body nbr-size" id="answer-4">
+                Antwort
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="question-footer">
+        <span><b id="right-solved-math-problems">1</b> von <b id="total-number-of-math-problems">5</b> Aufgabe(n)
+            korrekt
+            gelöst</span>
+
+        <button class="btn btn-primary" id="next-button" disabled onclick="nextMathProblem()">nächste Frage</button>
+    </div>
