@@ -4,9 +4,9 @@
             Rechnen mit Zahlen von
         </h3>
         <mat-button-toggle-group value="middle">
-            <mat-button-toggle class="color-white bg-c-1 border-round-left"  value="low">2 - 7</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1"  value="middle">5 - 15</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right"  value="high">10 - 20</mat-button-toggle>
+            <mat-button-toggle (click)="getAreaOfNumbersForArithmetic(2, 7)" class="color-white bg-c-1 border-round-left" value="low">2 - 7</mat-button-toggle>
+            <mat-button-toggle (click)="getAreaOfNumbersForArithmetic(5, 15)" class="color-white bg-c-1" value="middle">5 - 15</mat-button-toggle>
+            <mat-button-toggle (click)="getAreaOfNumbersForArithmetic(10, 20)" class="color-white bg-c-1 border-round-right" value="high">10 - 20</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
@@ -14,9 +14,9 @@
             Anzahl Aufgaben richtig zu lösen
         </h3>
         <mat-button-toggle-group  value="10">
-            <mat-button-toggle class="color-white bg-c-1 border-round-left"  value="5">5</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1"  value="10">10</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right"  value="20">20</mat-button-toggle>
+            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect(5)" class="color-white bg-c-1 border-round-left"  value="5">5</mat-button-toggle>
+            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect(10)" class="color-white bg-c-1"  value="10">10</mat-button-toggle>
+            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect(20)" class="color-white bg-c-1 border-round-right"  value="20">20</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
@@ -24,9 +24,9 @@
             Mengen bildlich darstellen
         </h3>
         <mat-button-toggle-group value="yes">
-            <mat-button-toggle class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1" value="partly">Teilweise</mat-button-toggle>
-            <mat-button-toggle class="color-white bg-c-1 border-round-right" value="no">Nein</mat-button-toggle>
+            <mat-button-toggle (click)="getShowPicturesForAmount('yes')" class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
+            <mat-button-toggle (click)="getShowPicturesForAmount('partly')" class="color-white bg-c-1" value="partly">Teilweise</mat-button-toggle>
+            <mat-button-toggle (click)="getShowPicturesForAmount('no')" class="color-white bg-c-1 border-round-right" value="no">Nein</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="settings-btn-box">
