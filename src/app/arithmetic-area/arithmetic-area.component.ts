@@ -20,6 +20,22 @@ export class ArithmeticAreaComponent implements OnInit {
   min: number = 2;
   max: number = 7;
   showImages: number = 2;
+  resultsX: any[] = [];
+  resultsY: any[] = [];
+  results: any[] = [];
+  wrongAnswersX: any[] = [];
+  wrongAnswersY: any[] = [];
+  wrongAnswerOperators: any[] = [];
+  wrongAnswersResults: any[] = [];
+
+  currentQuestion: number = 0;
+  numberOfRightAnswers: number = 0;
+
+  numberOfMathProblems: number = 0;
+  correctSolvedMathproblems: number = 0;
+
+  chosenOperator: number = 1;
+  workingOperator: number = 1;
 
   constructor() { }
 
@@ -94,7 +110,7 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
-  changeOperatorInHTML(){
+  changeOperatorInHTML() {
     //
   }
 
@@ -102,12 +118,56 @@ export class ArithmeticAreaComponent implements OnInit {
     //
   }
 
+  doMinusOperation() {
+    return this.workingOperator = -1; //workingOperator = -1
+  }
+
+
+  doPlusOperation() {
+    return this.workingOperator = +1; //workingOperator = +1
+  }
+
+
+  plusOperationIsGiven() {
+    return this.workingOperator == +1; //workingOperator = +1
+  }
+
+
+  minusOperationIsGiven() {
+    return this.workingOperator == -1; //workingOperator = +1
+  }
+
   calcRightAnswer(x, y) {
-    //
+    if (this.minusOperationIsGiven()) {
+      if (x >= y) {
+        let result = x - y;
+        this.pushCalcInTemporaryArray(result, x, y);
+        this.generateRandomizedAnswers();
+      }
+      else {
+        let result = y - x;
+        this.pushCalcInTemporaryArray(result, x, y);
+        this.generateRandomizedAnswers();
+      }
+    }
+    else {
+      let result = x + y;
+      this.pushCalcInTemporaryArray(result, x, y);
+      this.generateRandomizedAnswers();
+    }
   }
 
   renderImageOfAmount() {
     //
   }
 
+  pushCalcInTemporaryArray(result, x, y) {
+    this.resultsX.push(x)
+    this.resultsY.push(y)
+    this.results.push(result)
+  }
+
+  generateRandomizedAnswers(){
+    //
+  }
 }
