@@ -14,3 +14,24 @@
     line-height: 46px;
     font-weight: 600;
 }
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.quiz-answer-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+
+    div {
+        color: white;
+    }
+}
