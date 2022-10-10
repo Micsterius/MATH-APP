@@ -11,10 +11,18 @@ export class ArithmeticAreaComponent implements OnInit {
   numberOne: number = 0;
   numberTwo: number = 0;
   params: any = '';
+  areaOfNumbersForArithmetic
+  numberOfAnswersToSolveCorrect
+  showPicturesForAmount
+  mathOperator
   constructor() { }
 
   ngOnInit(): void {
-    // this.generateRandomIntegers(min, max);
+    this.areaOfNumbersForArithmetic = localStorage.getItem('areaOfNumbersForArithmetic')
+    this.numberOfAnswersToSolveCorrect = localStorage.getItem('numberOfAnswersToSolveCorrect')
+    this.showPicturesForAmount = localStorage.getItem('areaOfNumbersForArithmetic')
+    this.mathOperator = localStorage.getItem('areaOfNumbersForArithmetic')
+    console.log(this.mathOperator)
   }
 
   newArithmetic() {
