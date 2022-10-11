@@ -18,12 +18,13 @@ h1 {
         padding-bottom: 8px;
         width: 200px;
         border-radius: 12px;
-        box-shadow: 2px 2px 0 0 #68478D;
+        box-shadow: 0 2px 2px 0 #1a1a1a;
+        
 
         &:hover {
+            opacity: 0.9;
             cursor: pointer;
-            opacity: 0.7;
-            box-shadow: 1px 1px 0 0 #9b6bd3;
+            box-shadow: none;
         }
     }
 }
