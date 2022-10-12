@@ -45,7 +45,7 @@ export class ArithmeticAreaComponent implements OnInit {
   result4: number = 0;
 
   answerIsGiven: boolean = false;
-
+  progressBarValue: number = 0;
 
 
   constructor() { }
@@ -101,7 +101,6 @@ export class ArithmeticAreaComponent implements OnInit {
 
     this.arrangeNumbersOnPosition(x, y)
     this.calcRightAnswer(x, y);
-    this.renderImageOfAmount();
   }
 
   arrangeNumbersOnPosition(x, y) {
@@ -168,9 +167,7 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
-  renderImageOfAmount() {
-    //
-  }
+  
 
   pushCalcInTemporaryArray(result, x, y) {
     this.resultsX.push(x)
@@ -230,9 +227,8 @@ export class ArithmeticAreaComponent implements OnInit {
     if (selection == rightAnswer) {
       this.playSound('success');
       this.numberOfRightAnswers++;
+      this.updateProgressbar();
       /*
-      this.increaseNumberOfRightSolvedMathProblems();
-      this.deactivateAnswerButtons();
       this.updateProgressBar();
       setTimeout(function () {
           this.showEndscreen()
@@ -248,9 +244,13 @@ export class ArithmeticAreaComponent implements OnInit {
     };
   }
 
-  playSound(event){
+  updateProgressbar() {
+    this.progressBarValue = this.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
+  }
+
+  playSound(event) {
     let AUDIO_RESULT = new Audio()
-    AUDIO_RESULT.src = "./../../assets/audio/"+event+".mp3"
+    AUDIO_RESULT.src = "./../../assets/audio/" + event + ".mp3"
     AUDIO_RESULT.load();
     AUDIO_RESULT.play();
   }
