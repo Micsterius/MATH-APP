@@ -33,25 +33,25 @@
     <div class="answer-container">
         <div class="transparency-box" id="transparent-box" style="display:none"></div>
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(result1); toggleClass($event)"
+            (click)="checkAnswer(result1); toggleClass($event)" #answerButtonOne
             [ngClass]="{'bg-success' : checkResult(result1) && answerIsGiven, 'bg-failed' : !checkResult(result1) && answerIsGiven}">
             {{result1}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(result2); toggleClass($event)"
+            (click)="checkAnswer(result2); toggleClass($event)" #answerButtonTwo
             [ngClass]="{'bg-success' : checkResult(result2) && answerIsGiven, 'bg-failed' : !checkResult(result2) && answerIsGiven}">
             {{result2}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(result3); toggleClass($event)"
+            (click)="checkAnswer(result3); toggleClass($event)" #answerButtonThree
             [ngClass]="{'bg-success' : checkResult(result3) && answerIsGiven, 'bg-failed' : !checkResult(result3) && answerIsGiven}">
             {{result3}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(result4); toggleClass($event)"
+            (click)="checkAnswer(result4); toggleClass($event)"#answerButtonFour
             [ngClass]="{'bg-success' : checkResult(result4) && answerIsGiven, 'bg-failed' : !checkResult(result4) && answerIsGiven}">
             {{result4}}
         </button>
@@ -64,7 +64,7 @@
         <span><b>{{numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{numberOfMathProblems}}</b> Aufgabe(n)
             korrekt
             gelöst</span>
-        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button (click)="nextMathProblem()">
             <mat-icon style="color: white;">double_arrow</mat-icon>
         </button>
     </div>

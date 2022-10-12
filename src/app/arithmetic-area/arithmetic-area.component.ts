@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Arithmetic } from 'src/models/arithmetic';
 
 @Component({
@@ -47,6 +47,10 @@ export class ArithmeticAreaComponent implements OnInit {
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
 
+  @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
+  @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
+  @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
+  @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
   constructor() { }
 
@@ -92,7 +96,6 @@ export class ArithmeticAreaComponent implements OnInit {
   newArithmetic() {
     this.generateRandomIntegers();
     this.changeOperatorInHTML();
-    this.renderStatisticOverview();
   }
 
   generateRandomIntegers() {
@@ -121,10 +124,6 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   changeOperatorInHTML() {
-    //
-  }
-
-  renderStatisticOverview() {
     //
   }
 
@@ -167,7 +166,7 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
-  
+
 
   pushCalcInTemporaryArray(result, x, y) {
     this.resultsX.push(x)
@@ -229,7 +228,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.numberOfRightAnswers++;
       this.updateProgressbar();
       /*
-      this.updateProgressBar();
+
       setTimeout(function () {
           this.showEndscreen()
       }, 500);
@@ -238,9 +237,7 @@ export class ArithmeticAreaComponent implements OnInit {
     else {
       this.playSound('wrong')
       /* 
-       this.pushMathProblemInWrongAnswersArray(x, y, workingOperator)
-       this.activateNextButton();
-       this.deactivateAnswerButtons();*/
+       this.pushMathProblemInWrongAnswersArray(x, y, workingOperator)*/
     };
   }
 
@@ -261,6 +258,43 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   toggleClass = (event) => {
-    event.target.classList.toggle('btn-pressed');
+    event.target.classList.add('btn-pressed');
+  }
+
+  nextMathProblem() {
+    this.numberOfMathProblems++;
+    this.answerIsGiven = false;
+    this.resetAnswerButtons();
+
+   // this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
+    this.clearTemporaryArray();
+   /* init();
+    increaseNumberOfShownMathProblems();
+    updateProgressBar();
+    activateAnswerButtons();
+    deactivateNextButton();*/
+
+    this.newArithmetic();
+  }
+
+  resetAnswerButtons() {
+    if (this.answerButtonOne.nativeElement.classList.contains('btn-pressed')) {
+      this.answerButtonOne.nativeElement.classList.remove('btn-pressed')
+    }
+    if (this.answerButtonTwo.nativeElement.classList.contains('btn-pressed')) {
+      this.answerButtonTwo.nativeElement.classList.remove('btn-pressed')
+    }
+    if (this.answerButtonThree.nativeElement.classList.contains('btn-pressed')) {
+      this.answerButtonThree.nativeElement.classList.remove('btn-pressed')
+    }
+    if (this.answerButtonFour.nativeElement.classList.contains('btn-pressed')) {
+      this.answerButtonFour.nativeElement.classList.remove('btn-pressed')
+    }
+  }
+
+  clearTemporaryArray() {
+    this.resultsX.splice(0, 1);
+    this.resultsY.splice(0, 1);
+    this.results.splice(0, 1);
   }
 }
