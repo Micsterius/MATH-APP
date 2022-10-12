@@ -34,8 +34,7 @@ export class ArithmeticAreaComponent implements OnInit {
   currentQuestion: number = 0;
   numberOfRightAnswers: number = 0;
 
-  numberOfMathProblems: number = 0;
-  correctSolvedMathproblems: number = 0;
+  numberOfMathProblems: number = 1;
 
   chosenOperator: number = 1;
   workingOperator: number = 1;
@@ -229,8 +228,9 @@ export class ArithmeticAreaComponent implements OnInit {
     this.answerIsGiven = true;
 
     if (selection == rightAnswer) {
-      this.playSound('success')
-      /*this.AUDIO_SUCCESS.play();
+      this.playSound('success');
+      this.numberOfRightAnswers++;
+      /*
       this.increaseNumberOfRightSolvedMathProblems();
       this.deactivateAnswerButtons();
       this.updateProgressBar();
@@ -242,8 +242,6 @@ export class ArithmeticAreaComponent implements OnInit {
     else {
       this.playSound('wrong')
       /* 
-       this.AUDIO_WRONG.play();
-       this.showRightAnswer(rightAnswer);
        this.pushMathProblemInWrongAnswersArray(x, y, workingOperator)
        this.activateNextButton();
        this.deactivateAnswerButtons();*/
