@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Arithmetic } from 'src/models/arithmetic';
 
 @Component({
@@ -46,13 +47,14 @@ export class ArithmeticAreaComponent implements OnInit {
 
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
+  showArithmeticEndscreen: boolean = false;
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     let areaOfNumbersForArithmetic = localStorage.getItem('areaOfNumbersForArithmetic')
@@ -233,6 +235,7 @@ export class ArithmeticAreaComponent implements OnInit {
           this.showEndscreen()
       }, 500);
       this.activateNextButton();*/
+      this.showEndscreen();
     }
     else {
       this.playSound('wrong')
@@ -266,14 +269,8 @@ export class ArithmeticAreaComponent implements OnInit {
     this.answerIsGiven = false;
     this.resetAnswerButtons();
 
-   // this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
+    // this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
     this.clearTemporaryArray();
-   /* init();
-    increaseNumberOfShownMathProblems();
-    updateProgressBar();
-    activateAnswerButtons();
-    deactivateNextButton();*/
-
     this.newArithmetic();
   }
 
@@ -296,5 +293,9 @@ export class ArithmeticAreaComponent implements OnInit {
     this.resultsX.splice(0, 1);
     this.resultsY.splice(0, 1);
     this.results.splice(0, 1);
+  }
+
+  showEndscreen() {
+    if (this.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) this.router.navigate(['/arithmeticEndscreen']);
   }
 }

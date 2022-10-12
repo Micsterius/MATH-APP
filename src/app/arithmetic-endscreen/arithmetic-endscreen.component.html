@@ -1,0 +1,10 @@
+<div class="bg-c-1-light startscreen-container w450">
+    <h2>Runde beendet!</h2>
+    <h4>Du hast X von X Fragen richtig beantwortet.</h4>
+    <div class="button-box">
+        <button class="bg-c-1 color-white" (click)="navigateToArithmetic()">Erneut rechnen</button>
+        <button class="bg-c-1 color-white" [routerLink]="['settings']">Falsche Antworten nochmal</button>
+        <button class="bg-c-1 color-white" [routerLink]="['']">Start</button>
+    </div>
+</div>
+

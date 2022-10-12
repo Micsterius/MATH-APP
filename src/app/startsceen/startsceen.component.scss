@@ -4,27 +4,3 @@ h1 {
     text-align: center;
 }
 
-.button-startscreen-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    button {
-        margin-top: 16px;
-        margin-bottom: 16px;
-        font-size: 24px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        width: 200px;
-        border-radius: 12px;
-        box-shadow: 0 2px 2px 0 #1a1a1a;
-        
-
-        &:hover {
-            opacity: 0.9;
-            cursor: pointer;
-            box-shadow: none;
-        }
-    }
-}

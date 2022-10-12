@@ -15,6 +15,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ArithmeticEndscreenComponent } from './arithmetic-endscreen/arithmetic-endscreen.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HeaderComponent,
     TriumphComponent,
     SettingsComponent,
-    ArithmeticAreaComponent
+    ArithmeticAreaComponent,
+    ArithmeticEndscreenComponent
   ],
   imports: [
     BrowserAnimationsModule,
