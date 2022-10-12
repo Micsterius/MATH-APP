@@ -3,10 +3,10 @@
 
 
     <div class="question-text">
-        <h5 class="card-title" id="question-text">
+        <h3 class="card-title" id="question-text">
             Wieviel ist
-        </h5>
-        <div class="help"><img src="img/help.svg"></div>
+        </h3>
+        <div class="help"><img src="./../../assets/img/help.svg"></div>
     </div>
     <div class="question-box">
         <div class="nbr-size">{{numberOne}}</div>
@@ -15,9 +15,17 @@
 
         <div class="nbr-size">{{numberTwo}}</div>
     </div>
-    <div class="pic-amount" id="amount-image-box">
-        <div id="picture-of-amount-1" class="image-amount-1"></div>
-        <div id="picture-of-amount-2" class="image-amount-2"></div>
+    <div class="image-amount-box">
+        <div class="image-amount-sub-box border-right">
+            <div class="image-amount" *ngFor="let i of Arr(numberOne).fill(1);">
+                <img src="./../../assets/img/nbr-1.svg">
+            </div>
+        </div>
+        <div class="image-amount-sub-box border-left">
+            <div class="image-amount" *ngFor="let i of Arr(numberTwo).fill(1);">
+                <img src="./../../assets/img/nbr-1.svg">
+            </div>
+        </div>
     </div>
 
 

@@ -7,6 +7,9 @@ import { Arithmetic } from 'src/models/arithmetic';
   styleUrls: ['./arithmetic-area.component.scss']
 })
 export class ArithmeticAreaComponent implements OnInit {
+
+  Arr = Array
+
   arithmetic: Arithmetic | any;
   numberOne: number = 0;
   numberTwo: number = 0;
