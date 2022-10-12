@@ -47,6 +47,8 @@ export class ArithmeticAreaComponent implements OnInit {
 
   answerIsGiven: boolean = false;
 
+
+
   constructor() { }
 
   ngOnInit(): void {
@@ -227,6 +229,7 @@ export class ArithmeticAreaComponent implements OnInit {
     this.answerIsGiven = true;
 
     if (selection == rightAnswer) {
+      this.playSound('success')
       /*this.AUDIO_SUCCESS.play();
       this.increaseNumberOfRightSolvedMathProblems();
       this.deactivateAnswerButtons();
@@ -237,6 +240,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.activateNextButton();*/
     }
     else {
+      this.playSound('wrong')
       /* 
        this.AUDIO_WRONG.play();
        this.showRightAnswer(rightAnswer);
@@ -244,6 +248,13 @@ export class ArithmeticAreaComponent implements OnInit {
        this.activateNextButton();
        this.deactivateAnswerButtons();*/
     };
+  }
+
+  playSound(event){
+    let AUDIO_RESULT = new Audio()
+    AUDIO_RESULT.src = "./../../assets/audio/"+event+".mp3"
+    AUDIO_RESULT.load();
+    AUDIO_RESULT.play();
   }
 
   checkResult(selection) {

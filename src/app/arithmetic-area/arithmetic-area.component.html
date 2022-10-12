@@ -64,7 +64,7 @@
         <span><b id="right-solved-math-problems">1</b> von <b id="total-number-of-math-problems">5</b> Aufgabe(n)
             korrekt
             gelöst</span>
-        <button class="bg-c-1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
             <mat-icon style="color: white;">double_arrow</mat-icon>
         </button>
     </div>
