@@ -45,6 +45,8 @@ export class ArithmeticAreaComponent implements OnInit {
   result3: number = 0;
   result4: number = 0;
 
+  answerIsGiven: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -216,5 +218,40 @@ export class ArithmeticAreaComponent implements OnInit {
     if (result < 2) this.result3 = result + 1; //make sure there is no negative number in the result options
     else this.result3 = result - 2;
     this.result4 = result;
+  }
+
+  checkAnswer(selection) {
+    let x = this.resultsX[0];
+    let y = this.resultsY[0];
+    let rightAnswer = this.results[0];
+    this.answerIsGiven = true;
+
+    if (selection == rightAnswer) {
+      /*this.AUDIO_SUCCESS.play();
+      this.increaseNumberOfRightSolvedMathProblems();
+      this.deactivateAnswerButtons();
+      this.updateProgressBar();
+      setTimeout(function () {
+          this.showEndscreen()
+      }, 500);
+      this.activateNextButton();*/
+    }
+    else {
+      /* 
+       this.AUDIO_WRONG.play();
+       this.showRightAnswer(rightAnswer);
+       this.pushMathProblemInWrongAnswersArray(x, y, workingOperator)
+       this.activateNextButton();
+       this.deactivateAnswerButtons();*/
+    };
+  }
+
+  checkResult(selection) {
+    if (selection == this.results[0]) return true;
+    else return false;
+  }
+
+  toggleClass = (event) => {
+    event.target.classList.toggle('btn-pressed');
   }
 }

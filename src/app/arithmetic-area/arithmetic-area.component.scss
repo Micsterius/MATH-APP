@@ -38,7 +38,7 @@
     width: 70px;
     height: 70px;
     border-radius: 8px;
-    box-shadow: 0 2px 2px 0 #1a1a1a;
+    box-shadow: 0 4px 4px 0 #1a1a1a;
     font-size: 46px;
     line-height: 46px;
     font-weight: 600;
@@ -96,4 +96,16 @@
     margin-left: 24px;
     margin-right: 24px;
     margin-top: 24px;
+}
+
+.bg-success {
+    background-color: rgb(31, 166, 31);
+}
+
+.bg-failed {
+    background-color: rgb(198, 40, 0);
+}
+
+.btn-pressed{
+    box-shadow: inset 0px 0px 6px 0px #1a1a1a !important;
 }

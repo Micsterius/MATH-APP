@@ -32,21 +32,29 @@
 
     <div class="answer-container">
         <div class="transparency-box" id="transparent-box" style="display:none"></div>
-        <div class="quiz-answer-card bg-c-1">
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(result1); toggleClass($event)"
+            [ngClass]="{'bg-success' : checkResult(result1) && answerIsGiven, 'bg-failed' : !checkResult(result1) && answerIsGiven}">
             {{result1}}
-        </div>
+        </button>
 
-        <div class="quiz-answer-card bg-c-1">
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(result2); toggleClass($event)"
+            [ngClass]="{'bg-success' : checkResult(result2) && answerIsGiven, 'bg-failed' : !checkResult(result2) && answerIsGiven}">
             {{result2}}
-        </div>
+        </button>
 
-        <div class="quiz-answer-card bg-c-1">
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(result3); toggleClass($event)"
+            [ngClass]="{'bg-success' : checkResult(result3) && answerIsGiven, 'bg-failed' : !checkResult(result3) && answerIsGiven}">
             {{result3}}
-        </div>
+        </button>
 
-        <div class="quiz-answer-card bg-c-1">
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(result4); toggleClass($event)"
+            [ngClass]="{'bg-success' : checkResult(result4) && answerIsGiven, 'bg-failed' : !checkResult(result4) && answerIsGiven}">
             {{result4}}
-        </div>
+        </button>
 
     </div>
 
