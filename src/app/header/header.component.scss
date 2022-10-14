@@ -6,6 +6,27 @@ mat-card {
     line-height: 38px;
 }
 
+.header-top {
+    position: relative;
+}
+
+mat-icon {
+    position: absolute;
+    right: 0%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+        color: black;
+    }
+}
+
+mat-card-title {
+        margin-bottom: 0px;
+}
+
 .card-img-top {
     height: 130px;
     object-fit: contain;

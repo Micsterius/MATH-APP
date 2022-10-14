@@ -101,6 +101,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "math-app:build:production",
+            "firebaseProject": "math-app-fb2bb",
+            "firebaseHostingSite": "math-app-fb2bb"
+          }
         }
       }
     }

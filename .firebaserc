@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "math-app-fb2bb": {
+      "hosting": {
+        "math-app": [
+          "math-app-fb2bb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "math-app-fb2bb"
+  }
+}

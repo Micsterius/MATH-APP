@@ -229,13 +229,11 @@ export class ArithmeticAreaComponent implements OnInit {
       this.playSound('success');
       this.numberOfRightAnswers++;
       this.updateProgressbar();
-      /*
+
 
       setTimeout(function () {
-          this.showEndscreen()
+        this.showEndscreen();
       }, 500);
-      this.activateNextButton();*/
-      this.showEndscreen();
     }
     else {
       this.playSound('wrong')
