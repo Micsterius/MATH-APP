@@ -3,19 +3,23 @@
         <div class="authBlock">
             <h3>Sign Up</h3>
             <form ngNativeValidate #myForm>
-                <mat-form-field appearance="fill">
-                    <mat-label class="contact-label">Enter your E-Mail</mat-label>
-                    <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="email"
-                        type="email" id="mail" placeholder="Your@email.com" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessageMail()}}</mat-error>
-                </mat-form-field>
-                <div class="formGroup">
-                    <input type="password" class="formControl" placeholder="Password" #userPwd required />
+                <div class="auth-container">
+                    <mat-form-field appearance="fill">
+                        <mat-label class="contact-label">Enter your E-Mail</mat-label>
+                        <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="email"
+                            type="email" id="mail" placeholder="Your@email.com" required>
+                        <mat-error *ngIf="email.invalid">{{getErrorMessageMail()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label class="contact-label">Enter your Password</mat-label>
+                        <input formControlName="password" minlength="8" name="password" #userPwd matInput placeholder="Password" required>
+                        <mat-error *ngIf="password.errors?.['minlength']">Please use a password with minimum 8 characters</mat-error>
+                    </mat-form-field>
                 </div>
             </form>
             <div class="formGroup">
                 <input type="button" class="btn btnPrimary" value="Sign Up"
-                    (click)="authService.SignUp(userEmail.value, userPwd.value)" />
+                    (click)="authService.SignUp(userEmail.value, userPwd.value)"/>
             </div>
             <div class="formGroup">
                 <span class="or"><span class="orInner">Or</span></span>
