@@ -8,12 +8,12 @@
                         <mat-label class="contact-label">Enter your E-Mail</mat-label>
                         <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="email"
                             type="email" id="mail" placeholder="Your@email.com" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessageMail()}}</mat-error>
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label class="contact-label">Enter your Password</mat-label>
-                        <input formControlName="password" minlength="8" name="password" #userPwd matInput placeholder="Password" required>
-                        <mat-error *ngIf="password.errors?.['minlength']">Please use a password with minimum 8 characters</mat-error>
+                        <input [formControl]="password" type="password" name="password" #userPwd matInput placeholder="Password" required>
+                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
             </form>

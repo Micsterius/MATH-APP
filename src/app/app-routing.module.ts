@@ -19,7 +19,6 @@ const routes: Routes = [
   { path: 'triumph', component: TriumphComponent },
   { path: 'arithmetic', component: ArithmeticAreaComponent },
   { path: 'arithmeticEndscreen', component: ArithmeticEndscreenComponent },
-  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
