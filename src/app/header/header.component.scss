@@ -12,19 +12,23 @@ mat-card {
 
 .icon-header {
     position: absolute;
-    right: 0%;
+    right: 24px;
     top: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
+    transform: translate(0%, -50%);
 
-    &:hover {
-        cursor: pointer;
-        color: black;
+    mat-icon {
+        color: white;
+        margin-left: 12px;
+
+        &:hover {
+            cursor: pointer;
+            color: black;
+        }
     }
 }
 
 mat-card-title {
-        margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .card-img-top {
