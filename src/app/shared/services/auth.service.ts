@@ -134,9 +134,10 @@ export class AuthService {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', Validators.required);
+  name = new FormControl('', Validators.required);
 
   getErrorMessage() {
-    if (this.email.hasError('required') || this.password.hasError('required')) {
+    if (this.email.hasError('required') || this.password.hasError('required') || this.name.hasError('required')) {
       return 'You must enter a value';
     }
 
@@ -158,6 +159,10 @@ export class AuthService {
     }).catch((error) => {
       window.alert(error.message);
     });
+  }
+
+  changeUserDataName(){
+    //
   }
 
 }

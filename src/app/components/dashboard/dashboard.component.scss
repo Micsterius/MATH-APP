@@ -14,6 +14,7 @@
     font-size: 16px;
     margin-top: 16px;
     margin-bottom: 16px;
+    border-bottom: 1px solid lightgray;
 
     p {
         margin: 0;
@@ -30,7 +31,7 @@
 
 .home-btn-box {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-right: 24px;
     margin-bottom: 24px;
 
@@ -50,11 +51,23 @@
     }
 }
 
-.w100percent {
-    width: 100%;
-}
-
 .dashboard-container {
     display: flex;
     flex-direction: column;
 }
+
+
+
+.mat-icon-close {
+    position: absolute;
+    right: 0px;
+}
+
+.mat-icon-done {
+    position: absolute;
+    right: 32px;
+}
+
+.mat-form-field {
+    width: 300px;
+  }
