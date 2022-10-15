@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
   editUserName: boolean = false;
   editUserId: boolean = false;
   editUserMail: boolean = false;
-  newMail: string = '';
+  editUserPw: boolean = false;
 
  
   

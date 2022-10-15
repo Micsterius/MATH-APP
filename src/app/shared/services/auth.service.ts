@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
-import { getAuth, updateEmail } from "firebase/auth";
+import { getAuth, updateEmail, updatePassword } from "firebase/auth";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -143,13 +143,21 @@ export class AuthService {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
-  changeUserData(email: string) {
+  changeUserDataMail(email: string) {
     updateEmail(this.userData, email)
-      .then((result) => {
+      .then(() => {
         console.log('Mail updated');
       }).catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  changeUserDataPw(newPassword: string) {
+    updatePassword(this.userData, newPassword).then(() => {
+      console.log('Password updated');
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 
 }
