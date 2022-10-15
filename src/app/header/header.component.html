@@ -1,8 +1,19 @@
 <mat-card>
     <div class="header-top">
         <mat-card-title class="bg-c-1 color-white">Mathe App</mat-card-title>
-        <mat-icon fontIcon="login" [routerLink]="['sign-in']" *ngIf="!authService.userData as user"></mat-icon>
-        <mat-icon fontIcon="settings" *ngIf="authService.userData as user"></mat-icon>
+        <mat-icon class="icon-header" fontIcon="login" [routerLink]="['sign-in']" *ngIf="!authService.userData as user"></mat-icon>
+        <mat-icon class="icon-header" mat-icon-button [matMenuTriggerFor]="menu" fontIcon="settings" *ngIf="authService.userData as user">
+        </mat-icon>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button [routerLink]="['dashboard']" mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span>Dein Profil</span>
+            </button>
+            <button mat-menu-item (click)="authService.SignOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Ausloggen</span>
+            </button>
+        </mat-menu>
     </div>
 </mat-card>
 <div class="head-imgs bg-c-1-light">

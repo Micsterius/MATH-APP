@@ -13,8 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
+import { MatMenuModule } from '@angular/material/menu';
 //components
 import { StartsceenComponent } from './startsceen/startsceen.component';
 import { ArithmeticEndscreenComponent } from './arithmetic-endscreen/arithmetic-endscreen.component';
@@ -67,6 +68,7 @@ import { AuthService } from "./shared/services/auth.service";
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatMenuModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

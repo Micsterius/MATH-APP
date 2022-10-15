@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
+import { getAuth, updateEmail } from "firebase/auth";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -11,6 +12,7 @@ import { FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   userData: any; // Save logged in user data
   constructor(
@@ -40,7 +42,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['']);
           }
         });
       })
@@ -140,4 +142,14 @@ export class AuthService {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  changeUserData(email: string) {
+    updateEmail(this.userData, email)
+      .then((result) => {
+        console.log('Mail updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
 }

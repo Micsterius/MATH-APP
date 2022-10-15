@@ -14,14 +14,14 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AuthGuard } from './shared/guard/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: StartsceenComponent },
+  { path: '', component: StartsceenComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent },
   { path: 'triumph', component: TriumphComponent },
   { path: 'arithmetic', component: ArithmeticAreaComponent },
   { path: 'arithmeticEndscreen', component: ArithmeticEndscreenComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
 ];

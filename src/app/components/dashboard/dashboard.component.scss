@@ -1,0 +1,33 @@
+.headline-user {
+    text-align: center;
+}
+
+.user-detail-container {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.user-detail-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    p {
+        margin: 0;
+    }
+
+    mat-icon {
+        &:hover {
+            cursor: pointer;
+            color: #E91E63;
+        }
+    }
+
+}
+
+.w100percent {
+    width: 100%;
+}
