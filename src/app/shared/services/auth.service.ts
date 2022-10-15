@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
-import { getAuth, updateEmail, updatePassword } from "firebase/auth";
+import { getAuth, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -161,8 +161,14 @@ export class AuthService {
     });
   }
 
-  changeUserDataName(){
-    //
+  changeUserDataName(newName) {
+    updateProfile(this.userData, {
+      displayName: newName, photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+      console.log('Name updated');
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 
 }
