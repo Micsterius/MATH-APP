@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
@@ -127,5 +128,16 @@ export class AuthService {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
     });
+  }
+
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', Validators.required);
+
+  getErrorMessage() {
+    if (this.email.hasError('required') || this.password.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 }

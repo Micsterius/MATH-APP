@@ -88,6 +88,22 @@ body {
     }
 }
 
+.authBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 html,
 body {
     height: 100%;

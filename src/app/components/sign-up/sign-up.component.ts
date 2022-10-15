@@ -13,7 +13,7 @@ export class SignUpComponent implements OnInit {
     public authService: AuthService
   ) { }
 
-  
+  /*
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', Validators.required);
 
@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
+  }*/
 
   ngOnInit(): void {
   }

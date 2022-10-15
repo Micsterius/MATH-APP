@@ -2,28 +2,37 @@
 
     <div class="authBlock">
         <h3>Sign In</h3>
-        <div class="formGroup">
-            <input type="text" class="formControl" placeholder="Username" #userName required>
-        </div>
-        <div class="formGroup">
-            <input type="password" class="formControl" placeholder="Password" #userPassword required>
-        </div>
+        <form ngNativeValidate #myForm>
+            <div class="auth-container">
+                <mat-form-field appearance="fill">
+                    <mat-label class="contact-label">Enter your E-Mail</mat-label>
+                    <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="authService.email"
+                        type="email" id="mail" placeholder="Your@email.com" required>
+                    <mat-error *ngIf="authService.email.invalid">{{authService.getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label class="contact-label">Enter your Password</mat-label>
+                    <input [formControl]="authService.password" type="password" name="password" #userPwd matInput placeholder="Password" required>
+                    <mat-error *ngIf="authService.password.invalid">{{authService.getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
         <!-- Calling SignIn Api from AuthService -->
         <div class="formGroup">
-            <input type="button" class="btn btnPrimary" value="Log in"
-                (click)="authService.SignIn(userName.value, userPassword.value)">
+            <input type="button" class="btn-auth bg-c-1 color-white" value="Log in"
+                (click)="authService.SignIn(userEmail.value, userPwd.value)">
         </div>
         <div class="formGroup">
             <span class="or"><span class="orInner">Or</span></span>
         </div>
         <!-- Calling GoogleAuth Api from AuthService -->
-        <div class="formGroup">
-            <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-                <i class="fab fa-google-plus-g"></i>
+        <div class="google-btn-box">
+            <img src="./../../../assets/img/google_icon.svg" alt="">
+            <button type="button" class="color-white bg-c-1" (click)="authService.GoogleAuth()">
                 Log in with Google
             </button>
         </div>
-        <div class="forgotPassword">
+        <div class="redirect">
             <span routerLink="/forgot-password">Forgot Password?</span>
         </div>
     </div>

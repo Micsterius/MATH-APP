@@ -6,14 +6,14 @@
                 <div class="auth-container">
                     <mat-form-field appearance="fill">
                         <mat-label class="contact-label">Enter your E-Mail</mat-label>
-                        <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="email"
+                        <input class="contact-input-element" name="mail" #userEmail matInput [formControl]="authService.email"
                             type="email" id="mail" placeholder="Your@email.com" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                        <mat-error *ngIf="authService.email.invalid">{{authService.getErrorMessage()}}</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="fill">
                         <mat-label class="contact-label">Enter your Password</mat-label>
-                        <input [formControl]="password" type="password" name="password" #userPwd matInput placeholder="Password" required>
-                        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                        <input [formControl]="authService.password" type="password" name="password" #userPwd matInput placeholder="Password" required>
+                        <mat-error *ngIf="authService.password.invalid">{{authService.getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
             </form>
