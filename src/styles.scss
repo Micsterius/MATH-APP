@@ -16,11 +16,87 @@ body {
     width: 450px;
 }
 
-.color-white{
+.color-white {
     color: white;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.color-main {
+    color: #E91E63;
+}
+
+.fs18 {
+    font-size: 24px !important;
+    line-height: 24px;
+    font-weight: 500 !important;
+}
+
+.btn-auth {
+    min-width: 200px;
+    border-radius: 8px;
+    border: 1px solid black;
+    height: 32px;
+
+    &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+        color: black;
+    }
+}
+
+.google-btn-box {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    border: 1px solid black;
+    border-radius: 8px;
+
+    img {
+        width: 24px;
+        object-fit: cover;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    button {
+        border: none;
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        height: 30px;
+        width: 100%;
+
+        &:hover {
+            color: black;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+    }
+}
+
+.redirectToLogin {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.redirect {
+    color: #E91E63;
+    &:hover{
+        cursor: pointer;
+        color: black;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .button-box {
     display: flex;
@@ -37,7 +113,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         min-width: 200px;
         border-radius: 12px;
         box-shadow: 0 2px 2px 0 #1a1a1a;
-        
+
 
         &:hover {
             opacity: 0.9;

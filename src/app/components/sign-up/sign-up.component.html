@@ -1,7 +1,7 @@
 <div class="bg-c-1-light w450">
     <div class="displayTableCell">
         <div class="authBlock">
-            <h3>Sign Up</h3>
+            <h3 class="color-main fs18">Sign Up</h3>
             <form ngNativeValidate #myForm>
                 <div class="auth-container">
                     <mat-form-field appearance="fill">
@@ -18,16 +18,16 @@
                 </div>
             </form>
             <div class="formGroup">
-                <input type="button" class="btn btnPrimary" value="Sign Up"
+                <input type="button" class="btn-auth bg-c-1 color-white" value="Sign Up"
                     (click)="authService.SignUp(userEmail.value, userPwd.value)"/>
             </div>
             <div class="formGroup">
                 <span class="or"><span class="orInner">Or</span></span>
             </div>
             <!-- Continue with Google -->
-            <div class="formGroup">
-                <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-                    <i class="fab fa-google-plus-g"></i>
+            <div class="google-btn-box">
+                <img src="./../../../assets/img/google_icon.svg" alt="">
+                <button type="button" class="color-white bg-c-1" (click)="authService.GoogleAuth()">
                     Continue with Google
                 </button>
             </div>
