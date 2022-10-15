@@ -1,7 +1,8 @@
 <mat-card>
     <div class="header-top">
         <mat-card-title class="bg-c-1 color-white">Mathe App</mat-card-title>
-        <mat-icon fontIcon="login" [routerLink]="['sign-in']"></mat-icon>
+        <mat-icon fontIcon="login" [routerLink]="['sign-in']" *ngIf="!authService.userData as user"></mat-icon>
+        <mat-icon fontIcon="settings" *ngIf="authService.userData as user"></mat-icon>
     </div>
 </mat-card>
 <div class="head-imgs bg-c-1-light">

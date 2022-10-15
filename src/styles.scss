@@ -93,8 +93,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-
 }
 
 .auth-container {
@@ -102,6 +100,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.verify-text-box{
+    padding-right: 24px;
+    padding-left: 24px;
+    text-align: center;
 }
 
 html,
