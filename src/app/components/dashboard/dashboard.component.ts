@@ -12,16 +12,15 @@ export class DashboardComponent implements OnInit {
   editUserMail: boolean = false;
   editUserPw: boolean = false;
 
- 
-  
+
+
   constructor(
     public authService: AuthService
   ) {
-
   }
 
 
-  
+
 
   ngOnInit(): void {
   }

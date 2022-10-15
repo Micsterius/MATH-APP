@@ -163,7 +163,7 @@ export class AuthService {
 
   changeUserDataName(newName) {
     updateProfile(this.userData, {
-      displayName: newName, photoURL: "https://example.com/jane-q-user/profile.jpg"
+      displayName: newName, photoURL: "icon-unknown.svg"
     }).then(() => {
       console.log('Name updated');
     }).catch((error) => {

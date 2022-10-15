@@ -56,7 +56,10 @@
     flex-direction: column;
 }
 
-
+.img-box {
+    display: flex;
+    justify-content: center;
+}
 
 .mat-icon-close {
     position: absolute;
@@ -70,4 +73,9 @@
 
 .mat-form-field {
     width: 300px;
+  }
+
+  .profile-img {
+    height: 60px;
+    object-fit: cover;
   }
