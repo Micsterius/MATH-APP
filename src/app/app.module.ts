@@ -38,6 +38,9 @@ import { environment } from '../environments/environment';
 
 // Auth service
 import { AuthService } from "./shared/services/auth.service";
+import { MainComponent } from './community/main/main.component';
+import { ChatComponent } from './community/chat/chat.component';
+import { FriendsComponent } from './community/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { AuthService } from "./shared/services/auth.service";
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    MainComponent,
+    ChatComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserAnimationsModule,

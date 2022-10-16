@@ -1,0 +1,27 @@
+<div class="w450 bg-c-1-light">
+    <div class="padding-l-r-24">
+        <div class="main-community-header">
+            <mat-icon class="icon-header" fontIcon="people_alt" (click)="navigateToFriends()">
+            </mat-icon>
+            <mat-form-field class="example-full-width">
+                <span matPrefix> </span>
+                <input type="text" (keyup)="loadsearch()" [(ngModel)]="searchValue" matInput placeholder="Suche"
+                    name="search">
+                <button matSuffix mat-button>
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+            <mat-icon class="icon-header" fontIcon="mail" (click)="navigateToChat()">
+            </mat-icon>
+        </div>
+        <div class="search-output">
+            <div class="search-result" *ngFor="let user of searchMatchesUsers">
+                <div>
+                    {{user}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
