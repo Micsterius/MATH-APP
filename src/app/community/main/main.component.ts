@@ -34,20 +34,20 @@ export class MainComponent implements OnInit {
   }
 
   loadsearch() {
-    /* if (this.searchValue !== '') {
-       this.firestore.collection(`users`, ref => ref
-         .orderBy("displayName")
-         .startAt(this.searchValue)
-         .limit(6))
-         .valueChanges()
-         .subscribe((obj: User[]) =>
-           this.users = obj
-         );
-       console.log(this.users)
- 
-       this.filterUsers();
-     }
-     else this.users = [];*/
+    if (this.searchValue !== '') {
+      this.firestore.collection(`users`, ref => ref
+        .orderBy("displayName")
+        .startAt(this.searchValue)
+        .limit(6))
+        .valueChanges()
+        .subscribe((obj: User[]) =>
+          this.users = obj
+        );
+      console.log(this.users)
+
+      this.filterUsers(); //muss noch so programmiert werden, dass die fkt erst ausgeführt wird, wenn das Laden der User abgeschlossen ist
+    }
+    else this.users = [];
   }
 
   filterUsers() {
@@ -76,13 +76,20 @@ export class MainComponent implements OnInit {
     return this.searchMatchesUsers.indexOf(name) > -1;
   }
 
+  checkIfUserIsAlreadyAFriend(uid) {
+    if (this.authService.userData.uid == uid) {
+      return false;
+    }
+    else return true;
+  }
+
   addUserAsFriend(uid) {
     console.log(uid)
     console.log(this.authService.userData.uid)
     console.log(this.authService.userData.uid)
     this.firestore.collection('users')
-    .doc(this.authService.userData.uid)
-    .update({friends: arrayUnion(uid)})
+      .doc(this.authService.userData.uid)
+      .update({ friends: arrayUnion(uid) })
     /*await updateDoc(doc(this.db, 'users', this.authService.userData.uid), {
       friends: arrayUnion(uid)
     })*/

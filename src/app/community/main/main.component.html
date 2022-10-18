@@ -16,10 +16,10 @@
         </div>
         <div class="search-output">
             <div class="search-result" *ngFor="let user of users">
-                <div *ngIf="validate(user.displayName)">
+                <div *ngIf="validate(user.displayName) && checkIfUserIsAlreadyAFriend(user.uid)">
                     {{user.displayName}}
                 </div>
-                <mat-icon *ngIf="validate(user.displayName)" fontIcon="person_add" (click)="addUserAsFriend(user.uid)"></mat-icon>
+                <mat-icon *ngIf="validate(user.displayName) && checkIfUserIsAlreadyAFriend(user.uid)" fontIcon="person_add" (click)="addUserAsFriend(user.uid)"></mat-icon>
             </div>
         </div>
     </div>
