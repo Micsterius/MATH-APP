@@ -9,12 +9,18 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 
 export class AuthService {
   userData: any; // Save logged in user data
+  app = initializeApp(environment.firebase);
+  auth = getAuth(this.app);
+  user = this.auth.currentUser;
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -119,6 +125,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      friends: []
     };
     return userRef.set(userData, {
       merge: true,
@@ -129,6 +136,7 @@ export class AuthService {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
+      this.userData = '';
     });
   }
 
@@ -162,13 +170,29 @@ export class AuthService {
   }
 
   changeUserDataName(newName) {
-    updateProfile(this.userData, {
-      displayName: newName, photoURL: "icon-unknown.svg"
+    this.afs.collection('users')
+      .doc(this.userData.uid)
+      .update({displayName: newName})
+      .then(() => {
+        console.log('Name updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
+  changeUserDataName2(newName) {
+    this.userData.updateProfile({
+      displayName: newName, 
+      photoURL: "https://example.com/jane-q-user/profile.jpg"
     }).then(() => {
-      console.log('Name updated');
+      // Profile updated!
+      // ...
     }).catch((error) => {
-      window.alert(error.message);
+      // An error occurred
+      // ...
     });
   }
+
+  
 
 }

@@ -28,4 +28,8 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //reload of the website is necessary, because after sign up the login doesn't work without refresh 
+  reload(){
+    location.reload();
+  }
 }

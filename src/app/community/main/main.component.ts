@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { environment } from 'src/environments/environment';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 
 
@@ -12,26 +17,25 @@ import { User } from 'src/app/shared/services/user';
 })
 export class MainComponent implements OnInit {
   searchValue: string = "";
-
   users: User[] = [];
   showUser: boolean = false;
   userNames: string[] = [];
   searchMatchesUsers: string[] = [];
 
-
-
   constructor(
-    public firstore: AngularFirestore,
-    private router: Router) { }
-
+    private firestore: AngularFirestore,
+    private router: Router,
+    public authService: AuthService) {
+    
+  }
 
   ngOnInit(): void {
-
+    
   }
 
   loadsearch() {
-    if (this.searchValue !== '') {
-      this.firstore.collection(`users`, ref => ref
+   /* if (this.searchValue !== '') {
+      this.firestore.collection(`users`, ref => ref
         .orderBy("displayName")
         .startAt(this.searchValue)
         .limit(6))
@@ -43,7 +47,7 @@ export class MainComponent implements OnInit {
 
       this.filterUsers();
     }
-    else this.users = [];
+    else this.users = [];*/
   }
 
   filterUsers() {
@@ -61,7 +65,6 @@ export class MainComponent implements OnInit {
     }
   }
 
-
   navigateToChat() {
     this.router.navigate(['/chat'])
   }
@@ -69,4 +72,25 @@ export class MainComponent implements OnInit {
   navigateToFriends() {
     this.router.navigate(['/friends'])
   }
+  validate(name) {
+    return this.searchMatchesUsers.indexOf(name) > -1;
+  }
+
+  addUserAsFriend(uid) {
+    /*console.log(uid)
+    console.log(this.authService.userData.uid)
+    console.log(this.authService.userData.uid)
+    this.firestore.collection('users').doc(this.authService.userData.uid).set({
+      displayName: this.authService.userData.displayName,
+      email: this.authService.userData.email,
+      emailVerified: this.authService.userData.emailVerified,
+      photoURL: this.authService.userData.photoURL,
+      uid: this.authService.userData.uid,
+      friends: []
+    })*/
+   /* await updateDoc(doc(this.db, 'users', this.authService.userData.uid), {
+      friends: arrayUnion(uid)
+    })*/
+  }
 }
+

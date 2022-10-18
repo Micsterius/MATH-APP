@@ -6,4 +6,12 @@
 
 .search-output {
     height: 300px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.search-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
