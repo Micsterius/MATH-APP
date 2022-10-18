@@ -155,6 +155,7 @@ export class AuthService {
   changeUserDataMail(email: string) {
     updateEmail(this.userData, email)
       .then(() => {
+        this.SendVerificationMail();
         console.log('Mail updated');
       }).catch((error) => {
         window.alert(error.message);
@@ -169,30 +170,5 @@ export class AuthService {
     });
   }
 
-  changeUserDataName(newName) {
-    this.afs.collection('users')
-      .doc(this.userData.uid)
-      .update({displayName: newName})
-      .then(() => {
-        console.log('Name updated');
-      }).catch((error) => {
-        window.alert(error.message);
-      });
-  }
-
-  changeUserDataName2(newName) {
-    this.userData.updateProfile({
-      displayName: newName, 
-      photoURL: "https://example.com/jane-q-user/profile.jpg"
-    }).then(() => {
-      // Profile updated!
-      // ...
-    }).catch((error) => {
-      // An error occurred
-      // ...
-    });
-  }
-
-  
 
 }

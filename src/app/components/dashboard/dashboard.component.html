@@ -22,7 +22,7 @@
             (click)="editUserName = false">
           </mat-icon>
           <mat-icon type="button" *ngIf="editUserName" class="icon-header mat-icon-done" fontIcon="done"
-            (click)="editUserName = false; authService.changeUserDataName(userNameChange.value)"></mat-icon>
+            (click)="editUserName = false; changeUserDataNameFirestore(userNameChange.value)"></mat-icon>
         </mat-form-field>
       </div>
       <div class="user-detail-box">
@@ -40,7 +40,8 @@
             (click)="editUserMail = false">
           </mat-icon>
           <mat-icon type="button" *ngIf="editUserMail" class="icon-header mat-icon-done" fontIcon="done"
-            (click)="editUserMail = false; authService.changeUserDataMail(userEmailChange.value)"></mat-icon>
+            (click)="editUserMail = false; authService.changeUserDataMail(userEmailChange.value); changeUserDataMailFirestore(userEmailChange.value)">
+          </mat-icon>
         </mat-form-field>
       </div>
       <div class="user-detail-box">

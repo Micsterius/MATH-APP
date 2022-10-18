@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public afs: AngularFirestore
   ) {
   }
 
@@ -25,4 +27,25 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changeUserDataNameFirestore(newName) {
+    this.afs.collection('users')
+      .doc(this.authService.userData.uid)
+      .update({displayName: newName})
+      .then(() => {
+        console.log('Name updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
+
+  changeUserDataMailFirestore(newMail) {
+    this.afs.collection('users')
+      .doc(this.authService.userData.uid)
+      .update({email: newMail})
+      .then(() => {
+        console.log('Mail updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }
