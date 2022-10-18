@@ -26,28 +26,28 @@ export class MainComponent implements OnInit {
     private firestore: AngularFirestore,
     private router: Router,
     public authService: AuthService) {
-    
+
   }
 
   ngOnInit(): void {
-    
+
   }
 
   loadsearch() {
-   /* if (this.searchValue !== '') {
-      this.firestore.collection(`users`, ref => ref
-        .orderBy("displayName")
-        .startAt(this.searchValue)
-        .limit(6))
-        .valueChanges()
-        .subscribe((obj: User[]) =>
-          this.users = obj
-        );
-      console.log(this.users)
-
-      this.filterUsers();
-    }
-    else this.users = [];*/
+    /* if (this.searchValue !== '') {
+       this.firestore.collection(`users`, ref => ref
+         .orderBy("displayName")
+         .startAt(this.searchValue)
+         .limit(6))
+         .valueChanges()
+         .subscribe((obj: User[]) =>
+           this.users = obj
+         );
+       console.log(this.users)
+ 
+       this.filterUsers();
+     }
+     else this.users = [];*/
   }
 
   filterUsers() {
@@ -77,18 +77,13 @@ export class MainComponent implements OnInit {
   }
 
   addUserAsFriend(uid) {
-    /*console.log(uid)
+    console.log(uid)
     console.log(this.authService.userData.uid)
     console.log(this.authService.userData.uid)
-    this.firestore.collection('users').doc(this.authService.userData.uid).set({
-      displayName: this.authService.userData.displayName,
-      email: this.authService.userData.email,
-      emailVerified: this.authService.userData.emailVerified,
-      photoURL: this.authService.userData.photoURL,
-      uid: this.authService.userData.uid,
-      friends: []
-    })*/
-   /* await updateDoc(doc(this.db, 'users', this.authService.userData.uid), {
+    this.firestore.collection('users')
+    .doc(this.authService.userData.uid)
+    .update({friends: arrayUnion(uid)})
+    /*await updateDoc(doc(this.db, 'users', this.authService.userData.uid), {
       friends: arrayUnion(uid)
     })*/
   }

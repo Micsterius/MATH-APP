@@ -163,12 +163,22 @@ export class AuthService {
   }
 
   changeUserDataPw(newPassword: string) {
-    updatePassword(this.userData, newPassword).then(() => {
-      console.log('Password updated');
-    }).catch((error) => {
-      window.alert(error.message);
-    });
+    updatePassword(this.userData, newPassword)
+      .then(() => {
+        console.log('Password updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
   }
 
-
+  changeUserDataName(userName) {
+    updateProfile(this.userData, {
+      displayName: userName
+    })
+      .then(() => {
+        console.log('Name updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }

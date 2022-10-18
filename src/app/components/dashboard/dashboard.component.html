@@ -22,7 +22,8 @@
             (click)="editUserName = false">
           </mat-icon>
           <mat-icon type="button" *ngIf="editUserName" class="icon-header mat-icon-done" fontIcon="done"
-            (click)="editUserName = false; changeUserDataNameFirestore(userNameChange.value)"></mat-icon>
+            (click)="editUserName = false; changeUserDataNameFirestore(userNameChange.value); authService.changeUserDataName(userNameChange.value)">
+          </mat-icon>
         </mat-form-field>
       </div>
       <div class="user-detail-box">
