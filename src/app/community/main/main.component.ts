@@ -3,10 +3,11 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { query } from '@angular/animations';
 
 
 
@@ -28,12 +29,11 @@ export class MainComponent implements OnInit {
     private firestore: AngularFirestore,
     private router: Router,
     public authService: AuthService) {
-
+    let actualUser = JSON.parse(localStorage.getItem('user'))
+    this.getAlreadyAddedFriends(actualUser.uid);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   loadsearch() {
     if (this.searchValue !== '') {
@@ -44,8 +44,7 @@ export class MainComponent implements OnInit {
         .valueChanges()
         .subscribe((obj: User[]) => {
           this.users = obj;
-          this.filterUsers();//muss noch so programmiert werden, dass die fkt erst ausgeführt wird, wenn das Laden der User abgeschlossen ist
-          this.getAlreadyAddedFriends();
+          this.filterUsers();
         });
     }
     else this.users = [];
@@ -89,17 +88,15 @@ export class MainComponent implements OnInit {
     else return true;
   }
 
-  getAlreadyAddedFriends() {
-    let currentUserUid = this.authService.userData.uid
+  getAlreadyAddedFriends(uid) {
     this.firestore.collection('users')
-      .doc(currentUserUid)
+      .doc(uid)
       .valueChanges()
       .subscribe((user: any) => {
         this.currentUser = user;
       })
-    console.log(this.currentUser.friends)
   }
-
+  //muss noch so programmiert werden, dass die fkt erst ausgeführt wird, wenn das Laden der Freunde abgeschlossen ist
   userAlreadyAddedAsFriend(uid) {
     return this.currentUser.friends.indexOf(uid) > -1
   }
