@@ -23,7 +23,8 @@
         </div>
         <div class="image-amount-sub-box border-left" *ngIf="showBothPictures">
             <div class="image-amount" *ngFor="let i of Arr(numberTwo).fill(1);">
-                <img src="./../../assets/img/nbr-1.svg">
+                <img src="./../../assets/img/nbr-1.svg" *ngIf="this.operator =='+'">
+                <img src="./../../assets/img/nbr-1-red.svg" *ngIf="this.operator =='-'">
             </div>
         </div>
     </div>
