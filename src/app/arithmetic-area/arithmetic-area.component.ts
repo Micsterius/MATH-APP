@@ -14,12 +14,12 @@ export class ArithmeticAreaComponent implements OnInit {
   arithmetic: Arithmetic | any;
   numberOne: number = 0;
   numberTwo: number = 0;
-
+  mathSetting: any;
   params: any = '';
   areaOfNumbersForArithmetic
   numberOfAnswersToSolveCorrect: number = 10;
   showPicturesForAmount
-  mathOperator: string = 'plus';
+  operator: string = '+';
 
   min: number = 2;
   max: number = 7;
@@ -31,6 +31,7 @@ export class ArithmeticAreaComponent implements OnInit {
   wrongAnswersY: any[] = [];
   wrongAnswerOperators: any[] = [];
   wrongAnswersResults: any[] = [];
+  temporaryOperatorChoice: string;
 
   currentQuestion: number = 0;
   numberOfRightAnswers: number = 0;
@@ -54,17 +55,16 @@ export class ArithmeticAreaComponent implements OnInit {
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
+    this.temporaryOperatorChoice = this.mathSetting.mathOperator
+    if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus'
+  }
 
   ngOnInit(): void {
-    let areaOfNumbersForArithmetic = localStorage.getItem('areaOfNumbersForArithmetic')
-    let numberOfAnswersToSolveCorrect = localStorage.getItem('numberOfAnswersToSolveCorrect')
-    let showPicturesForAmount = localStorage.getItem('areaOfNumbersForArithmetic')
-    this.mathOperator = localStorage.getItem('areaOfNumbersForArithmetic')
-
-    this.findAreaOfNumbers(areaOfNumbersForArithmetic)
-    this.findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect)
-    this.findShowPicturesForAmount(showPicturesForAmount)
+    this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic)
+    this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect)
+    this.findShowPicturesForAmount(this.mathSetting.showPicturesForAmount)
     this.newArithmetic()
   }
 
@@ -100,6 +100,11 @@ export class ArithmeticAreaComponent implements OnInit {
     this.changeOperatorInHTML();
   }
 
+  changeOperatorInHTML() {
+    if (this.mathSetting.mathOperator == 'minus') this.operator = '-';
+    if (this.mathSetting.mathOperator == 'plus') this.operator = '+';
+  }
+
   generateRandomIntegers() {
     let x = Math.floor((Math.random() * (this.max + 1 - this.min)) + this.min); // random Number between min and max
     let y = Math.floor((Math.random() * (this.max + 1 - this.min)) + this.min); // random Number between min and max
@@ -109,7 +114,7 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   arrangeNumbersOnPosition(x, y) {
-    if (this.mathOperator == 'minus') {
+    if (this.minusOperationIsGiven()) {
       if (x >= y) {
         this.numberOne = x;
         this.numberTwo = y;
@@ -125,27 +130,40 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
-  changeOperatorInHTML() {
-    //
+  changeOperator() {
+    console.log('nn')
+    if (this.temporaryOperatorChoice == 'both') {
+      if (this.plusOperationIsGiven()) {
+        this.operator = '-';
+        this.doMinusOperation();
+        console.log('A')
+      }
+      else {
+        this.operator = '+';
+        this.doPlusOperation();
+        console.log('B')
+      }
+    }
+
   }
 
   doMinusOperation() {
-    return this.workingOperator = -1; //workingOperator = -1
+    return this.mathSetting.mathOperator = 'minus'; //workingOperator = -1
   }
 
 
   doPlusOperation() {
-    return this.workingOperator = +1; //workingOperator = +1
+    return this.mathSetting.mathOperator = 'plus'; //workingOperator = +1
   }
 
 
   plusOperationIsGiven() {
-    return this.workingOperator == +1; //workingOperator = +1
+    return this.mathSetting.mathOperator == 'plus'; //workingOperator = +1
   }
 
 
   minusOperationIsGiven() {
-    return this.workingOperator == -1; //workingOperator = +1
+    return this.mathSetting.mathOperator == 'minus'; //workingOperator = +1
   }
 
   calcRightAnswer(x, y) {
@@ -230,8 +248,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.numberOfRightAnswers++;
       this.updateProgressbar();
 
-
-      setTimeout(function () {
+      setTimeout(() => {
         this.showEndscreen();
       }, 500);
     }
@@ -266,8 +283,7 @@ export class ArithmeticAreaComponent implements OnInit {
     this.numberOfMathProblems++;
     this.answerIsGiven = false;
     this.resetAnswerButtons();
-
-    // this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
+    this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
     this.clearTemporaryArray();
     this.newArithmetic();
   }
