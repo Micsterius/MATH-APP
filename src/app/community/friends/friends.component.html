@@ -1,7 +1,10 @@
 <div class="w450 bg-c-1-light">
     <div class="padding-l-r-24" *ngIf="show">
-        <div *ngFor="let userFriend of user.friends">
-            {{userFriend}}
+        <div *ngFor="let friend of myFriends" class="friends-box">
+            <div>
+                {{friend.displayName}}
+            </div>
+            <img src="./../../../assets/img/userIcons/{{friend.photoURL}}" alt="">
         </div>
     </div>
 </div>

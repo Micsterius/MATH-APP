@@ -1,0 +1,13 @@
+.friends-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    overflow: auto;
+
+    img{
+        height: 40px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+}

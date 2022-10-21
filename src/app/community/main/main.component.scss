@@ -5,7 +5,7 @@
 }
 
 .search-output {
-    height: 300px;
+   max-height: 300px;
     padding-left: 80px;
     padding-right: 80px;
 }
@@ -14,4 +14,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.main-container{
+    height: 350px;
 }

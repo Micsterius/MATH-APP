@@ -10,6 +10,7 @@ export class FriendsComponent implements OnInit {
   actualUser: any;
   user: any;
   show:boolean = false;
+  myFriends: any[];
   constructor(
     private firestore: AngularFirestore
   ) {
@@ -27,8 +28,22 @@ export class FriendsComponent implements OnInit {
       .subscribe((user) => {
         this.user = user
         console.log(this.user.friends)
+        this.loadDetailsOfFriends()
+      })
+  }
+
+  loadDetailsOfFriends(){
+    this.myFriends = [];
+    for (let i = 0; i < this.user.friends.length; i++) {
+      const friendUid = this.user.friends[i];
+      this.firestore.collection(`users`)
+      .doc(friendUid)
+      .valueChanges()
+      .subscribe((user) => {
+        this.myFriends.push(user)
+        console.log(this.myFriends)
         this.show = true;
       })
-
+    }
   }
 }
