@@ -6,42 +6,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  areaOfNumbersForArithmetic:string = '2';
+  areaOfNumbersForArithmetic: string = '2';
   numberOfAnswersToSolveCorrect: string = '10';
   showPicturesForAmount: string = 'yes'; //boolean not possible because there are three options
   mathOperator: string = 'plus';
+  mathSetting = {
+    'mathOperator': this.mathOperator,
+    'showPicturesForAmount': this.showPicturesForAmount,
+    'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
+    'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
+  }
 
-
-  constructor() { }
+  constructor() {
+    localStorage.setItem('mathSetting', JSON.stringify(this.mathSetting));
+  }
 
   ngOnInit(): void {
-    localStorage.setItem('areaOfNumbersForArithmetic', this.areaOfNumbersForArithmetic)
-    localStorage.setItem('numberOfAnswersToSolveCorrect', this.numberOfAnswersToSolveCorrect)
-    localStorage.setItem('areaOfNumbersForArithmetic', this.showPicturesForAmount)
-    localStorage.setItem('areaOfNumbersForArithmetic', this.mathOperator)
+
   }
 
   ngOnChanges() {
-    
+
+  }
+
+  actualizeSettingObj() {
+    this.mathSetting = {
+      'mathOperator': this.mathOperator,
+      'showPicturesForAmount': this.showPicturesForAmount,
+      'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
+      'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
+    }
+    localStorage.setItem('mathSetting', JSON.stringify(this.mathSetting));
   }
 
   getOperator(operator) {
     this.mathOperator = operator;
-    localStorage.setItem('areaOfNumbersForArithmetic', this.mathOperator)
+    this.actualizeSettingObj();
   }
 
   getAreaOfNumbersForArithmetic(a) {
     this.areaOfNumbersForArithmetic = a;
-    localStorage.setItem('areaOfNumbersForArithmetic', this.areaOfNumbersForArithmetic)
+    this.actualizeSettingObj();
   }
 
   getNumberOfAnswersToSolveCorrect(number) {
     this.numberOfAnswersToSolveCorrect = number;
-    localStorage.setItem('numberOfAnswersToSolveCorrect', this.numberOfAnswersToSolveCorrect)
+    this.actualizeSettingObj();
   }
 
   getShowPicturesForAmount(param) {
     this.showPicturesForAmount = param;
-    localStorage.setItem('areaOfNumbersForArithmetic', this.showPicturesForAmount)
+    this.actualizeSettingObj();
   }
 }
