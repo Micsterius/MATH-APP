@@ -19,6 +19,8 @@ export class ArithmeticAreaComponent implements OnInit {
   areaOfNumbersForArithmetic
   numberOfAnswersToSolveCorrect: number = 10;
   showPicturesForAmount
+  showBothPictures: boolean = false;
+  showOnePictures: boolean = false;
   operator: string = '+';
 
   min: number = 2;
@@ -58,20 +60,24 @@ export class ArithmeticAreaComponent implements OnInit {
   constructor(private router: Router) {
     this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
     this.temporaryOperatorChoice = this.mathSetting.mathOperator
-    if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus'
+    if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
+    this.showPictures();
+    console.log(this.mathSetting)
+    this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
+    this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
+    this.newArithmetic();
   }
 
   ngOnInit(): void {
-    this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic)
-    this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect)
-    this.findShowPicturesForAmount(this.mathSetting.showPicturesForAmount)
-    this.newArithmetic()
   }
 
-  findShowPicturesForAmount(showPicturesForAmount) {
-    if (showPicturesForAmount == 'yes') this.showPicturesForAmount = 2;
-    if (showPicturesForAmount == 'partly') this.showPicturesForAmount = 1;
-    if (showPicturesForAmount == 'no') this.showPicturesForAmount = 0;
+  showPictures() {
+    if (this.mathSetting.showPicturesForAmount == 'yes') this.showBothPictures = true;
+    if (this.mathSetting.showPicturesForAmount == 'partly') this.showOnePictures = true;
+    if (this.mathSetting.showPicturesForAmount == 'no') {
+      this.showOnePictures = false;
+      this.showBothPictures = false;
+    }
   }
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
