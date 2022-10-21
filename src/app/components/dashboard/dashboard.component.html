@@ -6,7 +6,7 @@
   <!-- Show user data when logged in -->
   <div *ngIf="authService.userData as user">
     <div class="img-box">
-      <img class="profile-img" src="./../../../assets/img/{{(user.photoURL) ? user.photoURL : 'icon-unknown.svg'}}"
+      <img class="profile-img" src="./../../../assets/img/userIcons/{{(user.photoURL) ? user.photoURL : 'icon-unknown.svg'}}"
         alt="{{user.displayName}}">
     </div>
 
