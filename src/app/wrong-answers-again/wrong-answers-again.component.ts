@@ -79,8 +79,9 @@ export class WrongAnswersAgainComponent implements OnInit {
       setTimeout(() => this.showEndscreen(), 500);
     }
     else {
-      this.mathServ.playSound('wrong')
-      this.pushMathProblemInWrongAnswersArray()
+      this.mathServ.playSound('wrong');
+      this.pushMathProblemInWrongAnswersArray();
+      this.wrongAnswers.shift();
     };
   }
 
@@ -104,7 +105,6 @@ export class WrongAnswersAgainComponent implements OnInit {
   }
 
   nextMathProblem() {
-    this.numberOfMathProblems++;
     this.answerIsGiven = false;
     this.currentExercise = this.wrongAnswers[0];
     this.numberOne = this.currentExercise.numberOne;
