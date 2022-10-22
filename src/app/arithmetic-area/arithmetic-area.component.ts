@@ -22,6 +22,8 @@ export class ArithmeticAreaComponent implements OnInit {
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
+  imageArrayNumberOne: string[] = [];
+  imageArrayNumberTwo: string[] = [];
 
   min: number = 2;
   max: number = 7;
@@ -69,6 +71,26 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  fillArrayOfImageAmount() {
+    this.imageArrayNumberOne.length = 0;
+    this.imageArrayNumberTwo.length = 0;
+    for (let i = 0; i < this.numberOne; i++) this.imageArrayNumberOne.push('nbr-1.svg');
+    if (this.mathSetting.mathOperator == 'plus') for (let i = 0; i < this.numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1.svg');
+    if (this.mathSetting.mathOperator == 'minus') for (let i = 0; i < this.numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1-red.svg');
+  }
+
+  //x is number one or two, imageNumber is index in Array
+  changeImageColor(imageNumber, x) {
+    if (x == 1) {
+      if (this.imageArrayNumberOne[imageNumber] == 'nbr-1.svg') this.imageArrayNumberOne[imageNumber] = 'nbr-1-red.svg';
+      else this.imageArrayNumberOne[imageNumber] = 'nbr-1.svg';
+    }
+    if (x == 2) {
+      if (this.imageArrayNumberTwo[imageNumber] == 'nbr-1.svg') this.imageArrayNumberTwo[imageNumber] = 'nbr-1-red.svg';
+      else this.imageArrayNumberTwo[imageNumber] = 'nbr-1.svg';
+    }
   }
 
   showPictures() {
@@ -134,6 +156,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.numberOne = x;
       this.numberTwo = y;
     }
+    this.fillArrayOfImageAmount()
   }
 
   changeOperator() {
