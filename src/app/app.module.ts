@@ -44,6 +44,7 @@ import { AuthService } from "./shared/services/auth.service";
 import { MainComponent } from './community/main/main.component';
 import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
+import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { FriendsComponent } from './community/friends/friends.component';
     VerifyEmailComponent,
     MainComponent,
     ChatComponent,
-    FriendsComponent
+    FriendsComponent,
+    WrongAnswersAgainComponent
   ],
   imports: [
     BrowserAnimationsModule,
