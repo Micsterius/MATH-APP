@@ -9,8 +9,6 @@ import { MathService } from '../shared/services/math.service';
 })
 export class ArithmeticAreaComponent implements OnInit {
 
-  Arr = Array
-
   numberOne: number = 0;
   numberTwo: number = 0;
   mathSetting: any;
@@ -66,7 +64,7 @@ export class ArithmeticAreaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fillArrayOfImageAmount() {
+ /* fillArrayOfImageAmount() {
     this.imageArrayNumberOne.length = 0;
     this.imageArrayNumberTwo.length = 0;
     for (let i = 0; i < this.numberOne; i++) this.imageArrayNumberOne.push('nbr-1.svg');
@@ -84,7 +82,7 @@ export class ArithmeticAreaComponent implements OnInit {
       if (this.imageArrayNumberTwo[imageNumber] == 'nbr-1.svg') this.imageArrayNumberTwo[imageNumber] = 'nbr-1-red.svg';
       else this.imageArrayNumberTwo[imageNumber] = 'nbr-1.svg';
     }
-  }
+  }*/
 
   showPictures() {
     if (this.mathSetting.showPicturesForAmount == 'yes') this.showBothPictures = true;
@@ -149,7 +147,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.numberOne = x;
       this.numberTwo = y;
     }
-    this.fillArrayOfImageAmount()
+    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.mathSetting.mathOperator)
   }
 
   changeOperator() {
@@ -190,27 +188,19 @@ export class ArithmeticAreaComponent implements OnInit {
       if (x >= y) {
         let result = x - y;
         this.mathServ.result = result;
-        this.generateRandomizedAnswers();
+        this.mathServ.generateRandomizedAnswers();
       }
       else {
         let result = y - x;
         this.mathServ.result = result;
-        this.generateRandomizedAnswers();
+        this.mathServ.generateRandomizedAnswers();
       }
     }
     else {
       let result = x + y;
       this.mathServ.result = result;
-      this.generateRandomizedAnswers();
+      this.mathServ.generateRandomizedAnswers();
     }
-  }
-
-  generateRandomizedAnswers() {
-    let x = Math.floor(Math.random() * 4 + 1); // generate a randomize number between 1 and 4
-    if (x == 1) this.mathServ.showAnswers1()
-    if (x == 2) this.mathServ.showAnswers2()
-    if (x == 3) this.mathServ.showAnswers3()
-    if (x == 4) this.mathServ.showAnswers4()
   }
 
   checkAnswer(selection) {
@@ -218,7 +208,7 @@ export class ArithmeticAreaComponent implements OnInit {
     this.answerIsGiven = true;
 
     if (selection == rightAnswer) {
-      this.playSound('success');
+      this.mathServ.playSound('success');
       this.numberOfRightAnswers++;
       this.updateProgressbar();
 
@@ -227,11 +217,12 @@ export class ArithmeticAreaComponent implements OnInit {
       }, 500);
     }
     else {
-      this.playSound('wrong')
+      this.mathServ.playSound('wrong')
 
       this.pushMathProblemInWrongAnswersArray()
     };
   }
+
   pushMathProblemInWrongAnswersArray() {
     this.wrongAnswers.push({
       'numberOne': this.numberOne,
@@ -243,22 +234,6 @@ export class ArithmeticAreaComponent implements OnInit {
 
   updateProgressbar() {
     this.progressBarValue = this.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
-  }
-
-  playSound(event) {
-    let AUDIO_RESULT = new Audio()
-    AUDIO_RESULT.src = "./../../assets/audio/" + event + ".mp3"
-    AUDIO_RESULT.load();
-    AUDIO_RESULT.play();
-  }
-
-  checkResult(selection) {
-    if (selection == this.mathServ.result) return true;
-    else return false;
-  }
-
-  toggleClass = (event) => {
-    event.target.classList.add('btn-pressed');
   }
 
   nextMathProblem() {

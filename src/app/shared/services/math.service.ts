@@ -12,10 +12,25 @@ export class MathService {
   result4: number = 0;
   result: number = 0;
 
+  mathSetting: any;
+  imageArrayNumberOne: string[] = [];
+  imageArrayNumberTwo: string[] = [];
+
   constructor(
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) { }
+    
+  ) { 
+    
+  }
+
+  generateRandomizedAnswers() {
+    let x = Math.floor(Math.random() * 4 + 1); // generate a randomize number between 1 and 4
+    if (x == 1) this.showAnswers1()
+    if (x == 2) this.showAnswers2()
+    if (x == 3) this.showAnswers3()
+    if (x == 4) this.showAnswers4()
+  }
 
   showAnswers1() {
     this.result1 = this.result;
@@ -49,5 +64,42 @@ export class MathService {
     if (this.result < 2) this.result3 = this.result + 1; //make sure there is no negative number in the result options
     else this.result3 = this.result - 2;
     this.result4 = this.result;
+  }
+
+  fillArrayOfImageAmount(numberOne, numberTwo, mathOperator) {
+    this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
+    this.imageArrayNumberOne.length = 0;
+    this.imageArrayNumberTwo.length = 0;
+    
+    for (let i = 0; i < numberOne; i++) this.imageArrayNumberOne.push('nbr-1.svg');
+    if (mathOperator == 'plus') for (let i = 0; i < numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1.svg');
+    if (mathOperator == 'minus') for (let i = 0; i < numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1-red.svg');
+  }
+
+  changeImageColor(imageNumber, x) {
+    if (x == 1) {
+      if (this.imageArrayNumberOne[imageNumber] == 'nbr-1.svg') this.imageArrayNumberOne[imageNumber] = 'nbr-1-red.svg';
+      else this.imageArrayNumberOne[imageNumber] = 'nbr-1.svg';
+    }
+    if (x == 2) {
+      if (this.imageArrayNumberTwo[imageNumber] == 'nbr-1.svg') this.imageArrayNumberTwo[imageNumber] = 'nbr-1-red.svg';
+      else this.imageArrayNumberTwo[imageNumber] = 'nbr-1.svg';
+    }
+  }
+
+  toggleClass = (event) => {
+    event.target.classList.add('btn-pressed');
+  }
+
+  playSound(event) {
+    let AUDIO_RESULT = new Audio()
+    AUDIO_RESULT.src = "./../../assets/audio/" + event + ".mp3"
+    AUDIO_RESULT.load();
+    AUDIO_RESULT.play();
+  }
+
+  checkResult(selection) {
+    if (selection == this.result) return true;
+    else return false;
   }
 }

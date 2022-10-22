@@ -17,13 +17,13 @@
     </div>
     <div class="image-amount-box">
         <div class="image-amount-sub-box border-right" *ngIf="showBothPictures || showOnePictures">
-            <div class="image-amount" *ngFor="let imageSrcOne of imageArrayNumberOne; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcOne}}" (click)="changeImageColor(indexOfelement, 1)">
+            <div class="image-amount" *ngFor="let imageSrcOne of mathServ.imageArrayNumberOne; let indexOfelement=index">
+                <img src="./../../assets/img/{{imageSrcOne}}" (click)="mathServ.changeImageColor(indexOfelement, 1)">
             </div>
         </div>
         <div class="image-amount-sub-box border-left" *ngIf="showBothPictures">
-            <div class="image-amount" *ngFor="let imageSrcTwo of imageArrayNumberTwo; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcTwo}}" (click)="changeImageColor(indexOfelement, 2)">
+            <div class="image-amount" *ngFor="let imageSrcTwo of mathServ.imageArrayNumberTwo; let indexOfelement=index">
+                <img src="./../../assets/img/{{imageSrcTwo}}" (click)="mathServ.changeImageColor(indexOfelement, 2)">
             </div>
         </div>
     </div>
@@ -33,26 +33,26 @@
     <div class="answer-container">
         <div class="transparency-box" id="transparent-box" style="display:none"></div>
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(mathServ.result1); toggleClass($event)" #answerButtonOne
-            [ngClass]="{'bg-success' : checkResult(mathServ.result1) && answerIsGiven, 'bg-failed' : !checkResult(mathServ.result1) && answerIsGiven}">
+            (click)="checkAnswer(mathServ.result1); mathServ.toggleClass($event)" #answerButtonOne
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result1) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result1) && answerIsGiven}">
             {{mathServ.result1}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(mathServ.result2); toggleClass($event)" #answerButtonTwo
-            [ngClass]="{'bg-success' : checkResult(mathServ.result2) && answerIsGiven, 'bg-failed' : !checkResult(mathServ.result2) && answerIsGiven}">
+            (click)="checkAnswer(mathServ.result2); mathServ.toggleClass($event)" #answerButtonTwo
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result2) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result2) && answerIsGiven}">
             {{mathServ.result2}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(mathServ.result3); toggleClass($event)" #answerButtonThree
-            [ngClass]="{'bg-success' : checkResult(mathServ.result3) && answerIsGiven, 'bg-failed' : !checkResult(mathServ.result3) && answerIsGiven}">
+            (click)="checkAnswer(mathServ.result3); mathServ.toggleClass($event)" #answerButtonThree
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result3) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result3) && answerIsGiven}">
             {{mathServ.result3}}
         </button>
 
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
-            (click)="checkAnswer(mathServ.result4); toggleClass($event)" #answerButtonFour
-            [ngClass]="{'bg-success' : checkResult(mathServ.result4) && answerIsGiven, 'bg-failed' : !checkResult(mathServ.result4) && answerIsGiven}">
+            (click)="checkAnswer(mathServ.result4); mathServ.toggleClass($event)" #answerButtonFour
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result4) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result4) && answerIsGiven}">
             {{mathServ.result4}}
         </button>
 
