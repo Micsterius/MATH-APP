@@ -12,7 +12,11 @@ export class ArithmeticEndscreenComponent implements OnInit {
 
   ngOnInit(): void {
   }
-navigateToArithmetic(){
-  this.router.navigate(['/arithmetic'])
-}
+  navigateToArithmetic() {
+    this.router.navigate(['/arithmetic'])
+  }
+
+  navigateToWrongAnswers() {
+    this.router.navigate(['/wrongAnswers']);
+  }
 }

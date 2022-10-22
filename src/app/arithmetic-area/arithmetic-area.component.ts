@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Arithmetic } from 'src/models/arithmetic';
+import { MathService } from '../shared/services/math.service';
 
 @Component({
   selector: 'app-arithmetic-area',
@@ -11,7 +11,6 @@ export class ArithmeticAreaComponent implements OnInit {
 
   Arr = Array
 
-  arithmetic: Arithmetic | any;
   numberOne: number = 0;
   numberTwo: number = 0;
   mathSetting: any;
@@ -29,10 +28,6 @@ export class ArithmeticAreaComponent implements OnInit {
   max: number = 7;
   showImages: number = 2;
   result: number;
-  wrongAnswersX: any[] = [];
-  wrongAnswersY: any[] = [];
-  wrongAnswerOperators: any[] = [];
-  wrongAnswersResults: any[] = [];
   temporaryOperatorChoice: string;
 
   wrongAnswers: any[] = [];
@@ -45,11 +40,6 @@ export class ArithmeticAreaComponent implements OnInit {
   chosenOperator: number = 1;
   workingOperator: number = 1;
 
-  result1: number = 0;
-  result2: number = 0;
-  result3: number = 0;
-  result4: number = 0;
-
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
   showArithmeticEndscreen: boolean = false;
@@ -59,7 +49,10 @@ export class ArithmeticAreaComponent implements OnInit {
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    public mathServ: MathService) {
+    this.wrongAnswers.length = 0;
     this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
     this.temporaryOperatorChoice = this.mathSetting.mathOperator
     if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
@@ -164,7 +157,6 @@ export class ArithmeticAreaComponent implements OnInit {
       if (this.plusOperationIsGiven()) {
         this.operator = '-';
         this.doMinusOperation();
-        console.log('A')
       }
       else {
         this.operator = '+';
@@ -197,66 +189,32 @@ export class ArithmeticAreaComponent implements OnInit {
     if (this.minusOperationIsGiven()) {
       if (x >= y) {
         let result = x - y;
-        this.result = result;
+        this.mathServ.result = result;
         this.generateRandomizedAnswers();
       }
       else {
         let result = y - x;
-        this.result = result;
+        this.mathServ.result = result;
         this.generateRandomizedAnswers();
       }
     }
     else {
       let result = x + y;
-      this.result = result;
+      this.mathServ.result = result;
       this.generateRandomizedAnswers();
     }
   }
 
   generateRandomizedAnswers() {
     let x = Math.floor(Math.random() * 4 + 1); // generate a randomize number between 1 and 4
-    if (x == 1) this.showAnswers1()
-    if (x == 2) this.showAnswers2()
-    if (x == 3) this.showAnswers3()
-    if (x == 4) this.showAnswers4()
-  }
-
-  showAnswers1() {
-    this.result1 = this.result;
-    this.result2 = this.result + 1;
-    if (this.result < 1) this.result3 = this.result + 3;//make sure there is no negative number in the result options
-    else this.result3 = this.result - 1;
-    this.result4 = this.result + 2;
-  }
-
-  showAnswers2() {
-    if (this.result < 2) this.result1 = this.result + 3; //make sure there is no negative number in the result options
-    else this.result1 = this.result - 2;
-    this.result2 = this.result;
-    if (this.result < 1) this.result3 = this.result + 2;//make sure there is no negative number in the result options
-    else this.result3 = this.result - 1;
-    this.result4 = this.result + 1;
-  }
-
-  showAnswers3() {
-    this.result1 = this.result + 2;
-    this.result2 = this.result + 3;
-    this.result3 = this.result;
-    if (this.result < 1) this.result4 = this.result + 1;//make sure there is no negative number in the result options
-    else this.result4 = this.result - 1;
-  }
-
-  showAnswers4() {
-    if (this.result < 1) this.result1 = this.result + 2;//make sure there is no negative number in the result options
-    else this.result1 = this.result - 1;
-    this.result2 = this.result + 4;
-    if (this.result < 2) this.result3 = this.result + 1; //make sure there is no negative number in the result options
-    else this.result3 = this.result - 2;
-    this.result4 = this.result;
+    if (x == 1) this.mathServ.showAnswers1()
+    if (x == 2) this.mathServ.showAnswers2()
+    if (x == 3) this.mathServ.showAnswers3()
+    if (x == 4) this.mathServ.showAnswers4()
   }
 
   checkAnswer(selection) {
-    let rightAnswer = this.result;
+    let rightAnswer = this.mathServ.result;
     this.answerIsGiven = true;
 
     if (selection == rightAnswer) {
@@ -275,19 +233,12 @@ export class ArithmeticAreaComponent implements OnInit {
     };
   }
   pushMathProblemInWrongAnswersArray() {
-    /* let mathProblem = {
-       'numberOne': this.numberOne,
-       'numberTwo': this.numberTwo,
-       'operator': this.operator,
-       'result': this.results[0]
-     }*/
     this.wrongAnswers.push({
       'numberOne': this.numberOne,
       'numberTwo': this.numberTwo,
       'operator': this.operator,
-      'result': this.result
+      'result': this.mathServ.result
     });
-    console.log(this.wrongAnswers)
   }
 
   updateProgressbar() {
@@ -302,7 +253,7 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   checkResult(selection) {
-    if (selection == this.result) return true;
+    if (selection == this.mathServ.result) return true;
     else return false;
   }
 
@@ -334,6 +285,11 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   showEndscreen() {
-    if (this.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) this.router.navigate(['/arithmeticEndscreen']);
+    if (this.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
+      this.mathServ.wrongAnswers = this.wrongAnswers;
+      console.log(this.wrongAnswers)
+      console.log(this.mathServ.wrongAnswers)
+      this.router.navigate(['/arithmeticEndscreen']);
+    }
   }
 }

@@ -13,6 +13,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { MainComponent } from './community/main/main.component';
 import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
+import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 // route guard
 import { AuthGuard } from './shared/guard/auth.guard';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'main-community', component: MainComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'friends', component: FriendsComponent },
+  { path: 'wrongAnswers', component: WrongAnswersAgainComponent },
 ];
 
 @NgModule({
