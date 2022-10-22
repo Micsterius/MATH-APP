@@ -16,6 +16,9 @@ export class MathService {
   imageArrayNumberOne: string[] = [];
   imageArrayNumberTwo: string[] = [];
 
+  numberOfRightAnswers: number = 0;
+  numberOfMathProblems: number = 1;
+  
   constructor(
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning

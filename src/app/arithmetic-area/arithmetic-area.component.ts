@@ -13,9 +13,7 @@ export class ArithmeticAreaComponent implements OnInit {
   numberTwo: number = 0;
   mathSetting: any;
   params: any = '';
-  areaOfNumbersForArithmetic
   numberOfAnswersToSolveCorrect: number = 10;
-  showPicturesForAmount
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
@@ -31,9 +29,6 @@ export class ArithmeticAreaComponent implements OnInit {
   wrongAnswers: any[] = [];
 
   currentQuestion: number = 0;
-  numberOfRightAnswers: number = 0;
-
-  numberOfMathProblems: number = 1;
 
   chosenOperator: number = 1;
   workingOperator: number = 1;
@@ -58,31 +53,13 @@ export class ArithmeticAreaComponent implements OnInit {
     console.log(this.mathSetting)
     this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
     this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
+    this.mathServ.numberOfMathProblems = 1;
+    this.mathServ.numberOfRightAnswers = 0;
     this.newArithmetic();
   }
 
   ngOnInit(): void {
   }
-
- /* fillArrayOfImageAmount() {
-    this.imageArrayNumberOne.length = 0;
-    this.imageArrayNumberTwo.length = 0;
-    for (let i = 0; i < this.numberOne; i++) this.imageArrayNumberOne.push('nbr-1.svg');
-    if (this.mathSetting.mathOperator == 'plus') for (let i = 0; i < this.numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1.svg');
-    if (this.mathSetting.mathOperator == 'minus') for (let i = 0; i < this.numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1-red.svg');
-  }
-
-  //x is number one or two, imageNumber is index in Array
-  changeImageColor(imageNumber, x) {
-    if (x == 1) {
-      if (this.imageArrayNumberOne[imageNumber] == 'nbr-1.svg') this.imageArrayNumberOne[imageNumber] = 'nbr-1-red.svg';
-      else this.imageArrayNumberOne[imageNumber] = 'nbr-1.svg';
-    }
-    if (x == 2) {
-      if (this.imageArrayNumberTwo[imageNumber] == 'nbr-1.svg') this.imageArrayNumberTwo[imageNumber] = 'nbr-1-red.svg';
-      else this.imageArrayNumberTwo[imageNumber] = 'nbr-1.svg';
-    }
-  }*/
 
   showPictures() {
     if (this.mathSetting.showPicturesForAmount == 'yes') this.showBothPictures = true;
@@ -209,7 +186,7 @@ export class ArithmeticAreaComponent implements OnInit {
 
     if (selection == rightAnswer) {
       this.mathServ.playSound('success');
-      this.numberOfRightAnswers++;
+      this.mathServ.numberOfRightAnswers++;
       this.updateProgressbar();
 
       setTimeout(() => {
@@ -233,11 +210,11 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   updateProgressbar() {
-    this.progressBarValue = this.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
+    this.progressBarValue = this.mathServ.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
   nextMathProblem() {
-    this.numberOfMathProblems++;
+    this.mathServ.numberOfMathProblems++;
     this.answerIsGiven = false;
     this.resetAnswerButtons();
     this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
@@ -260,7 +237,7 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   showEndscreen() {
-    if (this.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
+    if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
       this.mathServ.wrongAnswers = this.wrongAnswers;
       console.log(this.wrongAnswers)
       console.log(this.mathServ.wrongAnswers)
