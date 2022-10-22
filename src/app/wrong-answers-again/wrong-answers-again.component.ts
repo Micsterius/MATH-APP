@@ -113,7 +113,6 @@ export class WrongAnswersAgainComponent implements OnInit {
     this.mathServ.result = this.currentExercise.result;
     this.mathServ.generateRandomizedAnswers();
     this.resetAnswerButtons();
-    //  this.newArithmetic();
   }
 
   resetAnswerButtons() {

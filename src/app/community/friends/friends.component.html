@@ -1,10 +1,17 @@
 <div class="w450 bg-c-1-light">
     <div class="padding-l-r-24" *ngIf="show">
         <div *ngFor="let friend of myFriends" class="friends-box">
-            <div>
-                {{friend.displayName}}
+            <div class="friends-sub-box">
+                <img src="./../../../assets/img/userIcons/{{friend.photoURL}}" alt="">
+                <div>
+                    {{friend.displayName}}
+                </div>
             </div>
-            <img src="./../../../assets/img/userIcons/{{friend.photoURL}}" alt="">
+            <div>
+                <mat-icon fontIcon="email" (click)="navigateToChat()"></mat-icon>
+                <mat-icon fontIcon="person_remove"></mat-icon>
+            </div>
+
         </div>
     </div>
 </div>

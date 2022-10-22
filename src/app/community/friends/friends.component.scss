@@ -4,10 +4,18 @@
     align-items: center;
     margin-bottom: 8px;
     overflow: auto;
+    padding-left: 80px;
+    padding-right: 80px;
+}
 
-    img{
+.friends-sub-box {
+    display: flex;
+    align-items: center;
+
+    img {
         height: 40px;
         object-fit: cover;
         border-radius: 100%;
+        margin-right: 8px;
     }
 }
