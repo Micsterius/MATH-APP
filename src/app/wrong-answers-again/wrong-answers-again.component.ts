@@ -101,10 +101,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   }
 
   showEndscreen() {
-    if (this.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
-      this.mathServ.wrongAnswers = this.wrongAnswers;
-      console.log(this.wrongAnswers)
-      console.log(this.mathServ.wrongAnswers)
+    if (this.wrongAnswers.length == 0) {
       this.router.navigate(['/arithmeticEndscreen']);
     }
   }
@@ -112,8 +109,19 @@ export class WrongAnswersAgainComponent implements OnInit {
   nextMathProblem() {
     this.numberOfMathProblems++;
     this.answerIsGiven = false;
-    this.resetAnswerButtons();
-  //  this.newArithmetic();
+    this.wrongAnswers.shift();
+    if (this.wrongAnswers.length == 0) this.showEndscreen()
+    else {
+      this.currentExercise = this.wrongAnswers[0];
+      this.numberOne = this.currentExercise.numberOne;
+      this.numberTwo = this.currentExercise.numberTwo;
+      this.operator = this.currentExercise.operator;
+      this.mathServ.result = this.currentExercise.result;
+      this.mathServ.generateRandomizedAnswers();
+      this.resetAnswerButtons();
+    }
+
+    //  this.newArithmetic();
   }
 
   resetAnswerButtons() {
