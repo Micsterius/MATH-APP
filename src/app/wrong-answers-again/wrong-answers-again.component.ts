@@ -14,7 +14,6 @@ export class WrongAnswersAgainComponent implements OnInit {
   numberTwo: number = 0;
   mathSetting: any;
   params: any = '';
-  areaOfNumbersForArithmetic
   numberOfAnswersToSolveCorrect: number = 10;  
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
@@ -36,6 +35,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
   showArithmeticEndscreen: boolean = false;
+  numberOfExercises: number = 0;
 
   currentExercise: any;
 
@@ -61,6 +61,7 @@ export class WrongAnswersAgainComponent implements OnInit {
     this.numberTwo = this.currentExercise.numberTwo;
     this.operator = this.currentExercise.operator;
     this.mathServ.result = this.currentExercise.result;
+    this.numberOfExercises = this.wrongAnswers.length
     this.mathServ.generateRandomizedAnswers();
   }
 
@@ -93,7 +94,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   }
 
   updateProgressbar() {
-    this.progressBarValue = this.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
+    this.progressBarValue = this.numberOfRightAnswers * 100 / this.numberOfExercises
   }
 
   showEndscreen() {
