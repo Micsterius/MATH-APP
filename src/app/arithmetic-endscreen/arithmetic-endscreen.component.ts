@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MathService } from '../shared/services/math.service';
 
 @Component({
   selector: 'app-arithmetic-endscreen',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class ArithmeticEndscreenComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    public mathServ: MathService) { }
 
   ngOnInit(): void {
   }

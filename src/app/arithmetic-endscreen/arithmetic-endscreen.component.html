@@ -3,8 +3,8 @@
     <h4>Du hast X von X Fragen richtig beantwortet.</h4>
     <div class="button-box">
         <button class="bg-c-1 color-white" (click)="navigateToArithmetic()">Erneut rechnen</button>
-        <button class="bg-c-1 color-white" (click)="navigateToWrongAnswers()">Falsche Antworten nochmal</button>
+        <button [disabled]="mathServ.wrongAnswers.length == 0" class="bg-c-1 color-white"
+            (click)="navigateToWrongAnswers()" [ngClass]="{'btn-disabled' : mathServ.wrongAnswers.length == 0}">Falsche Antworten nochmal</button>
         <button class="bg-c-1 color-white" [routerLink]="['']">Start</button>
     </div>
 </div>
-

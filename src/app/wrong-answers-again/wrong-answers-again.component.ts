@@ -15,8 +15,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   mathSetting: any;
   params: any = '';
   areaOfNumbersForArithmetic
-  numberOfAnswersToSolveCorrect: number = 10;
-  showPicturesForAmount
+  numberOfAnswersToSolveCorrect: number = 10;  
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
@@ -75,14 +74,11 @@ export class WrongAnswersAgainComponent implements OnInit {
       this.mathServ.playSound('success');
       this.numberOfRightAnswers++;
       this.updateProgressbar();
-
-      setTimeout(() => {
-        this.showEndscreen();
-      }, 500);
+      this.wrongAnswers.shift();
+      setTimeout(() => this.showEndscreen(), 500);
     }
     else {
       this.mathServ.playSound('wrong')
-
       this.pushMathProblemInWrongAnswersArray()
     };
   }
@@ -109,18 +105,13 @@ export class WrongAnswersAgainComponent implements OnInit {
   nextMathProblem() {
     this.numberOfMathProblems++;
     this.answerIsGiven = false;
-    this.wrongAnswers.shift();
-    if (this.wrongAnswers.length == 0) this.showEndscreen()
-    else {
-      this.currentExercise = this.wrongAnswers[0];
-      this.numberOne = this.currentExercise.numberOne;
-      this.numberTwo = this.currentExercise.numberTwo;
-      this.operator = this.currentExercise.operator;
-      this.mathServ.result = this.currentExercise.result;
-      this.mathServ.generateRandomizedAnswers();
-      this.resetAnswerButtons();
-    }
-
+    this.currentExercise = this.wrongAnswers[0];
+    this.numberOne = this.currentExercise.numberOne;
+    this.numberTwo = this.currentExercise.numberTwo;
+    this.operator = this.currentExercise.operator;
+    this.mathServ.result = this.currentExercise.result;
+    this.mathServ.generateRandomizedAnswers();
+    this.resetAnswerButtons();
     //  this.newArithmetic();
   }
 
