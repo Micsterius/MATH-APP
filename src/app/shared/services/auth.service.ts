@@ -181,4 +181,15 @@ export class AuthService {
         window.alert(error.message);
       });
   }
+
+  changeUserDataImg(src) {
+    updateProfile(this.userData, {
+      photoURL: src
+    })
+      .then(() => {
+        console.log('Img updated');
+      }).catch((error) => {
+        window.alert(error.message);
+      });
+  }
 }

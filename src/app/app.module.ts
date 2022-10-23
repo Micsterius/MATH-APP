@@ -45,6 +45,7 @@ import { MainComponent } from './community/main/main.component';
 import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-
     ReactiveFormsModule,
     MatInputModule,
     MatMenuModule,
+    SwiperModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -1,19 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
+// import Swiper core and required modules
+import SwiperCore, { Pagination, Navigation, Keyboard, Virtual } from "swiper";
+
+// install Swiper modules
+SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
   editUserName: boolean = false;
   editUserId: boolean = false;
   editUserMail: boolean = false;
   editUserPw: boolean = false;
+  editPhotoURL: boolean = false;
 
+  images: any [] = [
+   {'src': 'icon_female_1.png'},
+   {'src': 'icon_female_2.png'},
+   {'src': 'icon_female_3.jpg'},
+   {'src': 'icon_female_4.jpg'},
+   {'src': 'icon_female_5.jpg'},
+   {'src': 'icon_female_6.png'},
+   {'src': 'icon_female_7.jpg'},
+   {'src': 'icon_male_1.png'},
+   {'src': 'icon_male_2.png'},
+   {'src': 'icon_male_3.png'},
+   {'src': 'icon_male_4.png'},
+   {'src': 'icon_male_5.jpg'},
+   {'src': 'icon_male_6.png'},
+   {'src': 'icon-unknown.svg'}
+]
 
+imgSrc2: any [] = [
+  {'src': 'counting-1.png'},
+  {'src': 'counting-2.png'},
+  {'src': 'counting-3.png'}
+]
+
+slides: string [] = [
+  'hallo',
+  'wie gehts',
+  'danke gut'
+]
 
   constructor(
     public authService: AuthService,
@@ -47,5 +81,23 @@ export class DashboardComponent implements OnInit {
       }).catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  onSwiper([swiper]) {
+    console.log(swiper);
+  }
+  onSlideChange() {
+    console.log('slide change');
+  }
+
+  saveImgUserPhotoURL(src){
+    this.afs.collection('users')
+    .doc(this.authService.userData.uid)
+    .update({photoURL: src})
+    .then(() => {
+      console.log('Image updated');
+    }).catch((error) => {
+      window.alert(error.message);
+    });
   }
 }
