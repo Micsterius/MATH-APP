@@ -4,7 +4,7 @@
         <mat-icon class="icon-header" fontIcon="login" [routerLink]="['sign-in']" *ngIf="!authService.userData as user">
         </mat-icon>
         <div class="icon-header">
-            <mat-icon mat-icon-button [routerLink]="['main-community']" fontIcon="chat_bubble" *ngIf="authService.userData as user"></mat-icon>
+            <mat-icon mat-icon-button [routerLink]="['main-community']" fontIcon="groups_2" *ngIf="authService.userData as user"></mat-icon>
             <mat-icon mat-icon-button [matMenuTriggerFor]="menu" fontIcon="settings"
                 *ngIf="authService.userData as user"></mat-icon>
         </div>
