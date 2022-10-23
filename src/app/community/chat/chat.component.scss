@@ -1,0 +1,11 @@
+.chat-container {
+    position: relative;
+    height: 450px;
+}
+
+.writing-area {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}

@@ -46,6 +46,7 @@ import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 import { SwiperModule } from 'swiper/angular';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SwiperModule } from 'swiper/angular';
     MatInputModule,
     MatMenuModule,
     SwiperModule,
+    EditorModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
