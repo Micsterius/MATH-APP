@@ -32,7 +32,6 @@ export class FriendsComponent implements OnInit {
       .valueChanges()
       .subscribe((user) => {
         this.user = user
-        console.log(this.user.friends)
         this.loadDetailsOfFriends()
       })
   }
@@ -59,5 +58,9 @@ export class FriendsComponent implements OnInit {
       this.firestore.collection('users')
         .doc(this.authService.userData.uid)
         .update({ friends: arrayRemove(uid) })
+  }
+
+  navigateToMain(){
+    this.router.navigate(['/main-community'])
   }
 }
