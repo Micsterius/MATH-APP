@@ -105,9 +105,6 @@ export class MainComponent implements OnInit {
     this.firestore.collection('users')
       .doc(this.authService.userData.uid)
       .update({ friends: arrayUnion(uid) })
-    /*await updateDoc(doc(this.db, 'users', this.authService.userData.uid), {
-      friends: arrayUnion(uid)
-    })*/
   }
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { arrayRemove } from 'firebase/firestore';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-friends',
@@ -14,7 +16,8 @@ export class FriendsComponent implements OnInit {
   myFriends: any[];
   constructor(
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
   ) {
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.loadAllFriends()
@@ -43,7 +46,6 @@ export class FriendsComponent implements OnInit {
       .valueChanges()
       .subscribe((user) => {
         this.myFriends.push(user)
-        console.log(this.myFriends)
         this.show = true;
       })
     }
@@ -51,5 +53,11 @@ export class FriendsComponent implements OnInit {
 
   navigateToChat() {
     this.router.navigate(['/chat'])
+  }
+
+  deleteFriendFromList(uid){
+      this.firestore.collection('users')
+        .doc(this.authService.userData.uid)
+        .update({ friends: arrayRemove(uid) })
   }
 }
