@@ -40,7 +40,7 @@ export class MainComponent implements OnInit {
       this.firestore.collection(`users`, ref => ref
         .orderBy("displayName")
         .startAt(this.searchValue)
-        .limit(6))
+        .limit(100))
         .valueChanges()
         .subscribe((obj: User[]) => {
           this.users = obj;

@@ -19,3 +19,15 @@
 .main-container{
     height: 350px;
 }
+
+.search-result-box{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    
+    img{
+        height: 25px;
+        object-fit: cover;
+        margin-right: 8px;
+    }
+}
