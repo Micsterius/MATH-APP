@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   actualUser: any;
   allChatsId: any;
   allChats: any;
+  showChatsWithFriends:boolean = false;
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
   constructor(
@@ -50,6 +51,8 @@ export class ChatComponent implements OnInit {
         if (!this.arrayOfFirendsWithChat.some((friend) => friend.uid == docSnap.data()["uid"])) { //user is not already in array
           this.arrayOfFirendsWithChat.push(docSnap.data())
         }
+        if (this.arrayOfFriendsWithChatUid.length == this.arrayOfFirendsWithChat.length) this.showChatsWithFriends = true;        
+        
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");

@@ -1,7 +1,11 @@
 <div class="w450 bg-c-1-light chat-container">
-    <div>
-Hallo
+    <div *ngIf="showChatsWithFriends" class="chat-friend-container">
+        <div *ngFor="let friend of arrayOfFirendsWithChat" class="chat-friend-box bg-c-1">
+            {{friend.displayName}}
+            <img src="./../../../assets/img/userIcons/{{friend.photoURL}}">
+        </div>
     </div>
+
     <div class="writing-area">
         <editor apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
       height: 150,
