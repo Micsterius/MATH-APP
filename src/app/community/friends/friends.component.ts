@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { arrayRemove } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { arrayRemove, collection, getFirestore } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-friends',
@@ -10,6 +12,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent implements OnInit {
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
+
   actualUser: any;
   user: any;
   show:boolean = false;
@@ -62,5 +67,12 @@ export class FriendsComponent implements OnInit {
 
   navigateToMain(){
     this.router.navigate(['/main-community'])
+  }
+
+  addFriendToChatList(friendUid){
+    this.firestore.collection('posts')
+    .add({
+      authors: [this.actualUser.uid, friendUid],
+    })
   }
 }
