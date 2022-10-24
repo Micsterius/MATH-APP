@@ -34,7 +34,7 @@
         <mat-icon *ngIf="!editUserName" class="icon-header" fontIcon="edit" (click)="editUserName = true"></mat-icon>
         <mat-form-field appearance="fill" *ngIf="editUserName">
           <input name="userNameChange" #userNameChange matInput [formControl]="authService.name" type="text"
-            placeholder="{{user.displayName}}" required>
+            placeholder="{{user.displayName}}" required maxLength="10" >
           <mat-error *ngIf="authService.name.invalid">{{authService.getErrorMessage()}}</mat-error>
           <mat-icon *ngIf="editUserName" class="icon-header mat-icon-close" fontIcon="close"
             (click)="editUserName = false">
