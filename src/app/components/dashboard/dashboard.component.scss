@@ -63,6 +63,12 @@
 .img-box {
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
+    mat-icon{
+        position: absolute;
+        right: 24px;
+    }
 }
 
 .mat-icon-close {

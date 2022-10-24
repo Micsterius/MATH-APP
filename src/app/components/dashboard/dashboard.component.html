@@ -10,6 +10,7 @@
       <img class="profile-img" (click)="editPhotoURL = true"
         src="./../../../assets/img/userIcons/{{(user.photoURL) ? user.photoURL : 'icon-unknown.svg'}}"
         alt="{{user.displayName}}">
+        <mat-icon *ngIf="!editPhotoURL" fontIcon="edit" (click)="editPhotoURL = true"></mat-icon>
     </div>
 
     <div *ngIf="editPhotoURL" class="swiper-container">
