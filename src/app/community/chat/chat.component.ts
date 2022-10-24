@@ -46,10 +46,10 @@ export class ChatComponent implements OnInit {
     this.arrayOfFriendsWithChatUid.forEach(async (uid) => {
       let docRef = doc(this.db, "users", uid);
       let docSnap = await getDoc(docRef);
-      if (docSnap.exists() && !this.noObjectContainsAlreadySameUid(uid)) {
-        this.arrayOfFirendsWithChat.push(docSnap.data())
-        console.log(docSnap.data()["uid"]);
-        console.log(this.arrayOfFirendsWithChat);
+      if (docSnap.exists()) {
+        if (!this.arrayOfFirendsWithChat.some((friend) => friend.uid == docSnap.data()["uid"])) { //user is not already in array
+          this.arrayOfFirendsWithChat.push(docSnap.data())
+        }
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -57,18 +57,10 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  noObjectContainsAlreadySameUid(friendUid) {
-    console.log (friendUid)
-    console.log (this.arrayOfFirendsWithChat)
-    console.log (this.arrayOfFriendsWithChatUid)
-    return this.arrayOfFirendsWithChat.some((uid) => uid == friendUid)
-  }
-
   async getAllDocsInSubCollection(postId) {
     let docsSnap = await getDocs(collection(this.db, "posts", postId, "text"));
     docsSnap.forEach((doc) => {
       console.log(doc.data());
-
     });
   }
 }
