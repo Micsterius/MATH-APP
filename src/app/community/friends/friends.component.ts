@@ -19,7 +19,7 @@ export class FriendsComponent implements OnInit {
   actualUser: any;
   user: any;
   show: boolean = false;
-  myFriends: any[];
+  myFriends: any[] = [];
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
@@ -39,13 +39,13 @@ export class FriendsComponent implements OnInit {
       .doc(this.actualUser.uid)
       .valueChanges()
       .subscribe((user) => {
-        this.user = user
-        this.loadDetailsOfFriends()
+        this.user = user;
+        this.loadDetailsOfFriends();
       })
   }
 
   loadDetailsOfFriends() {
-    this.myFriends = [];
+    this.myFriends.length = 0;
     for (let i = 0; i < this.user.friends.length; i++) {
       const friendUid = this.user.friends[i];
       this.firestore.collection(`users`)
@@ -53,7 +53,7 @@ export class FriendsComponent implements OnInit {
         .valueChanges()
         .subscribe((user) => {
           this.myFriends.push(user)
-          this.show = true;
+          if (this.user.friends.length == this.myFriends.length) this.show = true;
         })
     }
   }
@@ -72,42 +72,9 @@ export class FriendsComponent implements OnInit {
     this.router.navigate(['/main-community'])
   }
 
-  async addFriendToChatList(friendUid) {
-    let docRef = await addDoc(collection(this.db, "posts"), {
-      authors: [this.actualUser.uid, friendUid],
-    })
-    console.log(docRef.id)/* */
-    // this.navigateToChatWithFriend()
-    this.checkIfAlreadyPostsDocExist(friendUid)
-    /* this.firestore.collection('posts')
-       .add({
-         authors: [this.actualUser.uid, friendUid],
-       })*/
-  }
+
 
   navigateToChatWithFriend() {
     this.router.navigate(['/chat-friend'])
-  }
-
-  async checkIfAlreadyPostsDocExist(friendUid) {
-    let docRef = query(collection(this.db, "posts"), where("authors", 'array-contains', [friendUid, this.actualUser.uid]));
-    let querySnapshot = await getDocs(docRef);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-    });
-
-    /*
-        let a = this.firestore.collection(`posts`, ref => ref
-          .where("authors", 'array-contains', [friendUid, this.actualUser.uid]));
-        let docSnap = await getDoc(a);
-        if (docSnap.exists()) {
-          // Convert to City object
-          const city = docSnap.data();
-          // Use a City instance method
-          console.log(city.toString());
-        } else {
-          console.log("No such document!");
-        }*/
   }
 }

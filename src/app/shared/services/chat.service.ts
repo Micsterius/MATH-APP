@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
@@ -17,7 +18,7 @@ export class ChatService {
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
 
-  constructor() {
+  constructor(private router: Router) {
   }
   async loadChats() {
     this.actualUser = JSON.parse(localStorage.getItem('user'))
@@ -64,10 +65,15 @@ export class ChatService {
       this.arrayOfFriendsWithChatUid.push(friendUid);
     }
     else console.log('already doc exist');
+    this.navigateToChatWithFriend()
   }
 
   friendChatDocAlreadyExist(friendUid) {
     if (this.arrayOfFriendsWithChatUid.indexOf(friendUid) > -1) return true;
     else return false;
+  }
+
+  navigateToChatWithFriend() {
+    this.router.navigate(['/chat-friend'])
   }
 }
