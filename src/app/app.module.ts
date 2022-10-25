@@ -47,6 +47,7 @@ import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 import { SwiperModule } from 'swiper/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { ChatFriendComponent } from './community/chat-friend/chat-friend.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     MainComponent,
     ChatComponent,
     FriendsComponent,
-    WrongAnswersAgainComponent
+    WrongAnswersAgainComponent,
+    ChatFriendComponent
   ],
   imports: [
     BrowserAnimationsModule,

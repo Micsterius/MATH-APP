@@ -14,8 +14,10 @@ import { MainComponent } from './community/main/main.component';
 import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
+import { ChatFriendComponent } from './community/chat-friend/chat-friend.component';
 // route guard
 import { AuthGuard } from './shared/guard/auth.guard';
+
 
 const routes: Routes = [
   { path: '', component: StartsceenComponent, canActivate: [AuthGuard] },
@@ -32,6 +34,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'friends', component: FriendsComponent },
   { path: 'wrongAnswers', component: WrongAnswersAgainComponent },
+  { path: 'chat-friend', component: ChatFriendComponent },
 ];
 
 @NgModule({
