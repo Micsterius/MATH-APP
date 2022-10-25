@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,18 +21,16 @@ export class ChatComponent implements OnInit {
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
   constructor(
-    private firestore: AngularFirestore,) {
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
-    setTimeout(() => {
-      this.loadChats()
-    }, 500);
+    private firestore: AngularFirestore,
+    public chatServ: ChatService) {
+    chatServ.loadChats()
 
   }
 
   ngOnInit(): void {
   }
 
-  async loadChats() {
+ /* async loadChats() {
     this.allChatsId = query(collection(this.db, "posts"), where("authors", "array-contains", this.actualUser.uid));
     this.allChats = await getDocs(this.allChatsId);
     this.allChats.forEach((doc) => {
@@ -65,5 +64,5 @@ export class ChatComponent implements OnInit {
     docsSnap.forEach((doc) => {
       console.log(doc.data());
     });
-  }
+  }*/
 }

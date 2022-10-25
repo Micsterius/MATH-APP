@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { addDoc, arrayRemove, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,10 +23,12 @@ export class FriendsComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    public chatServ: ChatService
   ) {
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.loadAllFriends()
+    chatServ.loadChats()
   }
 
   ngOnInit(): void {
@@ -73,8 +76,8 @@ export class FriendsComponent implements OnInit {
     let docRef = await addDoc(collection(this.db, "posts"), {
       authors: [this.actualUser.uid, friendUid],
     })
-   console.log(docRef.id)/* */
-   // this.navigateToChatWithFriend()
+    console.log(docRef.id)/* */
+    // this.navigateToChatWithFriend()
     this.checkIfAlreadyPostsDocExist(friendUid)
     /* this.firestore.collection('posts')
        .add({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,17 +13,14 @@ export class ChatService {
   actualUser: any;
   allChatsId: any;
   allChats: any;
-  showChatsWithFriends:boolean = false;
+  showChatsWithFriends: boolean = false;
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
 
-  constructor() { 
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
-    setTimeout(() => {
-      this.loadChats()
-    }, 500);
+  constructor() {
   }
   async loadChats() {
+    this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.allChatsId = query(collection(this.db, "posts"), where("authors", "array-contains", this.actualUser.uid));
     this.allChats = await getDocs(this.allChatsId);
     this.allChats.forEach((doc) => {
@@ -43,8 +40,8 @@ export class ChatService {
         if (!this.arrayOfFirendsWithChat.some((friend) => friend.uid == docSnap.data()["uid"])) { //user is not already in array
           this.arrayOfFirendsWithChat.push(docSnap.data())
         }
-        if (this.arrayOfFriendsWithChatUid.length == this.arrayOfFirendsWithChat.length) this.showChatsWithFriends = true;        
-        
+        if (this.arrayOfFriendsWithChatUid.length == this.arrayOfFirendsWithChat.length) this.showChatsWithFriends = true;
+
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -57,5 +54,20 @@ export class ChatService {
     docsSnap.forEach((doc) => {
       console.log(doc.data());
     });
+  }
+
+  async addFriendToChatList(friendUid) {
+    if (!this.friendChatDocAlreadyExist(friendUid)) {
+      let docRef = await addDoc(collection(this.db, "posts"), {
+        authors: [this.actualUser.uid, friendUid],
+      });
+      this.arrayOfFriendsWithChatUid.push(friendUid);
+    }
+    else console.log('already doc exist');
+  }
+
+  friendChatDocAlreadyExist(friendUid) {
+    if (this.arrayOfFriendsWithChatUid.indexOf(friendUid) > -1) return true;
+    else return false;
   }
 }
