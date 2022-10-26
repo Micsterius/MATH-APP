@@ -1,7 +1,8 @@
+import { identifierName } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class ChatService {
   showChatsWithFriends: boolean = false;
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
+  currentChatId: string = '';
 
   constructor(private router: Router) {
   }
@@ -61,11 +63,23 @@ export class ChatService {
     if (!this.friendChatDocAlreadyExist(friendUid)) {
       let docRef = await addDoc(collection(this.db, "posts"), {
         authors: [this.actualUser.uid, friendUid],
+        id: ''
       });
+      console.log(docRef.id)
+      this.updateIdInFirestorePostsDocs(docRef.id)
+      this.currentChatId = docRef.id;
       this.arrayOfFriendsWithChatUid.push(friendUid);
     }
     else console.log('already doc exist');
-    this.navigateToChatWithFriend()
+    this.navigateToChatWithFriend(friendUid)
+  }
+
+  //give the id of document in the document as a field
+  async updateIdInFirestorePostsDocs(id) {
+    let docRef = doc(this.db, "posts", id);
+    await updateDoc(docRef, {
+      id: id
+    })
   }
 
   friendChatDocAlreadyExist(friendUid) {
@@ -73,7 +87,18 @@ export class ChatService {
     else return false;
   }
 
-  navigateToChatWithFriend() {
-    this.router.navigate(['/chat-friend'])
+  navigateToChatWithFriend(friendUid) {
+    this.findCurrentChatDocId(friendUid);
+    this.router.navigate(['/chat-friend']);
+  }
+
+  async findCurrentChatDocId(friendUid) {
+    let chatIds = query(collection(this.db, "posts"), where("authors", "array-contains", [this.actualUser.uid, friendUid]));
+    let rightChat = await getDocs(chatIds);
+    console.log(rightChat)
+    rightChat.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.data())
+    })
   }
 }

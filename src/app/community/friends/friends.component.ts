@@ -46,19 +46,9 @@ export class FriendsComponent implements OnInit {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
-/*
-    this.firestore.collection(`users`)
-      .doc(this.actualUser.uid)
-      .valueChanges()
-      .subscribe((user) => {
-        this.user = user;
-        this.loadDetailsOfFriends();
-      })*/
   }
 
   async loadDetailsOfFriends() {
-    
-
     for (let i = 0; i < this.user.friends.length; i++) {
       const friendUid = this.user.friends[i];
       let docRef = doc(this.db, "users", friendUid)
@@ -73,17 +63,6 @@ export class FriendsComponent implements OnInit {
       }
     }
     this.show = true
-/*
-    for (let i = 0; i < this.user.friends.length; i++) {
-      const friendUid = this.user.friends[i];
-      this.firestore.collection(`users`)
-        .doc(friendUid)
-        .valueChanges()
-        .subscribe((user) => {
-          this.myFriends.push(user)
-          if (this.user.friends.length == this.myFriends.length) this.show = true;
-        })
-    }*/
   }
 
   navigateToChat() {

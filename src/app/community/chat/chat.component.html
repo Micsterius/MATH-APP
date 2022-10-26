@@ -1,20 +1,11 @@
 <div class="w450 bg-c-1-light chat-container">
     <div *ngIf="chatServ.showChatsWithFriends" class="chat-friend-container">
-        <div *ngFor="let friend of chatServ.arrayOfFirendsWithChat" class="chat-friend-box bg-c-1" (click)="chatServ.navigateToChatWithFriend()">
+        <div *ngFor="let friend of chatServ.arrayOfFirendsWithChat" class="chat-friend-box bg-c-1" (click)="chatServ.navigateToChatWithFriend(friend.uid)">
             {{friend.displayName}}
             <img src="./../../../assets/img/userIcons/{{friend.photoURL}}">
         </div>
     </div>
 
-    <div class="writing-area">
-        <editor apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
-      height: 150,
-      width: 440,
-      menubar: false, 
-      plugins: 'emoticons advlist autolink lists link image charmap preview anchor',
-      toolbar: 'undo redo | bold italic | emoticons',
-      emoticons_database: 'emojis'
-       }"></editor>
-    </div>
+
 
 </div>
