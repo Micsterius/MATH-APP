@@ -18,7 +18,7 @@ export class ChatService {
   showChatsWithFriends: boolean = false;
   arrayOfFriendsWithChatUid: string[] = [];
   arrayOfFirendsWithChat: any[] = [];
-  currentChatId: string = '';
+  currentChatId: any = '';
 
   constructor(private router: Router) {
   }
@@ -93,12 +93,23 @@ export class ChatService {
   }
 
   async findCurrentChatDocId(friendUid) {
-    let chatIds = query(collection(this.db, "posts"), where("authors", "array-contains", [this.actualUser.uid, friendUid]));
-    let rightChat = await getDocs(chatIds);
-    console.log(rightChat)
-    rightChat.forEach((doc) => {
+    let arrIdsOne = [];
+    let chatIdsOne = query(collection(this.db, "posts"), where("authors", "array-contains", this.actualUser.uid));
+    let querySnapshotOne  = await getDocs(chatIdsOne);
+    querySnapshotOne.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.data())
+      arrIdsOne.push(doc.id)
     })
+
+    let arrIdsTwo = [];
+    let chatIdsTwo = query(collection(this.db, "posts"), where("authors", "array-contains", friendUid));
+    let querySnapshotTwo  = await getDocs(chatIdsTwo);
+    querySnapshotTwo.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      arrIdsTwo.push(doc.id)
+    })
+
+    let intersection = arrIdsOne.filter((element) => arrIdsTwo.includes(element))
+    this.currentChatId = intersection;
   }
 }
