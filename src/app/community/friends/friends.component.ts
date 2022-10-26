@@ -26,26 +26,54 @@ export class FriendsComponent implements OnInit {
     public authService: AuthService,
     public chatServ: ChatService
   ) {
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
-    this.loadAllFriends()
-    chatServ.loadChats()
+    this.actualUser = JSON.parse(localStorage.getItem('user'));
+    this.myFriends.length = 0;
+    this.loadAllFriends();
+    chatServ.loadChats();
   }
 
   ngOnInit(): void {
   }
 
-  loadAllFriends() {
+  async loadAllFriends() {
+    let docRef = doc(this.db, "users", this.actualUser.uid)
+    let docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      this.user = docSnap.data();
+      this.loadDetailsOfFriends();
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+/*
     this.firestore.collection(`users`)
       .doc(this.actualUser.uid)
       .valueChanges()
       .subscribe((user) => {
         this.user = user;
         this.loadDetailsOfFriends();
-      })
+      })*/
   }
 
-  loadDetailsOfFriends() {
-    this.myFriends.length = 0;
+  async loadDetailsOfFriends() {
+    
+
+    for (let i = 0; i < this.user.friends.length; i++) {
+      const friendUid = this.user.friends[i];
+      let docRef = doc(this.db, "users", friendUid)
+      let docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        this.myFriends.push(docSnap.data())
+        console.log("my friends list",this.myFriends)
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+    this.show = true
+/*
     for (let i = 0; i < this.user.friends.length; i++) {
       const friendUid = this.user.friends[i];
       this.firestore.collection(`users`)
@@ -55,7 +83,7 @@ export class FriendsComponent implements OnInit {
           this.myFriends.push(user)
           if (this.user.friends.length == this.myFriends.length) this.show = true;
         })
-    }
+    }*/
   }
 
   navigateToChat() {
