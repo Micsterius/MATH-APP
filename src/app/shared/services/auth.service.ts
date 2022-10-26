@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
+import { arrayUnion, doc, getDoc, getFirestore } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +20,9 @@ export class AuthService {
   userData: any; // Save logged in user data
   app = initializeApp(environment.firebase);
   auth = getAuth(this.app);
+  db = getFirestore(this.app);
   user = this.auth.currentUser;
+  userFromFirestore: any;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -119,17 +122,30 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    const userData: User = {
+    let userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      friends: []
+      friends: user.friends
     };
+    if(this.checkIfUserIsAlreadyInFirestoreAndGetFriendsList(user.uid)) userData = this.userFromFirestore
     return userRef.set(userData, {
       merge: true,
     });
+  }
+
+  //function is necessary, because authentication doesn't know anything about friends, so in case of login/logout friends is empty
+  async checkIfUserIsAlreadyInFirestoreAndGetFriendsList(uid) {
+    let docRef = doc(this.db, "users", uid);
+    let docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      this.userFromFirestore = docSnap.data();
+      return true;
+    } else {
+      return false;
+    }
   }
   // Sign out
   SignOut() {
