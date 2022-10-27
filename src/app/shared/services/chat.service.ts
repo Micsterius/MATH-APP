@@ -34,6 +34,7 @@ export class ChatService {
    * also the doc id will be pushed for further reading the subCollection
    */
   async loadChats() {
+    this.arrayOfFriendsWithChatUid.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.allChatsId = query(collection(this.db, "posts"), where("authors", "array-contains", this.actualUser.uid));
     this.allChats = await getDocs(this.allChatsId);
@@ -65,6 +66,7 @@ export class ChatService {
       }
     })
     console.log(this.arrayOfFirendsWithChat)
+    console.log(this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
   }
 
   async getAllDocsInSubCollection(postId) {

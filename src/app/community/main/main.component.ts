@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   showUser: boolean = false;
   userNames: string[] = [];
   searchMatchesUsers: string[] = [];
-  currentUser: User
+  currentUser: any;
   friends: string[] = [];
 
   constructor(
@@ -89,7 +89,7 @@ export class MainComponent implements OnInit {
   }
 
   getAlreadyAddedFriends(uid) {
-    this.firestore.collection('users')
+    this.firestore.collection('UserFriends')
       .doc(uid)
       .valueChanges()
       .subscribe((user: any) => {
@@ -102,7 +102,7 @@ export class MainComponent implements OnInit {
   }
 
   addUserAsFriend(uid) {
-    this.firestore.collection('users')
+    this.firestore.collection('UserFriends')
       .doc(this.authService.userData.uid)
       .update({ friends: arrayUnion(uid) })
   }

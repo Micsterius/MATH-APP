@@ -36,7 +36,7 @@ export class FriendsComponent implements OnInit {
   }
 
   async loadAllFriends() {
-    let docRef = doc(this.db, "users", this.actualUser.uid)
+    let docRef = doc(this.db, "UserFriends", this.actualUser.uid)
     let docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
@@ -70,7 +70,7 @@ export class FriendsComponent implements OnInit {
   }
 
   deleteFriendFromList(uid) {
-    this.firestore.collection('users')
+    this.firestore.collection('UserFriends')
       .doc(this.authService.userData.uid)
       .update({ friends: arrayRemove(uid) })
   }

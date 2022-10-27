@@ -127,10 +127,8 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      friends: user.friends
+      emailVerified: user.emailVerified
     };
-    if(this.checkIfUserIsAlreadyInFirestoreAndGetFriendsList(user.uid)) userData = this.userFromFirestore
     return userRef.set(userData, {
       merge: true,
     });
