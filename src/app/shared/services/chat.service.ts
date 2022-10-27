@@ -1,5 +1,6 @@
 import { identifierName } from '@angular/compiler';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
@@ -20,17 +21,26 @@ export class ChatService {
   arrayOfFirendsWithChat: any[] = [];
   currentChatId: any = '';
 
-  constructor(private router: Router) {
+  testArray: any[] = [];
+  showChat: boolean = false;
+
+  constructor(private router: Router,
+    public afs: AngularFirestore) {
   }
 
+  /**
+   * In this function will be get at first all docs form collection posts which contains the actual user uid.
+   * Then the user uids of the person who write with the current user will be pushed in the array "arrayOfFriendsWithChatUid"
+   * also the doc id will be pushed for further reading the subCollection
+   */
   async loadChats() {
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.allChatsId = query(collection(this.db, "posts"), where("authors", "array-contains", this.actualUser.uid));
     this.allChats = await getDocs(this.allChatsId);
     this.allChats.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      if (doc.data().authors[0] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({author: doc.data().authors[0], id: doc.data().id});
-      if (doc.data().authors[1] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({author: doc.data().authors[1], id: doc.data().id});
+      if (doc.data().authors[0] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({ author: doc.data().authors[0], id: doc.data().id });
+      if (doc.data().authors[1] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({ author: doc.data().authors[1], id: doc.data().id });
       console.log(doc.id, " => ", doc.data());
       this.getUserInfo()
     });
@@ -49,13 +59,12 @@ export class ChatService {
           this.arrayOfFirendsWithChat.push(user)
         }
         if (this.arrayOfFriendsWithChatUid.length == this.arrayOfFirendsWithChat.length) this.showChatsWithFriends = true;
-
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
       }
     })
-    console.log (this.arrayOfFirendsWithChat)
+    console.log(this.arrayOfFirendsWithChat)
   }
 
   async getAllDocsInSubCollection(postId) {
@@ -104,5 +113,39 @@ export class ChatService {
     this.currentChatId = friendChatId; //Save the active doc id to read out this in the chat window
     console.log(this.currentChatId)
     this.router.navigate(['/chat-friend']);
+  }
+
+  async loadSubcollection() {
+    let docId = this.currentChatId
+
+    /*  let q = query(collection(this.db, "posts/",docId ,"/text"));
+      let docsSnap = await getDocs(q);
+      docsSnap.forEach((doc) => {
+        console.log(doc.data()); // "doc1" and "doc2"
+      });*/
+
+    /*
+       let q = collection(this.db, "posts", docId, "text");
+       const qSnap = getDocs(q)
+       console.log((await qSnap).docs.map(d => ({ id: d.id, ...d.data() })))
+         
+    // let subColRef = collection(this.db, "posts", docId, 'text');
+    let querySnapshot = await getDocs(collection(this.db, "posts", docId, "text"));
+    console.log(docId)
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      this.testArray.push(doc.data())
+    });
+    this.showChat = true;*/
+
+    this.afs.collection('posts')
+      .doc('RKXScwaXiEma9EeoMEwh')
+      .collection('text')
+      .valueChanges()
+      .subscribe((text) => {
+        let allPosts = text;
+        console.log('POSTS IS', allPosts)
+      })
   }
 }

@@ -8,6 +8,12 @@
         </div>
     </div>
 -->
+<div *ngIf="chatServ.showChat">
+    <div *ngFor="let text of chatServ.testArray">
+        {{text.content}}
+    </div>
+</div>
+    
     <div class="writing-area">
         <editor apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
   height: 150,
