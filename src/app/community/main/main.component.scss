@@ -31,3 +31,9 @@
         margin-right: 8px;
     }
 }
+
+mat-form-field{
+    @media (max-width: 380px) {
+        width: 190px !important;
+    }
+}
