@@ -65,8 +65,9 @@ export class ChatService {
         console.log("No such document!");
       }
     })
-    console.log(this.arrayOfFirendsWithChat)
-    console.log(this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
+    console.log('A',this.arrayOfFirendsWithChat)
+    console.log('B',this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
+    console.log('A',this.arrayOfFriendsWithChatUid)
   }
 
   async getAllDocsInSubCollection(postId) {
@@ -77,6 +78,9 @@ export class ChatService {
   }
 
   async addFriendToChatList(friendUid) {
+    console.log('1', friendUid)
+    console.log('2', this.arrayOfFirendsWithChat)
+    console.log('3', this.arrayOfFriendsWithChatUid)
     if (!this.friendChatDocAlreadyExist(friendUid)) {
       let docRef = await addDoc(collection(this.db, "posts"), {
         authors: [this.actualUser.uid, friendUid],
@@ -106,8 +110,7 @@ export class ChatService {
   }
 
   friendChatDocAlreadyExist(friendUid) {
-    if (this.arrayOfFriendsWithChatUid.indexOf(friendUid) > -1) return true;
-    else return false;
+    return this.arrayOfFriendsWithChatUid.some((obj) => obj.author == friendUid)
   }
 
 
