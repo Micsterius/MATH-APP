@@ -20,6 +20,7 @@ export class ChatService {
   arrayOfFriendsWithChatUid: any[] = [];
   arrayOfFirendsWithChat: any[] = [];
   currentChatId: any = '';
+  currentFriendId: any = '';
 
   testArray: any[] = [];
   showChat: boolean = false;
@@ -65,9 +66,9 @@ export class ChatService {
         console.log("No such document!");
       }
     })
-    console.log('A',this.arrayOfFirendsWithChat)
-    console.log('B',this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
-    console.log('A',this.arrayOfFriendsWithChatUid)
+    console.log('A', this.arrayOfFirendsWithChat)
+    console.log('B', this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
+    console.log('A', this.arrayOfFriendsWithChatUid)
   }
 
   async getAllDocsInSubCollection(postId) {
@@ -78,9 +79,6 @@ export class ChatService {
   }
 
   async addFriendToChatList(friendUid) {
-    console.log('1', friendUid)
-    console.log('2', this.arrayOfFirendsWithChat)
-    console.log('3', this.arrayOfFriendsWithChatUid)
     if (!this.friendChatDocAlreadyExist(friendUid)) {
       let docRef = await addDoc(collection(this.db, "posts"), {
         authors: [this.actualUser.uid, friendUid],
@@ -94,6 +92,7 @@ export class ChatService {
       console.log('already doc exist');
       this.findFriendInList(friendUid);
     }
+    this.currentFriendId = friendUid;
   }
 
   findFriendInList(friendUid) {
@@ -113,44 +112,8 @@ export class ChatService {
     return this.arrayOfFriendsWithChatUid.some((obj) => obj.author == friendUid)
   }
 
-
   navigateToChatWithFriend(friendChatId) {
     this.currentChatId = friendChatId; //Save the active doc id to read out this in the chat window
-    console.log(this.currentChatId)
     this.router.navigate(['/chat-friend']);
-  }
-
-  async loadSubcollection() {
-    let docId = this.currentChatId
-
-    /*  let q = query(collection(this.db, "posts/",docId ,"/text"));
-      let docsSnap = await getDocs(q);
-      docsSnap.forEach((doc) => {
-        console.log(doc.data()); // "doc1" and "doc2"
-      });*/
-
-    /*
-       let q = collection(this.db, "posts", docId, "text");
-       const qSnap = getDocs(q)
-       console.log((await qSnap).docs.map(d => ({ id: d.id, ...d.data() })))
-         
-    // let subColRef = collection(this.db, "posts", docId, 'text');
-    let querySnapshot = await getDocs(collection(this.db, "posts", docId, "text"));
-    console.log(docId)
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      this.testArray.push(doc.data())
-    });
-    this.showChat = true;*/
-
-    this.afs.collection('posts')
-      .doc('RKXScwaXiEma9EeoMEwh')
-      .collection('text')
-      .valueChanges()
-      .subscribe((text) => {
-        let allPosts = text;
-        console.log('POSTS IS', allPosts)
-      })
   }
 }

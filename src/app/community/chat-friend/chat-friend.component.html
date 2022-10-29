@@ -1,19 +1,20 @@
-<div class="w450 bg-c-1-light chat-container">
-    <!--
-    <div *ngIf="chatServ.showChatsWithFriends" class="chat-friend-container">
-        <div *ngFor="let friend of chatServ.arrayOfFirendsWithChat" class="chat-friend-box bg-c-1"
-            (click)="chatServ.navigateToChatWithFriend()">
-            {{friend.displayName}}
-            <img src="./../../../assets/img/userIcons/{{friend.photoURL}}">
+<div class="w450 bg-c-1-light">
+
+    <div *ngIf="showChat" class="chat-container">
+        <div *ngFor="let text of messages" class="chat-friend-box">
+            <div class="chat-friend-author" *ngIf="text.author == userFriend.uid">
+                <div class="chat-friend-text"><i>{{text.content}}</i></div>
+                <img src="./../../../assets/img/userIcons/{{userFriend.photoURL}}">
+                <p>{{userFriend.displayName}}</p>
+            </div>
+            <div class="chat-current-author" *ngIf="text.author == currentUser.uid">
+                <p>{{currentUser.displayName}}</p>
+                <img src="./../../../assets/img/userIcons/{{currentUser.photoURL}}">
+                <div class="chat-friend-text"><i>{{text.content}}</i></div>
+            </div>
         </div>
     </div>
--->
-<div *ngIf="chatServ.showChat">
-    <div *ngFor="let text of chatServ.testArray">
-        {{text.content}}
-    </div>
-</div>
-    
+
     <div class="writing-area">
         <editor apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
   height: 150,
