@@ -66,9 +66,6 @@ export class ChatService {
         console.log("No such document!");
       }
     })
-    console.log('A', this.arrayOfFirendsWithChat)
-    console.log('B', this.arrayOfFriendsWithChatUid.length, this.arrayOfFirendsWithChat.length)
-    console.log('A', this.arrayOfFriendsWithChatUid)
   }
 
   async getAllDocsInSubCollection(postId) {
@@ -87,12 +84,13 @@ export class ChatService {
       this.updateIdInFirestorePostsDocs(docRef.id)
       this.currentChatId = docRef.id;
       this.arrayOfFriendsWithChatUid.push(friendUid);
+      this.getUserInfo();
     }
     else {
       console.log('already doc exist');
-      this.findFriendInList(friendUid);
     }
     this.currentFriendId = friendUid;
+    this.findFriendInList(friendUid);
   }
 
   findFriendInList(friendUid) {
