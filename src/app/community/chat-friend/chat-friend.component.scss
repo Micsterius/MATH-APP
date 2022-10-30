@@ -1,5 +1,7 @@
 .chat-container{
     padding: 24px;
+    max-height: 220px;
+    overflow-y: auto;
 }
 
 .chat-friend-box{
@@ -61,6 +63,7 @@
     position: relative;
     display: flex;
     justify-content: center;
+    padding-bottom: 4px;
 
     button{
         position: absolute;
