@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
@@ -47,7 +47,10 @@ export class ChatFriendComponent implements OnInit {
     this.showChat = true;
   }
 
-  sendMessage(){
+  async sendMessage(){
+    await setDoc(doc(this.db, "posts", this.currentChatId, "texts", "text-"+(this.messages.length+1)), {content: this.message, author: this.currentUser.uid})
+    let newMessage = {author: this.currentUser.uid, content: this.message}
+    this.messages.push(newMessage)
     console.log(this.message)
   }
 }
