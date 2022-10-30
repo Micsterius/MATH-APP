@@ -3,7 +3,7 @@
     <div *ngIf="showChat" class="chat-container">
         <div *ngFor="let text of messages" class="chat-friend-box">
             <div class="chat-friend-author" *ngIf="text.author == userFriend.uid">
-                <div class="chat-friend-text">{{text.content}}</div>
+                <div class="chat-friend-text" [innerHTML]="text.content"></div>
                 <img src="./../../../assets/img/userIcons/{{userFriend.photoURL}}">
                 <p>{{userFriend.displayName}}</p>
             </div>

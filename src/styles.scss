@@ -1,9 +1,3 @@
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #C3E3A8;
-}
-
 .bg-c-1 {
     background-color: #E91E63;
 }
@@ -111,14 +105,11 @@ body {
     text-align: center;
 }
 
-html,
-body {
-    height: 100%;
-}
-
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100vh;
+    background-color: #C3E3A8;
 }
 
 .button-box {

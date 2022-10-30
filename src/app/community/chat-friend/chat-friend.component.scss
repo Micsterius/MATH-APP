@@ -1,12 +1,18 @@
-.chat-container{
+p {
+    margin: 0 0 0 0;
+}
+
+.chat-container {
     padding: 24px;
     max-height: 220px;
     overflow-y: auto;
+    min-height: 220px;
 }
 
-.chat-friend-box{
+.chat-friend-box {
     display: flex;
     align-items: center;
+    margin-bottom: 8px;
 }
 
 .chat-friend-author {
@@ -22,7 +28,7 @@
         margin-right: 8px;
     }
 
-    p{
+    p {
         color: #E91E63;
         margin: 0;
     }
@@ -41,31 +47,31 @@
         margin-left: 8px;
     }
 
-    p{
+    p {
         color: #E91E63;
         margin: 0;
     }
 }
 
-.chat-friend-text{
+.chat-friend-text {
     background-color: white;
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 12px;
     padding-right: 8px;
     padding-left: 8px;
     border-radius: 8px;
 
     margin-left: 8px;
     margin-right: 8px;
+    line-height: 0px;
 }
 
-.writing-area{
+.writing-area {
     position: relative;
     display: flex;
     justify-content: center;
     padding-bottom: 4px;
 
-    button{
+    button {
         position: absolute;
         top: 12px;
         right: 12px;
