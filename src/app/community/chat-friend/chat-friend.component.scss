@@ -62,7 +62,8 @@ p {
 
     margin-left: 8px;
     margin-right: 8px;
-    line-height: 0px;
+    max-width: 250px;
+    word-wrap: break-word;
 }
 
 .writing-area {
