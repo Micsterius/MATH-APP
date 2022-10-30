@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
 import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
@@ -52,5 +53,8 @@ export class ChatFriendComponent implements OnInit {
     let newMessage = {author: this.currentUser.uid, content: this.message}
     this.messages.push(newMessage)
     console.log(this.message)
+
+
+    this.message = '';
   }
 }
