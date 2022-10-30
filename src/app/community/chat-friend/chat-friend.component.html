@@ -16,7 +16,7 @@
     </div>
 
     <div class="writing-area">
-        <editor apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
+        <editor [(ngModel)]="message" apiKey="0u347b51bx380ihx2w2vws4bfqf9dfqewelzkjxsl7p5ki0a" [init]="{
   height: 150,
   width: 440,
   menubar: false, 
@@ -24,6 +24,9 @@
   toolbar: 'undo redo | bold italic | emoticons',
   emoticons_database: 'emojis'
    }"></editor>
+   <button (click)="sendMessage()">
+    submit
+   </button>
     </div>
 
 </div>

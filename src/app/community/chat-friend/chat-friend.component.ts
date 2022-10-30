@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
@@ -21,6 +21,7 @@ export class ChatFriendComponent implements OnInit {
   showChat: boolean = false;
   userFriend: User;
   currentUser: User;
+  message: any;
 
   constructor(
     public chatServ: ChatService,
@@ -44,5 +45,9 @@ export class ChatFriendComponent implements OnInit {
     });
     this.userFriend = this.chatServ.arrayOfFirendsWithChat.find((friend) => friend.uid == this.chatServ.currentFriendId)
     this.showChat = true;
+  }
+
+  sendMessage(){
+    console.log(this.message)
   }
 }
