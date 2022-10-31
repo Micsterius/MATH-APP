@@ -112,6 +112,7 @@ export class ChatService {
 
   navigateToChatWithFriend(friendChatId) {
     this.currentChatId = friendChatId; //Save the active doc id to read out this in the chat window
+    console.log(friendChatId)
     this.router.navigate(['/chat-friend']);
   }
 }

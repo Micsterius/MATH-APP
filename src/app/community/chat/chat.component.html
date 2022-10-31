@@ -1,11 +1,8 @@
 <div class="w450 bg-c-1-light chat-container">
     <div *ngIf="chatServ.showChatsWithFriends" class="chat-friend-container">
-        <div *ngFor="let friend of chatServ.arrayOfFirendsWithChat" class="chat-friend-box bg-c-1" (click)="chatServ.navigateToChatWithFriend(friend.id)">
+        <div *ngFor="let friend of chatServ.arrayOfFirendsWithChat" class="chat-friend-box bg-c-1" (click)="chatServ.navigateToChatWithFriend(friend.id); saveCurrentFriendId(friend.uid)">
             {{friend.displayName}}
             <img src="./../../../assets/img/userIcons/{{friend.photoURL}}">
         </div>
     </div>
-
-
-
 </div>

@@ -5,7 +5,6 @@ import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc } fro
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
-import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-chat-friend',
@@ -28,8 +27,7 @@ export class ChatFriendComponent implements OnInit {
 
   constructor(
     public chatServ: ChatService,
-    public authServ: AuthService,
-    private scroller: ViewportScroller
+    public authServ: AuthService
   ) {
     this.currentUser = this.authServ.userData;
     this.currentChatId = this.chatServ.currentChatId;
@@ -44,6 +42,7 @@ export class ChatFriendComponent implements OnInit {
     this.scrollToBottom();
   }
 
+  /** scroll automatically to last message */
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
@@ -56,9 +55,6 @@ export class ChatFriendComponent implements OnInit {
       this.messages = [];
       this.showChat = false;
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        //this.testArray.push(doc.data())
         this.messages.push(doc.data())
       })
       this.showChat = true;

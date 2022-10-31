@@ -15,11 +15,14 @@ export class ChatComponent implements OnInit {
   db = getFirestore(this.app);
 
   constructor(
-    private firestore: AngularFirestore,
     public chatServ: ChatService) {
     chatServ.loadChats()
   }
 
   ngOnInit(): void {
+  }
+
+  saveCurrentFriendId(friendUid){
+    this.chatServ.currentFriendId = friendUid;
   }
 }
