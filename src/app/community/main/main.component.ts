@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
-import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs, where, getDoc, setDoc } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -24,6 +24,9 @@ export class MainComponent implements OnInit {
   searchMatchesUsers: string[] = [];
   currentUser: any;
   friends: string[] = [];
+
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
 
   constructor(
     private firestore: AngularFirestore,
@@ -98,13 +101,27 @@ export class MainComponent implements OnInit {
   }
   //muss noch so programmiert werden, dass die fkt erst ausgeführt wird, wenn das Laden der Freunde abgeschlossen ist
   userAlreadyAddedAsFriend(uid) {
-    return this.currentUser.friends.indexOf(uid) > -1
+    if (this.currentUser) {
+          return this.currentUser.friends.indexOf(uid) > -1;
+    }
+    else return false;
   }
 
-  addUserAsFriend(uid) {
-    this.firestore.collection('UserFriends')
-      .doc(this.authService.userData.uid)
-      .update({ friends: arrayUnion(uid) })
+  async addUserAsFriend(uid) {
+    let docRef = doc(this.db, "UserFriends", this.authService.userData.uid)
+    let docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      await updateDoc(docRef, {
+        friends: arrayUnion(uid)
+      });
+    } else {
+      // doc.data() will be undefined in this case
+      await setDoc(doc(this.db, "UserFriends", this.authService.userData.uid), {
+        friends: [uid],
+        uid: this.authService.userData.uid
+      });
+    }
   }
 }
 

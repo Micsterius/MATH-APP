@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
-import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
@@ -37,12 +37,17 @@ export class ChatFriendComponent implements OnInit {
   }
 
   async loadChat() {
-    let querySnapshot = await getDocs(collection(this.db, "posts", this.currentChatId, "texts"));
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      //this.testArray.push(doc.data())
-      this.messages.push(doc.data())
+    let q = query(collection(this.db, "posts", this.currentChatId, "texts"))
+    let unsubscribe = onSnapshot(q, (querySnapshot) => {
+      this.messages = [];
+      this.showChat = false;
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        //this.testArray.push(doc.data())
+        this.messages.push(doc.data())
+      })
+      this.showChat = true;
     });
     this.userFriend = this.chatServ.arrayOfFirendsWithChat.find((friend) => friend.uid == this.chatServ.currentFriendId)
     this.showChat = true;
@@ -56,11 +61,6 @@ export class ChatFriendComponent implements OnInit {
     let textId = Math.round(new Date().getTime() / 1000);
     let idAdd = Math.random().toString(16).substr(2, 6)
     await setDoc(doc(this.db, "posts", this.currentChatId, "texts", `${textId + idAdd}`), { content: this.message, author: this.currentUser.uid })
-    let newMessage = { author: this.currentUser.uid, content: this.message }
-    this.messages.push(newMessage)
-    console.log(this.message)
-
-
     this.message = '';
   }
 }
