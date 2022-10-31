@@ -48,9 +48,15 @@ export class ChatFriendComponent implements OnInit {
     this.showChat = true;
   }
 
-  async sendMessage(){
-    await setDoc(doc(this.db, "posts", this.currentChatId, "texts", "text-"+(this.messages.length+1)), {content: this.message, author: this.currentUser.uid})
-    let newMessage = {author: this.currentUser.uid, content: this.message}
+  /**here the new doc id in the subcollection texts will be generated with two components. 
+   * The first one is a timestamp, so the messeages are in the right order when they come 
+   * from firestore. The second component is a randowm string with 6 characters if two 
+   * users post at the same time. */
+  async sendMessage() {
+    let textId = Math.round(new Date().getTime() / 1000);
+    let idAdd = Math.random().toString(16).substr(2, 6)
+    await setDoc(doc(this.db, "posts", this.currentChatId, "texts", `${textId + idAdd}`), { content: this.message, author: this.currentUser.uid })
+    let newMessage = { author: this.currentUser.uid, content: this.message }
     this.messages.push(newMessage)
     console.log(this.message)
 
