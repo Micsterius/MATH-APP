@@ -1,12 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
 import { collection, doc, getDocs, getFirestore, onSnapshot, query, setDoc } from 'firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ChatService } from 'src/app/shared/services/chat.service';
 import { environment } from 'src/environments/environment';
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-chat-friend',
@@ -14,6 +13,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./chat-friend.component.scss']
 })
 export class ChatFriendComponent implements OnInit {
+
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
 
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
@@ -27,13 +29,25 @@ export class ChatFriendComponent implements OnInit {
   constructor(
     public chatServ: ChatService,
     public authServ: AuthService,
+    private scroller: ViewportScroller
   ) {
     this.currentUser = this.authServ.userData;
     this.currentChatId = this.chatServ.currentChatId;
     this.loadChat();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 
   async loadChat() {
