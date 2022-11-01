@@ -1,7 +1,7 @@
 <div class="w450 bg-c-1-light trophy-container">
-    <div *ngIf="showTrophys">
+    <div *ngIf="showTrophys" class="trophy-box">
         <div *ngFor="let trophy of userTrophys.medals">
-            <img class="trophy-img" src="./../../assets/img/{{trophy}}.svg">
+            <img class="trophy-img" src="./../../assets/img/{{trophy}}.png">
         </div>
     </div>
 </div>

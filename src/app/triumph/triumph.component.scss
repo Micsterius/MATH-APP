@@ -6,3 +6,9 @@
 .trophy-container{
     min-height: 350px;
 }
+
+.trophy-box{
+    display: flex;
+    padding: 24px;
+    flex-wrap: wrap;
+}
