@@ -20,7 +20,6 @@ export class ChatService {
   arrayOfFriendsWithChatUid: any[] = [];
   arrayOfFirendsWithChat: any[] = [];
   currentChatId: any = '';
-  currentFriendId: any = '';
 
   testArray: any[] = [];
   showChat: boolean = false;
@@ -51,7 +50,7 @@ export class ChatService {
   async getUserInfo() {
     this.arrayOfFirendsWithChat.length = 0;
     this.arrayOfFriendsWithChatUid.forEach(async (obj) => {
-      let docRef = doc(this.db, "users", obj.author);
+      let docRef = doc(this.db, "users", obj.author); //search in the users collection for the user with the same uid as the author uid//search in the users collection for the user with the same uid as the author uid
       let docSnap = await getDoc(docRef);
       let user;
       if (docSnap.exists()) {
@@ -89,12 +88,12 @@ export class ChatService {
     else {
       console.log('already doc exist');
     }
-    this.currentFriendId = friendUid;
     this.findFriendInList(friendUid);
   }
 
   findFriendInList(friendUid) {
     let friend = this.arrayOfFirendsWithChat.find((friend) => friend.uid == friendUid);
+    localStorage.setItem('userFriend', JSON.stringify(friend));
     this.navigateToChatWithFriend(friend.id);
   }
 
@@ -112,7 +111,7 @@ export class ChatService {
 
   navigateToChatWithFriend(friendChatId) {
     this.currentChatId = friendChatId; //Save the active doc id to read out this in the chat window
-    console.log(friendChatId)
+    localStorage.setItem('currentChatId', JSON.stringify(this.currentChatId));
     this.router.navigate(['/chat-friend']);
   }
 }

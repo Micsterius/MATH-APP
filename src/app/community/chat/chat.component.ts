@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  saveCurrentFriendId(friendUid){
-    this.chatServ.currentFriendId = friendUid;
+  saveCurrentFriendId(friend){
+    localStorage.setItem('userFriend', JSON.stringify(friend));
   }
 }

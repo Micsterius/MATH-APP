@@ -29,8 +29,9 @@ export class ChatFriendComponent implements OnInit {
     public chatServ: ChatService,
     public authServ: AuthService
   ) {
-    this.currentUser = this.authServ.userData;
-    this.currentChatId = this.chatServ.currentChatId;
+    this.currentUser = JSON.parse(localStorage.getItem('user')!);    
+    this.currentChatId = JSON.parse(localStorage.getItem('currentChatId')!);
+    this.userFriend = JSON.parse(localStorage.getItem('userFriend')!);
     this.loadChat();
   }
 
@@ -59,7 +60,6 @@ export class ChatFriendComponent implements OnInit {
       })
       this.showChat = true;
     });
-    this.userFriend = this.chatServ.arrayOfFirendsWithChat.find((friend) => friend.uid == this.chatServ.currentFriendId)
     this.showChat = true;
   }
 
