@@ -2,7 +2,7 @@
     <div class="padding-l-r-24" *ngIf="show">
         <div *ngFor="let friend of myFriends" class="friends-box">
             <div class="friends-sub-box">
-                <img src="./../../../assets/img/userIcons/{{friend.photoURL}}" alt="">
+                <img src="./../../../assets/img/userIcons/{{(friend.photoURL) ? friend.photoURL : 'icon-unknown.svg'}}" alt="">
                 <div>
                     {{friend.displayName}}
                 </div>

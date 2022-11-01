@@ -4,12 +4,12 @@
         <div *ngFor="let text of messages" class="chat-friend-box">
             <div class="chat-friend-author" *ngIf="text.author == userFriend.uid">
                 <div class="chat-friend-text" [innerHTML]="text.content"></div>
-                <img src="./../../../assets/img/userIcons/{{userFriend.photoURL}}">
+                <img src="./../../../assets/img/userIcons/{{(userFriend.photoURL) ? userFriend.photoURL : 'icon-unknown.svg'}}">
                 <p>{{userFriend.displayName}}</p>
             </div>
             <div class="chat-current-author" *ngIf="text.author == currentUser.uid">
                 <p>{{currentUser.displayName}}</p>
-                <img src="./../../../assets/img/userIcons/{{currentUser.photoURL}}">
+                <img src="./../../../assets/img/userIcons/{{(currentUser.photoURL) ? currentUser.photoURL : 'icon-unknown.svg'}}">
                 <div class="chat-friend-text" [innerHTML]="text.content"></div>
             </div>
         </div>
