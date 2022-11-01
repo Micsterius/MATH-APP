@@ -1,1 +1,7 @@
-<p>works</p>
+<div class="w450 bg-c-1-light trophy-container">
+    <div *ngIf="showTrophys">
+        <div *ngFor="let trophy of userTrophys.medals">
+            <img class="trophy-img" src="./../../assets/img/{{trophy}}.svg">
+        </div>
+    </div>
+</div>

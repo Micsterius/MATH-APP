@@ -1,5 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { initializeApp } from 'firebase/app';
+import { User } from 'firebase/auth';
+import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { environment } from 'src/environments/environment';
 import { MathService } from '../shared/services/math.service';
 
 @Component({
@@ -8,6 +12,11 @@ import { MathService } from '../shared/services/math.service';
   styleUrls: ['./arithmetic-area.component.scss']
 })
 export class ArithmeticAreaComponent implements OnInit {
+
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
+
+  actualUser: User;
 
   numberOne: number = 0;
   numberTwo: number = 0;
@@ -46,6 +55,7 @@ export class ArithmeticAreaComponent implements OnInit {
     private router: Router,
     public mathServ: MathService) {
     this.wrongAnswers.length = 0;
+    this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
     this.temporaryOperatorChoice = this.mathSetting.mathOperator
     if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
@@ -237,11 +247,33 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   showEndscreen() {
+
     if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
       this.mathServ.wrongAnswers = this.wrongAnswers;
-      console.log(this.wrongAnswers)
-      console.log(this.mathServ.wrongAnswers)
+      this.earnTrophy();
       this.router.navigate(['/arithmeticEndscreen']);
+    }
+  }
+
+  earnTrophy() {
+    if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.giveMedal('silver')
+    if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.giveMedal('silver-gold')
+    if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.giveMedal('gold')
+  }
+
+  async giveMedal(medal) {
+    let docRef = doc(this.db, "userTrophys", this.actualUser.uid); //search in the users collection for the user with the same uid as the author uid//search in the users collection for the user with the same uid as the author uid
+    let docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      await updateDoc(docRef, {
+        medals: arrayUnion(medal),
+      })
+    }
+    else {
+      await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
+        medals: [medal],
+        id: this.actualUser.uid
+      });
     }
   }
 }

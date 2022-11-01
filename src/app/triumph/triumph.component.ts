@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { initializeApp } from 'firebase/app';
+import { User } from 'firebase/auth';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-triumph',
@@ -8,9 +12,28 @@ import {FormControl} from '@angular/forms';
 })
 export class TriumphComponent implements OnInit {
 
-  constructor() { }
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
+  actualUser: User;
+  userTrophys: any;
+  showTrophys: boolean = false;
+
+  constructor() {
+    this.actualUser = JSON.parse(localStorage.getItem('user'));
+    this.getMedals();
+  }
 
   ngOnInit(): void {
   }
 
+  async getMedals() {
+
+    let docRef = doc(this.db, "userTrophys", this.actualUser.uid);
+    let docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      this.userTrophys = docSnap.data();
+      this.showTrophys = true;
+    }
+    else console.log("No such document");
+  }
 }
