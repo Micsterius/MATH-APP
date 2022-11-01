@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { ChatService } from 'src/app/shared/services/chat.service';
@@ -15,7 +16,8 @@ export class ChatComponent implements OnInit {
   db = getFirestore(this.app);
 
   constructor(
-    public chatServ: ChatService) {
+    public chatServ: ChatService,
+    private router: Router) {
     chatServ.loadChats()
   }
 
@@ -24,5 +26,9 @@ export class ChatComponent implements OnInit {
 
   saveCurrentFriendId(friend){
     localStorage.setItem('userFriend', JSON.stringify(friend));
+  }
+
+  navigateToMain() {
+    this.router.navigate(['/main-community'])
   }
 }

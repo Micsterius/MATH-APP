@@ -31,3 +31,24 @@ width: 150px;
         border-radius: 100%;
     }
 }
+
+.home-btn-box{
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+
+    mat-icon {
+        padding: 4px;
+        height: 36px;
+        width: 36px;
+        font-size: 36px;
+        color: white;
+        border-radius: 100%;
+        background-color: #E91E63;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+}

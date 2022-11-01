@@ -44,3 +44,20 @@ mat-card-title {
     background-image: radial-gradient(#EDE3FF 5%, #E91E63 60%);
   //  border-bottom: 8px solid #E91E63;
 }
+
+.icon-header-home{
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    mat-icon {
+        color: white;
+        margin-left: 12px;
+
+        &:hover {
+            cursor: pointer;
+            color: black;
+        }
+    }
+}
