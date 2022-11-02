@@ -10,7 +10,7 @@ export class SpeakingService {
     let voices = []; // global array of available voices
     voices = window.speechSynthesis.getVoices();
     this.speech.voice = voices[0];
-    this.speech.rate = 0.3;
+    this.speech.rate = 0.5;
   }
 
   speak(text){

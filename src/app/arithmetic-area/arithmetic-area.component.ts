@@ -148,23 +148,19 @@ export class ArithmeticAreaComponent implements OnInit {
         this.doPlusOperation();
       }
     }
-
   }
 
   doMinusOperation() {
     return this.mathSetting.mathOperator = 'minus'; //workingOperator = -1
   }
 
-
   doPlusOperation() {
     return this.mathSetting.mathOperator = 'plus'; //workingOperator = +1
   }
 
-
   plusOperationIsGiven() {
     return this.mathSetting.mathOperator == 'plus'; //workingOperator = +1
   }
-
 
   minusOperationIsGiven() {
     return this.mathSetting.mathOperator == 'minus'; //workingOperator = +1
@@ -172,16 +168,7 @@ export class ArithmeticAreaComponent implements OnInit {
 
   calcRightAnswer(x, y) {
     if (this.minusOperationIsGiven()) {
-      if (x >= y) {
-        let result = x - y;
-        this.mathServ.result = result;
-        this.mathServ.generateRandomizedAnswers();
-      }
-      else {
-        let result = y - x;
-        this.mathServ.result = result;
-        this.mathServ.generateRandomizedAnswers();
-      }
+      this.arrangeForMinusOperation(x, y)
     }
     else {
       let result = x + y;
@@ -190,24 +177,34 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
+  arrangeForMinusOperation(x, y) {
+    if (x >= y) {
+      let result = x - y;
+      this.mathServ.result = result;
+      this.mathServ.generateRandomizedAnswers();
+    }
+    else {
+      let result = y - x;
+      this.mathServ.result = result;
+      this.mathServ.generateRandomizedAnswers();
+    }
+  }
+
   checkAnswer(selection) {
     let rightAnswer = this.mathServ.result;
     this.answerIsGiven = true;
-
     if (selection == rightAnswer) {
       this.mathServ.playSound('success');
       this.mathServ.numberOfRightAnswers++;
       this.updateProgressbar();
-
       setTimeout(() => {
         this.showEndscreen();
-      }, 500);
+      }, 500)
     }
     else {
       this.mathServ.playSound('wrong')
-
       this.pushMathProblemInWrongAnswersArray()
-    };
+    }
   }
 
   pushMathProblemInWrongAnswersArray() {
@@ -247,7 +244,6 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   showEndscreen() {
-
     if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
       this.mathServ.wrongAnswers = this.wrongAnswers;
       this.earnTrophy();
@@ -270,10 +266,14 @@ export class ArithmeticAreaComponent implements OnInit {
       })
     }
     else {
-      await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
-        medals: [medal],
-        id: this.actualUser.uid
-      });
+      this.createNewFirestoreDocForTrophys(medal)
     }
+  }
+
+  async createNewFirestoreDocForTrophys(medal){
+    await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
+      medals: [medal],
+      id: this.actualUser.uid
+    });
   }
 }

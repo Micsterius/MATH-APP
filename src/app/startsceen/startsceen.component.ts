@@ -17,14 +17,10 @@ export class StartsceenComponent implements OnInit {
     {
       'nameOne': 'Kopfrechnen',
       'linkOne': 'arithmetic',
-      'nameTwo': 'Einstellungen',
-      'linkTwo': 'settings',
     },
     {
       'nameOne': 'Silbenlesen',
       'linkOne': 'reading-phenomene',
-      'nameTwo': 'Einstellungen',
-      'linkTwo': '',
     }
   ]
 

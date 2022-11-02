@@ -20,24 +20,8 @@ export class PhonemeExerciseComponent implements OnInit {
 
   actualUser: User;
 
-  numberOne: number = 0;
-  numberTwo: number = 0;
-  mathSetting: any;
-  params: any = '';
   numberOfAnswersToSolveCorrect: number = 10;
-  showBothPictures: boolean = false;
-  showOnePictures: boolean = false;
-  operator: string = '+';
-  imageArrayNumberOne: string[] = [];
-  imageArrayNumberTwo: string[] = [];
-
-  min: number = 2;
-  max: number = 7;
-  showImages: number = 2;
-  result: number;
-  temporaryOperatorChoice: string;
-
-  wrongAnswers: any[] = [];
+  numberOfCorrectAnswers: number = 0;
 
   currentQuestion: number = 0;
 
@@ -122,21 +106,16 @@ export class PhonemeExerciseComponent implements OnInit {
 
     if (selection == rightAnswer) {
       this.mathServ.playSound('success');
-      /* this.mathServ.numberOfRightAnswers++;
-       this.updateProgressbar();
- 
-       setTimeout(() => {
-         this.showEndscreen();
-       }, 500);*/
+      this.numberOfCorrectAnswers++
 
     }
     else {
       this.mathServ.playSound('wrong')
-
-      //  this.pushMathProblemInWrongAnswersArray()
+      setTimeout(() => {
+        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
+      }, 1500);
     };
     setTimeout(() => {
-      this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
       this.nextIsAvailable = true;
     }, 1500);
   }
@@ -153,14 +132,7 @@ export class PhonemeExerciseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showPictures() {
-    if (this.mathSetting.showPicturesForAmount == 'yes') this.showBothPictures = true;
-    if (this.mathSetting.showPicturesForAmount == 'partly') this.showOnePictures = true;
-    if (this.mathSetting.showPicturesForAmount == 'no') {
-      this.showOnePictures = false;
-      this.showBothPictures = false;
-    }
-  }
+
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
@@ -168,109 +140,6 @@ export class PhonemeExerciseComponent implements OnInit {
     if (numberOfAnswersToSolveCorrect == '20') this.numberOfAnswersToSolveCorrect = 20;
   }
 
-  findAreaOfNumbers(areaOfNumbersForArithmetic) {
-    if (areaOfNumbersForArithmetic == 'small') {
-      this.min = 2;
-      this.max = 7;
-    }
-    if (areaOfNumbersForArithmetic == 'middle') {
-      this.min = 5;
-      this.max = 15;
-    }
-    if (areaOfNumbersForArithmetic == 'high') {
-      this.min = 10;
-      this.max = 20;
-    }
-  }
-
-  newArithmetic() {
-    this.generateRandomIntegers();
-    this.changeOperatorInHTML();
-  }
-
-  changeOperatorInHTML() {
-    if (this.mathSetting.mathOperator == 'minus') this.operator = '-';
-    if (this.mathSetting.mathOperator == 'plus') this.operator = '+';
-  }
-
-  generateRandomIntegers() {
-    let x = Math.floor((Math.random() * (this.max + 1 - this.min)) + this.min); // random Number between min and max
-    let y = Math.floor((Math.random() * (this.max + 1 - this.min)) + this.min); // random Number between min and max
-
-    this.arrangeNumbersOnPosition(x, y)
-    this.calcRightAnswer(x, y);
-  }
-
-  arrangeNumbersOnPosition(x, y) {
-    if (this.minusOperationIsGiven()) {
-      if (x >= y) {
-        this.numberOne = x;
-        this.numberTwo = y;
-      }
-      else {
-        this.numberOne = y;
-        this.numberTwo = x;
-      }
-    }
-    else {
-      this.numberOne = x;
-      this.numberTwo = y;
-    }
-    //  this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.mathSetting.mathOperator)
-  }
-
-  changeOperator() {
-    if (this.temporaryOperatorChoice == 'both') {
-      if (this.plusOperationIsGiven()) {
-        this.operator = '-';
-        this.doMinusOperation();
-      }
-      else {
-        this.operator = '+';
-        this.doPlusOperation();
-      }
-    }
-
-  }
-
-  doMinusOperation() {
-    return this.mathSetting.mathOperator = 'minus'; //workingOperator = -1
-  }
-
-
-  doPlusOperation() {
-    return this.mathSetting.mathOperator = 'plus'; //workingOperator = +1
-  }
-
-
-  plusOperationIsGiven() {
-    return this.mathSetting.mathOperator == 'plus'; //workingOperator = +1
-  }
-
-
-  minusOperationIsGiven() {
-    return this.mathSetting.mathOperator == 'minus'; //workingOperator = +1
-  }
-
-  calcRightAnswer(x, y) {
-    if (this.minusOperationIsGiven()) {
-      if (x >= y) {
-        let result = x - y;
-        //   this.mathServ.result = result;
-        //   this.mathServ.generateRandomizedAnswers();
-      }
-      else {
-        let result = y - x;
-        //   this.mathServ.result = result;
-        //  this.mathServ.generateRandomizedAnswers();
-      }
-    }
-    else {
-      let result = x + y;
-      //  this.mathServ.result = result;
-      //  this.mathServ.generateRandomizedAnswers();
-    }
-  }
 
   /*  checkAnswer(selection) {
        let rightAnswer = this.mathServ.result;
@@ -292,26 +161,12 @@ export class PhonemeExerciseComponent implements OnInit {
        };
     }*/
 
-  pushMathProblemInWrongAnswersArray() {
-    this.wrongAnswers.push({
-      'numberOne': this.numberOne,
-      'numberTwo': this.numberTwo,
-      'operator': this.operator,
-      //    'result': this.mathServ.result
-    });
-  }
 
   updateProgressbar() {
     //   this.progressBarValue = this.mathServ.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
-  nextMathProblem() {
-    //   this.mathServ.numberOfMathProblems++;
-    this.answerIsGiven = false;
-    this.resetAnswerButtons();
-    this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
-    this.newArithmetic();
-  }
+
 
   resetAnswerButtons() {
     if (this.answerButtonOne.nativeElement.classList.contains('btn-pressed')) {

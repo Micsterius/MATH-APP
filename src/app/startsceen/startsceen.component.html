@@ -6,14 +6,13 @@
             <ng-template swiperSlide *ngFor="let button of buttons">
                 <div class="button-box">
                     <button class="bg-c-1 color-white" [routerLink]="[button.linkOne]">{{button.nameOne}}</button>
-                    <button class="bg-c-1 color-white" [routerLink]="[button.linkTwo]">{{button.nameTwo}}</button>
                 </div>
             </ng-template>
         </swiper>
     </div>
 
     <div class="button-box">
-
+        <button class="bg-c-1 color-white" [routerLink]="['settings']">Einstellungen</button>
         <button class="bg-c-1 color-white" [routerLink]="['triumph']">Erfolge</button>
     </div>
 </div>

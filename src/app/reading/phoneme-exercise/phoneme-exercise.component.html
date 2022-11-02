@@ -15,7 +15,7 @@
 
 
 
-    <div class="answer-container">
+    <div class="answer-container" *ngIf="showExercise">
         <div class="answer-box">
             <mat-icon mat-icon-button fontIcon="volume_up" (click)="speakServ.speak(allExercises[currentQuestion].callOne)"></mat-icon>
             <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
@@ -49,11 +49,9 @@
             </button>
         </div>
     </div>
-
-
-    
+   
     <div class="question-footer">
-        <span><b>{{mathServ.numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{mathServ.numberOfMathProblems}}</b>
+        <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
             Aufgabe(n)
             korrekt
             gelöst</span>
