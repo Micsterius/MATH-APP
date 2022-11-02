@@ -4,7 +4,7 @@
 
     <div class="question-text">
         <h3 class="card-title" id="question-text">
-            Wieviel ist
+            Was steht hier
         </h3>
         <div class="help"><img src="./../../assets/img/help.svg"></div>
     </div>
@@ -51,15 +51,15 @@
     </div>
 
 
-    <!--
+    
     <div class="question-footer">
         <span><b>{{mathServ.numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{mathServ.numberOfMathProblems}}</b>
             Aufgabe(n)
             korrekt
             gelöst</span>
-        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+        <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
             (click)="nextExercise()">
             <mat-icon style="color: white;">double_arrow</mat-icon>
         </button>
     </div>
--->
+<!---->

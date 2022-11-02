@@ -50,6 +50,7 @@ export class PhonemeExerciseComponent implements OnInit {
   syllableBig: string = '';
   allExercises: any[] = [];
   showExercise: boolean = false;
+  nextIsAvailable: boolean = false;
 
   answerSyllableOne: string = '';
   answerSyllableTwo: string = '';
@@ -90,15 +91,15 @@ export class PhonemeExerciseComponent implements OnInit {
       querySnapshot.forEach((doc) => {
         this.allExercises.push(doc.data())
         console.log(this.allExercises)
-        this.loadFirstExcercise();
+        this.loadExercise();
       })
     });
 
   }
 
-  loadFirstExcercise() {
-    let firstExcercise = this.allExercises[this.currentQuestion]
-    this.syllableSmall = firstExcercise.right;
+  loadExercise() {
+    let excercise = this.allExercises[this.currentQuestion]
+    this.syllableSmall = excercise.right;
     this.loadAnswers();
     this.showExercise = true;
   }
@@ -116,28 +117,38 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
   checkAnswer(selection) {
-     let rightAnswer = this.allExercises[this.currentQuestion].right;
-     this.answerIsGiven = true;
- 
-     if (selection == rightAnswer) {
-       this.mathServ.playSound('success');
+    let rightAnswer = this.allExercises[this.currentQuestion].right;
+    this.answerIsGiven = true;
+
+    if (selection == rightAnswer) {
+      this.mathServ.playSound('success');
       /* this.mathServ.numberOfRightAnswers++;
        this.updateProgressbar();
  
        setTimeout(() => {
          this.showEndscreen();
        }, 500);*/
-       
-     }
-     else {
-       this.mathServ.playSound('wrong')
- 
-     //  this.pushMathProblemInWrongAnswersArray()
-     };
-     setTimeout(() => {
-      this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
-    }, 1500);
+
     }
+    else {
+      this.mathServ.playSound('wrong')
+
+      //  this.pushMathProblemInWrongAnswersArray()
+    };
+    setTimeout(() => {
+      this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
+      this.nextIsAvailable = true;
+    }, 1500);
+  }
+
+  nextExercise() {
+    this.answerIsGiven = false;
+    this.nextIsAvailable = false;
+    this.resetAnswerButtons();
+    this.currentQuestion++;
+    this.loadExercise();
+  }
+
 
   ngOnInit(): void {
   }
@@ -261,25 +272,25 @@ export class PhonemeExerciseComponent implements OnInit {
     }
   }
 
-/*  checkAnswer(selection) {
-     let rightAnswer = this.mathServ.result;
-     this.answerIsGiven = true;
- 
-     if (selection == rightAnswer) {
-       this.mathServ.playSound('success');
-       this.mathServ.numberOfRightAnswers++;
-       this.updateProgressbar();
- 
-       setTimeout(() => {
-         this.showEndscreen();
-       }, 500);
-     }
-     else {
-       this.mathServ.playSound('wrong')
- 
-       this.pushMathProblemInWrongAnswersArray()
-     };
-  }*/
+  /*  checkAnswer(selection) {
+       let rightAnswer = this.mathServ.result;
+       this.answerIsGiven = true;
+   
+       if (selection == rightAnswer) {
+         this.mathServ.playSound('success');
+         this.mathServ.numberOfRightAnswers++;
+         this.updateProgressbar();
+   
+         setTimeout(() => {
+           this.showEndscreen();
+         }, 500);
+       }
+       else {
+         this.mathServ.playSound('wrong')
+   
+         this.pushMathProblemInWrongAnswersArray()
+       };
+    }*/
 
   pushMathProblemInWrongAnswersArray() {
     this.wrongAnswers.push({
