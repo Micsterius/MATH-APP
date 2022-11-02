@@ -31,7 +31,6 @@
 
 
     <div class="answer-container">
-        <div class="transparency-box" id="transparent-box" style="display:none"></div>
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
             (click)="checkAnswer(mathServ.result1); mathServ.toggleClass($event)" #answerButtonOne
             [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result1) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result1) && answerIsGiven}">

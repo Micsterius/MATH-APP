@@ -5,5 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ReadingService {
 
-  constructor() { }
+  constructor() {
+
+  }
+
+  toggleClass = (event) => {
+    event.target.classList.add('btn-pressed');
+  }
 }

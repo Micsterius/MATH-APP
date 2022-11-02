@@ -2,7 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
-import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
+import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
 import { environment } from 'src/environments/environment';
 
@@ -44,7 +45,16 @@ export class PhonemeExerciseComponent implements OnInit {
 
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
-  showArithmeticEndscreen: boolean = false;
+  syllableSmall: string = '';
+  syllableBig: string = '';
+  allExercises: any[] = [];
+  showExercise: boolean = false;
+
+  answerSyllableOne: string = '';
+  answerSyllableTwo: string = '';
+  answerSyllableThree: string = '';
+  answerSyllableFour: string = '';
+
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
@@ -53,21 +63,75 @@ export class PhonemeExerciseComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public readServ: ReadingService
-    ) {
-    this.wrongAnswers.length = 0;
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
-    this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
-    this.temporaryOperatorChoice = this.mathSetting.mathOperator
-    if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
-    this.showPictures();
-    console.log(this.mathSetting)
-    this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
-    this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
-   /* this.readServ.numberOfReadingProblems = 1;
-    this.readServ.numberOfRightAnswers = 0*/
-    this.newArithmetic();
+    public readServ: ReadingService,
+    public mathServ: MathService
+  ) {
+    /*  this.wrongAnswers.length = 0;
+      this.actualUser = JSON.parse(localStorage.getItem('user'))
+      this.mathSetting = JSON.parse(localStorage.getItem('readSetting'))
+      this.temporaryOperatorChoice = this.mathSetting.mathOperator
+      if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
+      this.showPictures();
+      console.log(this.mathSetting)
+      this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
+      this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
+      this.readServ.numberOfReadingProblems = 1;
+      this.readServ.numberOfRightAnswers = 0
+      this.newArithmetic();*/
+
+    this.loadPhenome()
   }
+
+  loadPhenome() {
+    let q = query(collection(this.db, "lesen", "laute", "uebung-hoeren"))
+    let unsubscribe = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.allExercises.push(doc.data())
+        console.log(this.allExercises)
+        this.loadFirstExcercise();
+      })
+    });
+
+  }
+
+  loadFirstExcercise() {
+    let firstExcercise = this.allExercises[this.currentQuestion]
+    this.syllableSmall = firstExcercise.right;
+    this.loadAnswers();
+    this.showExercise = true;
+  }
+
+  loadAnswers() {
+    this.answerSyllableOne = this.allExercises[this.currentQuestion].answerOne
+    this.answerSyllableTwo = this.allExercises[this.currentQuestion].answerTwo
+    this.answerSyllableThree = this.allExercises[this.currentQuestion].answerThree
+    this.answerSyllableFour = this.allExercises[this.currentQuestion].answerFour
+  }
+
+  checkResult(selection) {
+    if (selection == this.allExercises[this.currentQuestion].right) return true;
+    else return false;
+  }
+
+  checkAnswer(selection) {
+     let rightAnswer = this.allExercises[this.currentQuestion].right;
+     this.answerIsGiven = true;
+ 
+     if (selection == rightAnswer) {
+       this.mathServ.playSound('success');
+      /* this.mathServ.numberOfRightAnswers++;
+       this.updateProgressbar();
+ 
+       setTimeout(() => {
+         this.showEndscreen();
+       }, 500);*/
+     }
+     else {
+       this.mathServ.playSound('wrong')
+ 
+     //  this.pushMathProblemInWrongAnswersArray()
+     };
+    }
 
   ngOnInit(): void {
   }
@@ -135,7 +199,7 @@ export class PhonemeExerciseComponent implements OnInit {
       this.numberOne = x;
       this.numberTwo = y;
     }
-  //  this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.mathSetting.mathOperator)
+    //  this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.mathSetting.mathOperator)
   }
 
   changeOperator() {
@@ -175,57 +239,57 @@ export class PhonemeExerciseComponent implements OnInit {
     if (this.minusOperationIsGiven()) {
       if (x >= y) {
         let result = x - y;
-     //   this.mathServ.result = result;
-     //   this.mathServ.generateRandomizedAnswers();
+        //   this.mathServ.result = result;
+        //   this.mathServ.generateRandomizedAnswers();
       }
       else {
         let result = y - x;
-     //   this.mathServ.result = result;
-      //  this.mathServ.generateRandomizedAnswers();
+        //   this.mathServ.result = result;
+        //  this.mathServ.generateRandomizedAnswers();
       }
     }
     else {
       let result = x + y;
-    //  this.mathServ.result = result;
-    //  this.mathServ.generateRandomizedAnswers();
+      //  this.mathServ.result = result;
+      //  this.mathServ.generateRandomizedAnswers();
     }
   }
 
-  checkAnswer(selection) {
-   /* let rightAnswer = this.mathServ.result;
-    this.answerIsGiven = true;
-
-    if (selection == rightAnswer) {
-      this.mathServ.playSound('success');
-      this.mathServ.numberOfRightAnswers++;
-      this.updateProgressbar();
-
-      setTimeout(() => {
-        this.showEndscreen();
-      }, 500);
-    }
-    else {
-      this.mathServ.playSound('wrong')
-
-      this.pushMathProblemInWrongAnswersArray()
-    };*/
-  }
+/*  checkAnswer(selection) {
+     let rightAnswer = this.mathServ.result;
+     this.answerIsGiven = true;
+ 
+     if (selection == rightAnswer) {
+       this.mathServ.playSound('success');
+       this.mathServ.numberOfRightAnswers++;
+       this.updateProgressbar();
+ 
+       setTimeout(() => {
+         this.showEndscreen();
+       }, 500);
+     }
+     else {
+       this.mathServ.playSound('wrong')
+ 
+       this.pushMathProblemInWrongAnswersArray()
+     };
+  }*/
 
   pushMathProblemInWrongAnswersArray() {
     this.wrongAnswers.push({
       'numberOne': this.numberOne,
       'numberTwo': this.numberTwo,
       'operator': this.operator,
-  //    'result': this.mathServ.result
+      //    'result': this.mathServ.result
     });
   }
 
   updateProgressbar() {
- //   this.progressBarValue = this.mathServ.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
+    //   this.progressBarValue = this.mathServ.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
   nextMathProblem() {
- //   this.mathServ.numberOfMathProblems++;
+    //   this.mathServ.numberOfMathProblems++;
     this.answerIsGiven = false;
     this.resetAnswerButtons();
     this.changeOperator(); //if in settings is chosen both for operators, the next math problem switch from minus to plus and reverse
@@ -249,17 +313,17 @@ export class PhonemeExerciseComponent implements OnInit {
 
   showEndscreen() {
 
-/*    if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
-      this.mathServ.wrongAnswers = this.wrongAnswers;
-      this.earnTrophy();
-      this.router.navigate(['/arithmeticEndscreen']);
-    }*/
+    /*    if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
+          this.mathServ.wrongAnswers = this.wrongAnswers;
+          this.earnTrophy();
+          this.router.navigate(['/arithmeticEndscreen']);
+        }*/
   }
 
   earnTrophy() {
- /*   if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.giveMedal('silver')
-    if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.giveMedal('silver-gold')
-    if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.giveMedal('gold')*/
+    /*   if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.giveMedal('silver')
+       if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.giveMedal('silver-gold')
+       if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.giveMedal('gold')*/
   }
 
   async giveMedal(medal) {
