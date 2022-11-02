@@ -10,7 +10,7 @@ export class SettingsComponent implements OnInit {
   numberOfAnswersToSolveCorrect: string = '10';
   showPicturesForAmount: string = 'yes'; //boolean not possible because there are three options
   mathOperator: string = 'plus';
-  mathSetting = {
+  setting = {
     'mathOperator': this.mathOperator,
     'showPicturesForAmount': this.showPicturesForAmount,
     'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
@@ -18,7 +18,7 @@ export class SettingsComponent implements OnInit {
   }
 
   constructor() {
-    localStorage.setItem('mathSetting', JSON.stringify(this.mathSetting));
+    localStorage.setItem('setting', JSON.stringify(this.setting));
   }
 
   ngOnInit(): void {
@@ -30,13 +30,13 @@ export class SettingsComponent implements OnInit {
   }
 
   actualizeSettingObj() {
-    this.mathSetting = {
+    this.setting = {
       'mathOperator': this.mathOperator,
       'showPicturesForAmount': this.showPicturesForAmount,
       'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
       'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
     }
-    localStorage.setItem('mathSetting', JSON.stringify(this.mathSetting));
+    localStorage.setItem('setting', JSON.stringify(this.setting));
   }
 
   getOperator(operator) {

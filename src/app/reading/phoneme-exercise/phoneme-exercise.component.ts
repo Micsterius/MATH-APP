@@ -20,13 +20,11 @@ export class PhonemeExerciseComponent implements OnInit {
 
   actualUser: User;
 
-  numberOfAnswersToSolveCorrect: number = 10;
+  numberOfAnswersToSolveCorrect: number = 5;
   numberOfCorrectAnswers: number = 0;
 
   currentQuestion: number = 0;
-
-  chosenOperator: number = 1;
-  workingOperator: number = 1;
+  setting: any;
 
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
@@ -53,37 +51,58 @@ export class PhonemeExerciseComponent implements OnInit {
     public mathServ: MathService,
     public speakServ: SpeakingService
   ) {
-    /*  this.wrongAnswers.length = 0;
-      this.actualUser = JSON.parse(localStorage.getItem('user'))
-      this.mathSetting = JSON.parse(localStorage.getItem('readSetting'))
-      this.temporaryOperatorChoice = this.mathSetting.mathOperator
-      if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
-      this.showPictures();
-      console.log(this.mathSetting)
-      this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
-      this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
-      this.readServ.numberOfReadingProblems = 1;
-      this.readServ.numberOfRightAnswers = 0
-      this.newArithmetic();*/
-
+    this.setting = JSON.parse(localStorage.getItem('setting'));
+    this.actualUser = JSON.parse(localStorage.getItem('user'))
+    if(this.setting) this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
     this.loadPhenome()
+    //this.setNewExercises()
+  }
+
+
+ /* async setNewExercises(){
+    const readingRef = collection(this.db, "lesen");
+    await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'bo'), {
+      answerFour: "br / BR", answerThree: "ba / BA", answerTwo: "bo / BO", answerOne: "bu / BU",
+      callOne: 'buch', callTwo: 'bogen', callThree: 'ball', callFour: 'brei',
+      callRight: 'bogen', right: 'bo / BO' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'bei'), {
+    answerFour: "bei / BEI", answerThree: "ba / BA", answerTwo: "bu / BU", answerOne: "bo / BO",
+    callOne: 'bohren', callTwo: 'bus', callThree: 'baden', callFour: 'beine',
+    callRight: 'beine', right: 'bei / BEI' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'lei'), {
+    answerFour: "lu / LU", answerThree: "Lei / LEI", answerTwo: "la / LA", answerOne: "lo / LO",
+    callOne: 'lob', callTwo: 'laden', callThree: 'leise', callFour: 'luft',
+    callRight: 'leise', right: 'lei / LEI' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'mu'), {
+    answerFour: "ma / MA", answerThree: "mo / Mo", answerTwo: "mei / MEI", answerOne: "mu / Mu",
+    callOne: 'musik', callTwo: 'meister', callThree: 'mosaik', callFour: 'mama',
+    callRight: 'musik', right: "mu / Mu" });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'er'), {
+    answerFour: "en / EN", answerThree: "ele / ELE", answerTwo: "er / ER", answerOne: "es / ES",
+    callOne: 'essen', callTwo: 'erbsen', callThree: 'Elefant', callFour: 'ende',
+    callRight: 'erbsen', right: 'er / ER' });
+  }*/
+
+  findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
+    if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
+    if (numberOfAnswersToSolveCorrect == '10') this.numberOfAnswersToSolveCorrect = 10;
+    if (numberOfAnswersToSolveCorrect == '20') this.numberOfAnswersToSolveCorrect = 20;
   }
 
   loadPhenome() {
+    this.allExercises.length = 0;
     let q = query(collection(this.db, "lesen", "laute", "uebung-hoeren"))
     let unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.allExercises.push(doc.data())
-        console.log(this.allExercises)
         this.loadExercise();
       })
     });
-
   }
 
   loadExercise() {
     let excercise = this.allExercises[this.currentQuestion]
-    this.syllableSmall = excercise.right;
+    this.syllableSmall = excercise.right; //variable to read
     this.loadAnswers();
     this.showExercise = true;
   }
@@ -106,8 +125,9 @@ export class PhonemeExerciseComponent implements OnInit {
 
     if (selection == rightAnswer) {
       this.mathServ.playSound('success');
-      this.numberOfCorrectAnswers++
-
+      this.numberOfCorrectAnswers++;
+      this.updateProgressbar();
+      if(this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
     }
     else {
       this.mathServ.playSound('wrong')
@@ -132,38 +152,8 @@ export class PhonemeExerciseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-  findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
-    if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
-    if (numberOfAnswersToSolveCorrect == '10') this.numberOfAnswersToSolveCorrect = 10;
-    if (numberOfAnswersToSolveCorrect == '20') this.numberOfAnswersToSolveCorrect = 20;
-  }
-
-
-  /*  checkAnswer(selection) {
-       let rightAnswer = this.mathServ.result;
-       this.answerIsGiven = true;
-   
-       if (selection == rightAnswer) {
-         this.mathServ.playSound('success');
-         this.mathServ.numberOfRightAnswers++;
-         this.updateProgressbar();
-   
-         setTimeout(() => {
-           this.showEndscreen();
-         }, 500);
-       }
-       else {
-         this.mathServ.playSound('wrong')
-   
-         this.pushMathProblemInWrongAnswersArray()
-       };
-    }*/
-
-
   updateProgressbar() {
-    //   this.progressBarValue = this.mathServ.numberOfRightAnswers * 100 / this.numberOfAnswersToSolveCorrect
+    this.progressBarValue = this.numberOfCorrectAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
 
@@ -184,18 +174,14 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
   showEndscreen() {
-
-    /*    if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
-          this.mathServ.wrongAnswers = this.wrongAnswers;
           this.earnTrophy();
-          this.router.navigate(['/arithmeticEndscreen']);
-        }*/
+          this.router.navigate(['']);
   }
 
   earnTrophy() {
-    /*   if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.giveMedal('silver')
-       if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.giveMedal('silver-gold')
-       if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.giveMedal('gold')*/
+       if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.giveMedal('silver')
+       if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.giveMedal('silver-gold')
+       if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 12) this.giveMedal('gold')
   }
 
   async giveMedal(medal) {
@@ -206,11 +192,13 @@ export class PhonemeExerciseComponent implements OnInit {
         medals: arrayUnion(medal),
       })
     }
-    else {
-      await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
-        medals: [medal],
-        id: this.actualUser.uid
-      });
-    }
+    else this.createNewFirestoreDocForTrophys(medal);
+  }
+
+  async createNewFirestoreDocForTrophys(medal){
+    await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
+      medals: [medal],
+      id: this.actualUser.uid
+    });
   }
 }

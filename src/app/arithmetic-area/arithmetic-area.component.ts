@@ -20,7 +20,7 @@ export class ArithmeticAreaComponent implements OnInit {
 
   numberOne: number = 0;
   numberTwo: number = 0;
-  mathSetting: any;
+  setting: any;
   params: any = '';
   numberOfAnswersToSolveCorrect: number = 10;
   showBothPictures: boolean = false;
@@ -56,13 +56,12 @@ export class ArithmeticAreaComponent implements OnInit {
     public mathServ: MathService) {
     this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
-    this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
-    this.temporaryOperatorChoice = this.mathSetting.mathOperator
-    if (this.temporaryOperatorChoice == 'both') this.mathSetting.mathOperator = 'plus';
+    this.setting = JSON.parse(localStorage.getItem('setting'))
+    this.temporaryOperatorChoice = this.setting.mathOperator
+    if (this.temporaryOperatorChoice == 'both') this.setting.mathOperator = 'plus';
     this.showPictures();
-    console.log(this.mathSetting)
-    this.findAreaOfNumbers(this.mathSetting.areaOfNumbersForArithmetic);
-    this.findNumberOfAnswersToSolveCorrect(this.mathSetting.numberOfAnswersToSolveCorrect);
+    this.findAreaOfNumbers(this.setting.areaOfNumbersForArithmetic);
+    this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
     this.mathServ.numberOfMathProblems = 1;
     this.mathServ.numberOfRightAnswers = 0;
     this.newArithmetic();
@@ -72,9 +71,9 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   showPictures() {
-    if (this.mathSetting.showPicturesForAmount == 'yes') this.showBothPictures = true;
-    if (this.mathSetting.showPicturesForAmount == 'partly') this.showOnePictures = true;
-    if (this.mathSetting.showPicturesForAmount == 'no') {
+    if (this.setting.showPicturesForAmount == 'yes') this.showBothPictures = true;
+    if (this.setting.showPicturesForAmount == 'partly') this.showOnePictures = true;
+    if (this.setting.showPicturesForAmount == 'no') {
       this.showOnePictures = false;
       this.showBothPictures = false;
     }
@@ -107,8 +106,8 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   changeOperatorInHTML() {
-    if (this.mathSetting.mathOperator == 'minus') this.operator = '-';
-    if (this.mathSetting.mathOperator == 'plus') this.operator = '+';
+    if (this.setting.mathOperator == 'minus') this.operator = '-';
+    if (this.setting.mathOperator == 'plus') this.operator = '+';
   }
 
   generateRandomIntegers() {
@@ -134,7 +133,7 @@ export class ArithmeticAreaComponent implements OnInit {
       this.numberOne = x;
       this.numberTwo = y;
     }
-    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.mathSetting.mathOperator)
+    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.setting.mathOperator)
   }
 
   changeOperator() {
@@ -151,19 +150,19 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   doMinusOperation() {
-    return this.mathSetting.mathOperator = 'minus'; //workingOperator = -1
+    return this.setting.mathOperator = 'minus'; //workingOperator = -1
   }
 
   doPlusOperation() {
-    return this.mathSetting.mathOperator = 'plus'; //workingOperator = +1
+    return this.setting.mathOperator = 'plus'; //workingOperator = +1
   }
 
   plusOperationIsGiven() {
-    return this.mathSetting.mathOperator == 'plus'; //workingOperator = +1
+    return this.setting.mathOperator == 'plus'; //workingOperator = +1
   }
 
   minusOperationIsGiven() {
-    return this.mathSetting.mathOperator == 'minus'; //workingOperator = +1
+    return this.setting.mathOperator == 'minus'; //workingOperator = +1
   }
 
   calcRightAnswer(x, y) {
