@@ -5,6 +5,7 @@ import { User } from 'firebase/auth';
 import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
 import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
+import { SpeakingService } from 'src/app/shared/services/speaking.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -64,7 +65,8 @@ export class PhonemeExerciseComponent implements OnInit {
   constructor(
     private router: Router,
     public readServ: ReadingService,
-    public mathServ: MathService
+    public mathServ: MathService,
+    public speakServ: SpeakingService
   ) {
     /*  this.wrongAnswers.length = 0;
       this.actualUser = JSON.parse(localStorage.getItem('user'))
@@ -125,12 +127,16 @@ export class PhonemeExerciseComponent implements OnInit {
        setTimeout(() => {
          this.showEndscreen();
        }, 500);*/
+       
      }
      else {
        this.mathServ.playSound('wrong')
  
      //  this.pushMathProblemInWrongAnswersArray()
      };
+     setTimeout(() => {
+      this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
+    }, 1500);
     }
 
   ngOnInit(): void {
