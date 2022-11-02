@@ -43,12 +43,6 @@ imgSrc2: any [] = [
   {'src': 'counting-3.png'}
 ]
 
-slides: string [] = [
-  'hallo',
-  'wie gehts',
-  'danke gut'
-]
-
   constructor(
     public authService: AuthService,
     public afs: AngularFirestore
@@ -81,13 +75,6 @@ slides: string [] = [
       }).catch((error) => {
         window.alert(error.message);
       });
-  }
-
-  onSwiper([swiper]) {
-    console.log(swiper);
-  }
-  onSlideChange() {
-    console.log('slide change');
   }
 
   saveImgUserPhotoURL(src){

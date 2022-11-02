@@ -1,8 +1,19 @@
 <div class="bg-c-1-light startscreen-container w450">
-    <h1>Lass uns rechnen</h1>
+    <h1>Lass uns lernen</h1>
+
+    <div class="swiper-container">
+        <swiper [navigation]="true" [pagination]="true" class="mySwiper">
+            <ng-template swiperSlide *ngFor="let button of buttons">
+                <div class="button-box">
+                    <button class="bg-c-1 color-white" [routerLink]="[button.linkOne]">{{button.nameOne}}</button>
+                    <button class="bg-c-1 color-white" [routerLink]="[button.linkTwo]">{{button.nameTwo}}</button>
+                </div>
+            </ng-template>
+        </swiper>
+    </div>
+
     <div class="button-box">
-        <button class="bg-c-1 color-white" [routerLink]="['arithmetic']">Kopfrechnen</button>
-        <button class="bg-c-1 color-white" [routerLink]="['settings']">Einstellungen</button>
+
         <button class="bg-c-1 color-white" [routerLink]="['triumph']">Erfolge</button>
     </div>
 </div>
