@@ -48,6 +48,9 @@ import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-
 import { SwiperModule } from 'swiper/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ChatFriendComponent } from './community/chat-friend/chat-friend.component';
+import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
+import { WordsComponent } from './reading/words/words.component';
+import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { ChatFriendComponent } from './community/chat-friend/chat-friend.compone
     ChatComponent,
     FriendsComponent,
     WrongAnswersAgainComponent,
-    ChatFriendComponent
+    ChatFriendComponent,
+    PhonemeExerciseComponent,
+    WordsComponent,
+    SettingsReadingComponent
   ],
   imports: [
     BrowserAnimationsModule,

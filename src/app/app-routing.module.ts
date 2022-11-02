@@ -15,6 +15,7 @@ import { ChatComponent } from './community/chat/chat.component';
 import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 import { ChatFriendComponent } from './community/chat-friend/chat-friend.component';
+import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
 // route guard
 import { AuthGuard } from './shared/guard/auth.guard';
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'friends', component: FriendsComponent },
   { path: 'wrongAnswers', component: WrongAnswersAgainComponent },
   { path: 'chat-friend', component: ChatFriendComponent },
+  { path: 'reading-phenomene', component: PhonemeExerciseComponent },
 ];
 
 @NgModule({

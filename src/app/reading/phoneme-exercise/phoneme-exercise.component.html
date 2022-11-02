@@ -1,0 +1,62 @@
+<div class="w450 bg-c-1-light">
+    <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
+
+
+    <div class="question-text">
+        <h3 class="card-title" id="question-text">
+            Wieviel ist
+        </h3>
+        <div class="help"><img src="./../../assets/img/help.svg"></div>
+    </div>
+    <div class="question-box">
+        <div class="nbr-size">{{numberOne}}</div>
+
+        <div id="arithmetic-operator" class="nbr-size">{{operator}}</div>
+
+        <div class="nbr-size">{{numberTwo}}</div>
+    </div>
+
+
+
+<!--
+    <div class="answer-container">
+        <div class="transparency-box" id="transparent-box" style="display:none"></div>
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(mathServ.result1); mathServ.toggleClass($event)" #answerButtonOne
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result1) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result1) && answerIsGiven}">
+            {{mathServ.result1}}
+        </button>
+
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(mathServ.result2); mathServ.toggleClass($event)" #answerButtonTwo
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result2) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result2) && answerIsGiven}">
+            {{mathServ.result2}}
+        </button>
+
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(mathServ.result3); mathServ.toggleClass($event)" #answerButtonThree
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result3) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result3) && answerIsGiven}">
+            {{mathServ.result3}}
+        </button>
+
+        <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            (click)="checkAnswer(mathServ.result4); mathServ.toggleClass($event)" #answerButtonFour
+            [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result4) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result4) && answerIsGiven}">
+            {{mathServ.result4}}
+        </button>
+
+    </div>
+
+
+
+    <div class="question-footer">
+        <span><b>{{mathServ.numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{mathServ.numberOfMathProblems}}</b>
+            Aufgabe(n)
+            korrekt
+            gelöst</span>
+        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+            (click)="nextExercise()">
+            <mat-icon style="color: white;">double_arrow</mat-icon>
+        </button>
+    </div>
+-->
