@@ -61,26 +61,26 @@ export class PhonemeExerciseComponent implements OnInit {
 
  /* async setNewExercises(){
     const readingRef = collection(this.db, "lesen");
-    await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'bo'), {
-      answerFour: "br / BR", answerThree: "ba / BA", answerTwo: "bo / BO", answerOne: "bu / BU",
-      callOne: 'buch', callTwo: 'bogen', callThree: 'ball', callFour: 'brei',
-      callRight: 'bogen', right: 'bo / BO' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'bei'), {
-    answerFour: "bei / BEI", answerThree: "ba / BA", answerTwo: "bu / BU", answerOne: "bo / BO",
-    callOne: 'bohren', callTwo: 'bus', callThree: 'baden', callFour: 'beine',
-    callRight: 'beine', right: 'bei / BEI' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'lei'), {
-    answerFour: "lu / LU", answerThree: "Lei / LEI", answerTwo: "la / LA", answerOne: "lo / LO",
-    callOne: 'lob', callTwo: 'laden', callThree: 'leise', callFour: 'luft',
-    callRight: 'leise', right: 'lei / LEI' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'mu'), {
-    answerFour: "ma / MA", answerThree: "mo / Mo", answerTwo: "mei / MEI", answerOne: "mu / Mu",
-    callOne: 'musik', callTwo: 'meister', callThree: 'mosaik', callFour: 'mama',
-    callRight: 'musik', right: "mu / Mu" });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'er'), {
-    answerFour: "en / EN", answerThree: "ele / ELE", answerTwo: "er / ER", answerOne: "es / ES",
-    callOne: 'essen', callTwo: 'erbsen', callThree: 'Elefant', callFour: 'ende',
-    callRight: 'erbsen', right: 'er / ER' });
+    await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ho'), {
+      answerFour: "ho / Ho", answerThree: "ha / HA", answerTwo: "he / He", answerOne: "hu / HU",
+      callOne: 'husten', callTwo: 'heben', callThree: 'Hand', callFour: 'hose',
+      callRight: 'hose', right: 'ho / Ho' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ha'), {
+    answerFour: "hi / HI", answerThree: "ha / HA", answerTwo: "hu / HU", answerOne: "ho / HO",
+    callOne: 'holen', callTwo: 'hupen', callThree: 'hamster', callFour: 'hinten',
+    callRight: 'hamster', right: 'ha / HA' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'he'), {
+    answerFour: "he / HE", answerThree: "hi / HI", answerTwo: "ha / HA", answerOne: "ho / HO",
+    callOne: 'hof', callTwo: 'hallo', callThree: 'hieb', callFour: 'hefe',
+    callRight: 'hefe', right: 'he / HE' });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hu'), {
+    answerFour: "ha / HA", answerThree: "he / HE", answerTwo: "ho / HO", answerOne: "hu / Hu",
+    callOne: 'huf', callTwo: 'honig', callThree: 'herz', callFour: 'hase',
+    callRight: 'huf', right: "hu / Hu" });
+  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hi'), {
+    answerFour: "hi / HI", answerThree: "hei / HEI", answerTwo: "ha / HA", answerOne: "hu / Hu",
+    callOne: 'hupen', callTwo: 'hafen', callThree: 'heilen', callFour: 'hinein',
+    callRight: 'hinein', right: 'hi / HI' });
   }*/
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
@@ -94,11 +94,20 @@ export class PhonemeExerciseComponent implements OnInit {
     let q = query(collection(this.db, "lesen", "laute", "uebung-hoeren"))
     let unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        this.allExercises.push(doc.data())
+        this.allExercises.push(doc.data());
+        this.fisherYatesShuffle(this.allExercises);
         this.loadExercise();
       })
     });
   }
+
+  //randomize array
+  fisherYatesShuffle(arr){
+    for(var i =arr.length-1 ; i>0 ;i--){
+        var j = Math.floor( Math.random() * (i + 1) ); //random index
+        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+    }
+}
 
   loadExercise() {
     let excercise = this.allExercises[this.currentQuestion]
