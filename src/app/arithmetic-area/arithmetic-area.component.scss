@@ -14,10 +14,10 @@
     font-weight: 600;
 }
 
-.operator{
-position: absolute;
-left: 50%;
-transform: translate(-50%);
+.operator {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .answer-container {
@@ -78,6 +78,16 @@ transform: translate(-50%);
     align-items: center;
     padding-left: 24px;
     padding-right: 24px;
+    position: relative;
+
+    img {
+        height: 60px;
+        /* object-fit: cover; */
+        position: absolute;
+        right: 24px;
+        top: 1px;
+        width: 50px;
+    }
 }
 
 .image-amount {
@@ -122,7 +132,7 @@ transform: translate(-50%);
     opacity: 0.7;
 }
 
-.nbr-container{
+.nbr-container {
     display: flex;
     flex-direction: column;
     align-items: center;

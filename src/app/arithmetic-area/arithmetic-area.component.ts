@@ -5,6 +5,7 @@ import { User } from 'firebase/auth';
 import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
 import { MathService } from '../shared/services/math.service';
+import { SpeakingService } from '../shared/services/speaking.service';
 
 @Component({
   selector: 'app-arithmetic-area',
@@ -53,11 +54,12 @@ export class ArithmeticAreaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public mathServ: MathService) {
+    public mathServ: MathService,
+    public speakServ: SpeakingService) {
     this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.setting = JSON.parse(localStorage.getItem('setting'))
-    if(!this.setting) this.setStandardSetting();
+    if (!this.setting) this.setStandardSetting();
     this.temporaryOperatorChoice = this.setting.mathOperator
     if (this.temporaryOperatorChoice == 'both') this.setting.mathOperator = 'plus';
     this.showPictures();
@@ -68,7 +70,18 @@ export class ArithmeticAreaComponent implements OnInit {
     this.newArithmetic();
   }
 
-  setStandardSetting(){
+  helptext() {
+    if (this.helpSpeakPictures()) {
+      let text = 'Wenn du auf die bunten Kugeln tippst, verändert sich ihre Farbe. Das hilft dir beim Zählen'
+      this.speakServ.speak(text, 1)
+    }
+  }
+
+  helpSpeakPictures() {
+    return (this.setting.showPicturesForAmount == 'yes' || this.setting.showPicturesForAmount == 'partly')
+  }
+
+  setStandardSetting() {
     this.setting = {
       'mathOperator': 'plus',
       'showPicturesForAmount': 'yes',
@@ -279,7 +292,7 @@ export class ArithmeticAreaComponent implements OnInit {
     }
   }
 
-  async createNewFirestoreDocForTrophys(medal){
+  async createNewFirestoreDocForTrophys(medal) {
     await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
       medals: [medal],
       id: this.actualUser.uid
