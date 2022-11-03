@@ -6,30 +6,32 @@
         <h3 class="card-title" id="question-text">
             Wieviel ist
         </h3>
-        <div class="help"><img src="./../../assets/img/help.svg"></div>
     </div>
     <div class="question-box">
-        <div class="nbr-size">{{numberOne}}</div>
-
-        <div id="arithmetic-operator" class="nbr-size">{{operator}}</div>
-
-        <div class="nbr-size">{{numberTwo}}</div>
-    </div>
-    <div class="image-amount-box">
-        <div class="image-amount-sub-box border-right" *ngIf="showBothPictures || showOnePictures">
-            <div class="image-amount" *ngFor="let imageSrcOne of mathServ.imageArrayNumberOne; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcOne}}" (click)="mathServ.changeImageColor(indexOfelement, 1)">
+        <div class="nbr-container">
+            <div class="nbr-size">{{numberOne}}</div>
+            <div class="image-amount-sub-box border-right" *ngIf="showBothPictures || showOnePictures">
+                <div class="image-amount"
+                    *ngFor="let imageSrcOne of mathServ.imageArrayNumberOne; let indexOfelement=index">
+                    <img src="./../../assets/img/{{imageSrcOne}}"
+                        (click)="mathServ.changeImageColor(indexOfelement, 1)">
+                </div>
             </div>
         </div>
-        <div class="image-amount-sub-box border-left" *ngIf="showBothPictures">
-            <div class="image-amount" *ngFor="let imageSrcTwo of mathServ.imageArrayNumberTwo; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcTwo}}" (click)="mathServ.changeImageColor(indexOfelement, 2)">
+        <div id="arithmetic-operator" class="nbr-size operator">{{operator}}</div>
+
+        <div class="nbr-container">
+            <div class="nbr-size">{{numberTwo}}</div>
+            <div class="image-amount-sub-box border-left" *ngIf="showBothPictures">
+                <div class="image-amount"
+                    *ngFor="let imageSrcTwo of mathServ.imageArrayNumberTwo; let indexOfelement=index">
+                    <img src="./../../assets/img/{{imageSrcTwo}}"
+                        (click)="mathServ.changeImageColor(indexOfelement, 2)">
+                </div>
             </div>
         </div>
     </div>
-
-
-
+   
     <div class="answer-container">
         <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
             (click)="checkAnswer(mathServ.result1); mathServ.toggleClass($event)" #answerButtonOne
@@ -60,7 +62,8 @@
 
 
     <div class="question-footer">
-        <span><b>{{mathServ.numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{mathServ.numberOfMathProblems}}</b>
+        <span><b>{{mathServ.numberOfRightAnswers}}</b> von <b
+                id="total-number-of-math-problems">{{mathServ.numberOfMathProblems}}</b>
             Aufgabe(n)
             korrekt
             gelöst</span>

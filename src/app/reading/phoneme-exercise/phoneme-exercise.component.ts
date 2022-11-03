@@ -39,6 +39,8 @@ export class PhonemeExerciseComponent implements OnInit {
   answerSyllableThree: string = '';
   answerSyllableFour: string = '';
 
+  speakRate: number = 0.5;
+
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
@@ -141,7 +143,7 @@ export class PhonemeExerciseComponent implements OnInit {
     else {
       this.mathServ.playSound('wrong')
       setTimeout(() => {
-        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight);
+        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate);
       }, 1500);
     };
     setTimeout(() => {

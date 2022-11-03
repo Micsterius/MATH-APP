@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpeakingService } from '../shared/services/speaking.service';
 
 @Component({
   selector: 'app-settings',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  areaOfNumbersForArithmetic: string = '2';
+  areaOfNumbersForArithmetic: string = 'small';
   numberOfAnswersToSolveCorrect: string = '10';
   showPicturesForAmount: string = 'yes'; //boolean not possible because there are three options
   mathOperator: string = 'plus';
@@ -17,15 +18,22 @@ export class SettingsComponent implements OnInit {
     'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
   }
 
-  constructor() {
-    localStorage.setItem('setting', JSON.stringify(this.setting));
+  disableBtnAmount: boolean = false;
+
+  constructor(
+    private speakServ: SpeakingService
+  ) {
+    this.setting = JSON.parse(localStorage.getItem('setting'));
+    if (this.setting) {
+      this.areaOfNumbersForArithmetic = this.setting.areaOfNumbersForArithmetic;
+      this.numberOfAnswersToSolveCorrect = this.setting.numberOfAnswersToSolveCorrect
+      this.mathOperator = this.setting.mathOperator
+      this.showPicturesForAmount = this.setting.showPicturesForAmount
+    }
+    if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngOnChanges() {
 
   }
 
@@ -46,6 +54,12 @@ export class SettingsComponent implements OnInit {
 
   getAreaOfNumbersForArithmetic(a) {
     this.areaOfNumbersForArithmetic = a;
+    if (a == 'high') {
+      this.getShowPicturesForAmount('no'); //in case of number bigger than 15, no helping images will be shown.
+      this.disableBtnAmount = true;
+      this.giveHint();
+    }
+    else this.disableBtnAmount = false;
     this.actualizeSettingObj();
   }
 
@@ -56,6 +70,12 @@ export class SettingsComponent implements OnInit {
 
   getShowPicturesForAmount(param) {
     this.showPicturesForAmount = param;
+    if (this.setting.areaOfNumbersForArithmetic == 'high') this.showPicturesForAmount = 'no';
     this.actualizeSettingObj();
+  }
+
+  giveHint() {
+    let text = 'Bitte beachte, im Zahlenbereich von 10 bis 20 werden keine Bilder der Zahlenmenge dargestellt.'
+    this.speakServ.speak(text, 1)
   }
 }

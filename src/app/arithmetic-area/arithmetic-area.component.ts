@@ -57,6 +57,7 @@ export class ArithmeticAreaComponent implements OnInit {
     this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.setting = JSON.parse(localStorage.getItem('setting'))
+    if(!this.setting) this.setStandardSetting();
     this.temporaryOperatorChoice = this.setting.mathOperator
     if (this.temporaryOperatorChoice == 'both') this.setting.mathOperator = 'plus';
     this.showPictures();
@@ -65,6 +66,15 @@ export class ArithmeticAreaComponent implements OnInit {
     this.mathServ.numberOfMathProblems = 1;
     this.mathServ.numberOfRightAnswers = 0;
     this.newArithmetic();
+  }
+
+  setStandardSetting(){
+    this.setting = {
+      'mathOperator': 'plus',
+      'showPicturesForAmount': 'yes',
+      'numberOfAnswersToSolveCorrect': '10',
+      'areaOfNumbersForArithmetic': 'small'
+    }
   }
 
   ngOnInit(): void {

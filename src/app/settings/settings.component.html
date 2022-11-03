@@ -3,8 +3,8 @@
         <h3>
             Rechnen mit Zahlen von
         </h3>
-        <mat-button-toggle-group value="middle">
-            <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('small')" class="color-white bg-c-1 border-round-left" value="low">2 - 7</mat-button-toggle>
+        <mat-button-toggle-group value="{{setting.areaOfNumbersForArithmetic ? setting.areaOfNumbersForArithmetic : 'middle'}}">
+            <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('small')" class="color-white bg-c-1 border-round-left" value="small">2 - 7</mat-button-toggle>
             <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('middle')" class="color-white bg-c-1" value="middle">5 - 15</mat-button-toggle>
             <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('high')" class="color-white bg-c-1 border-round-right" value="high">10 - 20</mat-button-toggle>
         </mat-button-toggle-group>
@@ -13,7 +13,7 @@
         <h3>
             Anzahl Aufgaben richtig zu lösen
         </h3>
-        <mat-button-toggle-group  value="10">
+        <mat-button-toggle-group  value="{{setting.numberOfAnswersToSolveCorrect ? setting.numberOfAnswersToSolveCorrect : '10'}}">
             <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('5')" class="color-white bg-c-1 border-round-left"  value="5">5</mat-button-toggle>
             <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('10')" class="color-white bg-c-1"  value="10">10</mat-button-toggle>
             <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('20')" class="color-white bg-c-1 border-round-right"  value="20">20</mat-button-toggle>
@@ -23,9 +23,9 @@
         <h3>
             Mengen bildlich darstellen
         </h3>
-        <mat-button-toggle-group value="yes">
-            <mat-button-toggle (click)="getShowPicturesForAmount('yes')" class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
-            <mat-button-toggle (click)="getShowPicturesForAmount('partly')" class="color-white bg-c-1" value="partly">Teilweise</mat-button-toggle>
+        <mat-button-toggle-group value="{{setting.showPicturesForAmount ? setting.showPicturesForAmount : 'yes'}}">
+            <mat-button-toggle [disabled]="disableBtnAmount" (click)="getShowPicturesForAmount('yes')" class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
+            <mat-button-toggle [disabled]="disableBtnAmount" (click)="getShowPicturesForAmount('partly')" class="color-white bg-c-1" value="partly">Teilweise</mat-button-toggle>
             <mat-button-toggle (click)="getShowPicturesForAmount('no')" class="color-white bg-c-1 border-round-right" value="no">Nein</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
@@ -33,7 +33,7 @@
         <h3>
             Rechenarten
         </h3>
-        <mat-button-toggle-group value="plus">
+        <mat-button-toggle-group value="{{setting.mathOperator ? setting.mathOperator : 'plus'}}">
             <mat-button-toggle (click)="getOperator('plus')" class="color-white bg-c-1 border-round-left" value="plus">+</mat-button-toggle>
             <mat-button-toggle (click)="getOperator('minus')" class="color-white bg-c-1" value="minus">-</mat-button-toggle>
             <mat-button-toggle (click)="getOperator('both')" class="color-white bg-c-1 border-round-right" value="both">+/-</mat-button-toggle>
@@ -41,6 +41,6 @@
     </div>
 
     <div class="home-btn-box" [routerLink]="['']">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back" (click)="actualizeSettingObj()"></mat-icon>
     </div>
 </div>
