@@ -16,6 +16,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from '@angular/material/menu';
+
 //components
 import { StartsceenComponent } from './startsceen/startsceen.component';
 import { ArithmeticEndscreenComponent } from './arithmetic-endscreen/arithmetic-endscreen.component';

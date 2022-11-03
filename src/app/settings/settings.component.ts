@@ -4,24 +4,26 @@ import { SpeakingService } from '../shared/services/speaking.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-  areaOfNumbersForArithmetic: string = 'small';
+  areaOfNumbersForArithmetic: string = 'middle';
   numberOfAnswersToSolveCorrect: string = '10';
   showPicturesForAmount: string = 'yes'; //boolean not possible because there are three options
   mathOperator: string = 'plus';
+ 
   setting = {
-    'mathOperator': this.mathOperator,
-    'showPicturesForAmount': this.showPicturesForAmount,
-    'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
-    'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
+    'mathOperator': 'plus',
+    'showPicturesForAmount': 'yes',
+    'numberOfAnswersToSolveCorrect': '10',
+    'areaOfNumbersForArithmetic': 'middle'
   }
 
-  areas: any[] = [1, 2
-  ]
+  areas: any[] = [1, 2]
 
   disableBtnAmount: boolean = false;
+  allowToSlide: boolean = true;
+  rangeValue: number = 50;
 
   constructor(
     private speakServ: SpeakingService
@@ -32,13 +34,17 @@ export class SettingsComponent implements OnInit {
       this.numberOfAnswersToSolveCorrect = this.setting.numberOfAnswersToSolveCorrect
       this.mathOperator = this.setting.mathOperator
       this.showPicturesForAmount = this.setting.showPicturesForAmount
+      if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
     }
-    if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
   }
 
   ngOnInit(): void {
-
   }
+
+  getRange(){
+    console.log(this.rangeValue)
+ //   this.allowToSlide = false;
+   }
 
   actualizeSettingObj() {
     this.setting = {
