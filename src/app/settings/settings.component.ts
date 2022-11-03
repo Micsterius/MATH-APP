@@ -18,6 +18,9 @@ export class SettingsComponent implements OnInit {
     'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
   }
 
+  areas: any[] = [1, 2
+  ]
+
   disableBtnAmount: boolean = false;
 
   constructor(
