@@ -28,12 +28,12 @@ export class SettingsComponent implements OnInit {
   constructor(
     private speakServ: SpeakingService
   ) {
-    this.setting = JSON.parse(localStorage.getItem('setting'));
-    if (this.setting) {
-      this.areaOfNumbersForArithmetic = this.setting.areaOfNumbersForArithmetic;
-      this.numberOfAnswersToSolveCorrect = this.setting.numberOfAnswersToSolveCorrect
-      this.mathOperator = this.setting.mathOperator
-      this.showPicturesForAmount = this.setting.showPicturesForAmount
+    let setting = JSON.parse(localStorage.getItem('setting'));
+    if (setting) {
+      this.areaOfNumbersForArithmetic = setting.areaOfNumbersForArithmetic;
+      this.numberOfAnswersToSolveCorrect = setting.numberOfAnswersToSolveCorrect
+      this.mathOperator = setting.mathOperator
+      this.showPicturesForAmount = setting.showPicturesForAmount
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
     }
   }
