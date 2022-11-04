@@ -18,13 +18,15 @@ export class MathService {
 
   numberOfRightAnswers: number = 0;
   numberOfMathProblems: number = 1;
+  volume: number = 50
   
   constructor(
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
     
   ) { 
-    
+    let setting = JSON.parse(localStorage.getItem('setting')!);
+    if (setting) this.volume = setting.rangeValueVolume;
   }
 
   generateRandomizedAnswers() {
@@ -97,6 +99,7 @@ export class MathService {
   playSound(event) {
     let AUDIO_RESULT = new Audio()
     AUDIO_RESULT.src = "./../../assets/audio/" + event + ".mp3"
+    AUDIO_RESULT.volume = 1 * this.volume / 100;
     AUDIO_RESULT.load();
     AUDIO_RESULT.play();
   }

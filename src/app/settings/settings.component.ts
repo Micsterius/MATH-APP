@@ -16,14 +16,15 @@ export class SettingsComponent implements OnInit {
     'mathOperator': 'plus',
     'showPicturesForAmount': 'yes',
     'numberOfAnswersToSolveCorrect': '10',
-    'areaOfNumbersForArithmetic': 'middle'
+    'areaOfNumbersForArithmetic': 'middle',
+    'rangeValueVolume': '50'
   }
 
   areas: any[] = [1, 2]
 
   disableBtnAmount: boolean = false;
   allowToSlide: boolean = true;
-  rangeValue: number = 50;
+  rangeValueVolume: number = 50;
 
   constructor(
     private speakServ: SpeakingService
@@ -34,6 +35,7 @@ export class SettingsComponent implements OnInit {
       this.numberOfAnswersToSolveCorrect = setting.numberOfAnswersToSolveCorrect
       this.mathOperator = setting.mathOperator
       this.showPicturesForAmount = setting.showPicturesForAmount
+      this.rangeValueVolume = Number(setting.rangeValueVolume)
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
     }
   }
@@ -42,8 +44,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getRange(){
-    console.log(this.rangeValue)
- //   this.allowToSlide = false;
+    this.actualizeSettingObj()
    }
 
   actualizeSettingObj() {
@@ -51,7 +52,8 @@ export class SettingsComponent implements OnInit {
       'mathOperator': this.mathOperator,
       'showPicturesForAmount': this.showPicturesForAmount,
       'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
-      'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic
+      'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic,
+      'rangeValueVolume': `${this.rangeValueVolume}`
     }
     localStorage.setItem('setting', JSON.stringify(this.setting));
   }

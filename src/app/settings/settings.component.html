@@ -62,11 +62,9 @@
                     </div>
                 </div>
                 <div *ngIf="area == 1">
-                    <h3>
-                        Allgemein
-                    </h3>
-                    <div>
-                        <mat-slider (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
+                    <div class="settings-btn-box">
+                        <h3>Lautstärke</h3>
+                        <mat-slider [(ngModel)]="rangeValueVolume" thumbLabel (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
                 </div>
