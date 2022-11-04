@@ -55,7 +55,10 @@ export class PhonemeExerciseComponent implements OnInit {
   ) {
     this.setting = JSON.parse(localStorage.getItem('setting'));
     this.actualUser = JSON.parse(localStorage.getItem('user'))
-    if(this.setting) this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
+    if(this.setting) {
+      this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
+      this.speakRate = this.setting.rangeValueRate
+    }
     this.loadPhenome()
     //this.setNewExercises()
   }

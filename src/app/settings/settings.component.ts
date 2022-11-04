@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MathService } from '../shared/services/math.service';
 import { SpeakingService } from '../shared/services/speaking.service';
 
 @Component({
@@ -11,13 +12,15 @@ export class SettingsComponent implements OnInit {
   numberOfAnswersToSolveCorrect: string = '10';
   showPicturesForAmount: string = 'yes'; //boolean not possible because there are three options
   mathOperator: string = 'plus';
- 
+
   setting = {
     'mathOperator': 'plus',
     'showPicturesForAmount': 'yes',
     'numberOfAnswersToSolveCorrect': '10',
     'areaOfNumbersForArithmetic': 'middle',
-    'rangeValueVolume': '50'
+    'rangeValueVolume': '100',
+    'rangeValueRate': '50',
+    'voice': `1`
   }
 
   areas: any[] = [1, 2]
@@ -25,9 +28,12 @@ export class SettingsComponent implements OnInit {
   disableBtnAmount: boolean = false;
   allowToSlide: boolean = true;
   rangeValueVolume: number = 50;
+  rangeValueRate: number = 50;
+  voice: number = 1;
 
   constructor(
-    private speakServ: SpeakingService
+    private speakServ: SpeakingService,
+    public mathServ: MathService,
   ) {
     let setting = JSON.parse(localStorage.getItem('setting'));
     if (setting) {
@@ -36,6 +42,8 @@ export class SettingsComponent implements OnInit {
       this.mathOperator = setting.mathOperator
       this.showPicturesForAmount = setting.showPicturesForAmount
       this.rangeValueVolume = Number(setting.rangeValueVolume)
+      this.rangeValueRate = Number(setting.rangeValueRate)
+      this.voice = Number(setting.voice)
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
     }
   }
@@ -43,9 +51,25 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getRange(){
+  getRange() {
     this.actualizeSettingObj()
-   }
+  }
+
+  selectVoice(nbr) {
+    this.voice = Number(nbr)
+    this.actualizeSettingObj();
+    this.speakServ.changeVoice(nbr)
+    this.speakServ.speak('Hallo', 1)
+  }
+
+  playSound() {
+    this.speakServ.volume = this.rangeValueVolume
+    this.mathServ.volume = this.rangeValueVolume
+    this.speakServ.speak('Hallo', 1)
+    setTimeout(() => {
+      this.mathServ.playSound('success')
+    }, 1000)
+  }
 
   actualizeSettingObj() {
     this.setting = {
@@ -53,7 +77,9 @@ export class SettingsComponent implements OnInit {
       'showPicturesForAmount': this.showPicturesForAmount,
       'numberOfAnswersToSolveCorrect': this.numberOfAnswersToSolveCorrect,
       'areaOfNumbersForArithmetic': this.areaOfNumbersForArithmetic,
-      'rangeValueVolume': `${this.rangeValueVolume}`
+      'rangeValueVolume': `${this.rangeValueVolume}`,
+      'rangeValueRate': `${this.rangeValueRate}`,
+      'voice': `${this.voice}`
     }
     localStorage.setItem('setting', JSON.stringify(this.setting));
   }

@@ -64,8 +64,24 @@
                 <div *ngIf="area == 1">
                     <div class="settings-btn-box">
                         <h3>Lautstärke</h3>
-                        <mat-slider [(ngModel)]="rangeValueVolume" thumbLabel (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
+                        <mat-slider [(ngModel)]="rangeValueVolume" thumbLabel (mouseup)="playSound()" (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
+                    </div>
+                    <div class="settings-btn-box">
+                        <h3>Sprechgeschwindigkeit Leseübung</h3>
+                        <mat-slider [(ngModel)]="rangeValueRate" thumbLabel (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
+                        </mat-slider>
+                    </div>
+                    <div class="settings-btn-box">
+                        <h3>Stimme</h3>
+                        <mat-button-toggle-group value="{{(setting.mathOperator) ? (setting.mathOperator) : 'plus'}}">
+                            <mat-button-toggle (click)="selectVoice('0')"
+                                class="color-white bg-c-1 border-round-left" value="plus">1</mat-button-toggle>
+                            <mat-button-toggle (click)="selectVoice('1')" class="color-white bg-c-1" value="minus">2
+                            </mat-button-toggle>
+                            <mat-button-toggle (click)="selectVoice('2')"
+                                class="color-white bg-c-1 border-round-right" value="both">3</mat-button-toggle>
+                        </mat-button-toggle-group>
                     </div>
                 </div>
 

@@ -21,6 +21,12 @@ h3 {
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+
+    mat-slider{
+        width: 280px;
+        padding: 8px;
+        height: 42px;
+    }
 }
 
 .border-round-left {
@@ -97,8 +103,4 @@ mat-button-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-mat-slider{
-    width: 300px;
 }
