@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Keyboard, Virtual } from "swiper";
+import { SpeakingService } from '../shared/services/speaking.service';
 
 // install Swiper modules
 SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
@@ -24,8 +25,7 @@ export class StartsceenComponent implements OnInit {
     }
   ]
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }

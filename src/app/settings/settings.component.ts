@@ -27,9 +27,10 @@ export class SettingsComponent implements OnInit {
 
   disableBtnAmount: boolean = false;
   allowToSlide: boolean = true;
-  rangeValueVolume: number = 50;
+  rangeValueVolume: number = 100;
   rangeValueRate: number = 50;
   voice: number = 1;
+
 
   constructor(
     private speakServ: SpeakingService,
@@ -51,8 +52,14 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getRange() {
+  getRangeVolume() {
     this.actualizeSettingObj()
+    this.playSound(this.rangeValueVolume)
+  }
+
+  getRangeRate() {
+    this.actualizeSettingObj();
+    this.speakServ.speak('Willkommen', this.rangeValueRate/100)
   }
 
   selectVoice(nbr) {
@@ -62,9 +69,9 @@ export class SettingsComponent implements OnInit {
     this.speakServ.speak('Hallo', 1)
   }
 
-  playSound() {
-    this.speakServ.volume = this.rangeValueVolume
-    this.mathServ.volume = this.rangeValueVolume
+  playSound(nbr) {
+    this.speakServ.volume = nbr;
+    this.mathServ.volume = nbr;
     this.speakServ.speak('Hallo', 1)
     setTimeout(() => {
       this.mathServ.playSound('success')
