@@ -1,7 +1,7 @@
 <div class="settings-box bg-c-1-light w450">
 
     <div class="swiper-container">
-        <swiper [allowSlideNext]="allowToSlide" [allowSlidePrev]="allowToSlide" [navigation]="true" [pagination]="true" class="mySwiper">
+        <swiper [enabled]="allowToSlide" [allowTouchMove]="allowToSlide" [allowSlideNext]="allowToSlide" [allowSlidePrev]="allowToSlide" [navigation]="true" [pagination]="true" class="mySwiper">
             <ng-template swiperSlide *ngFor="let area of areas">
                 <div *ngIf="area == 2">
                     <div class="settings-btn-box">
@@ -66,7 +66,7 @@
                         Allgemein
                     </h3>
                     <div>
-                        <mat-slider (change)="getRange()" thumbLabel="true" [(ngModel)]="rangeValue" tickInterval="1" min="0" max="100">
+                        <mat-slider (mouseover)="allowToSlide = false; getRange()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
                 </div>
