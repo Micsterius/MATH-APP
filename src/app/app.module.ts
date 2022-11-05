@@ -54,6 +54,7 @@ import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
 import {MatExpansionModule} from '@angular/material/expansion';
+import { FriendshipRequestComponent } from './community/friendship-request/friendship-request.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ChatFriendComponent,
     PhonemeExerciseComponent,
     WordsComponent,
-    SettingsReadingComponent
+    SettingsReadingComponent,
+    FriendshipRequestComponent
   ],
   imports: [
     BrowserAnimationsModule,

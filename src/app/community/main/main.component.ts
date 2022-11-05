@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
-import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs, where, getDoc, setDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs, where, getDoc, setDoc, addDoc } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -123,5 +123,23 @@ export class MainComponent implements OnInit {
       });
     }
   }
+
+  async askForFriendship(uid){
+    await addDoc(collection(this.db, "friendship-request"), {
+      from: this.authService.userData.uid,
+      to: uid
+    });
+  }
+
+  acceptFriendship(){
+
+  }
+
+  /**next steps
+   * -if the player asked for friendship, the asked user shouldn't be able to add icon should be disabled
+   * -if i login i should get shown the asking question if i want to be his/her friend
+   * -if i accept i and he/she should add us as friend
+   * -create a ignore list
+   */
 }
 
