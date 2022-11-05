@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ChatComponent implements OnInit {
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
+  panelOpenState: boolean = false;
 
   constructor(
     public chatServ: ChatService,

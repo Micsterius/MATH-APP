@@ -53,7 +53,7 @@ import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exe
 import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
-import {MatTreeModule} from '@angular/material/tree';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -95,7 +95,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatMenuModule,
     SwiperModule,
     EditorModule,
-    MatTreeModule,
+    MatExpansionModule,
     CommonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
