@@ -4,8 +4,33 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
+import { of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+export interface ChatNode {
+  displayName: string;
+  id: string;
+  photoURL: string;
+  uid: string;
+  children?: ChatNode[];
+}
+
+let TREE_DATA: ChatNode[] = [
+  {
+    displayName: 'Chat',
+    id: '',
+    photoURL: '',
+    uid: '',
+    children: [
+      {
+        displayName: 'A',
+        id: 'A',
+        photoURL: 'A',
+        uid: 'A'
+      }
+    ]
+  }
+];
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +51,7 @@ export class ChatService {
 
   constructor(private router: Router,
     public afs: AngularFirestore) {
+
   }
 
   /**
@@ -42,7 +68,6 @@ export class ChatService {
       // doc.data() is never undefined for query doc snapshots
       if (doc.data().authors[0] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({ author: doc.data().authors[0], id: doc.data().id });
       if (doc.data().authors[1] != this.actualUser.uid) this.arrayOfFriendsWithChatUid.push({ author: doc.data().authors[1], id: doc.data().id });
-      console.log(doc.id, " => ", doc.data());
       this.getUserInfo()
     });
   }
@@ -113,5 +138,5 @@ export class ChatService {
     this.currentChatId = friendChatId; //Save the active doc id to read out this in the chat window
     localStorage.setItem('currentChatId', JSON.stringify(this.currentChatId));
     this.router.navigate(['/chat-friend']);
-  }
+  }  
 }

@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MathService } from '../shared/services/math.service';
 import { SpeakingService } from '../shared/services/speaking.service';
 
+import SwiperCore, { Pagination, Navigation, Keyboard, Virtual } from "swiper";
+
+// install Swiper modules
+SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SettingsComponent implements OnInit {
   areaOfNumbersForArithmetic: string = 'middle';

@@ -52,6 +52,8 @@ import { ChatFriendComponent } from './community/chat-friend/chat-friend.compone
 import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
 import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
+import { CommonModule } from "@angular/common";
+import {MatTreeModule} from '@angular/material/tree';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { SettingsReadingComponent } from './reading/settings-reading/settings-re
     MatMenuModule,
     SwiperModule,
     EditorModule,
+    MatTreeModule,
+    CommonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
