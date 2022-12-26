@@ -16,6 +16,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 //components
 import { StartsceenComponent } from './startsceen/startsceen.component';
@@ -53,7 +54,7 @@ import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exe
 import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
-import {MatExpansionModule} from '@angular/material/expansion';
+
 import { FriendshipRequestComponent } from './community/friendship-request/friendship-request.component';
 
 @NgModule({

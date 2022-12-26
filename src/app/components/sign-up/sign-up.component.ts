@@ -13,23 +13,13 @@ export class SignUpComponent implements OnInit {
     public authService: AuthService
   ) { }
 
-  /*
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', Validators.required);
-
-  getErrorMessage() {
-    if (this.email.hasError('required') || this.password.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }*/
-
   ngOnInit(): void {
   }
 
   //reload of the website is necessary, because after sign up the login doesn't work without refresh 
-  reload(){
-    location.reload();
+  reload() {
+    setTimeout(() => {
+      location.reload(); //set timeout is necessary because it would jump back to sign-up
+    }, 50);
   }
 }

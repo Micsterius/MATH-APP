@@ -21,21 +21,12 @@ import { AuthGuard } from './shared/guard/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: StartsceenComponent, canActivate: [AuthGuard] },
+  { path: '', component: StartsceenComponent},
   { path: 'settings', component: SettingsComponent },
   { path: 'triumph', component: TriumphComponent },
   { path: 'arithmetic', component: ArithmeticAreaComponent },
   { path: 'arithmeticEndscreen', component: ArithmeticEndscreenComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'register-user', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'main-community', component: MainComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'friends', component: FriendsComponent },
   { path: 'wrongAnswers', component: WrongAnswersAgainComponent },
-  { path: 'chat-friend', component: ChatFriendComponent },
   { path: 'reading-phenomene', component: PhonemeExerciseComponent },
 ];
 

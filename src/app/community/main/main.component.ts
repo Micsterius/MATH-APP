@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
-import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs, where, getDoc, setDoc, addDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, QuerySnapshot, collection, getDocs, where, getDoc, setDoc, addDoc, query } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { query } from '@angular/animations';
 
 
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+
 export class MainComponent implements OnInit {
+  app = initializeApp(environment.firebase);
+  db = getFirestore(this.app);
+
   searchValue: string = "";
   users: User[] = [];
   showUser: boolean = false;
@@ -25,8 +30,7 @@ export class MainComponent implements OnInit {
   currentUser: any;
   friends: string[] = [];
 
-  app = initializeApp(environment.firebase);
-  db = getFirestore(this.app);
+
 
   constructor(
     private firestore: AngularFirestore,
@@ -102,7 +106,7 @@ export class MainComponent implements OnInit {
   //muss noch so programmiert werden, dass die fkt erst ausgeführt wird, wenn das Laden der Freunde abgeschlossen ist
   userAlreadyAddedAsFriend(uid) {
     if (this.currentUser) {
-          return this.currentUser.friends.indexOf(uid) > -1;
+      return this.currentUser.friends.indexOf(uid) > -1;
     }
     else return false;
   }
@@ -124,16 +128,37 @@ export class MainComponent implements OnInit {
     }
   }
 
-  async askForFriendship(uid){
+  //Create doc for ask for friendship. this doc will be a reference for other functions
+  async askForFriendship(uid) {
     await addDoc(collection(this.db, "friendship-request"), {
       from: this.authService.userData.uid,
       to: uid
     });
   }
 
-  acceptFriendship(){
-
+  acceptFriendship() {
+    //
   }
+
+  checkIfUserAlreadyAskedForFriendship(uid) {
+    return true
+  }
+
+  async getAllRequests() {
+    let actualUser = JSON.parse(localStorage.getItem('user'))
+
+    const citiesRef = collection(this.db, "friendship-request");
+
+    const q = query(citiesRef, where("from", "==", actualUser.uid));
+
+
+    const querySnapshot = await getDocs(collection(this.db, "cities"));
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
+  }
+
 
   /**next steps
    * -if the player asked for friendship, the asked user shouldn't be able to add icon should be disabled
