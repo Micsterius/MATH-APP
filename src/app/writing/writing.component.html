@@ -1,1 +1,36 @@
-<p>writing works!</p>
+<div class="w450 bg-c-1-light">
+    <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
+
+
+    <div class="question-text">
+        <h3 class="card-title" id="question-text">
+            Wie wird das Wort geschrieben?
+        </h3>
+        <div class="help"><img src="./../../assets/img/help.svg"></div>
+    </div>
+    <div class="question-box" *ngIf="showExercise">
+        <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+            (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
+    </div>
+
+
+    <div class="drop-over-container">
+        <div class="drop-over-box" *ngFor="let n of arrayOfLetters"></div>
+    </div>
+
+    <div class="answer-container" *ngIf="showExercise">
+        <div class="answer-box" *ngFor="let letter of arrayOfLetters">
+            {{letter}}
+        </div>
+    </div>
+
+    <div class="question-footer">
+        <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
+            Aufgabe(n)
+            korrekt
+            gelöst</span>
+        <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+            (click)="nextExercise()">
+            <mat-icon style="color: white;">double_arrow</mat-icon>
+        </button>
+    </div>
