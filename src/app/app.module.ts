@@ -25,61 +25,35 @@ import { HeaderComponent } from './header/header.component';
 import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
 import { TriumphComponent } from './triumph/triumph.component';
 import { SettingsComponent } from './settings/settings.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
-// Firebase services + environment module
+
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
-import { initializeApp } from 'firebase/app';
-import { getAuth, updateEmail, updatePassword, updateProfile } from "firebase/auth";
-
-// Auth service
-import { AuthService } from "./shared/services/auth.service";
-import { MainComponent } from './community/main/main.component';
-import { ChatComponent } from './community/chat/chat.component';
-import { FriendsComponent } from './community/friends/friends.component';
 import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 import { SwiperModule } from 'swiper/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ChatFriendComponent } from './community/chat-friend/chat-friend.component';
 import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
 import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
 
-import { FriendshipRequestComponent } from './community/friendship-request/friendship-request.component';
-
 @NgModule({
   declarations: [
     AppComponent,
     StartsceenComponent,
-    HeaderComponent,
     TriumphComponent,
     SettingsComponent,
     ArithmeticAreaComponent,
     ArithmeticEndscreenComponent,
-    DashboardComponent,
-    SignInComponent,
-    SignUpComponent,
-    ForgotPasswordComponent,
-    VerifyEmailComponent,
-    MainComponent,
-    ChatComponent,
-    FriendsComponent,
     WrongAnswersAgainComponent,
-    ChatFriendComponent,
     PhonemeExerciseComponent,
     WordsComponent,
     SettingsReadingComponent,
-    FriendshipRequestComponent
+    HeaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -106,7 +80,7 @@ import { FriendshipRequestComponent } from './community/friendship-request/frien
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
