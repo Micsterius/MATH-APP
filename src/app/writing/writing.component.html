@@ -13,16 +13,19 @@
             (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
     </div>
 
+    <div cdkDropListGroup>
+        <div class="drop-over-container" cdkDropList [cdkDropListData]="answer" (cdkDropListDropped)="drop($event)">
+            <div class="drop-over-box" *ngFor="let n of arrayOfLetters" cdkDrag></div>
+        </div>
 
-    <div class="drop-over-container">
-        <div class="drop-over-box" *ngFor="let n of arrayOfLetters"></div>
-    </div>
-
-    <div class="answer-container" *ngIf="showExercise">
-        <div class="answer-box" *ngFor="let letter of arrayOfLetters">
-            {{letter}}
+        <div class="answer-container" *ngIf="showExercise" cdkDropList [cdkDropListData]="arrayOfLetters"
+        (cdkDropListDropped)="drop($event)">
+            <div class="answer-box" *ngFor="let letter of arrayOfLetters" cdkDrag>
+                {{letter}}
+            </div>
         </div>
     </div>
+
 
     <div class="question-footer">
         <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>

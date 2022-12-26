@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 //components
 import { StartsceenComponent } from './startsceen/startsceen.component';
@@ -76,6 +77,7 @@ import { WritingComponent } from './writing/writing.component';
     EditorModule,
     MatExpansionModule,
     CommonModule,
+    DragDropModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

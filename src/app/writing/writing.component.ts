@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
@@ -43,6 +44,23 @@ export class WritingComponent implements OnInit {
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
+
+  answer = [];
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+    console.log(this.answer)
+  }
 
   constructor(
     private router: Router,
@@ -109,6 +127,9 @@ export class WritingComponent implements OnInit {
     let excercise = this.allExercises[this.currentQuestion]
     this.word = excercise.right; //variable to read
     this.arrayOfLetters = this.word.split("")
+    this.answer.length = this.arrayOfLetters.length
+    console.log('1',this.arrayOfLetters)
+    console.log(this.answer)
     this.loadLetters();
     this.showExercise = true;
   }
