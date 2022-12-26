@@ -40,6 +40,7 @@ import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exe
 import { WordsComponent } from './reading/words/words.component';
 import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
+import { WritingComponent } from './writing/writing.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CommonModule } from "@angular/common";
     PhonemeExerciseComponent,
     WordsComponent,
     SettingsReadingComponent,
-    HeaderComponent
+    HeaderComponent,
+    WritingComponent
   ],
   imports: [
     BrowserAnimationsModule,

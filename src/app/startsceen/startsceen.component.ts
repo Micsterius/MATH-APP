@@ -20,8 +20,16 @@ export class StartsceenComponent implements OnInit {
       'linkOne': 'arithmetic',
     },
     {
-      'nameOne': 'Silbenlesen',
+      'nameOne': 'Silben lesen',
       'linkOne': 'reading-phenomene',
+    },
+    {
+      'nameOne': 'Wörter lesen',
+      'linkOne': 'reading-words',
+    },
+    {
+      'nameOne': 'Wörter schreiben',
+      'linkOne': 'writing-words',
     }
   ]
 
