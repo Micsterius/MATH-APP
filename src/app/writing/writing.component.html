@@ -1,53 +1,41 @@
 <div class="w450 bg-c-1-light">
-    <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
+  <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
 
 
-    <div class="question-text">
-        <h3 class="card-title" id="question-text">
-            Wie wird das Wort geschrieben?
-        </h3>
-        <div class="help"><img src="./../../assets/img/help.svg"></div>
+  <div class="question-text">
+    <h3 class="card-title" id="question-text">
+      Wie wird das Wort geschrieben?
+    </h3>
+    <div class="help"><img src="./assets/img/help.svg"></div>
+  </div>
+  <div class="question-box" *ngIf="showExercise">
+    <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+      (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
+  </div>
+  <div class="example-container">
+    <div cdkDropList cdkDropListOrientation="horizontal" #todoList="cdkDropList" [cdkDropListData]="answer"
+      [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of answer" cdkDrag>{{item}}</div>
     </div>
-    <div class="question-box" *ngIf="showExercise">
-        <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
-            (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
-    </div>
-    <div class="example-container">      
-        <div
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-          #todoList="cdkDropList"
-          [cdkDropListData]="answer"
-          [cdkDropListConnectedTo]="[doneList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of answer" cdkDrag>{{item}}</div>
-        </div>
-      </div>
-      
-      <div class="example-container">      
-        <div
-          cdkDropList
-          cdkDropListOrientation="horizontal"
-          #doneList="cdkDropList"
-          [cdkDropListData]="arrayOfMixedLetters"
-          [cdkDropListConnectedTo]="[todoList]"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag>{{item}}</div>
-        </div>
-        <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0" (click)="checkAnswerWriting()">
-            <mat-icon>check</mat-icon>
-        </div>
-      </div>
+  </div>
 
-    <div class="question-footer">
-        <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
-            Aufgabe(n)
-            korrekt
-            gelöst</span>
-        <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
-            (click)="nextExercise()">
-            <mat-icon style="color: white;">double_arrow</mat-icon>
-        </button>
+  <div class="example-container">
+    <div cdkDropList cdkDropListOrientation="horizontal" #doneList="cdkDropList" [cdkDropListData]="arrayOfMixedLetters"
+      [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag>{{item}}</div>
     </div>
+    <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0" (click)="checkAnswerWriting()">
+      <mat-icon>check</mat-icon>
+    </div>
+  </div>
+
+  <div class="question-footer">
+    <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
+      Aufgabe(n)
+      korrekt
+      gelöst</span>
+    <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+      (click)="nextExercise()">
+      <mat-icon style="color: white;">double_arrow</mat-icon>
+    </button>
+  </div>

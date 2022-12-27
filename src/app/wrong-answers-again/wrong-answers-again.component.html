@@ -4,7 +4,7 @@
         <h3 class="card-title" id="question-text">
             Wieviel ist
         </h3>
-        <div class="help"><img src="./../../assets/img/help.svg"></div>
+        <div class="help"><img src="./assets/img/help.svg"></div>
     </div>
     <div class="question-box">
         <div class="nbr-size">{{numberOne}}</div>
@@ -17,13 +17,13 @@
         <div class="image-amount-sub-box border-right" *ngIf="showBothPictures || showOnePictures">
             <div class="image-amount"
                 *ngFor="let imageSrcOne of mathServ.imageArrayNumberOne; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcOne}}" (click)="mathServ.changeImageColor(indexOfelement, 1)">
+                <img src="./assets/img/{{imageSrcOne}}" (click)="mathServ.changeImageColor(indexOfelement, 1)">
             </div>
         </div>
         <div class="image-amount-sub-box border-left" *ngIf="showBothPictures">
             <div class="image-amount"
                 *ngFor="let imageSrcTwo of mathServ.imageArrayNumberTwo; let indexOfelement=index">
-                <img src="./../../assets/img/{{imageSrcTwo}}" (click)="mathServ.changeImageColor(indexOfelement, 2)">
+                <img src="./assets/img/{{imageSrcTwo}}" (click)="mathServ.changeImageColor(indexOfelement, 2)">
             </div>
         </div>
     </div>
