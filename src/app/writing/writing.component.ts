@@ -147,36 +147,31 @@ export class WritingComponent implements OnInit {
     console.log(this.arrayOfLetters)
   }
 
-  checkResult(selection) {
-    if (selection == this.allExercises[this.currentQuestion].right) return true;
-    else return false;
-  }
-
-  checkAnswer(selection) {
-    let rightAnswer = this.allExercises[this.currentQuestion].right;
-    this.answerIsGiven = true;
-
-    if (selection == rightAnswer) {
+  checkAnswerWriting() {
+    let letters = this.answer.toString()
+    let answer = letters.replace(/[,]/g, '')
+    console.log(answer)
+    if (this.word == answer) {
       this.mathServ.playSound('success');
       this.numberOfCorrectAnswers++;
       this.updateProgressbar();
+      this.answerIsGiven = true;
+      setTimeout(() => {
+        this.nextIsAvailable = true;
+      }, 1500);
       if (this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
     }
     else {
-      this.mathServ.playSound('wrong')
-      setTimeout(() => {
-        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate / 100);
-      }, 1500);
-    };
-    setTimeout(() => {
-      this.nextIsAvailable = true;
-    }, 1500);
+      this.mathServ.playSound('wrong');
+      this.answer.length = 0;
+      this.arrayOfMixedLetters = this.word.split("")
+    }
   }
 
   nextExercise() {
+    this.answer.length = 0
     this.answerIsGiven = false;
     this.nextIsAvailable = false;
-    this.resetAnswerButtons();
     this.currentQuestion++;
     this.loadExercise();
   }

@@ -36,7 +36,7 @@
           (cdkDropListDropped)="drop($event)">
           <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag>{{item}}</div>
         </div>
-        <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0">
+        <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0" (click)="checkAnswerWriting()">
             <mat-icon>check</mat-icon>
         </div>
       </div>
