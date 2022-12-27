@@ -145,35 +145,43 @@
     border: 1px solid black;
 }
 
-
+.check-arrow{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 48px;
+    width: 48px;
+    background-color: white;
+    border: 1px solid #E91E63;
+    border-radius: 50%;
+    mat-icon{
+        color: #E91E63;
+        font-size: 40px;
+        height: 40px;
+        width: 40px;
+    }
+}
 
 
 
 .example-container {
-    width: 400px;
+    width: 100%;
     max-width: 100%;
-    margin: 0 25px 25px 0;
+    margin: 0 24px 24px 0;
     display: inline-block;
     vertical-align: top;
-  }
-  
-  .example-list {
-    border: solid 1px #ccc;
-    min-height: 60px;
-    background: white;
-    border-radius: 4px;
-    overflow: hidden;
-    display: block;
+    position: relative;
   }
   
   .example-box {
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
     background: white;
@@ -208,11 +216,26 @@
     width: 50px;
     height: 70px;
     font-size: 56px;
-    line-height: 70px;
+    display: flex;
+    justify-content: center;
+    margin-left: 4px;
+    margin-right: 4px;
   }
 
   .example-list{
     display: flex;
+    align-items: center;
     justify-content: center;
+    height: 70px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    margin-right: 24px;
+    margin-left: 24px;
+
+    border: 1px solid #E91E63;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-radius: 24px;
+    box-shadow: 0 2px 2px 0 #E91E63;
   }
   
