@@ -64,7 +64,7 @@ export class WritingComponent implements OnInit {
     public mathServ: MathService,
     public speakServ: SpeakingService
   ) {
-    //this.setNewExercisesWordsWriting()
+  // this.setNewExercisesWordsWriting()
     this.setting = JSON.parse(localStorage.getItem('setting'));
 
     if (this.setting) {
@@ -76,23 +76,23 @@ export class WritingComponent implements OnInit {
   }
   /*
     async setNewExercisesWordsWriting() {
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Anna'), {
-        letterOne: 'A', letterTwo: 'n', letterThree: 'n', letterFour: 'a', right: 'Anna'
+      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Unten'), {
+        right: 'Unten'
       });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Affe'), {
-        letterOne: 'A', letterTwo: 'f', letterThree: 'f', letterFour: 'e', right: 'Affe'
+      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Ufer'), {
+        right: 'Ufer'
       });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Aber'), {
-        letterOne: 'A', letterTwo: 'b', letterThree: 'e', letterFour: 'r', right: 'Aber'
+      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Uhr'), {
+        right: 'Uhr'
       });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Alt'), {
-        letterOne: 'A', letterTwo: 'l', letterThree: 't', right: 'Alt'
+      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Uhu'), {
+        right: 'Uhu'
       });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Ast'), {
-        letterOne: 'A', letterTwo: 's', letterThree: 't', right: 'Ast'
+      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Umher'), {
+        right: 'Umher'
       });
-    }*/
-
+    }
+*/
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
     if (numberOfAnswersToSolveCorrect == '10') this.numberOfAnswersToSolveCorrect = 10;
