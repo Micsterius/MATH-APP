@@ -130,6 +130,7 @@ export class WritingComponent implements OnInit {
 
   loadLetters() {
     this.fisherYatesShuffle(this.arrayOfMixedLetters)
+    if(this.arrayOfMixedLetters == this.arrayOfLetters) this.fisherYatesShuffle(this.arrayOfMixedLetters)
   }
 
   drop(event: CdkDragDrop<string[]>) {
