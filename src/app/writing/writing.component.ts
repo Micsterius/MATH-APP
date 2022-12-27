@@ -1,4 +1,4 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
@@ -38,29 +38,25 @@ export class WritingComponent implements OnInit {
 
   speakRate: number = 0.5;
 
-  arrayOfLetters: string[] = [];
+  arrayOfMixedLetters: string[] = [];
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
+
+
   answer = [];
 
+  arrayOfLetters = [
+    'Get up',
+    'Brush teeth',
+    'Take a shower',
+    'Check e-mail',
+    'Walk dog'
+  ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-    console.log(this.answer)
-  }
 
   constructor(
     private router: Router,
@@ -127,15 +123,28 @@ export class WritingComponent implements OnInit {
     let excercise = this.allExercises[this.currentQuestion]
     this.word = excercise.right; //variable to read
     this.arrayOfLetters = this.word.split("")
-    this.answer.length = this.arrayOfLetters.length
-    console.log('1',this.arrayOfLetters)
-    console.log(this.answer)
+    this.arrayOfMixedLetters = this.word.split("")
     this.loadLetters();
     this.showExercise = true;
   }
 
   loadLetters() {
-    this.fisherYatesShuffle(this.arrayOfLetters)
+    this.fisherYatesShuffle(this.arrayOfMixedLetters)
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+    console.log(event.container.data)
+    console.log(this.arrayOfLetters)
   }
 
   checkResult(selection) {

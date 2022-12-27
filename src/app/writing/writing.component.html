@@ -14,18 +14,58 @@
     </div>
 
     <div cdkDropListGroup>
+        <!--
         <div class="drop-over-container" cdkDropList [cdkDropListData]="answer" (cdkDropListDropped)="drop($event)">
-            <div class="drop-over-box" *ngFor="let n of arrayOfLetters" cdkDrag></div>
+            <div class="drop-over-box" *ngFor="let letter of answer" cdkDrag>
+                {{letter}}
+            </div>
+        </div>-->
+        <div>
+            <div class="drop-over-container" cdkDropList [cdkDropListData]="answer" (cdkDropListDropped)="drop($event)">
+                <div class="drop-over-box" *ngFor="let letter of arrayOfLetters; let i = index" cdkDrag>
+                    {{answer[i]}}
+                </div>
+            </div>
         </div>
 
-        <div class="answer-container" *ngIf="showExercise" cdkDropList [cdkDropListData]="arrayOfLetters"
-        (cdkDropListDropped)="drop($event)">
-            <div class="answer-box" *ngFor="let letter of arrayOfLetters" cdkDrag>
+
+        <div class="answer-container" *ngIf="showExercise" cdkDropList [cdkDropListData]="arrayOfMixedLetters"
+            (cdkDropListDropped)="drop($event)">
+            <div class="answer-box" *ngFor="let letter of arrayOfMixedLetters" cdkDrag>
                 {{letter}}
             </div>
         </div>
     </div>
 
+    <div class="example-container">
+        <h2>To do</h2>
+      
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          #todoList="cdkDropList"
+          [cdkDropListData]="answer"
+          [cdkDropListConnectedTo]="[doneList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of answer" cdkDrag>{{item}}</div>
+        </div>
+      </div>
+      
+      <div class="example-container">
+        <h2>Done</h2>
+      
+        <div
+          cdkDropList
+          cdkDropListOrientation="horizontal"
+          #doneList="cdkDropList"
+          [cdkDropListData]="arrayOfLetters"
+          [cdkDropListConnectedTo]="[todoList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of arrayOfLetters" cdkDrag>{{item}}</div>
+        </div>
+      </div>
 
     <div class="question-footer">
         <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
