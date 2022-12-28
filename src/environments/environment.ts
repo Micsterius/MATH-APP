@@ -4,12 +4,13 @@
 
 export const environment = {
   firebase: {
-    apiKey: "AIzaSyBpo8vhre5BnDzTQsHHmuSsJQePHFulBrQ",
-    authDomain: "matheapp-51d74.firebaseapp.com",
-    projectId: "matheapp-51d74",
-    storageBucket: "matheapp-51d74.appspot.com",
-    messagingSenderId: "796170818322",
-    appId: "1:796170818322:web:191d22258bce7c59f999cb"
+    projectId: 'matheapp-51d74',
+    appId: '1:796170818322:web:4fb9fc6077505d20f999cb',
+    storageBucket: 'matheapp-51d74.appspot.com',
+    locationId: 'europe-west',
+    apiKey: 'AIzaSyBpo8vhre5BnDzTQsHHmuSsJQePHFulBrQ',
+    authDomain: 'matheapp-51d74.firebaseapp.com',
+    messagingSenderId: '796170818322',
   },
   production: false
 };

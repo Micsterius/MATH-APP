@@ -6,9 +6,16 @@
           "math-app-fb2bb"
         ]
       }
+    },
+    "matheapp-51d74": {
+      "hosting": {
+        "math-app": [
+          "matheapp-51d74"
+        ]
+      }
     }
   },
   "projects": {
-    "default": "math-app-fb2bb"
+    "default": "matheapp-51d74"
   }
 }

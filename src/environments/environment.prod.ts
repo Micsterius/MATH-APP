@@ -1,11 +1,12 @@
 export const environment = {
   firebase: {
-    projectId: 'math-app-fb2bb',
-    appId: '1:589926706309:web:2f8c660e62bba06783cdec',
-    storageBucket: 'math-app-fb2bb.appspot.com',
-    apiKey: 'AIzaSyDxwlxNEFgzPW6lSFLl7kbxRjw1OJmuxqM',
-    authDomain: 'math-app-fb2bb.firebaseapp.com',
-    messagingSenderId: '589926706309',
+    projectId: 'matheapp-51d74',
+    appId: '1:796170818322:web:4fb9fc6077505d20f999cb',
+    storageBucket: 'matheapp-51d74.appspot.com',
+    locationId: 'europe-west',
+    apiKey: 'AIzaSyBpo8vhre5BnDzTQsHHmuSsJQePHFulBrQ',
+    authDomain: 'matheapp-51d74.firebaseapp.com',
+    messagingSenderId: '796170818322',
   },
   production: true
 };

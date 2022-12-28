@@ -108,8 +108,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "math-app:build:production",
-            "firebaseProject": "math-app-fb2bb",
-            "firebaseHostingSite": "math-app-fb2bb"
+            "firebaseProject": "matheapp-51d74",
+            "firebaseHostingSite": "matheapp-51d74"
           }
         }
       }
