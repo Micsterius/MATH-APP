@@ -13,16 +13,16 @@
       (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
   </div>
   <div class="example-container">
-    <div cdkDropList cdkDropListOrientation="horizontal" #todoList="cdkDropList" [cdkDropListData]="answer"
-      [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of answer" cdkDrag>{{item}}</div>
+    <div cdkDropList cdkDropListOrientation="horizontal" #answerList="cdkDropList" [cdkDropListData]="answer"
+      [cdkDropListConnectedTo]="[letterList]" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of answer" cdkDrag (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
     </div>
   </div>
 
   <div class="example-container">
-    <div cdkDropList cdkDropListOrientation="horizontal" #doneList="cdkDropList" [cdkDropListData]="arrayOfMixedLetters"
-      [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag>{{item}}</div>
+    <div cdkDropList cdkDropListOrientation="horizontal" #letterList="cdkDropList" [cdkDropListData]="arrayOfMixedLetters"
+      [cdkDropListConnectedTo]="[answerList]" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
     </div>
     <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0" (click)="checkAnswerWriting()">
       <mat-icon>check</mat-icon>

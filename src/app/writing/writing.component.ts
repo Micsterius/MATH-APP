@@ -64,7 +64,7 @@ export class WritingComponent implements OnInit {
     public mathServ: MathService,
     public speakServ: SpeakingService
   ) {
-  // this.setNewExercisesWordsWriting()
+    // this.setNewExercisesWordsWriting()
     this.setting = JSON.parse(localStorage.getItem('setting'));
 
     if (this.setting) {
@@ -129,8 +129,12 @@ export class WritingComponent implements OnInit {
   }
 
   loadLetters() {
+    this.mixLetters()
+  }
+
+  mixLetters() {
     this.fisherYatesShuffle(this.arrayOfMixedLetters)
-    if(this.arrayOfMixedLetters == this.arrayOfLetters) this.fisherYatesShuffle(this.arrayOfMixedLetters)
+    if (this.arrayOfMixedLetters == this.arrayOfLetters) this.mixLetters()
   }
 
   drop(event: CdkDragDrop<string[]>) {
