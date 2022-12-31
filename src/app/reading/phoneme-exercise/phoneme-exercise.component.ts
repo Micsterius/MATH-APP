@@ -55,7 +55,7 @@ export class PhonemeExerciseComponent implements OnInit {
   ) {
     this.setting = JSON.parse(localStorage.getItem('setting'));
     this.actualUser = JSON.parse(localStorage.getItem('user'))
-    if(this.setting) {
+    if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
     }
@@ -64,29 +64,29 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
 
- /* async setNewExercises(){
-    const readingRef = collection(this.db, "lesen");
-    await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ho'), {
-      answerFour: "ho / Ho", answerThree: "ha / HA", answerTwo: "he / He", answerOne: "hu / HU",
-      callOne: 'husten', callTwo: 'heben', callThree: 'Hand', callFour: 'hose',
-      callRight: 'hose', right: 'ho / Ho' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ha'), {
-    answerFour: "hi / HI", answerThree: "ha / HA", answerTwo: "hu / HU", answerOne: "ho / HO",
-    callOne: 'holen', callTwo: 'hupen', callThree: 'hamster', callFour: 'hinten',
-    callRight: 'hamster', right: 'ha / HA' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'he'), {
-    answerFour: "he / HE", answerThree: "hi / HI", answerTwo: "ha / HA", answerOne: "ho / HO",
-    callOne: 'hof', callTwo: 'hallo', callThree: 'hieb', callFour: 'hefe',
-    callRight: 'hefe', right: 'he / HE' });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hu'), {
-    answerFour: "ha / HA", answerThree: "he / HE", answerTwo: "ho / HO", answerOne: "hu / Hu",
-    callOne: 'huf', callTwo: 'honig', callThree: 'herz', callFour: 'hase',
-    callRight: 'huf', right: "hu / Hu" });
-  await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hi'), {
-    answerFour: "hi / HI", answerThree: "hei / HEI", answerTwo: "ha / HA", answerOne: "hu / Hu",
-    callOne: 'hupen', callTwo: 'hafen', callThree: 'heilen', callFour: 'hinein',
-    callRight: 'hinein', right: 'hi / HI' });
-  }*/
+  /* async setNewExercises(){
+     const readingRef = collection(this.db, "lesen");
+     await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ho'), {
+       answerFour: "ho / Ho", answerThree: "ha / HA", answerTwo: "he / He", answerOne: "hu / HU",
+       callOne: 'husten', callTwo: 'heben', callThree: 'Hand', callFour: 'hose',
+       callRight: 'hose', right: 'ho / Ho' });
+   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ha'), {
+     answerFour: "hi / HI", answerThree: "ha / HA", answerTwo: "hu / HU", answerOne: "ho / HO",
+     callOne: 'holen', callTwo: 'hupen', callThree: 'hamster', callFour: 'hinten',
+     callRight: 'hamster', right: 'ha / HA' });
+   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'he'), {
+     answerFour: "he / HE", answerThree: "hi / HI", answerTwo: "ha / HA", answerOne: "ho / HO",
+     callOne: 'hof', callTwo: 'hallo', callThree: 'hieb', callFour: 'hefe',
+     callRight: 'hefe', right: 'he / HE' });
+   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hu'), {
+     answerFour: "ha / HA", answerThree: "he / HE", answerTwo: "ho / HO", answerOne: "hu / Hu",
+     callOne: 'huf', callTwo: 'honig', callThree: 'herz', callFour: 'hase',
+     callRight: 'huf', right: "hu / Hu" });
+   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hi'), {
+     answerFour: "hi / HI", answerThree: "hei / HEI", answerTwo: "ha / HA", answerOne: "hu / Hu",
+     callOne: 'hupen', callTwo: 'hafen', callThree: 'heilen', callFour: 'hinein',
+     callRight: 'hinein', right: 'hi / HI' });
+   }*/
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
@@ -107,12 +107,12 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
   //randomize array
-  fisherYatesShuffle(arr){
-    for(var i =arr.length-1 ; i>0 ;i--){
-        var j = Math.floor( Math.random() * (i + 1) ); //random index
-        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+  fisherYatesShuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)); //random index
+      [arr[i], arr[j]] = [arr[j], arr[i]]; // swap
     }
-}
+  }
 
   loadExercise() {
     let excercise = this.allExercises[this.currentQuestion]
@@ -141,7 +141,7 @@ export class PhonemeExerciseComponent implements OnInit {
       this.mathServ.playSound('success');
       this.numberOfCorrectAnswers++;
       this.updateProgressbar();
-      if(this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
+      if (this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
     }
     else {
       this.mathServ.playSound('wrong')
@@ -166,6 +166,21 @@ export class PhonemeExerciseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  helpPhoneme() {
+    if (this.syllableSmall.length == 7) {
+      let syllable = this.syllableSmall.slice(0, 2);
+      let arrayOfLetters = syllable.split("")
+      let helpText = `Das Wort beginnt mit einem ${arrayOfLetters[0]} und danach kommt ein ${arrayOfLetters[1]}`
+      this.speakServ.speak(helpText, 0.9)
+    }
+    else {
+      let syllable = this.syllableSmall.slice(0, 3);
+      let arrayOfLetters = syllable.split("")
+      let helpText = `Das Wort beginnt mit einem ${arrayOfLetters[0]}, ${arrayOfLetters[1]} und danach kommt ein ${arrayOfLetters[2]}`
+      this.speakServ.speak(helpText, 0.9)
+    }
+  }
+
   updateProgressbar() {
     this.progressBarValue = this.numberOfCorrectAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
@@ -188,14 +203,14 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
   showEndscreen() {
-          this.earnTrophy();
-          this.router.navigate(['']);
+    this.earnTrophy();
+    this.router.navigate(['']);
   }
 
   earnTrophy() {
-       if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.giveMedal('silver')
-       if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.giveMedal('silver-gold')
-       if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 12) this.giveMedal('gold')
+    if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.giveMedal('silver')
+    if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.giveMedal('silver-gold')
+    if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 12) this.giveMedal('gold')
   }
 
   async giveMedal(medal) {
@@ -209,7 +224,7 @@ export class PhonemeExerciseComponent implements OnInit {
     else this.createNewFirestoreDocForTrophys(medal);
   }
 
-  async createNewFirestoreDocForTrophys(medal){
+  async createNewFirestoreDocForTrophys(medal) {
     await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
       medals: [medal],
       id: this.actualUser.uid

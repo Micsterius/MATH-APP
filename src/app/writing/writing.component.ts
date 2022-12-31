@@ -189,7 +189,10 @@ export class WritingComponent implements OnInit {
     this.progressBarValue = this.numberOfCorrectAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
-
+  helpWriting(){
+    let helpText = 'klicke auf dem Buchstaben, um zu hören, welcher es ist'
+    this.speakServ.speak(helpText, 0.9)
+  }
 
   resetAnswerButtons() {
     if (this.answerButtonOne.nativeElement.classList.contains('btn-pressed')) {

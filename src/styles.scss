@@ -13,6 +13,15 @@
     }
 }
 
+.help{
+    img {
+        height: 80px;
+    }
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 .color-white {
     color: white;
 }
