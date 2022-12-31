@@ -185,8 +185,6 @@ export class PhonemeExerciseComponent implements OnInit {
     this.progressBarValue = this.numberOfCorrectAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
-
-
   resetAnswerButtons() {
     if (this.answerButtonOne.nativeElement.classList.contains('btn-pressed')) {
       this.answerButtonOne.nativeElement.classList.remove('btn-pressed')
