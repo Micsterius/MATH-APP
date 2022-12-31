@@ -38,6 +38,8 @@ export class WordsComponent implements OnInit {
 
   speakRate: number = 0.5;
 
+  loadFinished: boolean = false;
+
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
@@ -50,14 +52,14 @@ export class WordsComponent implements OnInit {
     public mathServ: MathService,
     public speakServ: SpeakingService
   ) {
-   //  this.setNewExercisesWords()
+    //  this.setNewExercisesWords()
     this.setting = JSON.parse(localStorage.getItem('setting'));
 
     if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
     }
-     this.loadWords()
+    this.loadWords()
 
   }
 
@@ -103,6 +105,7 @@ export class WordsComponent implements OnInit {
         this.allExercises.push(doc.data());
         this.fisherYatesShuffle(this.allExercises);
         this.loadExercise();
+        this.loadFinished = true;
       })
     });
   }
@@ -147,7 +150,7 @@ export class WordsComponent implements OnInit {
     else {
       this.mathServ.playSound('wrong')
       setTimeout(() => {
-        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate/100);
+        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate / 100);
       }, 1500);
     };
     setTimeout(() => {
@@ -186,6 +189,15 @@ export class WordsComponent implements OnInit {
     if (this.answerButtonFour.nativeElement.classList.contains('btn-pressed')) {
       this.answerButtonFour.nativeElement.classList.remove('btn-pressed')
     }
+  }
+
+  helpWord() {
+    if (this.allExercises[this.currentQuestion].helpText.length > 0) this.speakServ.speak(this.allExercises[this.currentQuestion].helpText, 0.9)
+    else {
+      let helpText = 'Für dieses Wort gibt es keine Hilfe'
+      this.speakServ.speak(helpText, 0.9)
+    }
+
   }
 
   showEndscreen() {

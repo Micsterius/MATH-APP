@@ -148,8 +148,6 @@ export class WritingComponent implements OnInit {
         event.currentIndex,
       );
     }
-    console.log(event.container.data)
-    console.log(this.arrayOfLetters)
   }
 
   checkAnswerWriting() {
