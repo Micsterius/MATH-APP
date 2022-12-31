@@ -49,14 +49,7 @@ export class WritingComponent implements OnInit {
 
   answer = [];
 
-  arrayOfLetters = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
+  arrayOfLetters = [];
 
   constructor(
     private router: Router,
@@ -178,7 +171,6 @@ export class WritingComponent implements OnInit {
     this.currentQuestion++;
     this.loadExercise();
   }
-
 
   ngOnInit(): void {
   }
