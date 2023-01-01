@@ -44,6 +44,10 @@ import { CommonModule } from "@angular/common";
 import { WritingComponent } from './writing/writing.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { LoginComponent } from './auth/login/login.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,11 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     WordsComponent,
     SettingsReadingComponent,
     HeaderComponent,
-    WritingComponent
+    WritingComponent,
+    LoginComponent,
+    SignUpComponent,
+    VerifyMailComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserAnimationsModule,
