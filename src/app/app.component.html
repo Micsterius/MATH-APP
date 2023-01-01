@@ -1,4 +1,5 @@
-<div class="app-container">
+<app-auth *ngIf="authService.showLoginArea"></app-auth>
+<div class="app-container" *ngIf="!authService.showLoginArea">
   <app-header class="w450"></app-header>
   <router-outlet></router-outlet>
 </div>

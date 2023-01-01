@@ -48,6 +48,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { AuthenticationService } from './shared/services/authentication.service';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     LoginComponent,
     SignUpComponent,
     VerifyMailComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    AuthComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -96,7 +99,7 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
