@@ -49,13 +49,7 @@ export class WritingComponent implements OnInit {
 
   answer = [];
 
-  arrayOfLetters = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
+  arrayOfLetters = [];
 
 
   constructor(
@@ -134,7 +128,7 @@ export class WritingComponent implements OnInit {
 
   mixLetters() {
     this.fisherYatesShuffle(this.arrayOfMixedLetters)
-    if (this.arrayOfMixedLetters == this.arrayOfLetters) this.mixLetters()
+    if (this.arrayOfMixedLetters[0] == this.arrayOfLetters[0] && this.arrayOfMixedLetters[1] == this.arrayOfLetters[1]) this.mixLetters()
   }
 
   drop(event: CdkDragDrop<string[]>) {
