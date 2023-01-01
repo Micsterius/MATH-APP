@@ -6,6 +6,10 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: rgb(0, 0, 0) !important;
 }
 
+.top-btn-login{
+    margin-bottom: 12px;
+}
+
 
 @media (max-height: 320px){
     .auth-area-container{

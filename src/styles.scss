@@ -153,12 +153,19 @@ mat-icon {
     color: white;
 }
 
+.auth-area-container{
+    padding: 24px;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
 .google-btn-box {
     display: flex;
     align-items: center;
     min-width: 200px;
     border: none;
     border-radius: 8px;
+    background-color: white;
 
     img {
         width: 24px;

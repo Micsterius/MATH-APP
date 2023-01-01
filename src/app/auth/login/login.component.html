@@ -21,15 +21,15 @@
                 </div>
             </form>
             <!-- Calling SignIn Api from AuthService -->
-            <div class="formGroup">
+            <div class="top-btn-login">
                 <input type="button" class="btn-auth bg-c-2 color-white margin-bottom-8" value="Log in"
                     (click)="authService.SignIn(userEmail.value, userPwd.value)">
             </div>
-            <div class="formGroup">
+            <div>
                 <input type="button" class="btn-auth bg-c-2 color-white" value="Log in as GUEST"
                     (click)="authService.signInAnonymously()">
             </div>
-            <div class="formGroup">
+            <div>
                 <span class="or"><span class="orInner">Or</span></span>
             </div>
             <!-- Calling GoogleAuth Api from AuthService -->

@@ -9,12 +9,18 @@ import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-
 import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
 import { WordsComponent } from './reading/words/words.component';
 import { WritingComponent } from './writing/writing.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
+import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 // route guard
 
 
 
 const routes: Routes = [
   { path: '', component: StartsceenComponent},
+  { path: 'register-user', component: SignUpComponent },
+  { path: 'forgot-password', component: ForgetPasswordComponent },
+  { path: 'verify-email-address', component: VerifyMailComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'triumph', component: TriumphComponent },
   { path: 'arithmetic', component: ArithmeticAreaComponent },
