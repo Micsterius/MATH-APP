@@ -4,6 +4,21 @@
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
         </div>
         <mat-card-title class="bg-c-1 color-white">Lern App</mat-card-title>
+        <div class="icon-header-menu color-white">
+            <mat-icon mat-icon-button [matMenuTriggerFor]="menu" fontIcon="settings"
+                *ngIf="authService.userData as user">
+            </mat-icon>
+        </div>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>
+                <mat-icon>person</mat-icon>
+                <span routerLink="/personal">Dein Profil</span>
+            </button>
+            <button mat-menu-item (click)="authService.SignOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Ausloggen</span>
+            </button>
+        </mat-menu>
     </div>
 </mat-card>
 <div class="head-imgs bg-c-1-light">

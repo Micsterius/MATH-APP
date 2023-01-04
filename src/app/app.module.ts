@@ -50,6 +50,8 @@ import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { AuthComponent } from './auth/auth.component';
+import { PersonalComponent } from './personal/personal.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { AuthComponent } from './auth/auth.component';
     SignUpComponent,
     VerifyMailComponent,
     ForgetPasswordComponent,
-    AuthComponent
+    AuthComponent,
+    PersonalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -91,6 +94,7 @@ import { AuthComponent } from './auth/auth.component';
     MatExpansionModule,
     CommonModule,
     DragDropModule,
+    MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

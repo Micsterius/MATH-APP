@@ -9,7 +9,9 @@ import { AuthenticationService } from './shared/services/authentication.service'
 export class AppComponent {
   title = 'math-app';
   constructor(public authService: AuthenticationService){
-    
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (user) this.authService.showLoginArea = false;
+    else this.authService.showLoginArea = true;
   }
 }
 

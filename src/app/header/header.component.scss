@@ -61,3 +61,26 @@ mat-card-title {
         }
     }
 }
+.icon-header-home{
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translate(0%, -50%);
+
+    mat-icon {
+        color: white;
+        margin-left: 12px;
+
+        &:hover {
+            cursor: pointer;
+            color: black;
+        }
+    }
+}
+
+.icon-header-menu{
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translate(0%, -50%);
+}

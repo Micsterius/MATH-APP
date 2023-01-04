@@ -12,6 +12,7 @@ import { WritingComponent } from './writing/writing.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
+import { PersonalComponent } from './personal/personal.component';
 // route guard
 
 
@@ -19,6 +20,7 @@ import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 const routes: Routes = [
   { path: '', component: StartsceenComponent},
   { path: 'register-user', component: SignUpComponent },
+  { path: 'personal', component: PersonalComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },
   { path: 'verify-email-address', component: VerifyMailComponent },
   { path: 'settings', component: SettingsComponent },

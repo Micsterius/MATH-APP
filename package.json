@@ -24,6 +24,7 @@
     "@ngbmodule/material-carousel": "^0.7.2",
     "@tinymce/tinymce-angular": "^7.0.0",
     "firebase": "^9.12.1",
+    "material-tooltip": "^1.0.1",
     "rxjs": "~7.5.0",
     "swiper": "^8.4.4",
     "tslib": "^2.3.0",
