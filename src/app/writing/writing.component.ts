@@ -169,6 +169,7 @@ export class WritingComponent implements OnInit {
       this.currentQuestion++
       this.answer.length = 0;
       this.arrayOfMixedLetters = this.word.split("")
+      this.mixLetters()
     }
   }
 
