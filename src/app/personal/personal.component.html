@@ -1,5 +1,5 @@
-<div *ngIf="authService.userData">
-  <div>
+<div *ngIf="authService.userData" class="w450 bg-c-1-light personal-container">
+  <div class="personal-sub-container">
     <div class="pt-3 pb-2 mb-3 border-bottom">
       <h1 class="headline-user-profile color-main fs18">Profile settings
         <mat-icon *ngIf="!editUser && activeUser.emailVerified" fontIcon="edit" (click)="editProfile()"></mat-icon>
@@ -18,7 +18,7 @@
       </mat-form-field>
     </div>
   </div>
-  <div>
+  <div class="personal-sub-container">
     <h1 *ngIf="!activeUser.emailVerified" class="headline-user-profile color-main fs18">Bitte E-Mail bestätigen</h1>
     <!-- Verified user -->
     <h1 *ngIf="activeUser.emailVerified" class="headline-user-profile color-main fs18">Passwort und Mail

@@ -7,10 +7,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
     margin-top: 16px;
     margin-bottom: 16px;
-    border-bottom: 1px solid lightgray;
 
     p {
         margin: 0;
@@ -22,4 +21,13 @@
             color: var(--main-color);
         }
     }
+}
+
+.personal-container{
+    height: calc(100vh - 188px);
+}
+
+.personal-sub-container{
+    padding-left: 48px;
+    padding-right: 48px;
 }
