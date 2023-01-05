@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl } from '@angular/forms';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { TooltipPosition } from '@angular/material/tooltip';
+import { UserInfoService } from '../shared/services/user-info.service';
 
 @Component({
   selector: 'app-personal',
@@ -10,6 +11,7 @@ import { TooltipPosition } from '@angular/material/tooltip';
   styleUrls: ['./personal.component.scss']
 })
 export class PersonalComponent implements OnInit {
+  editUser: boolean = false;
   editUserSensitive: boolean = false;
   checkIfPasswordChanged: boolean = false;
   activeUser;
@@ -19,8 +21,10 @@ export class PersonalComponent implements OnInit {
 
   constructor(
     public authService: AuthenticationService,
-    public afs: AngularFirestore,) {
+    public afs: AngularFirestore,
+    public usersService: UserInfoService) {
     this.activeUser = JSON.parse(localStorage.getItem('user')!);
+    this.usersService.loadUsers()
   }
 
   ngOnInit(): void {
@@ -43,6 +47,32 @@ export class PersonalComponent implements OnInit {
       this.afs.collection('users')
         .doc(this.activeUser.uid)
         .update({ email: this.activeUser.email })
+        .then(() => {
+        }).catch((error) => {
+          window.alert(error.message);
+        });
+    }
+  }
+
+  editProfile() {
+    this.editUser = true
+  }
+
+  closeProfileEdit() {
+    this.editUser = false
+  }
+
+  saveProfileEdit() {
+    this.authService.changeUserDataName(this.activeUser.displayName);
+    this.changeUserDataNameFirestore();
+    this.closeProfileEdit();
+  }
+
+  async changeUserDataNameFirestore() {
+    if (await this.authService.UserDataExist()) {
+      this.afs.collection('users')
+        .doc(this.activeUser.uid)
+        .update({ displayName: this.activeUser.displayName })
         .then(() => {
         }).catch((error) => {
           window.alert(error.message);
