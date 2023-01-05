@@ -24,14 +24,14 @@
       [cdkDropListConnectedTo]="[answerList]" class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
     </div>
-    <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0" (click)="checkAnswerWriting()">
+    <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0 && !checkButtonDisable" (click)="checkAnswerWriting()">
       <mat-icon>check</mat-icon>
     </div>
   </div>
 
   <div class="question-footer">
     <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
-      Aufgabe(n)
+      Versuch(en)
       korrekt
       gelöst</span>
     <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button

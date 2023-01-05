@@ -7,7 +7,6 @@ import { ReadingService } from 'src/app/shared/services/reading.service';
 import { SpeakingService } from 'src/app/shared/services/speaking.service';
 import { TrophyService } from 'src/app/shared/services/trophy.service';
 import { User } from 'src/app/shared/services/user';
-import { WritingService } from 'src/app/shared/services/writing.service';
 import { environment } from 'src/environments/environment';
 
 @Component({

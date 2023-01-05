@@ -14,6 +14,7 @@ import { ForgetPasswordComponent } from './auth/forget-password/forget-password.
 import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 import { PersonalComponent } from './personal/personal.component';
 import { EndscreenComponent } from './reading/endscreen/endscreen.component';
+import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen.component';
 // route guard
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'reading-words', component: WordsComponent },
   { path: 'writing-words', component: WritingComponent },
   { path: 'endscreen', component: EndscreenComponent },
+  { path: 'writing-endscreen', component: WritingEndscreenComponent },
 ];
 
 @NgModule({

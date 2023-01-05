@@ -7,6 +7,9 @@ import { environment } from 'src/environments/environment';
 import { MathService } from '../shared/services/math.service';
 import { ReadingService } from '../shared/services/reading.service';
 import { SpeakingService } from '../shared/services/speaking.service';
+import { TrophyService } from '../shared/services/trophy.service';
+import { User } from '../shared/services/user';
+import { WriteService } from '../shared/services/write.service';
 
 @Component({
   selector: 'app-writing',
@@ -17,6 +20,7 @@ export class WritingComponent implements OnInit {
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
 
+  checkButtonDisable: boolean = false;
   numberOfAnswersToSolveCorrect: number = 5;
   numberOfCorrectAnswers: number = 0;
 
@@ -48,7 +52,7 @@ export class WritingComponent implements OnInit {
 
 
   answer = [];
-
+  actualUser: User;
   arrayOfLetters = [];
 
 
@@ -56,11 +60,13 @@ export class WritingComponent implements OnInit {
     private router: Router,
     public readServ: ReadingService,
     public mathServ: MathService,
-    public speakServ: SpeakingService
+    public speakServ: SpeakingService,
+    private trophyService: TrophyService,
+    private writingService: WriteService
   ) {
     // this.setNewExercisesWordsWriting()
     this.setting = JSON.parse(localStorage.getItem('setting'));
-
+    this.actualUser = JSON.parse(localStorage.getItem('user'))
     if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
@@ -147,8 +153,8 @@ export class WritingComponent implements OnInit {
   checkAnswerWriting() {
     let letters = this.answer.toString()
     let answer = letters.replace(/[,]/g, '')
-    console.log(answer)
     if (this.word == answer) {
+      this.checkButtonDisable = true;
       this.mathServ.playSound('success');
       this.numberOfCorrectAnswers++;
       this.updateProgressbar();
@@ -160,6 +166,7 @@ export class WritingComponent implements OnInit {
     }
     else {
       this.mathServ.playSound('wrong');
+      this.currentQuestion++
       this.answer.length = 0;
       this.arrayOfMixedLetters = this.word.split("")
     }
@@ -171,6 +178,7 @@ export class WritingComponent implements OnInit {
     this.nextIsAvailable = false;
     this.currentQuestion++;
     this.loadExercise();
+    this.checkButtonDisable = false;
   }
 
 
@@ -202,31 +210,16 @@ export class WritingComponent implements OnInit {
   }
 
   showEndscreen() {
-    // this.earnTrophy();
-    this.router.navigate(['']);
+    this.writingService.numberOfRightAnswersWriting = this.numberOfCorrectAnswers;
+    this.currentQuestion++;
+    this.writingService.numberOfTasksWriting = this.currentQuestion;
+    this.earnTrophy();
+    this.router.navigate(['/writing-endscreen']);
   }
 
-  /*  earnTrophy() {
-         if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.giveMedal('silver')
-         if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.giveMedal('silver-gold')
-         if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 12) this.giveMedal('gold')
-    }
-  
-    async giveMedal(medal) {
-      let docRef = doc(this.db, "userTrophys", this.actualUser.uid); //search in the users collection for the user with the same uid as the author uid//search in the users collection for the user with the same uid as the author uid
-      let docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        await updateDoc(docRef, {
-          medals: arrayUnion(medal),
-        })
-      }
-      else this.createNewFirestoreDocForTrophys(medal);
-    }
-  
-    async createNewFirestoreDocForTrophys(medal){
-      await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
-        medals: [medal],
-        id: this.actualUser.uid
-      });
-    }*/
+  earnTrophy() {
+    if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.trophyService.giveMedal('bronze', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.trophyService.giveMedal('silver', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 22) this.trophyService.giveMedal('gold', this.actualUser.uid)
+  }
 }
