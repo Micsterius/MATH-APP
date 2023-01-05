@@ -36,23 +36,23 @@ export class TrophyService {
   }
 
   async updateGoldcoin(docRef, nbrOfGoldCoins) {
-    let coins = nbrOfGoldCoins++
+    let coins = nbrOfGoldCoins+1
     await updateDoc(docRef, {
-      goldCoins: coins
+      goldCoins: `${coins}`
     })
   }
 
   async updateSilvercoin(docRef, nbrOfSilverCoins) {
-    let coins = nbrOfSilverCoins++
+    let coins = nbrOfSilverCoins+1
     await updateDoc(docRef, {
-      goldCoins: coins
+      silverCoins: `${coins}`
     })
   }
 
   async updateBronzecoin(docRef, nbrOfBronzeCoins) {
-    let coins = nbrOfBronzeCoins++
+    let coins = nbrOfBronzeCoins+1
     await updateDoc(docRef, {
-      goldCoins: coins
+      bronzeCoins: `${coins}`
     })
   }
 }
