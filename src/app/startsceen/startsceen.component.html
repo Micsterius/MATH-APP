@@ -5,7 +5,7 @@
         <swiper [navigation]="true" [pagination]="true" class="mySwiper">
             <ng-template swiperSlide *ngFor="let button of buttons">
                 <div class="button-box">
-                    <button class="bg-c-1 color-white" [routerLink]="[button.linkOne]">{{button.nameOne}}</button>
+                    <button (click)="saveCurrentExercise(button.linkOne)" class="bg-c-1 color-white" [routerLink]="[button.linkOne]">{{button.nameOne}}</button>
                 </div>
             </ng-template>
         </swiper>

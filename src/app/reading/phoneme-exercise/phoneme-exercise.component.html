@@ -18,7 +18,7 @@
     <div class="answer-container" *ngIf="showExercise">
         <div class="answer-box">
             <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up" (click)="speakServ.speak(allExercises[currentQuestion].callOne, speakRate/100)"></mat-icon>
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main"
                 (click)="checkAnswer(answerSyllableOne); readServ.toggleClass($event)" #answerButtonOne
                 [ngClass]="{'bg-success' : checkResult(answerSyllableOne) && answerIsGiven, 'bg-failed' : !checkResult(answerSyllableOne) && answerIsGiven}">
                 {{answerSyllableOne}}
@@ -26,7 +26,7 @@
         </div>
         <div class="answer-box">
             <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up" (click)="speakServ.speak(allExercises[currentQuestion].callTwo, speakRate/100)"></mat-icon>
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main"
                 (click)="checkAnswer(answerSyllableTwo); readServ.toggleClass($event)" #answerButtonTwo
                 [ngClass]="{'bg-success' : checkResult(answerSyllableTwo) && answerIsGiven, 'bg-failed' : !checkResult(answerSyllableTwo) && answerIsGiven}">
                 {{answerSyllableTwo}}
@@ -34,7 +34,7 @@
         </div>
         <div class="answer-box">
             <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up" (click)="speakServ.speak(allExercises[currentQuestion].callThree, speakRate/100)"></mat-icon>
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main"
                 (click)="checkAnswer(answerSyllableThree); readServ.toggleClass($event)" #answerButtonThree
                 [ngClass]="{'bg-success' : checkResult(answerSyllableThree) && answerIsGiven, 'bg-failed' : !checkResult(answerSyllableThree) && answerIsGiven}">
                 {{answerSyllableThree}}
@@ -42,7 +42,7 @@
         </div>
         <div class="answer-box">
             <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up" (click)="speakServ.speak(allExercises[currentQuestion].callFour, speakRate/100)"></mat-icon>
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main"
                 (click)="checkAnswer(answerSyllableFour); readServ.toggleClass($event)" #answerButtonFour
                 [ngClass]="{'bg-success' : checkResult(answerSyllableFour) && answerIsGiven, 'bg-failed' : !checkResult(answerSyllableFour) && answerIsGiven}">
                 {{answerSyllableFour}}

@@ -52,6 +52,7 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { AuthComponent } from './auth/auth.component';
 import { PersonalComponent } from './personal/personal.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { EndscreenComponent } from './reading/endscreen/endscreen.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     VerifyMailComponent,
     ForgetPasswordComponent,
     AuthComponent,
-    PersonalComponent
+    PersonalComponent,
+    EndscreenComponent
   ],
   imports: [
     BrowserAnimationsModule,

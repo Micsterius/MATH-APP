@@ -51,6 +51,11 @@ export class StartsceenComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  saveCurrentExercise(exercise) {
+    this.generalService.currentExercise = exercise
+    console.log(this.generalService.currentExercise)
+  }
+
   async sayHello() {
     if (this.authService.sayHelloToUser && await this.authService.additionUserDataExist()) {
       let text

@@ -6,6 +6,7 @@ import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, onSnapshot, 
 import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
 import { SpeakingService } from 'src/app/shared/services/speaking.service';
+import { TrophyService } from 'src/app/shared/services/trophy.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -51,7 +52,8 @@ export class PhonemeExerciseComponent implements OnInit {
     private router: Router,
     public readServ: ReadingService,
     public mathServ: MathService,
-    public speakServ: SpeakingService
+    public speakServ: SpeakingService,
+    private trophyService: TrophyService
   ) {
     this.setting = JSON.parse(localStorage.getItem('setting'));
     this.actualUser = JSON.parse(localStorage.getItem('user'))
@@ -201,31 +203,16 @@ export class PhonemeExerciseComponent implements OnInit {
   }
 
   showEndscreen() {
+    this.readServ.numberOfRightAnswersReading = this.numberOfCorrectAnswers
+    this.currentQuestion++
+    this.readServ.numberOfTasks = this.currentQuestion
     this.earnTrophy();
-    this.router.navigate(['']);
+    this.router.navigate(['/endscreen']);
   }
 
   earnTrophy() {
-    if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.giveMedal('silver')
-    if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.giveMedal('silver-gold')
-    if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 12) this.giveMedal('gold')
-  }
-
-  async giveMedal(medal) {
-    let docRef = doc(this.db, "userTrophys", this.actualUser.uid); //search in the users collection for the user with the same uid as the author uid//search in the users collection for the user with the same uid as the author uid
-    let docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      await updateDoc(docRef, {
-        medals: arrayUnion(medal),
-      })
-    }
-    else this.createNewFirestoreDocForTrophys(medal);
-  }
-
-  async createNewFirestoreDocForTrophys(medal) {
-    await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
-      medals: [medal],
-      id: this.actualUser.uid
-    });
+    if (this.numberOfAnswersToSolveCorrect == 5 && this.currentQuestion < 6) this.trophyService.giveMedal('bronze', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 10 && this.currentQuestion < 12) this.trophyService.giveMedal('silver', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 20 && this.currentQuestion < 22) this.trophyService.giveMedal('gold', this.actualUser.uid)
   }
 }

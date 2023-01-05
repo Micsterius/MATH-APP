@@ -13,6 +13,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 import { PersonalComponent } from './personal/personal.component';
+import { EndscreenComponent } from './reading/endscreen/endscreen.component';
 // route guard
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'reading-phenomene', component: PhonemeExerciseComponent },
   { path: 'reading-words', component: WordsComponent },
   { path: 'writing-words', component: WritingComponent },
+  { path: 'endscreen', component: EndscreenComponent },
 ];
 
 @NgModule({

@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class ReadingService {
 
+numberOfRightAnswersReading: number = 0;
+numberOfTasks: number = 0;
+
   constructor() {
 
   }
