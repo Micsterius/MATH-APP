@@ -3,3 +3,14 @@
     opacity: 0.5 !important;
     box-shadow: none;
 }
+
+.trophy{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 10;
+
+    height: 80px;
+    width: 80px;
+}

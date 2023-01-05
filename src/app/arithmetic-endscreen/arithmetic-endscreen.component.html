@@ -7,4 +7,5 @@
             (click)="navigateToWrongAnswers()" [ngClass]="{'btn-disabled' : mathServ.wrongAnswers.length == 0}">Falsche Antworten nochmal</button>
         <button class="bg-c-1 color-white" [routerLink]="['']">Start</button>
     </div>
+    <img *ngIf="trophyService.trophyEarned" class="trophy" src="./../../assets/img/coins/{{trophyService.currentCoin}}-coin.png" alt="">
 </div>

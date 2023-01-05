@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MathService } from '../shared/services/math.service';
+import { TrophyService } from '../shared/services/trophy.service';
 
 @Component({
   selector: 'app-arithmetic-endscreen',
@@ -11,7 +12,12 @@ export class ArithmeticEndscreenComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public mathServ: MathService) { }
+    public mathServ: MathService,
+    public trophyService: TrophyService) {
+      setTimeout(() => {
+        trophyService.trophyEarned = false
+      }, 3000);
+    }
 
   ngOnInit(): void {
   }
