@@ -3,6 +3,23 @@
     object-fit: cover;
 }
 
+.trophy-nbr{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.trophy-sub-box{
+    position: relative;
+    margin-right: 24px;
+    margin-bottom: 24px;
+}
+
 .trophy-container{
     min-height: 350px;
     position: relative;

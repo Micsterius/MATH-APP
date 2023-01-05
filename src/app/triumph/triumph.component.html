@@ -1,7 +1,16 @@
 <div class="w450 bg-c-1-light trophy-container">
-    <div *ngIf="showTrophys" class="trophy-box">
-        <div *ngFor="let trophy of userTrophys.medals">
-            <img class="trophy-img" src="./../../assets/img/{{trophy}}.png">
+    <div *ngIf="showTrophys" class="trophy-box">        
+        <div class="trophy-sub-box">
+            <img class="trophy-img" src="./../../assets/img/coins/gold-coin.png">
+            <div class="trophy-nbr bg-c-1 color-white">{{userInfos.goldCoins}}</div>
+        </div>
+        <div class="trophy-sub-box">
+            <img class="trophy-img" src="./../../assets/img/coins/silver-coin.png">
+            <div class="trophy-nbr bg-c-1 color-white">{{userInfos.silverCoins}}</div>
+        </div>
+        <div class="trophy-sub-box">
+            <img class="trophy-img" src="./../../assets/img/coins/bronze-coin.png">
+            <div class="trophy-nbr bg-c-1 color-white">{{userInfos.bronzeCoins}}</div>
         </div>
     </div>
     <div class="home-btn-box" [routerLink]="['']">

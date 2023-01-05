@@ -15,7 +15,7 @@ export class TriumphComponent implements OnInit {
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
   actualUser: User;
-  userTrophys: any;
+  userInfos: any;
   showTrophys: boolean = false;
 
   constructor() {
@@ -28,10 +28,10 @@ export class TriumphComponent implements OnInit {
 
   async getMedals() {
 
-    let docRef = doc(this.db, "userTrophys", this.actualUser.uid);
+    let docRef = doc(this.db, "more-user-infos", this.actualUser.uid);
     let docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      this.userTrophys = docSnap.data();
+      this.userInfos = docSnap.data();
       this.showTrophys = true;
     }
     else console.log("No such document");
