@@ -24,7 +24,6 @@ export class PersonalComponent implements OnInit {
     public afs: AngularFirestore,
     public usersService: UserInfoService) {
     this.activeUser = JSON.parse(localStorage.getItem('user')!);
-    this.usersService.loadUsers()
   }
 
   ngOnInit(): void {

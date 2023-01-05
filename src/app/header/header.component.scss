@@ -84,3 +84,46 @@ mat-card-title {
     top: 50%;
     transform: translate(0%, -50%);
 }
+
+@keyframes backgroundColorPalette {
+    0% {
+      color: rgba($color: #3946a8, $alpha: 1.0);;
+    }
+    10% {
+        color: rgba($color: #3946a8, $alpha: 0.8);
+    }
+    20% {
+        color: rgba($color: #3946a8, $alpha: 0.6);
+    }
+    30% {
+        color: rgba($color: #3946a8, $alpha: 0.4);
+    }
+    40% {
+        color: rgba($color: #3946a8, $alpha: 0.2);
+    }
+    50% {
+        color: rgba($color: #3946a8, $alpha: 0.0);
+    }
+    60% {
+        color: rgba($color: #3946a8, $alpha: 0.2);
+    }
+    70% {
+        color: rgba($color: #3946a8, $alpha: 0.4);
+    }
+    80% {
+        color: rgba($color: #3946a8, $alpha: 0.6);
+    }
+    90% {
+        color: rgba($color: #3946a8, $alpha: 0.8);
+    }
+    100% {
+        color: rgba($color: #3946a8, $alpha: 1.0);
+    }
+  }
+
+.flash-icon{
+    animation-name: backgroundColorPalette;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

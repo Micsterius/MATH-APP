@@ -34,6 +34,8 @@ export class AuthenticationService {
   name = new FormControl('', [Validators.required, Validators.maxLength(5)]);
   phone = new FormControl('', [Validators.required, Validators.pattern('[- +()0-9]+')]);
   showLoginArea: boolean = true;
+  sayHelloToUser: boolean = false;
+  sayHelloToGuest: boolean = false;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -67,6 +69,7 @@ export class AuthenticationService {
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.showLoginArea = false;
+            this.sayHelloToUser = true;
             this.changeUserStatusToOnline()
           }
         });
@@ -215,6 +218,7 @@ export class AuthenticationService {
       .then(() => {
         // Signed in..
         this.showLoginArea = false;
+        this.sayHelloToGuest = true;
         this.onAuthStateChanged();
       })
       .catch((error) => {
