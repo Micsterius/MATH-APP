@@ -6,6 +6,7 @@ import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, setDoc, upda
 import { environment } from 'src/environments/environment';
 import { MathService } from '../shared/services/math.service';
 import { SpeakingService } from '../shared/services/speaking.service';
+import { TrophyService } from '../shared/services/trophy.service';
 
 @Component({
   selector: 'app-arithmetic-area',
@@ -55,7 +56,8 @@ export class ArithmeticAreaComponent implements OnInit {
   constructor(
     private router: Router,
     public mathServ: MathService,
-    public speakServ: SpeakingService) {
+    public speakServ: SpeakingService,
+    private trophyService: TrophyService) {
     this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.setting = JSON.parse(localStorage.getItem('setting'))
@@ -274,28 +276,8 @@ export class ArithmeticAreaComponent implements OnInit {
   }
 
   earnTrophy() {
-    if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.giveMedal('silver')
-    if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.giveMedal('silver-gold')
-    if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.giveMedal('gold')
-  }
-
-  async giveMedal(medal) {
-    let docRef = doc(this.db, "userTrophys", this.actualUser.uid); //search in the users collection for the user with the same uid as the author uid//search in the users collection for the user with the same uid as the author uid
-    let docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      await updateDoc(docRef, {
-        medals: arrayUnion(medal),
-      })
-    }
-    else {
-      this.createNewFirestoreDocForTrophys(medal)
-    }
-  }
-
-  async createNewFirestoreDocForTrophys(medal) {
-    await setDoc(doc(this.db, "userTrophys", this.actualUser.uid), {
-      medals: [medal],
-      id: this.actualUser.uid
-    });
+    if (this.numberOfAnswersToSolveCorrect == 5 && this.wrongAnswers.length < 1) this.trophyService.giveMedal('bronze', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 10 && this.wrongAnswers.length < 2) this.trophyService.giveMedal('silver', this.actualUser.uid)
+    if (this.numberOfAnswersToSolveCorrect == 20 && this.wrongAnswers.length < 2) this.trophyService.giveMedal('gold', this.actualUser.uid)
   }
 }

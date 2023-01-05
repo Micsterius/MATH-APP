@@ -42,9 +42,9 @@ export class AuthenticationService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
-  ) { 
-      /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
+  ) {
+    /* Saving user data in localstorage when 
+  logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -58,7 +58,7 @@ export class AuthenticationService {
   }
 
 
-  
+
 
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -70,7 +70,7 @@ export class AuthenticationService {
           if (user) {
             this.showLoginArea = false;
             this.sayHelloToUser = true;
-            this.changeUserStatusToOnline()
+            this.checkIfAdditionalUserDataExist()
           }
         });
       })
@@ -157,7 +157,6 @@ export class AuthenticationService {
 
   // Sign out
   async SignOut() {
-    await this.changeUserStatusToOffline();
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       this.userData = '';
@@ -240,17 +239,8 @@ export class AuthenticationService {
     });
   }
 
-  async changeUserStatusToOnline() {
-    if (await this.additionUserDataExist()) {
-      this.afs.collection('more-user-infos')
-        .doc(this.userData.uid)
-        .update({ isOnline: true })
-        .then(() => {
-        }).catch((error) => {
-          window.alert(error.message);
-        });
-    }
-    else if (await this.UserDataExist()) this.addDocInFirestore()
+  checkIfAdditionalUserDataExist() {
+    if (!this.additionUserDataExist()) this.addDocInFirestore()
   }
 
   //Check if additional user data exist to check if the document have to created or updated.
@@ -264,18 +254,10 @@ export class AuthenticationService {
   async addDocInFirestore() {
     await setDoc(doc(this.db, "more-user-infos", this.userData.uid), {
       uid: this.userData.uid,
-      isOnline: true
+      goldCoins: '0',
+      silverCoins: '0',
+      bronzeCoins: '0'
     });
-  }
-
-  async changeUserStatusToOffline() {
-    if (await this.UserDataExist()) {
-      this.afs.collection('more-user-infos')
-        .doc(this.userData.uid)
-        .update({ isOnline: false })
-        .then(() => {
-        }).catch((error) => {});
-    }
   }
 
   //Check if user exist, necessary to detect if it is a user or a guest. Guests will be return false
