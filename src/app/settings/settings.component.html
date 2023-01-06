@@ -5,12 +5,26 @@
             <ng-template swiperSlide *ngFor="let area of areas">
                 <div *ngIf="area == 1">
                     <div class="settings-btn-box">
+                        <h3>
+                            Anzahl Aufgaben richtig zu lösen
+                        </h3>
+                        <mat-button-toggle-group
+                            value="{{(setting.numberOfAnswersToSolveCorrect) ? (setting.numberOfAnswersToSolveCorrect) : '10'}}">
+                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('5')"
+                                class="color-white bg-c-1 border-round-left" value="5">5</mat-button-toggle>
+                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('10')"
+                                class="color-white bg-c-1" value="10">10</mat-button-toggle>
+                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('20')"
+                                class="color-white bg-c-1 border-round-right" value="20">20</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                    <div class="settings-btn-box">
                         <h3>Lautstärke</h3>
                         <mat-slider [(ngModel)]="rangeValueVolume" thumbLabel (mouseover)="allowToSlide = false" (change)="getRangeVolume()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>Sprechgeschwindigkeit Leseübung</h3>
+                        <h3>Sprechgeschwindigkeit Übungen</h3>
                         <mat-slider [(ngModel)]="rangeValueRate" thumbLabel (mouseover)="allowToSlide = false" (change)="getRangeRate()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
@@ -28,6 +42,7 @@
                 </div>
 
                 <div *ngIf="area == 2">
+                    <h2 class="headline-settings-two">Mathe</h2>
                     <div class="settings-btn-box">
                         <h3>
                             Rechnen mit Zahlen
@@ -40,20 +55,6 @@
                                 class="color-white bg-c-1" value="middle">5 - 15</mat-button-toggle>
                             <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('high')"
                                 class="color-white bg-c-1 border-round-right" value="high">10 - 20</mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                    <div class="settings-btn-box">
-                        <h3>
-                            Anzahl Aufgaben richtig zu lösen
-                        </h3>
-                        <mat-button-toggle-group
-                            value="{{(setting.numberOfAnswersToSolveCorrect) ? (setting.numberOfAnswersToSolveCorrect) : '10'}}">
-                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('5')"
-                                class="color-white bg-c-1 border-round-left" value="5">5</mat-button-toggle>
-                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('10')"
-                                class="color-white bg-c-1" value="10">10</mat-button-toggle>
-                            <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('20')"
-                                class="color-white bg-c-1 border-round-right" value="20">20</mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
                     <div class="settings-btn-box">
