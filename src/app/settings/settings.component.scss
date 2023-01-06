@@ -12,7 +12,7 @@
 
 h3 {
    // margin-bottom: 4px;
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 0 !important;
     margin-top: 8px !important;
 }
@@ -74,8 +74,8 @@ mat-button-toggle {
 .swiper-container{
     display: flex;
     justify-content: center;
-    height: 400px;
     width: 100%;
+    height: 500px;
 }
 
 .swiper-pagination-bullet-active {
@@ -106,6 +106,14 @@ mat-button-toggle {
     align-items: center;
 }
 
-.headline-settings-two{
+.headline-settings{
     text-align: center;
+    font-size: 48px;
+    line-height: 48px;
+}
+
+.sub-headline-settings{
+    font-size: 24px;
+    margin-top: 24px;
+    margin-bottom: 8px;
 }

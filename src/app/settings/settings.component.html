@@ -1,13 +1,14 @@
-<div class="settings-box bg-c-1-light w450">
+<div class="settings-box bg-c-1-light w450 max-height-with-header">
 
     <div class="swiper-container">
         <swiper [enabled]="allowToSlide" [allowTouchMove]="allowToSlide" [allowSlideNext]="allowToSlide" [allowSlidePrev]="allowToSlide" [navigation]="true" [pagination]="true" class="mySwiper">
             <ng-template swiperSlide *ngFor="let area of areas">
                 <div *ngIf="area == 1">
+                    <div class="headline-settings">Allgemein</div>
                     <div class="settings-btn-box">
-                        <h3>
+                        <div class="sub-headline-settings">
                             Anzahl Aufgaben richtig zu lösen
-                        </h3>
+                        </div>
                         <mat-button-toggle-group
                             value="{{(setting.numberOfAnswersToSolveCorrect) ? (setting.numberOfAnswersToSolveCorrect) : '10'}}">
                             <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('5')"
@@ -19,17 +20,17 @@
                         </mat-button-toggle-group>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>Lautstärke</h3>
+                        <div class="sub-headline-settings">Lautstärke</div>
                         <mat-slider [(ngModel)]="rangeValueVolume" thumbLabel (mouseover)="allowToSlide = false" (change)="getRangeVolume()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>Sprechgeschwindigkeit Übungen</h3>
+                        <div class="sub-headline-settings">Sprechgeschwindigkeit Übungen</div>
                         <mat-slider [(ngModel)]="rangeValueRate" thumbLabel (mouseover)="allowToSlide = false" (change)="getRangeRate()" (mouseleave)="allowToSlide = true" tickInterval="1" min="0" max="100">
                         </mat-slider>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>Stimme</h3>
+                        <div class="sub-headline-settings">Stimme</div>
                         <mat-button-toggle-group value="{{(setting.voice) ? (setting.voice) : '1'}}">
                             <mat-button-toggle (click)="selectVoice('0')"
                                 class="color-white bg-c-1 border-round-left" value="1">1</mat-button-toggle>
@@ -42,11 +43,11 @@
                 </div>
 
                 <div *ngIf="area == 2">
-                    <h2 class="headline-settings-two">Mathe</h2>
+                    <div class="headline-settings">Mathe</div>
                     <div class="settings-btn-box">
-                        <h3>
+                        <div class="sub-headline-settings">
                             Rechnen mit Zahlen
-                        </h3>
+                        </div>
                         <mat-button-toggle-group
                             value="{{(setting.areaOfNumbersForArithmetic) ? (setting.areaOfNumbersForArithmetic) : 'middle'}}">
                             <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('small')"
@@ -58,9 +59,9 @@
                         </mat-button-toggle-group>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>
+                        <div class="sub-headline-settings">
                             Mengen bildlich darstellen
-                        </h3>
+                        </div>
                         <mat-button-toggle-group
                             value="{{(setting.showPicturesForAmount) ? (setting.showPicturesForAmount) : 'yes'}}">
                             <mat-button-toggle [disabled]="disableBtnAmount" (click)="getShowPicturesForAmount('yes')"
@@ -73,9 +74,9 @@
                         </mat-button-toggle-group>
                     </div>
                     <div class="settings-btn-box">
-                        <h3>
+                        <div class="sub-headline-settings">
                             Rechenarten
-                        </h3>
+                        </div>
                         <mat-button-toggle-group value="{{(setting.mathOperator) ? (setting.mathOperator) : 'plus'}}">
                             <mat-button-toggle (click)="getOperator('plus')"
                                 class="color-white bg-c-1 border-round-left" value="plus">+</mat-button-toggle>
