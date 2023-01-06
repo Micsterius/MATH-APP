@@ -2,6 +2,7 @@ import { AnimationSequenceMetadata } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MathService } from '../shared/services/math.service';
+import { SpeakingService } from '../shared/services/speaking.service';
 
 @Component({
   selector: 'app-wrong-answers-again',
@@ -38,6 +39,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   numberOfExercises: number = 0;
 
   currentExercise: any;
+  setting;
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
   @ViewChild("answerButtonTwo") answerButtonTwo: ElementRef;
@@ -47,8 +49,10 @@ export class WrongAnswersAgainComponent implements OnInit {
   constructor(
     public mathServ: MathService,
     public router: Router,
+    public speakService: SpeakingService
   ) {
     this.loadWrongAnswerExercise();
+    this.setting = JSON.parse(localStorage.getItem('setting'))
   }
 
   ngOnInit(): void {
@@ -63,6 +67,7 @@ export class WrongAnswersAgainComponent implements OnInit {
     this.mathServ.result = this.currentExercise.result;
     this.numberOfExercises = this.wrongAnswers.length
     this.mathServ.generateRandomizedAnswers();
+    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.operator)
   }
 
 
@@ -128,5 +133,16 @@ export class WrongAnswersAgainComponent implements OnInit {
     if (this.answerButtonFour.nativeElement.classList.contains('btn-pressed')) {
       this.answerButtonFour.nativeElement.classList.remove('btn-pressed')
     }
+  }
+
+  helptext() {
+    if (this.helpSpeakPictures()) {
+      let text = 'Wenn du auf die bunten Kugeln tippst, verändert sich ihre Farbe. Das hilft dir beim Zählen'
+      this.speakService.speak(text, 1)
+    }
+  }
+
+  helpSpeakPictures() {
+    return (this.setting.showPicturesForAmount == 'yes' || this.setting.showPicturesForAmount == 'partly')
   }
 }

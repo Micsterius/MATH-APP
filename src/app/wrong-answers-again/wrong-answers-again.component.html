@@ -1,13 +1,23 @@
-<div class="w450 bg-c-1-light">
+<div class="w450 bg-c-1-light max-height-without-header-img main-arithmetic-container">
     <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
+
+
     <div class="question-text">
         <h3 class="card-title" id="question-text">
             Wieviel ist
         </h3>
-        <div class="help"><img src="./assets/img/help.svg"></div>
+        <img src="./assets/img/help.svg" (click)="helptext()">
     </div>
     <div class="question-box">
-        <div class="nbr-size">{{numberOne}}</div>
+        <div class="nbr-container">
+            <div class="nbr-size">{{numberOne}}</div>
+            <div class="image-amount-sub-box border-right" *ngIf="showBothPictures || showOnePictures">
+                <div class="image-amount"
+                    *ngFor="let imageSrcOne of mathServ.imageArrayNumberOne; let indexOfelement=index">
+                    <img src="./assets/img/{{imageSrcOne}}" (click)="mathServ.changeImageColor(indexOfelement, 1)">
+                </div>
+            </div>
+        </div>
 
         <div id="arithmetic-operator" class="nbr-size">{{operator}}</div>
 
@@ -53,7 +63,7 @@
     <div class="question-footer">
         <span><b>{{numberOfRightAnswers}}</b> von <b id="total-number-of-math-problems">{{numberOfExercises}}</b>
             Aufgabe(n) korrekt gelöst</span>
-        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-07' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+        <button [disabled]="!answerIsGiven" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1" mat-icon-button
             (click)="nextMathProblem()">
             <mat-icon style="color: white;">double_arrow</mat-icon>
         </button>
