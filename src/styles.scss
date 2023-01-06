@@ -8,16 +8,18 @@
 
 .w450 {
     width: 450px;
+
     @media (max-width: 449px) {
         width: 100vw;
     }
 }
 
-.help{
+.help {
     img {
         height: 80px;
     }
-    &:hover{
+
+    &:hover {
         cursor: pointer;
     }
 }
@@ -68,12 +70,12 @@ body {
     }
 }
 
-.padding-l-r-24{
+.padding-l-r-24 {
     padding-left: 24px;
     padding-right: 24px;
 }
 
-.curs-point{
+.curs-point {
     cursor: pointer;
 }
 
@@ -105,10 +107,6 @@ body {
     @media (max-width: 449px) {
         width: 100vw;
     }
-}
-
-.color-white {
-    color: white;
 }
 
 .color-main-without-hover {
@@ -153,7 +151,7 @@ mat-icon {
     color: white;
 }
 
-.auth-area-container{
+.auth-area-container {
     padding: 24px;
     border: 1px solid black;
     border-radius: 12px;
@@ -208,7 +206,7 @@ mat-icon {
     }
 }
 
-.color-gray{
+.color-gray {
     color: gray;
     cursor: not-allowed;
 }
@@ -231,4 +229,32 @@ mat-icon {
     padding-right: 24px;
     padding-left: 24px;
     text-align: center;
+}
+
+.max-height-width-header {
+    height: calc(100vh - 188px);
+}
+
+/////////
+/// 
+/// 
+.startscreen-container {
+    padding-top: 90px;
+
+    @media (max-height: 740px) {
+        padding-top: 40px;
+    }
+
+    @media (max-height: 640px) {
+        padding-top: 20px;
+    }
+
+    @media (max-height: 580px) {
+        padding-top: 0px;
+    }
+}
+
+.card-img-top {
+    height: 160px;
+    object-fit: contain;
 }

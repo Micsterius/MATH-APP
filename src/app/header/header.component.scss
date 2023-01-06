@@ -8,6 +8,10 @@ mat-card {
 
 .header-top {
     position: relative;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon-header {
@@ -29,11 +33,6 @@ mat-card {
 
 mat-card-title {
     margin-bottom: 0px;
-}
-
-.card-img-top {
-    height: 130px;
-    object-fit: contain;
 }
 
 .head-imgs {

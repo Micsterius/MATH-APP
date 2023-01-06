@@ -1,9 +1,9 @@
 <mat-card>
-    <div class="header-top">
+    <div class="header-top bg-c-1">
         <div class="icon-header-home" [routerLink]="['']">
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
         </div>
-        <mat-card-title class="bg-c-1 color-white">Lern App</mat-card-title>
+        <mat-card-title class="color-white">Lern App</mat-card-title>
         <div class="icon-header-menu color-white">
             <mat-icon [ngClass]="{'flash-icon': generalService.highlightSettingsButton}" mat-icon-button [matMenuTriggerFor]="menu" fontIcon="settings"
                 *ngIf="authService.userData as user">
