@@ -11,12 +11,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     public authService: AuthenticationService,
-    public generalService: GeneralService) { }
+    public generalService: GeneralService) {
+    let x = (location.pathname + location.search).substr(1)
+    if (x == null || x == undefined || x == '' || x == 'settings' || x == 'triumph') { this.generalService.inExercise = false; } //header einblenden wenn in der URL nichts steht(startscreen) oder in der url path settings oder triumph stehen
+  }
 
   ngOnInit(): void {
   }
 
-  backToStartScreen(){
-this.generalService.inExercise = false;
+  backToStartScreen() {
+    this.generalService.inExercise = false;
   }
 }

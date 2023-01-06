@@ -54,8 +54,6 @@ export class StartsceenComponent implements OnInit {
   saveCurrentExercise(exercise) {
     this.generalService.currentExercise = exercise
     this.generalService.inExercise = true;
-    localStorage.setItem('inExercise', JSON.stringify(this.generalService.inExercise));
-    console.log(this.generalService.currentExercise)
   }
 
   async sayHello() {

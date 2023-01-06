@@ -15,9 +15,6 @@ export class AppComponent {
     let user = JSON.parse(localStorage.getItem('user'))
     if (user) this.authService.showLoginArea = false;
     else this.authService.showLoginArea = true;
-
-    let inExercise = JSON.parse(localStorage.getItem('inExercise')!);
-    if (inExercise != null || inExercise != undefined) generalService.inExercise = inExercise
   }
 }
 

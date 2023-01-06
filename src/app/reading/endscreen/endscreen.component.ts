@@ -22,8 +22,6 @@ export class EndscreenComponent implements OnInit {
     setTimeout(() => {
       trophyService.trophyEarned = false
     }, 3000);
-    console.log('total', readingService.numberOfTasks)
-    console.log(readingService.numberOfRightAnswersReading)
    }
 
   ngOnInit(): void {
