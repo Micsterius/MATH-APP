@@ -15,4 +15,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  backToStartScreen(){
+this.generalService.inExercise = false;
+  }
 }

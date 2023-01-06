@@ -1,6 +1,6 @@
 <mat-card>
     <div class="header-top bg-c-1">
-        <div class="icon-header-home" [routerLink]="['']">
+        <div class="icon-header-home" [routerLink]="['']" (click)="backToStartScreen()">
             <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
         </div>
         <mat-card-title class="color-white">Lern App</mat-card-title>
@@ -21,7 +21,7 @@
         </mat-menu>
     </div>
 </mat-card>
-<div class="head-imgs bg-c-1-light">
+<div class="head-imgs bg-c-1-light" *ngIf="!generalService.inExercise">
     <img src="./assets/img/counting-1.png" class="card-img-top" id="header-img">
     <img src="./assets/img/counting-2.png" class="card-img-top" id="header-img2">
     <img src="./assets/img/counting-3.png" class="card-img-top" id="header-img3">

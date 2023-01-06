@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { GeneralService } from './shared/services/general.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,15 @@ import { AuthenticationService } from './shared/services/authentication.service'
 })
 export class AppComponent {
   title = 'math-app';
-  constructor(public authService: AuthenticationService){
+  constructor(
+    public authService: AuthenticationService,
+    public generalService: GeneralService) {
     let user = JSON.parse(localStorage.getItem('user'))
     if (user) this.authService.showLoginArea = false;
     else this.authService.showLoginArea = true;
+
+    let inExercise = JSON.parse(localStorage.getItem('inExercise')!);
+    if (inExercise != null || inExercise != undefined) generalService.inExercise = inExercise
   }
 }
 

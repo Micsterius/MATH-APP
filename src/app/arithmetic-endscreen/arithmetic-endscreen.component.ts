@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { GeneralService } from '../shared/services/general.service';
 import { MathService } from '../shared/services/math.service';
 import { TrophyService } from '../shared/services/trophy.service';
 
@@ -13,7 +14,8 @@ export class ArithmeticEndscreenComponent implements OnInit {
   constructor(
     private router: Router,
     public mathServ: MathService,
-    public trophyService: TrophyService) {
+    public trophyService: TrophyService,
+    public generalService: GeneralService) {
       setTimeout(() => {
         trophyService.trophyEarned = false
       }, 3000);
@@ -27,5 +29,9 @@ export class ArithmeticEndscreenComponent implements OnInit {
 
   navigateToWrongAnswers() {
     this.router.navigate(['/wrongAnswers']);
+  }
+
+  backToStartScreen() {
+    this.generalService.inExercise = false;
   }
 }

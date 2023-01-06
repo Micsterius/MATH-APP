@@ -3,7 +3,7 @@
     <h4>Du hast {{readingService.numberOfRightAnswersReading}} von {{readingService.numberOfTasks}} Fragen richtig beantwortet.</h4>
     <div class="button-box">
         <button [disabled]="generalService.currentExercise == ''" [ngClass]="{'btn-disabled': generalService.currentExercise == ''}" class="bg-c-1 color-white" (click)="navigateToExercise()">Wiederholen</button>
-        <button class="bg-c-1 color-white" [routerLink]="['']">Start</button>
+        <button class="bg-c-1 color-white" [routerLink]="['']" (click)="backToStartScreen()">Start</button>
     </div>
     <img *ngIf="trophyService.trophyEarned" class="trophy" src="./../../assets/img/coins/{{trophyService.currentCoin}}-coin.png" alt="">
 </div>

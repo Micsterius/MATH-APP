@@ -29,4 +29,7 @@ export class WritingEndscreenComponent implements OnInit {
     this.router.navigate([`/${this.generalService.currentExercise}`])
   }
 
+  backToStartScreen() {
+    this.generalService.inExercise = false;
+  }
 }
