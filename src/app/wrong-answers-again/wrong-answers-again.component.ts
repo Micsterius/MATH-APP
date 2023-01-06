@@ -15,7 +15,7 @@ export class WrongAnswersAgainComponent implements OnInit {
   numberTwo: number = 0;
   mathSetting: any;
   params: any = '';
-  numberOfAnswersToSolveCorrect: number = 10;  
+  numberOfAnswersToSolveCorrect: number = 10;
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
@@ -53,9 +53,20 @@ export class WrongAnswersAgainComponent implements OnInit {
   ) {
     this.loadWrongAnswerExercise();
     this.setting = JSON.parse(localStorage.getItem('setting'))
+    this.showPictures()
+    console.log(this.setting)
   }
 
   ngOnInit(): void {
+  }
+
+  showPictures() {
+    if (this.setting.showPicturesForAmount == 'yes') this.showBothPictures = true;
+    if (this.setting.showPicturesForAmount == 'partly') this.showOnePictures = true;
+    if (this.setting.showPicturesForAmount == 'no') {
+      this.showOnePictures = false;
+      this.showBothPictures = false;
+    }
   }
 
   loadWrongAnswerExercise() {
@@ -66,8 +77,14 @@ export class WrongAnswersAgainComponent implements OnInit {
     this.operator = this.currentExercise.operator;
     this.mathServ.result = this.currentExercise.result;
     this.numberOfExercises = this.wrongAnswers.length
+    let operatorForAmount = this.transformOperator()
     this.mathServ.generateRandomizedAnswers();
-    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.operator)
+    this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, operatorForAmount)
+  }
+
+  transformOperator(){
+    if(this.operator == '+') return 'plus'
+    else return 'minus'
   }
 
 

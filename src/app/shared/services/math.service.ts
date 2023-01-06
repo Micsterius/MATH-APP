@@ -72,13 +72,13 @@ export class MathService {
   }
 
   fillArrayOfImageAmount(numberOne, numberTwo, mathOperator) {
-    this.mathSetting = JSON.parse(localStorage.getItem('mathSetting'))
     this.imageArrayNumberOne.length = 0;
     this.imageArrayNumberTwo.length = 0;
     
     for (let i = 0; i < numberOne; i++) this.imageArrayNumberOne.push('nbr-1.svg');
     if (mathOperator == 'plus') for (let i = 0; i < numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1.svg');
     if (mathOperator == 'minus') for (let i = 0; i < numberTwo; i++) this.imageArrayNumberTwo.push('nbr-1-red.svg');
+    console.log('Hello', mathOperator)
   }
 
   changeImageColor(imageNumber, x) {
