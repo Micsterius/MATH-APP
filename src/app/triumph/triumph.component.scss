@@ -1,5 +1,5 @@
 .trophy-img {
-    height: 50px;
+    height: 90px;
     object-fit: cover;
 }
 
@@ -8,15 +8,16 @@
     bottom: 0;
     right: 0;
     border-radius: 50%;
-    height: 24px;
-    width: 24px;
+    height: 32px;
+    width: 32px;
     text-align: center;
-    line-height: 24px;
+    line-height: 32px;
 }
 
 .trophy-sub-box{
     position: relative;
-    margin-right: 24px;
+    margin-right: 12px;
+    margin-left: 12px;
     margin-bottom: 24px;
 }
 
@@ -27,6 +28,7 @@
 
 .trophy-box{
     display: flex;
+    justify-content: space-evenly;
     padding: 24px;
     flex-wrap: wrap;
 }
@@ -50,4 +52,13 @@
         cursor: pointer;
         opacity: 0.7;
     }
+}
+
+.headline-triumph-coins{
+    font-size: 46px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 32px;
+    padding-bottom: 24px;
 }
