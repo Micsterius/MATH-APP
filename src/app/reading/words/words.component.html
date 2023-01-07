@@ -60,9 +60,9 @@
                 Aufgabe(n)
                 korrekt
                 gelöst</span>
-            <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+            <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1 forward-btn"
                 (click)="nextExercise()">
-                <mat-icon style="color: white;">double_arrow</mat-icon>
+                <mat-icon class="forward-icon">double_arrow</mat-icon>
             </button>
         </div>
     </div>

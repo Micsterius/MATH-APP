@@ -15,16 +15,20 @@
   <div class="example-container">
     <div cdkDropList cdkDropListOrientation="horizontal" #answerList="cdkDropList" [cdkDropListData]="answer"
       [cdkDropListConnectedTo]="[letterList]" class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of answer" cdkDrag (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
+      <div class="example-box" *ngFor="let item of answer" cdkDrag (click)="speakServ.speak(item, speakRate/100)">
+        {{item}}</div>
     </div>
   </div>
 
   <div class="example-container">
-    <div cdkDropList cdkDropListOrientation="horizontal" #letterList="cdkDropList" [cdkDropListData]="arrayOfMixedLetters"
-      [cdkDropListConnectedTo]="[answerList]" class="example-list" (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
+    <div cdkDropList cdkDropListOrientation="horizontal" #letterList="cdkDropList"
+      [cdkDropListData]="arrayOfMixedLetters" [cdkDropListConnectedTo]="[answerList]" class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag
+        (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
     </div>
-    <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0 && !checkButtonDisable" (click)="checkAnswerWriting()">
+    <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0 && !checkButtonDisable"
+      (click)="checkAnswerWriting()">
       <mat-icon>check</mat-icon>
     </div>
   </div>
@@ -34,8 +38,8 @@
       Versuch(en)
       korrekt
       gelöst</span>
-    <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1" mat-icon-button
+    <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1 forward-btn"
       (click)="nextExercise()">
-      <mat-icon style="color: white;">double_arrow</mat-icon>
+      <mat-icon class="forward-icon">double_arrow</mat-icon>
     </button>
   </div>
