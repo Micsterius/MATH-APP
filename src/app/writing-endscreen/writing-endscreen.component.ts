@@ -13,14 +13,14 @@ import { WriteService } from '../shared/services/write.service';
 })
 export class WritingEndscreenComponent implements OnInit {
 
-  constructor(    
+  constructor(
     private router: Router,
     public mathServ: MathService,
     public trophyService: TrophyService,
     public generalService: GeneralService,
-    public writingService: WriteService) { 
-
-    }
+    public writingService: WriteService) {
+    this.generalService.inExercise = false;
+  }
 
   ngOnInit(): void {
   }

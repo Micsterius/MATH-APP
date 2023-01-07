@@ -22,6 +22,7 @@ export class EndscreenComponent implements OnInit {
     setTimeout(() => {
       trophyService.trophyEarned = false
     }, 3000);
+    this.generalService.inExercise = false;
    }
 
   ngOnInit(): void {

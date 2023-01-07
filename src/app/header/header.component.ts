@@ -13,8 +13,8 @@ export class HeaderComponent implements OnInit {
     public authService: AuthenticationService,
     public generalService: GeneralService) {
     let x = (location.pathname + location.search).substr(1)
-    if (x == null || x == undefined || x == '' || x == 'settings' || x == 'triumph') this.generalService.inExercise = false;
-    else this.generalService.inExercise = true;
+    if (x == 'arithmetic' || x == 'reading-phenomene' || x == 'reading-words' || x == 'writing-words') this.generalService.inExercise = true;
+    else this.generalService.inExercise = false;
      //header einblenden wenn in der URL nichts steht(startscreen) oder in der url path settings oder triumph stehen     
   }
 
