@@ -13,8 +13,8 @@
 }
 
 .nbr-size {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 46px;
+    line-height: 46px;
     font-weight: 600;
 }
 
@@ -44,12 +44,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: 70px;
+    height: 70px;
     border-radius: 8px;
     box-shadow: 0 4px 4px 0 #1a1a1a;
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 46px;
+    line-height: 46px;
     font-weight: 600;
     color: white;
 
@@ -67,6 +67,10 @@
     padding-left: 24px;
     padding-right: 24px;
     padding-bottom: 24px;
+
+    span{
+        font-size: 20px;
+    }
 }
 
 .help {
@@ -82,7 +86,7 @@
     padding-left: 24px;
     padding-right: 24px;
     position: relative;
-    margin-top: 32px;
+    margin-top: 8px;
 
     img {
         height: 120px;
@@ -147,14 +151,17 @@
     height: 50px;
     width: 50px;
     font-size: 50px;
-    line-height: 50px !important;
-    text-align: center;
     color: white;
 }
 
 .forward-btn{
     border-radius: 50%;
     border: none;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-arithmetic-container{
