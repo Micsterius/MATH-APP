@@ -109,7 +109,6 @@ export class WordsComponent implements OnInit {
         this.allExercises.push(doc.data());
         this.fisherYatesShuffle(this.allExercises);
         this.loadExercise();
-        this.loadFinished = true;
       })
     });
   }

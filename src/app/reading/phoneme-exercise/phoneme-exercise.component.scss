@@ -57,20 +57,6 @@
     padding: 24px;
 }
 
-.question-text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 24px;
-    padding-right: 24px;
-    position: relative;
-    margin-top: 8px;
-
-    img {
-        width: 70px;
-    }
-}
-
 .image-amount {
     display: flex;
 
@@ -125,8 +111,4 @@
         height: 40px;
         font-size: 40px;
     }
-}
-
-.mg-t-80 {
-    margin-top: 80px;
 }

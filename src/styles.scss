@@ -262,3 +262,21 @@ mat-icon {
 .main-exercise-container{
     position: relative;
 }
+
+.question-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 24px;
+    position: relative;
+    margin-top: 8px;
+
+    img {
+        width: 70px;
+    }
+}
+
+.mg-t-80 {
+    margin-top: 80px;
+}
