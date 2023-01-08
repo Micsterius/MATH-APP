@@ -42,7 +42,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;
-    background-color: white;
+    background-color: #e7bfcc;
 }
 
 .button-box {
@@ -99,14 +99,6 @@ body {
 
 .bg-c-1-light {
     background-color: var(--secondary-color);
-}
-
-.w450 {
-    width: 450px;
-
-    @media (max-width: 449px) {
-        width: 100vw;
-    }
 }
 
 .color-main-without-hover {
@@ -233,14 +225,17 @@ mat-icon {
 
 .max-height-with-header {
     height: calc(100vh - 244px);
+    max-height: calc(920px - 244px);
 
     @media (max-width: 400px) {
         height: calc(100vh - 224px);
+        max-height: calc(920px - 224px);
     }
 }
 
 .max-height-without-header-img {
     height: calc(100vh - 60px);
+    max-height: 860px;
 }
 
 .opac-0 {
@@ -285,7 +280,7 @@ mat-icon {
         width: 70px;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             scale: 1.1;
         }
     }
@@ -355,7 +350,7 @@ mat-icon {
     }
 }
 
-.trophy{
+.trophy {
     position: absolute;
     top: 244px;
     left: 50%;
@@ -366,10 +361,10 @@ mat-icon {
     width: 80px;
 }
 
-.color-gray{
+.color-gray {
     color: gray !important;
 }
 
-.color-black{
+.color-black {
     color: black !important;
 }

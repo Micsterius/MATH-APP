@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogScreensizeComponent } from './dialog-screensize/dialog-screensize.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GeneralService } from './shared/services/general.service';
@@ -21,7 +22,8 @@ export class AppComponent {
     public authService: AuthenticationService,
     public generalService: GeneralService,
     public dialog: MatDialog,
-    private speakService: SpeakingService) {
+    private speakService: SpeakingService,
+    private router: Router) {
     let user = JSON.parse(localStorage.getItem('user'))
     if (user) this.authService.showLoginArea = false;
     else this.authService.showLoginArea = true;
@@ -43,7 +45,7 @@ export class AppComponent {
     this.windowHeight = window.innerHeight;
     if (window.innerWidth < 350) this.openDialogScreenSize()
     if (window.innerHeight < 700) this.openDialogScreenSize()
-    if (window.innerWidth >= 350 && window.innerHeight >= 700) this.closeDialog()
+    if (window.innerWidth >= 350 && window.innerHeight >= 700 && this.dialogScreenSizeIsOpen) this.closeDialog()
   }
 
   openDialogScreenSize(): void {
@@ -58,5 +60,6 @@ export class AppComponent {
     this.windowToSmall = false;
     this.speakService.stop();
     this.generalService.timeStampDialogScreenSize = 0;
+    this.router.navigate(['']) // navigate to startscreen
   }
 }
