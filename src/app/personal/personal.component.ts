@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { TooltipPosition } from '@angular/material/tooltip';
 import { UserInfoService } from '../shared/services/user-info.service';
+import { GeneralService } from '../shared/services/general.service';
 
 @Component({
   selector: 'app-personal',
@@ -22,8 +23,10 @@ export class PersonalComponent implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public afs: AngularFirestore,
-    public usersService: UserInfoService) {
+    public usersService: UserInfoService,
+    private generalService: GeneralService) {
     this.activeUser = JSON.parse(localStorage.getItem('user')!);
+    this.generalService.inExercise = false;
   }
 
   ngOnInit(): void {
