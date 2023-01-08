@@ -53,6 +53,8 @@ import { PersonalComponent } from './personal/personal.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { EndscreenComponent } from './reading/endscreen/endscreen.component';
 import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen.component';
+import { DialogScreensizeComponent } from './dialog-screensize/dialog-screensize.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen
     AuthComponent,
     PersonalComponent,
     EndscreenComponent,
-    WritingEndscreenComponent
+    WritingEndscreenComponent,
+    DialogScreensizeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -97,6 +100,7 @@ import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen
     CommonModule,
     DragDropModule,
     MatTooltipModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
