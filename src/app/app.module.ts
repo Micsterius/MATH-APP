@@ -39,7 +39,6 @@ import { SwiperModule } from 'swiper/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
 import { WordsComponent } from './reading/words/words.component';
-import { SettingsReadingComponent } from './reading/settings-reading/settings-reading.component';
 import { CommonModule } from "@angular/common";
 import { WritingComponent } from './writing/writing.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -66,7 +65,6 @@ import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen
     WrongAnswersAgainComponent,
     PhonemeExerciseComponent,
     WordsComponent,
-    SettingsReadingComponent,
     HeaderComponent,
     WritingComponent,
     LoginComponent,
