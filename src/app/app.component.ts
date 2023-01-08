@@ -13,6 +13,8 @@ export class AppComponent {
   title = 'math-app';
   windowWidth: any;
   windowHeight: any;
+  dialogScreenSizeIsOpen: boolean = false;
+  windowToSmall: boolean = false;
 
   constructor(
     public authService: AuthenticationService,
@@ -26,8 +28,8 @@ export class AppComponent {
   ngOnInit() {
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
-    if (window.innerWidth < 350)this.openDialogSxreenSize()
-    if (window.innerHeight < 740)this.openDialogSxreenSize()
+    if (window.innerWidth < 350 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
+    if (window.innerHeight < 740 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
 
     if (window.innerWidth > 350 && window.innerHeight > 740) this.closeDialog()
   }
@@ -37,20 +39,24 @@ export class AppComponent {
   resizeWindow() {
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
-    if (window.innerWidth < 350)this.openDialogSxreenSize()
-    if (window.innerHeight < 740)this.openDialogSxreenSize()
+    if (window.innerWidth < 350) this.openDialogScreenSize()
+    if (window.innerHeight < 740) this.openDialogScreenSize()
     if (window.innerWidth > 350 && window.innerHeight > 740) this.closeDialog()
   }
 
-  openDialogSxreenSize(): void {
+  openDialogScreenSize(): void {
+    this.dialogScreenSizeIsOpen = true;
+    this.windowToSmall = true;
     const dialogRef = this.dialog.open(DialogScreensizeComponent);
   }
 
   closeDialog() {
     this.dialog.closeAll();
-}
+    this.dialogScreenSizeIsOpen = false;
+    this.windowToSmall = false;
+  }
 
-  
+
 
 }
 /**

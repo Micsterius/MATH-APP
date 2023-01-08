@@ -7,5 +7,7 @@ export class GeneralService {
   highlightSettingsButton: boolean = false;
   currentExercise: string = '';
   inExercise: boolean = false;
-  constructor() { }
+  timeStampDialogScreenSize = 0;
+
+  constructor() {}
 }
