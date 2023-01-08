@@ -98,7 +98,7 @@ export class MathService {
 
   playSound(event) {
     let AUDIO_RESULT = new Audio()
-    AUDIO_RESULT.src = "./../../assets/audio/" + event + ".mp3"
+    AUDIO_RESULT.src = "./assets/audio/" + event + ".mp3"
     AUDIO_RESULT.volume = 0.6 * this.volume / 100;
     AUDIO_RESULT.load();
     AUDIO_RESULT.play();

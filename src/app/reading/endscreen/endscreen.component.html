@@ -5,5 +5,5 @@
         <button [disabled]="generalService.currentExercise == ''" [ngClass]="{'btn-disabled': generalService.currentExercise == ''}" class="bg-c-1 color-white" (click)="navigateToExercise()">Wiederholen</button>
         <button class="bg-c-1 color-white" [routerLink]="['']" (click)="backToStartScreen()">Start</button>
     </div>
-    <img *ngIf="trophyService.trophyEarned" class="trophy" src="./../../assets/img/coins/{{trophyService.currentCoin}}-coin.png" alt="">
+    <img *ngIf="trophyService.trophyEarned" class="trophy" src="./assets/img/coins/{{trophyService.currentCoin}}-coin.png" alt="">
 </div>
