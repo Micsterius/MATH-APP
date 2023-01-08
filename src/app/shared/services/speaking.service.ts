@@ -32,9 +32,7 @@ export class SpeakingService {
       this.speech.text = text;
       this.speech.volume = 1 * this.volume / 100;
       window.speechSynthesis.speak(this.speech);
-      this.speech.onend = () => {
-        this.speechIsRunning = false;
-      };
+      setTimeout(() => this.speechIsRunning = false, 2000);
     }
   }
 
