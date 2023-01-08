@@ -237,6 +237,7 @@ mat-icon {
     @media (max-width: 400px) {
         height: calc(100vh - 224px);
     }
+    max-height: 1200px;
 }
 
 .max-height-without-header-img {
@@ -364,4 +365,12 @@ mat-icon {
 
     height: 80px;
     width: 80px;
+}
+
+.color-gray{
+    color: gray !important;
+}
+
+.color-black{
+    color: black !important;
 }

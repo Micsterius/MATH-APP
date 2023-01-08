@@ -9,6 +9,8 @@ export class SpeakingService {
   volume: number = 100;
   speaker: number = 1;
   voices: any[] = []; // global array of available voices
+  speechIsRunning: boolean = false;
+
   constructor() {
     this.speech.lang = "de";
     this.speech.rate = this.rate;
@@ -23,11 +25,17 @@ export class SpeakingService {
     this.speech.voice = this.voices[this.speaker];
   }
 
-  speak(text, a) {
-    this.speech.rate = a;
-    this.speech.text = text;
-    this.speech.volume = 1 * this.volume / 100;
-    window.speechSynthesis.speak(this.speech);
+  async speak(text, a) {
+    if (!this.speechIsRunning) {
+      this.speechIsRunning = true;
+      this.speech.rate = a;
+      this.speech.text = text;
+      this.speech.volume = 1 * this.volume / 100;
+      window.speechSynthesis.speak(this.speech);
+      this.speech.onend = () => {
+        this.speechIsRunning = false;
+      };
+    }
   }
 
   stop() {

@@ -17,7 +17,7 @@
     <div class="answer-main-container">
         <div class="answer-container" *ngIf="showExercise">
             <div class="answer-box">
-                <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+                <mat-icon [ngClass]="{'color-gray' : speakServ.speechIsRunning, 'color-black' : !speakServ.speechIsRunning}" class="curs-point" mat-icon-button fontIcon="volume_up"
                     (click)="speakServ.speak(allExercises[currentQuestion].callOne, speakRate/100)"></mat-icon>
                 <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main pho-answer-btn"
                     (click)="checkAnswer(answerSyllableOne); readServ.toggleClass($event)" #answerButtonOne
@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="answer-box">
-                <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+                <mat-icon [ngClass]="{'color-gray' : speakServ.speechIsRunning, 'color-black' : !speakServ.speechIsRunning}" class="curs-point" mat-icon-button fontIcon="volume_up"
                     (click)="speakServ.speak(allExercises[currentQuestion].callTwo, speakRate/100)"></mat-icon>
                 <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main pho-answer-btn"
                     (click)="checkAnswer(answerSyllableTwo); readServ.toggleClass($event)" #answerButtonTwo
@@ -35,7 +35,7 @@
                 </button>
             </div>
             <div class="answer-box">
-                <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+                <mat-icon [ngClass]="{'color-gray' : speakServ.speechIsRunning, 'color-black' : !speakServ.speechIsRunning}" class="curs-point" mat-icon-button fontIcon="volume_up"
                     (click)="speakServ.speak(allExercises[currentQuestion].callThree, speakRate/100)"></mat-icon>
                 <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main pho-answer-btn"
                     (click)="checkAnswer(answerSyllableThree); readServ.toggleClass($event)" #answerButtonThree
@@ -44,7 +44,7 @@
                 </button>
             </div>
             <div class="answer-box">
-                <mat-icon class="curs-point" mat-icon-button fontIcon="volume_up"
+                <mat-icon [ngClass]="{'color-gray' : speakServ.speechIsRunning, 'color-black' : !speakServ.speechIsRunning}" class="curs-point" mat-icon-button fontIcon="volume_up"
                     (click)="speakServ.speak(allExercises[currentQuestion].callFour, speakRate/100)"></mat-icon>
                 <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 color-main pho-answer-btn"
                     (click)="checkAnswer(answerSyllableFour); readServ.toggleClass($event)" #answerButtonFour
