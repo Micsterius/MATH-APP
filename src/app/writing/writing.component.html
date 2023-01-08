@@ -9,11 +9,9 @@
     <div class="help"><img src="./assets/img/help.svg" (click)="helpWriting()"></div>
   </div>
   <div class="question-box" *ngIf="showExercise && !speakServ.speechIsRunning">
-    <mat-icon class="writing-icon-sound" fontIcon="volume_up"
+    <mat-icon *ngIf="!speakServ.speechIsRunning" class="writing-icon-sound" fontIcon="volume_up"
       (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
-      <mat-icon *ngIf="speakServ.speechIsRunning"
-                    class="color-gray" mat-icon-button fontIcon="volume_up"></mat-icon>
-       *ngIf="!speakServ.speechIsRunning"
+    <mat-icon *ngIf="speakServ.speechIsRunning" class="color-gray" mat-icon-button fontIcon="volume_up"></mat-icon>
   </div>
   <div class="answer-main-container">
     <div class="example-container">
