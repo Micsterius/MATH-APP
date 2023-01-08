@@ -30,6 +30,7 @@ export class EndscreenComponent implements OnInit {
 
   navigateToExercise() {
     this.router.navigate([`/${this.generalService.currentExercise}`])
+    this.generalService.inExercise = true;
   }
 
   backToStartScreen() {

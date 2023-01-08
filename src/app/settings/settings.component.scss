@@ -116,6 +116,10 @@ mat-button-toggle {
     font-size: 24px;
     margin-top: 24px;
     margin-bottom: 8px;
+
+    @media (max-width: 360px) {
+        font-size: 20px;
+    }
 }
 
 .mat-accent .mat-slider-track-fill {

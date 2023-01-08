@@ -32,25 +32,25 @@
     </div>
     <div class="answer-main-container">
         <div class="answer-container">
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 math-answer-btn"
                 (click)="checkAnswer(mathServ.result1); mathServ.toggleClass($event)" #answerButtonOne
                 [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result1) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result1) && answerIsGiven}">
                 {{mathServ.result1}}
             </button>
 
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 math-answer-btn"
                 (click)="checkAnswer(mathServ.result2); mathServ.toggleClass($event)" #answerButtonTwo
                 [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result2) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result2) && answerIsGiven}">
                 {{mathServ.result2}}
             </button>
 
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 math-answer-btn"
                 (click)="checkAnswer(mathServ.result3); mathServ.toggleClass($event)" #answerButtonThree
                 [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result3) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result3) && answerIsGiven}">
                 {{mathServ.result3}}
             </button>
 
-            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1"
+            <button [disabled]="answerIsGiven" class="quiz-answer-card bg-c-1 math-answer-btn"
                 (click)="checkAnswer(mathServ.result4); mathServ.toggleClass($event)" #answerButtonFour
                 [ngClass]="{'bg-success' : mathServ.checkResult(mathServ.result4) && answerIsGiven, 'bg-failed' : !mathServ.checkResult(mathServ.result4) && answerIsGiven}">
                 {{mathServ.result4}}

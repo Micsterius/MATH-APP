@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GeneralService } from './shared/services/general.service';
 
@@ -9,6 +9,9 @@ import { GeneralService } from './shared/services/general.service';
 })
 export class AppComponent {
   title = 'math-app';
+  windowWidth: any;
+  windowHeight: any;
+
   constructor(
     public authService: AuthenticationService,
     public generalService: GeneralService) {
@@ -16,11 +19,25 @@ export class AppComponent {
     if (user) this.authService.showLoginArea = false;
     else this.authService.showLoginArea = true;
   }
-}
 
+  ngOnInit() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+    if (window.innerWidth < 350){}
+    if (window.innerHeight < 740){}
+  }
+
+  @HostListener('window:resize', ['$event'])
+
+  resizeWindow() {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+    if (this.windowWidth < 800){}
+    if (this.windowWidth > 800){}
+  }
+
+}
 /**
  * Next Tasks
  * speak only run one time per click, then await 2sek to activate again.
- * create math challenge between two friends
- * in case of add friend start a request to the oter, if he/she accepts you as a friend. Add the user to the list of the added friend
  */

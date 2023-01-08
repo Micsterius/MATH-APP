@@ -26,10 +26,12 @@ export class ArithmeticEndscreenComponent implements OnInit {
   }
   navigateToArithmetic() {
     this.router.navigate(['/arithmetic'])
+    this.generalService.inExercise = true;
   }
 
   navigateToWrongAnswers() {
     this.router.navigate(['/wrongAnswers']);
+    this.generalService.inExercise = true;
   }
 
   backToStartScreen() {

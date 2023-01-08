@@ -19,6 +19,9 @@ export class WritingEndscreenComponent implements OnInit {
     public trophyService: TrophyService,
     public generalService: GeneralService,
     public writingService: WriteService) {
+    setTimeout(() => {
+      trophyService.trophyEarned = false
+    }, 3000);
     this.generalService.inExercise = false;
   }
 
@@ -27,6 +30,7 @@ export class WritingEndscreenComponent implements OnInit {
 
   navigateToExercise() {
     this.router.navigate([`/${this.generalService.currentExercise}`])
+    this.generalService.inExercise = true;
   }
 
   backToStartScreen() {
