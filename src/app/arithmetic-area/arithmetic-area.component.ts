@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
 import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from '../shared/services/authentication.service';
 import { MathService } from '../shared/services/math.service';
 import { SpeakingService } from '../shared/services/speaking.service';
 import { TrophyService } from '../shared/services/trophy.service';
@@ -57,7 +58,8 @@ export class ArithmeticAreaComponent implements OnInit {
     private router: Router,
     public mathServ: MathService,
     public speakServ: SpeakingService,
-    private trophyService: TrophyService) {
+    private trophyService: TrophyService,
+    private authService: AuthenticationService) {
     this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     this.setting = JSON.parse(localStorage.getItem('setting'))
@@ -270,7 +272,7 @@ export class ArithmeticAreaComponent implements OnInit {
   showEndscreen() {
     if (this.mathServ.numberOfRightAnswers == this.numberOfAnswersToSolveCorrect) {
       this.mathServ.wrongAnswers = this.wrongAnswers;
-      this.earnTrophy();
+     if(this.authService.additionUserDataExist()) this.earnTrophy(); // guests don't get trophys because guests don't have additionUserData
       this.router.navigate(['/arithmeticEndscreen']);
     }
   }

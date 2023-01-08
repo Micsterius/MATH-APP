@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { collection, doc, getFirestore, onSnapshot, query, setDoc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from '../shared/services/authentication.service';
 import { MathService } from '../shared/services/math.service';
 import { ReadingService } from '../shared/services/reading.service';
 import { SpeakingService } from '../shared/services/speaking.service';
@@ -62,7 +63,8 @@ export class WritingComponent implements OnInit {
     public mathServ: MathService,
     public speakServ: SpeakingService,
     private trophyService: TrophyService,
-    private writingService: WriteService
+    private writingService: WriteService,
+    private authService: AuthenticationService
   ) {
     // this.setNewExercisesWordsWriting()
     this.setting = JSON.parse(localStorage.getItem('setting'));
@@ -190,7 +192,7 @@ export class WritingComponent implements OnInit {
     this.progressBarValue = this.numberOfCorrectAnswers * 100 / this.numberOfAnswersToSolveCorrect
   }
 
-  helpWriting(){
+  helpWriting() {
     let helpText = 'klicke auf dem Buchstaben, um zu hören, welcher es ist'
     this.speakServ.speak(helpText, 0.9)
   }
@@ -214,7 +216,7 @@ export class WritingComponent implements OnInit {
     this.writingService.numberOfRightAnswersWriting = this.numberOfCorrectAnswers;
     this.currentQuestion++;
     this.writingService.numberOfTasksWriting = this.currentQuestion;
-    this.earnTrophy();
+    if (this.authService.additionUserDataExist()) this.earnTrophy();// guests don't get trophys because guests don't have additionUserData
     this.router.navigate(['/writing-endscreen']);
   }
 

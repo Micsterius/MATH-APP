@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
 import { addDoc, arrayUnion, collection, doc, getDoc, getFirestore, onSnapshot, query, setDoc, updateDoc } from 'firebase/firestore';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
 import { SpeakingService } from 'src/app/shared/services/speaking.service';
@@ -53,7 +54,8 @@ export class PhonemeExerciseComponent implements OnInit {
     public readServ: ReadingService,
     public mathServ: MathService,
     public speakServ: SpeakingService,
-    private trophyService: TrophyService
+    private trophyService: TrophyService,
+    private authService: AuthenticationService
   ) {
     this.setting = JSON.parse(localStorage.getItem('setting'));
     this.actualUser = JSON.parse(localStorage.getItem('user'))
@@ -206,7 +208,7 @@ export class PhonemeExerciseComponent implements OnInit {
     this.readServ.numberOfRightAnswersReading = this.numberOfCorrectAnswers
     this.currentQuestion++
     this.readServ.numberOfTasks = this.currentQuestion
-    this.earnTrophy();
+    if(this.authService.additionUserDataExist()) this.earnTrophy();// guests don't get trophys because guests don't have additionUserData
     this.router.navigate(['/endscreen']);
   }
 
