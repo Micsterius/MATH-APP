@@ -31,9 +31,9 @@ export class AppComponent {
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
     if (window.innerWidth < 350 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
-    if (window.innerHeight < 740 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
+    if (window.innerHeight < 700 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
 
-    if (window.innerWidth >= 350 && window.innerHeight >= 740) this.closeDialog()
+    if (window.innerWidth >= 350 && window.innerHeight >= 700) this.closeDialog()
   }
 
   @HostListener('window:resize', ['$event'])
@@ -42,8 +42,8 @@ export class AppComponent {
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
     if (window.innerWidth < 350) this.openDialogScreenSize()
-    if (window.innerHeight < 740) this.openDialogScreenSize()
-    if (window.innerWidth >= 350 && window.innerHeight >= 740) this.closeDialog()
+    if (window.innerHeight < 700) this.openDialogScreenSize()
+    if (window.innerWidth >= 350 && window.innerHeight >= 700) this.closeDialog()
   }
 
   openDialogScreenSize(): void {
@@ -59,11 +59,4 @@ export class AppComponent {
     this.speakService.stop();
     this.generalService.timeStampDialogScreenSize = 0;
   }
-
-
-
 }
-/**
- * Next Tasks
- * speak only run one time per click, then await 2sek to activate again.
- */
