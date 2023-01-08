@@ -68,10 +68,11 @@ export class SettingsComponent implements OnInit {
   }
 
   selectVoice(nbr) {
-    this.voice = Number(nbr)
-    this.actualizeSettingObj();
+    let voice = Number(nbr)
+    this.voice = voice + 1
     this.speakServ.changeVoice(nbr)
-    this.speakServ.speak('Hallo', 1)
+    this.speakServ.speakSettings('Hallo', 1)
+    this.actualizeSettingObj();
   }
 
   playSound(nbr) {

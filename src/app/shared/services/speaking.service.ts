@@ -18,8 +18,10 @@ export class SpeakingService {
 
   changeVoice(voice) {
     this.speaker = Number(voice)
+    this.voices = window.speechSynthesis.getVoices();
     window.speechSynthesis.onvoiceschanged = () => {
       this.voices = window.speechSynthesis.getVoices();
+      console.log(this.voices)
       this.speech.voice = this.voices[this.speaker];
     }
     this.speech.voice = this.voices[this.speaker];
@@ -34,6 +36,14 @@ export class SpeakingService {
       window.speechSynthesis.speak(this.speech);
       setTimeout(() => this.speechIsRunning = false, 2000);
     }
+  }
+
+  async speakSettings(text, a) {
+      this.speechIsRunning = true;
+      this.speech.rate = a;
+      this.speech.text = text;
+      this.speech.volume = 1 * this.volume / 100;
+      window.speechSynthesis.speak(this.speech);
   }
 
   stop() {
