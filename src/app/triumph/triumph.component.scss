@@ -1,6 +1,10 @@
 .trophy-img {
     height: 90px;
     object-fit: cover;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .trophy-nbr{

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/shared/services/general.service';
 import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
+import { SpeakingService } from 'src/app/shared/services/speaking.service';
 import { TrophyService } from 'src/app/shared/services/trophy.service';
 
 @Component({
@@ -17,11 +18,11 @@ export class EndscreenComponent implements OnInit {
     public mathServ: MathService,
     public trophyService: TrophyService,
     public generalService: GeneralService,
-    public readingService: ReadingService
+    public readingService: ReadingService,
+    public speakService: SpeakingService
   ) {
-    setTimeout(() => {
-      trophyService.trophyEarned = false
-    }, 3000);
+    if (this.trophyService.trophyEarned) this.speakService.speak(`Gut gemacht. Du hast dir eine ${this.trophyService.currentCoin} Münze verdient.`, 1)
+    setTimeout(() => this.trophyService.trophyEarned = false, 3000);
     this.generalService.inExercise = false;
    }
 

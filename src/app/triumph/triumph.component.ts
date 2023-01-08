@@ -54,4 +54,19 @@ export class TriumphComponent implements OnInit {
     }
     else console.log("No such document");
   }
+
+  explainBronzeCoin() {
+    let text = 'Verdiene dir eine Bronze Münze in dem du in Einstellung auf 5 Aufgaben richtig ausfüllen klickst und in der Übung keine Fehler machst.'
+    this.speakService.speak(text, 1)
+  }
+
+  explainSilverCoin() {
+    let text = 'Verdiene dir eine Silber Münze in dem du in Einstellung auf 10 Aufgaben richtig ausfüllen klickst und in der Übung höchstens einen Fehler machst.'
+    this.speakService.speak(text, 1)
+  }
+
+  explainGoldCoin() {
+    let text = 'Verdiene dir eine Gold Münze in dem du in Einstellung auf 20 Aufgaben richtig ausfüllen klickst und in der Übung höchstens einen Fehler machst.'
+    this.speakService.speak(text, 1)
+  }
 }

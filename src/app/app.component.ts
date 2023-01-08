@@ -33,7 +33,7 @@ export class AppComponent {
     if (window.innerWidth < 350 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
     if (window.innerHeight < 740 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
 
-    if (window.innerWidth > 350 && window.innerHeight > 740) this.closeDialog()
+    if (window.innerWidth >= 350 && window.innerHeight >= 740) this.closeDialog()
   }
 
   @HostListener('window:resize', ['$event'])
@@ -43,7 +43,7 @@ export class AppComponent {
     this.windowHeight = window.innerHeight;
     if (window.innerWidth < 350) this.openDialogScreenSize()
     if (window.innerHeight < 740) this.openDialogScreenSize()
-    if (window.innerWidth > 350 && window.innerHeight > 740) this.closeDialog()
+    if (window.innerWidth >= 350 && window.innerHeight >= 740) this.closeDialog()
   }
 
   openDialogScreenSize(): void {

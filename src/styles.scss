@@ -283,6 +283,11 @@ mat-icon {
 
     img {
         width: 70px;
+        cursor: pointer;
+
+        &:hover{
+            scale: 1.1;
+        }
     }
 }
 
@@ -348,4 +353,15 @@ mat-icon {
         width: 65px;
         height: 65px;
     }
+}
+
+.trophy{
+    position: absolute;
+    top: 244px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 10;
+
+    height: 80px;
+    width: 80px;
 }

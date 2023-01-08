@@ -9,7 +9,7 @@ import { SpeakingService } from '../shared/services/speaking.service';
   styleUrls: ['./dialog-screensize.component.scss']
 })
 export class DialogScreensizeComponent implements OnInit {
-  text = 'Leider unterstützt diese App deine Bildschirm größe nicht. Falls du dein Handy nicht hochkant hälst (im Landscape Modus), drehe es bitte und prüfe, ob die App funktioniert.'
+  text = 'Leider unterstützt diese App deine Bildschirm größe nicht. Falls du dein Handy nicht hochkant hälst (im Landscape Modus), drehe es bitte und prüfe, ob die App funktioniert. Als Entwickler öffnen Sie bitte die Konsole und wählen eine Höhe von mindestens 740 Pixel und eine Breite von mindestens 350 Pixel.'
   dialogScreenSizeSpeak: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<DialogScreensizeComponent>,
