@@ -217,6 +217,10 @@ export class WritingComponent implements OnInit {
     this.currentQuestion++;
     this.writingService.numberOfTasksWriting = this.currentQuestion;
     if (this.authService.additionUserDataExist()) this.earnTrophy();// guests don't get trophys because guests don't have additionUserData
+    else {
+      let infoText = 'Bitte registriere dich, um für deine Leistung Münzen zu erhalten.'
+      this.speakServ.speak(infoText, 1)
+    }
     this.router.navigate(['/writing-endscreen']);
   }
 
