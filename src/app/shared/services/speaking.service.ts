@@ -14,19 +14,23 @@ export class SpeakingService {
     this.speech.rate = this.rate;
   }
 
-    changeVoice(voice) {
-      this.speaker = Number(voice)
-      window.speechSynthesis.onvoiceschanged = () => {
-        this.voices = window.speechSynthesis.getVoices();
-        this.speech.voice = this.voices[this.speaker];
-      }
+  changeVoice(voice) {
+    this.speaker = Number(voice)
+    window.speechSynthesis.onvoiceschanged = () => {
+      this.voices = window.speechSynthesis.getVoices();
       this.speech.voice = this.voices[this.speaker];
     }
-
-    speak(text, a) {
-      this.speech.rate = a;
-      this.speech.text = text;
-      this.speech.volume = 1 * this.volume / 100;
-      window.speechSynthesis.speak(this.speech);
-    }
+    this.speech.voice = this.voices[this.speaker];
   }
+
+  speak(text, a) {
+    this.speech.rate = a;
+    this.speech.text = text;
+    this.speech.volume = 1 * this.volume / 100;
+    window.speechSynthesis.speak(this.speech);
+  }
+
+  stop() {
+    window.speechSynthesis.cancel();
+  }
+}

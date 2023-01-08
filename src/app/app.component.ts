@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogScreensizeComponent } from './dialog-screensize/dialog-screensize.component';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { GeneralService } from './shared/services/general.service';
+import { SpeakingService } from './shared/services/speaking.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent {
   constructor(
     public authService: AuthenticationService,
     public generalService: GeneralService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private speakService: SpeakingService) {
     let user = JSON.parse(localStorage.getItem('user'))
     if (user) this.authService.showLoginArea = false;
     else this.authService.showLoginArea = true;
@@ -54,6 +56,8 @@ export class AppComponent {
     this.dialog.closeAll();
     this.dialogScreenSizeIsOpen = false;
     this.windowToSmall = false;
+    this.speakService.stop();
+    this.generalService.timeStampDialogScreenSize = 0;
   }
 
 
