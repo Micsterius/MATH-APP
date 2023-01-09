@@ -1,9 +1,23 @@
+.main-header-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mat-card-box-header{
+    width: 100%;
+}
+
 mat-card {
     font-size: 38px;
     font-weight: 600;
     text-align: center;
     padding: 0;
     line-height: 38px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: none !important;
+    background: none;
 }
 
 .header-top {
@@ -12,6 +26,7 @@ mat-card {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid lightgray;
 }
 
 .icon-header {
@@ -39,9 +54,9 @@ mat-card-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     background-image: radial-gradient(#EDE3FF 5%, #E91E63 60%);
-  //  border-bottom: 8px solid #E91E63;
 }
 
 .icon-header-home{

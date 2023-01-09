@@ -63,12 +63,16 @@
     display: flex;
 
     img {
-        height: 45px;
+        height: 55px;
         margin-left: 5px;
         margin-top: -5px;
 
         &:hover {
             cursor: pointer;
+        }
+
+        @media (max-height: 730px) {
+            height: 50px;
         }
     }
 }

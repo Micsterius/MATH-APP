@@ -224,17 +224,17 @@ mat-icon {
 }
 
 .max-height-with-header {
-    height: calc(100vh - 244px);
-    max-height: calc(920px - 244px);
+    height: calc(100vh - 245px);
+    max-height: calc(920px - 245px);
 
     @media (max-width: 400px) {
-        height: calc(100vh - 224px);
-        max-height: calc(920px - 224px);
+        height: calc(100vh - 225px);
+        max-height: calc(920px - 225px);
     }
 }
 
 .max-height-without-header-img {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 61px);
     max-height: 860px;
 }
 
@@ -367,4 +367,13 @@ mat-icon {
 
 .color-black {
     color: black !important;
+}
+
+.rounded-corners {
+    border-radius: 8px 8px 0 0;
+}
+
+
+.rounded-corners-bottom{
+    border-radius: 0 0 8px 8px;
 }

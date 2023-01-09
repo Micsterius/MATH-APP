@@ -3,6 +3,7 @@ import { MathService } from '../shared/services/math.service';
 import { SpeakingService } from '../shared/services/speaking.service';
 
 import SwiperCore, { Pagination, Navigation, Keyboard, Virtual } from "swiper";
+import { GeneralService } from '../shared/services/general.service';
 
 // install Swiper modules
 SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
@@ -40,6 +41,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private speakServ: SpeakingService,
     public mathServ: MathService,
+    private generalService: GeneralService
   ) {
     let setting = JSON.parse(localStorage.getItem('setting'));
     if (setting) {
@@ -51,11 +53,8 @@ export class SettingsComponent implements OnInit {
       this.rangeValueRate = Number(setting.rangeValueRate)
       this.voice = Number(setting.voice)
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
+      this.generalService.inExercise = false;
     }
-
-    setTimeout(() => {
-      console.log(this.speakServ.voices)
-    }, 1000);
   }
 
   ngOnInit(): void {
