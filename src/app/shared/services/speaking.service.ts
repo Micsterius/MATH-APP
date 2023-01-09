@@ -18,13 +18,17 @@ export class SpeakingService {
 
   changeVoice(voice) {
     this.speaker = Number(voice)
-    this.voices = window.speechSynthesis.getVoices();
     this.speech.voice = this.voices[this.speaker];
+  }
+
+  loadAllVoices() {
     window.speechSynthesis.onvoiceschanged = () => {
+      // Get List of Voices
       this.voices = window.speechSynthesis.getVoices();
-      console.log(this.voices)
-      this.speech.voice = this.voices[this.speaker];
-    }    
+    
+      // Initially set the First Voice in the Array.
+      this.speech.voice = this.voices[0];
+    };
   }
 
   async speak(text, a) {
@@ -39,10 +43,10 @@ export class SpeakingService {
   }
 
   async speakSettings(text, a) {
-      this.speech.rate = a;
-      this.speech.text = text;
-      this.speech.volume = 1 * this.volume / 100;
-      window.speechSynthesis.speak(this.speech);
+    this.speech.rate = a;
+    this.speech.text = text;
+    this.speech.volume = 1 * this.volume / 100;
+    window.speechSynthesis.speak(this.speech);
   }
 
   stop() {

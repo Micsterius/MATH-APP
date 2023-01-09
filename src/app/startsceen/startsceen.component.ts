@@ -42,8 +42,9 @@ export class StartsceenComponent implements OnInit {
     private generalService: GeneralService
   ) {
     this.usersService.loadUsers();
-    this.sayHello()
-    this.sayHelloToGuest()
+    this.sayHello();
+    this.sayHelloToGuest();
+    this.speakServ.loadAllVoices();
   }
 
   ngOnInit(): void {

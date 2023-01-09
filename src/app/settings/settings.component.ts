@@ -52,6 +52,10 @@ export class SettingsComponent implements OnInit {
       this.voice = Number(setting.voice)
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
     }
+
+    setTimeout(() => {
+      console.log(this.speakServ.voices)
+    }, 1000);
   }
 
   ngOnInit(): void {
