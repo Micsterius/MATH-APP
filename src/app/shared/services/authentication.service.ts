@@ -36,6 +36,7 @@ export class AuthenticationService {
   showLoginArea: boolean = true;
   sayHelloToUser: boolean = false;
   sayHelloToGuest: boolean = false;
+  userDataMailChanged: boolean = false;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -96,7 +97,7 @@ export class AuthenticationService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.showVerifyMail = true;
+        if (!this.userDataMailChanged) this.showVerifyMail = true;
         this.showSignUp = false;
       });
   }
@@ -185,6 +186,7 @@ export class AuthenticationService {
     updateEmail(this.userData, email)
       .then(() => {
         this.SendVerificationMail();
+        this.userDataMailChanged = true;
       }).catch((error) => {
         window.alert(error.message);
       });
