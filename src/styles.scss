@@ -1,9 +1,5 @@
 .bg-c-1 {
-    background-color: #E91E63;
-}
-
-.bg-c-1-light {
-    background-color: #EDE3FF;
+    background-color: #870A30;
 }
 
 .w450 {
@@ -29,7 +25,7 @@
 }
 
 .color-main {
-    color: #E91E63;
+    color: #870A30;
 }
 
 .fs18 {
@@ -42,7 +38,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;
-    background-color: #6f597f;
+    background-color: #EC8FD0;
 }
 
 .button-box {
@@ -82,11 +78,11 @@ body {
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 :root {
-    --main-color: #E91E63;
+    --main-color: #870A30;
     --main-color-rgb: 250, 39, 89;
-    --secondary-color: #f7b0c1;
+    --secondary-color: #F2C5E0;
     --secondary-color-rgb: 255, 235, 240;
-    --background-color: #E91E63;
+    --background-color: #870A30;
 }
 
 .bg-c-1 {
