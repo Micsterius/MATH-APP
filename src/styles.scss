@@ -1,5 +1,28 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+:root {
+    --main-color: #870A30;
+    --main-color-rgb: 250, 39, 89;
+    --secondary-color: #F2C5E0;
+    --secondary-color-rgb: 255, 235, 240;
+    --background-color: #870A30;
+    --body-background-color: #EC8FD0;
+}
+
 .bg-c-1 {
-    background-color: #870A30;
+    background-color: var(--background-color);
+}
+
+.bg-c-2 {
+    background-color: var(--main-color);
+}
+
+.bg-c-1-light {
+    background-color: var(--secondary-color);
+}
+
+.color-main {
+    color: var(--main-color);
 }
 
 .w450 {
@@ -24,10 +47,6 @@
     color: white;
 }
 
-.color-main {
-    color: #870A30;
-}
-
 .fs18 {
     font-size: 24px !important;
     line-height: 24px;
@@ -38,7 +57,7 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;
-    background-color: #EC8FD0;
+    background-color: var(--body-background-color);;
 }
 
 .button-box {
@@ -75,31 +94,7 @@ body {
     cursor: pointer;
 }
 
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-:root {
-    --main-color: #870A30;
-    --main-color-rgb: 250, 39, 89;
-    --secondary-color: #F2C5E0;
-    --secondary-color-rgb: 255, 235, 240;
-    --background-color: #870A30;
-}
-
-.bg-c-1 {
-    background-color: var(--background-color);
-}
-
-.bg-c-2 {
-    background-color: var(--main-color);
-}
-
-.bg-c-1-light {
-    background-color: var(--secondary-color);
-}
-
-.color-main-without-hover {
-    color: var(--main-color);
-}
 
 .btn-auth {
     min-width: 200px;
@@ -122,21 +117,6 @@ mat-dialog-container {
 
 mat-icon {
     cursor: pointer;
-}
-
-.channel-headline {
-    padding-top: 16px;
-    text-align: center;
-}
-
-.dialog-button {
-    cursor: pointer;
-    border: 2px solid black;
-    border-radius: 8px;
-    margin-right: 16px;
-    padding: 4px;
-    background-color: var(--main-color);
-    color: white;
 }
 
 .auth-area-container {
@@ -194,12 +174,7 @@ mat-icon {
     }
 }
 
-.color-gray {
-    color: gray;
-    cursor: not-allowed;
-}
-
-.authBlock {
+.auth-block {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -237,11 +212,6 @@ mat-icon {
 .opac-0 {
     opacity: 0;
 }
-
-/////////
-/// 
-/// 
-
 
 .card-img-top {
     height: 160px;
@@ -359,6 +329,7 @@ mat-icon {
 
 .color-gray {
     color: gray !important;
+    cursor: not-allowed !important;
 }
 
 .color-black {
@@ -370,6 +341,11 @@ mat-icon {
 }
 
 
-.rounded-corners-bottom{
+.rounded-corners-bottom {
     border-radius: 0 0 8px 8px;
+}
+
+.btn-disabled {
+    box-shadow: 0 1px 1px 0 #1a1a1a !important;
+    color: lightgrey;
 }
