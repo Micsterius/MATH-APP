@@ -57,20 +57,17 @@ export class AuthenticationService {
     });
   }
 
-
-
-
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
+        this.afAuth.authState.subscribe(async (user) => {
           if (user) {
+            await this.checkIfAdditionalUserDataExist()
             this.showLoginArea = false;
             this.sayHelloToUser = true;
-            this.checkIfAdditionalUserDataExist()
           }
         });
       })
@@ -125,6 +122,8 @@ export class AuthenticationService {
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      this.showLoginArea = false;
+      this.sayHelloToUser = true;
     });
   }
 
@@ -132,7 +131,15 @@ export class AuthenticationService {
   AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
-      .then((result) => { this.SetUserData(result.user) })
+      .then((result) => {
+        this.SetUserData(result.user)
+
+        this.userData = {
+          uid: result.user.uid,
+          displayName: result.user.displayName
+        }
+        this.checkIfAdditionalUserDataExist();
+      })
       .catch((error) => {
         window.alert(error);
       });
@@ -148,7 +155,7 @@ export class AuthenticationService {
     let userData: User = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName ? user.displayName : 'User', //necessary because if user.displayName is empty, search fkt for chat partner doesnt run
+      displayName: user.displayName ? user.displayName : 'User',
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     };
@@ -239,8 +246,8 @@ export class AuthenticationService {
     });
   }
 
-  checkIfAdditionalUserDataExist() {
-    if (!this.additionUserDataExist()) this.addDocInFirestore()
+  async checkIfAdditionalUserDataExist() {
+    if (! await this.additionUserDataExist()) this.addDocInFirestore()
   }
 
   //Check if additional user data exist to check if the document have to created or updated.

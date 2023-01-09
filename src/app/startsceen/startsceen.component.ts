@@ -16,7 +16,6 @@ SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class StartsceenComponent implements OnInit {
-  activeUser;
   buttons: any[] = [
     {
       'nameOne': 'Kopfrechnen',
@@ -43,7 +42,6 @@ export class StartsceenComponent implements OnInit {
     private generalService: GeneralService
   ) {
     this.usersService.loadUsers();
-    this.activeUser = JSON.parse(localStorage.getItem('user')!);
     this.sayHello()
     this.sayHelloToGuest()
   }
@@ -59,8 +57,8 @@ export class StartsceenComponent implements OnInit {
   async sayHello() {
     if (this.authService.sayHelloToUser && await this.authService.additionUserDataExist()) {
       let text
-      if (this.activeUser.displayName != 'User') {
-        text = `Hallo ${this.activeUser.displayName}`
+      if (this.authService.userData.displayName != 'User') {
+        text = `Hallo ${this.authService.userData.displayName}`
       }
       else {
         text = `Hallo lieber Nutzer, ändere deinen Namen, damit ich dich persönlich begrüßen kann`
