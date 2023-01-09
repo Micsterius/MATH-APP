@@ -21,9 +21,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 
 //components
 import { StartsceenComponent } from './startsceen/startsceen.component';
-import { ArithmeticEndscreenComponent } from './arithmetic-endscreen/arithmetic-endscreen.component';
 import { HeaderComponent } from './header/header.component';
-import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
 import { TriumphComponent } from './triumph/triumph.component';
 import { SettingsComponent } from './settings/settings.component';
 
@@ -34,13 +32,9 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
-import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
 import { SwiperModule } from 'swiper/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
-import { WordsComponent } from './reading/words/words.component';
 import { CommonModule } from "@angular/common";
-import { WritingComponent } from './writing/writing.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './auth/login/login.component';
@@ -51,10 +45,16 @@ import { AuthenticationService } from './shared/services/authentication.service'
 import { AuthComponent } from './auth/auth.component';
 import { PersonalComponent } from './personal/personal.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { EndscreenComponent } from './reading/endscreen/endscreen.component';
-import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen.component';
 import { DialogScreensizeComponent } from './dialog-screensize/dialog-screensize.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MentalArithmeticComponent } from './exercise/math/mental-arithmetic/mental-arithmetic.component';
+import { MathEndscreenComponent } from './exercise/math/math-endscreen/math-endscreen.component';
+import { WriteExerciseComponent } from './exercise/write/write-exercise/write-exercise.component';
+import { WriteEndscreenComponent } from './exercise/write/write-endscreen/write-endscreen.component';
+import { ReadEndscreenComponent } from './exercise/read/read-endscreen/read-endscreen.component';
+import { ReadWordComponent } from './exercise/read/read-word/read-word.component';
+import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.component';
+import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wrong-answer-again.component';
 
 @NgModule({
   declarations: [
@@ -62,22 +62,22 @@ import { MatDialogModule } from '@angular/material/dialog';
     StartsceenComponent,
     TriumphComponent,
     SettingsComponent,
-    ArithmeticAreaComponent,
-    ArithmeticEndscreenComponent,
-    WrongAnswersAgainComponent,
-    PhonemeExerciseComponent,
-    WordsComponent,
     HeaderComponent,
-    WritingComponent,
     LoginComponent,
     SignUpComponent,
     VerifyMailComponent,
     ForgetPasswordComponent,
     AuthComponent,
     PersonalComponent,
-    EndscreenComponent,
-    WritingEndscreenComponent,
-    DialogScreensizeComponent
+    DialogScreensizeComponent,
+    MentalArithmeticComponent,
+    MathEndscreenComponent,
+    WriteExerciseComponent,
+    WriteEndscreenComponent,
+    ReadEndscreenComponent,
+    ReadWordComponent,
+    ReadPhonemeComponent,
+    WrongAnswerAgainComponent
   ],
   imports: [
     BrowserAnimationsModule,

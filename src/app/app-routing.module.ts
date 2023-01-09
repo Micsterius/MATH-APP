@@ -3,18 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
 import { StartsceenComponent } from './startsceen/startsceen.component';
 import { TriumphComponent } from './triumph/triumph.component';
-import { ArithmeticAreaComponent } from './arithmetic-area/arithmetic-area.component';
-import { ArithmeticEndscreenComponent } from './arithmetic-endscreen/arithmetic-endscreen.component';
-import { WrongAnswersAgainComponent } from './wrong-answers-again/wrong-answers-again.component';
-import { PhonemeExerciseComponent } from './reading/phoneme-exercise/phoneme-exercise.component';
-import { WordsComponent } from './reading/words/words.component';
-import { WritingComponent } from './writing/writing.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './auth/forget-password/forget-password.component';
 import { VerifyMailComponent } from './auth/verify-mail/verify-mail.component';
 import { PersonalComponent } from './personal/personal.component';
-import { EndscreenComponent } from './reading/endscreen/endscreen.component';
-import { WritingEndscreenComponent } from './writing-endscreen/writing-endscreen.component';
+import { MentalArithmeticComponent } from './exercise/math/mental-arithmetic/mental-arithmetic.component';
+import { MathEndscreenComponent } from './exercise/math/math-endscreen/math-endscreen.component';
+import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wrong-answer-again.component';
+import { ReadEndscreenComponent } from './exercise/read/read-endscreen/read-endscreen.component';
+import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.component';
+import { ReadWordComponent } from './exercise/read/read-word/read-word.component';
+import { WriteEndscreenComponent } from './exercise/write/write-endscreen/write-endscreen.component';
+import { WriteExerciseComponent } from './exercise/write/write-exercise/write-exercise.component';
 // route guard
 
 
@@ -27,14 +27,14 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyMailComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'triumph', component: TriumphComponent },
-  { path: 'arithmetic', component: ArithmeticAreaComponent },
-  { path: 'arithmeticEndscreen', component: ArithmeticEndscreenComponent },
-  { path: 'wrongAnswers', component: WrongAnswersAgainComponent },
-  { path: 'reading-phenomene', component: PhonemeExerciseComponent },
-  { path: 'reading-words', component: WordsComponent },
-  { path: 'writing-words', component: WritingComponent },
-  { path: 'endscreen', component: EndscreenComponent },
-  { path: 'writing-endscreen', component: WritingEndscreenComponent },
+  { path: 'arithmetic', component: MentalArithmeticComponent },
+  { path: 'arithmeticEndscreen', component: MathEndscreenComponent },
+  { path: 'wrongAnswers', component: WrongAnswerAgainComponent },
+  { path: 'reading-phenomene', component: ReadPhonemeComponent },
+  { path: 'reading-words', component: ReadWordComponent },
+  { path: 'writing-words', component: WriteExerciseComponent },
+  { path: 'endscreen', component: ReadEndscreenComponent },
+  { path: 'writing-endscreen', component: WriteEndscreenComponent },
 ];
 
 @NgModule({

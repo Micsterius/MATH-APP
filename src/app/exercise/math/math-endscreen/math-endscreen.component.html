@@ -1,0 +1,16 @@
+<div class="bg-c-1-light endscreen-container w450 max-height-with-header rounded-corners-bottom">
+    <div class="headline-endscreen">Runde beendet!</div>
+    <div class="sub-headline-endscreen">Du hast <br><span>{{mathServ.numberOfRightAnswers}} von
+            {{mathServ.numberOfMathProblems}}</span> <br>Fragen richtig beantwortet.</div>
+    <div class="button-box">
+        <button [disabled]="generalService.currentExercise == ''"
+            [ngClass]="{'btn-disabled': generalService.currentExercise == ''}" class="bg-c-1 color-white"
+            (click)="navigateToArithmetic()">Erneut rechnen</button>
+        <button [disabled]="mathServ.wrongAnswers.length == 0" class="bg-c-1 color-white"
+            (click)="navigateToWrongAnswers()"
+            [ngClass]="{'btn-disabled-math' : mathServ.wrongAnswers.length == 0}">Falsche Antworten nochmal</button>
+        <button class="bg-c-1 color-white" (click)="backToStartScreen()" [routerLink]="['']">Start</button>
+    </div>
+    <img *ngIf="trophyService.trophyEarned" class="trophy"
+        src="./assets/img/coins/{{trophyService.currentCoin}}-coin.png" alt="">
+</div>

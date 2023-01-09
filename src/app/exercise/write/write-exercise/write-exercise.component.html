@@ -1,0 +1,50 @@
+<div class="w450 bg-c-1-light main-exercise-container max-height-without-header-img rounded-corners-bottom">
+    <mat-progress-bar class="arit-progress-bar" mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
+
+
+    <div class="question-text">
+        <h3 class="card-title" id="question-text">
+            Wie wird das Wort geschrieben?
+        </h3>
+        <img src="./assets/img/help.svg" (click)="helpWriting()">
+    </div>
+    <div class="question-box" *ngIf="showExercise">
+        <mat-icon *ngIf="!speakServ.speechIsRunning" class="writing-icon-sound" fontIcon="volume_up"
+            (click)="speakServ.speak(allExercises[currentQuestion].right, speakRate/100)"></mat-icon>
+        <mat-icon *ngIf="speakServ.speechIsRunning" class="color-gray writing-icon-sound"
+            fontIcon="volume_up"></mat-icon>
+    </div>
+    <div class="answer-main-container">
+        <div class="example-container">
+            <div cdkDropList cdkDropListOrientation="horizontal" #answerList="cdkDropList" [cdkDropListData]="answer"
+                [cdkDropListConnectedTo]="[letterList]" class="example-list" (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of answer" cdkDrag
+                    (click)="speakServ.speak(item, speakRate/100)">
+                    {{item}}</div>
+            </div>
+        </div>
+        <div class="example-container">
+            <div cdkDropList cdkDropListOrientation="horizontal" #letterList="cdkDropList"
+                [cdkDropListData]="arrayOfMixedLetters" [cdkDropListConnectedTo]="[answerList]" class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag
+                    (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
+            </div>
+            <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0 && !checkButtonDisable"
+                (click)="checkAnswerWriting()">
+                <mat-icon>check</mat-icon>
+            </div>
+        </div>
+
+        <div class="question-footer">
+            <span><b>{{numberOfCorrectAnswers}}</b> von <b id="total-number-of-math-problems">{{currentQuestion +1}}</b>
+                Versuch(en)
+                korrekt
+                gelöst</span>
+            <button [disabled]="!nextIsAvailable" [ngClass]="{'opac-0' : !answerIsGiven}" class="bg-c-1 forward-btn"
+                (click)="nextExercise()">
+                <mat-icon class="forward-icon">double_arrow</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
