@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit {
 
 
   constructor(
-    private speakServ: SpeakingService,
+    public speakServ: SpeakingService,
     public mathServ: MathService,
     private generalService: GeneralService
   ) {

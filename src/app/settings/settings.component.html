@@ -31,7 +31,7 @@
                     </div>
                     <div class="settings-btn-box">
                         <div class="sub-headline-settings">Stimme</div>
-                        <mat-button-toggle-group value="{{(setting.voice) ? (setting.voice) : '1'}}">
+                        <mat-button-toggle-group [disabled]="speakServ.settingSpeechIsRunning" value="{{(setting.voice) ? (setting.voice) : '1'}}">
                             <mat-button-toggle (click)="selectVoice('0')"
                                 class="color-white bg-c-1 border-round-left" value="1">1</mat-button-toggle>
                             <mat-button-toggle (click)="selectVoice('1')" class="color-white bg-c-1" value="2">2

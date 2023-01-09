@@ -16,6 +16,7 @@ SwiperCore.use([Keyboard, Pagination, Navigation, Virtual]);
   encapsulation: ViewEncapsulation.None,
 })
 export class StartsceenComponent implements OnInit {
+  showStartScreen: boolean = false;
   buttons: any[] = [
     {
       'nameOne': 'Kopfrechnen',
@@ -44,11 +45,16 @@ export class StartsceenComponent implements OnInit {
     this.usersService.loadUsers();
     this.sayHello();
     this.sayHelloToGuest();
-    this.speakServ.loadAllVoices();
     this.generalService.inExercise = false;
+    //this.loadSpeakVoices()
   }
 
   ngOnInit(): void {
+  }
+
+  async loadSpeakVoices() {
+    await this.speakServ.loadAllVoices();
+    console.log(this.speakServ.voicesAreLoaded)
   }
 
   saveCurrentExercise(exercise) {
@@ -71,7 +77,7 @@ export class StartsceenComponent implements OnInit {
       }
       setTimeout(() => {
         this.authService.sayHelloToUser = false;
-       }, 8000); 
+      }, 8000);
       this.speakServ.speak(text, 0.8)
     }
   }
@@ -79,9 +85,9 @@ export class StartsceenComponent implements OnInit {
   sayHelloToGuest() {
     if (this.authService.sayHelloToGuest) {
       let text = `Hallo lieber Gast, viel Spaß beim Erkunden. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
-     setTimeout(() => {
-      this.authService.sayHelloToGuest = false;
-     }, 9000); 
+      setTimeout(() => {
+        this.authService.sayHelloToGuest = false;
+      }, 9000);
       this.speakServ.speak(text, 0.8)
     }
   }

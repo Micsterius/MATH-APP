@@ -8,8 +8,10 @@ export class SpeakingService {
   rate = 0.5;
   volume: number = 100;
   speaker: number = 1;
-  voices: any[] = []; // global array of available voices
+  voices;
   speechIsRunning: boolean = false;
+  settingSpeechIsRunning: boolean = false;
+  voicesAreLoaded: boolean = false;
 
   constructor() {
     this.speech.lang = "de";
@@ -18,17 +20,25 @@ export class SpeakingService {
 
   changeVoice(voice) {
     this.speaker = Number(voice)
-    this.speech.voice = this.voices[this.speaker];
+    this.speech.voice = window.speechSynthesis.getVoices()[this.speaker]
   }
 
-  loadAllVoices() {
-    window.speechSynthesis.onvoiceschanged = () => {
-      // Get List of Voices
-      this.voices = window.speechSynthesis.getVoices();
-    
-      // Initially set the First Voice in the Array.
-      this.speech.voice = this.voices[0];
-    };
+  async loadAllVoices() {
+    const allVoicesObtained = new Promise(function (resolve, reject) {
+      let voices = window.speechSynthesis.getVoices();
+      if (voices.length !== 0) {
+        resolve(voices);
+      } else {
+        window.speechSynthesis.addEventListener("voiceschanged", function () {
+          voices = window.speechSynthesis.getVoices();
+          resolve(voices);
+        });
+      }
+    });
+    allVoicesObtained.then(voices => {
+      this.voices = voices;
+      console.log(this.voices)
+    });
   }
 
   async speak(text, a) {
@@ -43,10 +53,15 @@ export class SpeakingService {
   }
 
   async speakSettings(text, a) {
-    this.speech.rate = a;
-    this.speech.text = text;
-    this.speech.volume = 1 * this.volume / 100;
-    window.speechSynthesis.speak(this.speech);
+    if (!this.settingSpeechIsRunning) {
+      this.settingSpeechIsRunning = true;
+      this.speech.rate = a;
+      this.speech.text = text;
+      this.speech.volume = 1 * this.volume / 100;
+      window.speechSynthesis.speak(this.speech);
+      setTimeout(() => this.settingSpeechIsRunning = false, 3000);
+    }
+
   }
 
   stop() {
