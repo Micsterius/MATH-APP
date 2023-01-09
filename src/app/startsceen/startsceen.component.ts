@@ -45,6 +45,7 @@ export class StartsceenComponent implements OnInit {
     this.sayHello();
     this.sayHelloToGuest();
     this.speakServ.loadAllVoices();
+    this.generalService.inExercise = false;
   }
 
   ngOnInit(): void {
@@ -59,24 +60,28 @@ export class StartsceenComponent implements OnInit {
     if (this.authService.sayHelloToUser && await this.authService.additionUserDataExist()) {
       let text
       if (this.authService.userData.displayName != 'User') {
-        text = `Hallo ${this.authService.userData.displayName}`
+        text = `Hallo ${this.authService.userData.displayName}, drück auf mich in den Übungen, wenn du Hilfe brauchst`
       }
       else {
-        text = `Hallo lieber Nutzer, ändere deinen Namen, damit ich dich persönlich begrüßen kann`
+        text = `Hallo lieber Nutzer, ändere deinen Namen, damit ich dich persönlich begrüßen kann. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
         this.generalService.highlightSettingsButton = true;
         setTimeout(() => {
           this.generalService.highlightSettingsButton = false;
         }, 8000);
       }
-      this.authService.sayHelloToUser = false;
+      setTimeout(() => {
+        this.authService.sayHelloToUser = false;
+       }, 8000); 
       this.speakServ.speak(text, 0.8)
     }
   }
 
   sayHelloToGuest() {
     if (this.authService.sayHelloToGuest) {
-      let text = `Hallo lieber Gast, viel Spaß beim Erkunden`
+      let text = `Hallo lieber Gast, viel Spaß beim Erkunden. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
+     setTimeout(() => {
       this.authService.sayHelloToGuest = false;
+     }, 9000); 
       this.speakServ.speak(text, 0.8)
     }
   }
