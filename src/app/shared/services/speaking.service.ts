@@ -20,7 +20,11 @@ export class SpeakingService {
 
   changeVoice(voice) {
     this.speaker = Number(voice)
-    this.speech.voice = window.speechSynthesis.getVoices()[this.speaker]
+   /* if(this.speaker == 0) this.speech.voice = this.voiceOne
+    if(this.speaker == 1) this.speech.voice = this.voiceTwo
+    if(this.speaker == 2) this.speech.voice = this.voiceThree*/
+    //this.speech.voice = window.speechSynthesis.getVoices()[this.speaker]
+    this.speech.voice = this.voices[this.speaker]
   }
 
   async loadAllVoices() {
@@ -37,8 +41,16 @@ export class SpeakingService {
     });
     allVoicesObtained.then(voices => {
       this.voices = voices;
-      console.log(this.voices)
+      this.showVoiceSelection();
     });
+     /* this.voiceOne = window.speechSynthesis.getVoices()[0]
+      this.voiceTwo = window.speechSynthesis.getVoices()[1]  
+      this.voiceThree = window.speechSynthesis.getVoices()[2]  */
+  }
+
+  showVoiceSelection(){
+    console.log('A')
+    this.voicesAreLoaded = true;
   }
 
   async speak(text, a) {
@@ -59,7 +71,7 @@ export class SpeakingService {
       this.speech.text = text;
       this.speech.volume = 1 * this.volume / 100;
       window.speechSynthesis.speak(this.speech);
-      setTimeout(() => this.settingSpeechIsRunning = false, 3000);
+      setTimeout(() => this.settingSpeechIsRunning = false, 1000);
     }
 
   }

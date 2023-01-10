@@ -72,7 +72,7 @@ export class SettingsComponent implements OnInit {
 
   selectVoice(nbr) {
     let voice = Number(nbr)
-    this.voice = voice + 1
+    this.voice = voice + 1 // plus 1 because in the toggle buttons stands 1, 2, 3 and not 0, 1, 2
     this.speakServ.changeVoice(nbr)
     this.speakServ.speakSettings('Hallo', 1)
     this.actualizeSettingObj();

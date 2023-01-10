@@ -46,7 +46,7 @@ export class StartsceenComponent implements OnInit {
     this.sayHello();
     this.sayHelloToGuest();
     this.generalService.inExercise = false;
-    //this.loadSpeakVoices()
+    this.loadSpeakVoices()
   }
 
   ngOnInit(): void {
@@ -54,7 +54,6 @@ export class StartsceenComponent implements OnInit {
 
   async loadSpeakVoices() {
     await this.speakServ.loadAllVoices();
-    console.log(this.speakServ.voicesAreLoaded)
   }
 
   saveCurrentExercise(exercise) {
