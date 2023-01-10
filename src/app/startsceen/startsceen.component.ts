@@ -43,52 +43,60 @@ export class StartsceenComponent implements OnInit {
     private generalService: GeneralService
   ) {
     this.usersService.loadUsers();
-    this.sayHello();
-    this.sayHelloToGuest();
-    this.generalService.inExercise = false;
-    this.loadSpeakVoices()
-  }
 
-  ngOnInit(): void {
-  }
+    let setting = JSON.parse(localStorage.getItem('setting'));
+    if (setting) {
+      this.speakServ.voiceName = setting.voice
+    }
+
+
+
+      this.sayHello();
+      this.sayHelloToGuest();
+      this.generalService.inExercise = false;
+      this.loadSpeakVoices()
+    }
+
+    ngOnInit(): void {
+    }
 
   async loadSpeakVoices() {
-    await this.speakServ.loadAllVoices();
-  }
+      await this.speakServ.loadAllVoices();
+    }
 
-  saveCurrentExercise(exercise) {
-    this.generalService.currentExercise = exercise
-    this.generalService.inExercise = true;
-  }
+    saveCurrentExercise(exercise) {
+      this.generalService.currentExercise = exercise
+      this.generalService.inExercise = true;
+    }
 
   async sayHello() {
-    if (this.authService.sayHelloToUser && await this.authService.additionUserDataExist()) {
-      let text
-      if (this.authService.userData.displayName != 'User') {
-        text = `Hallo ${this.authService.userData.displayName}, drück auf mich in den Übungen, wenn du Hilfe brauchst`
-      }
-      else {
-        text = `Hallo lieber Nutzer, ändere deinen Namen, damit ich dich persönlich begrüßen kann. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
-        this.generalService.highlightSettingsButton = true;
+      if (this.authService.sayHelloToUser && await this.authService.additionUserDataExist()) {
+        let text
+        if (this.authService.userData.displayName != 'User') {
+          text = `Hallo ${this.authService.userData.displayName}, drück auf mich in den Übungen, wenn du Hilfe brauchst`
+        }
+        else {
+          text = `Hallo lieber Nutzer, ändere deinen Namen, damit ich dich persönlich begrüßen kann. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
+          this.generalService.highlightSettingsButton = true;
+          setTimeout(() => {
+            this.generalService.highlightSettingsButton = false;
+          }, 8000);
+        }
         setTimeout(() => {
-          this.generalService.highlightSettingsButton = false;
+          this.authService.sayHelloToUser = false;
         }, 8000);
+        this.speakServ.speak(text, 0.8)
       }
-      setTimeout(() => {
-        this.authService.sayHelloToUser = false;
-      }, 8000);
-      this.speakServ.speak(text, 0.8)
     }
-  }
 
-  sayHelloToGuest() {
-    if (this.authService.sayHelloToGuest) {
-      let text = `Hallo lieber Gast, viel Spaß beim Erkunden. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
-      setTimeout(() => {
-        this.authService.sayHelloToGuest = false;
-      }, 9000);
-      this.speakServ.speak(text, 0.8)
+    sayHelloToGuest() {
+      if (this.authService.sayHelloToGuest) {
+        let text = `Hallo lieber Gast, viel Spaß beim Erkunden. Drück auf mich in den Übungen, wenn du Hilfe brauchst`
+        setTimeout(() => {
+          this.authService.sayHelloToGuest = false;
+        }, 9000);
+        this.speakServ.speak(text, 0.8)
+      }
     }
-  }
 
-}
+  }

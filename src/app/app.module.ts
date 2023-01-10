@@ -55,6 +55,7 @@ import { ReadEndscreenComponent } from './exercise/read/read-endscreen/read-ends
 import { ReadWordComponent } from './exercise/read/read-word/read-word.component';
 import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.component';
 import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wrong-answer-again.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wr
     DragDropModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSelectModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

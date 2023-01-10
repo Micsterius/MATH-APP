@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
   allowToSlide: boolean = true;
   rangeValueVolume: number = 100;
   rangeValueRate: number = 50;
-  voice: number = 1;
+  voice: string = '';
 
 
   constructor(
@@ -51,7 +51,7 @@ export class SettingsComponent implements OnInit {
       this.showPicturesForAmount = setting.showPicturesForAmount
       this.rangeValueVolume = Number(setting.rangeValueVolume)
       this.rangeValueRate = Number(setting.rangeValueRate)
-      this.voice = Number(setting.voice)
+      this.voice = setting.voice
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
       this.generalService.inExercise = false;
     }
@@ -70,12 +70,13 @@ export class SettingsComponent implements OnInit {
     this.speakServ.speak('Willkommen', this.rangeValueRate/100)
   }
 
-  selectVoice(nbr) {
-    let voice = Number(nbr)
-    this.voice = voice + 1 // plus 1 because in the toggle buttons stands 1, 2, 3 and not 0, 1, 2
-    this.speakServ.changeVoice(nbr)
+  selectVoice(name) {
+   /* let voice = Number(nbr)*/
+    this.voice = name
+    this.speakServ.changeVoice(name)
     this.speakServ.speakSettings('Hallo', 1)
     this.actualizeSettingObj();
+    this.speakServ.selection = name;
   }
 
   playSound(nbr) {
@@ -86,6 +87,8 @@ export class SettingsComponent implements OnInit {
       this.mathServ.playSound('success')
     }, 1000)
   }
+
+
 
   actualizeSettingObj() {
     this.setting = {
