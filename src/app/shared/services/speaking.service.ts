@@ -49,7 +49,7 @@ export class SpeakingService {
   findAllGermanVoices() {
     this.voicesArray.forEach(voice => {
       let voiceName = voice.name.split(' ', 5)
-      let check = voiceName.some(text => text == 'German' || text == 'Deutsch' || text == 'german' || text == 'deutsch' || text == 'Germany')
+      let check = voiceName.some(text => text == 'German' || text == 'Deutsch' || text == 'german' || text == 'deutsch' || text == 'Katja' || text == 'Jan' || text == 'Conrad' || text == 'Ingrid' || text == 'Amala' || text == 'Jonas')
       if (check) this.voicesGerman.push(voice)
     });
   }
@@ -73,6 +73,17 @@ export class SpeakingService {
       this.speech.volume = 1 * this.volume / 100;
       window.speechSynthesis.speak(this.speech);
       setTimeout(() => this.settingSpeechIsRunning = false, 1000);
+    }
+  }
+
+  async speakSettingsInfo(text, a) {
+    if (!this.settingSpeechIsRunning) {
+      this.settingSpeechIsRunning = true;
+      this.speech.rate = a;
+      this.speech.text = text;
+      this.speech.volume = 1 * this.volume / 100;
+      window.speechSynthesis.speak(this.speech);
+      setTimeout(() => this.settingSpeechIsRunning = false, 4000);
     }
   }
 

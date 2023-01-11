@@ -79,6 +79,11 @@ export class SettingsComponent implements OnInit {
     this.speakServ.selection = name;
   }
 
+  infoSpeech(){
+    let text = 'Leider stellt dein Browser nur eine deutsche Stimme zur Verfügung. Wenn du eine andere Stimme willst, öffne die App mit dem Browser Microsoft Edge'
+    this.speakServ.speakSettingsInfo(text, 0.9)
+  }
+
   playSound(nbr) {
     this.speakServ.volume = nbr;
     this.mathServ.volume = nbr;

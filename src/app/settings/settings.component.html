@@ -34,28 +34,21 @@
                             max="100">
                         </mat-slider>
                     </div>
-                    <div class="settings-btn-box" *ngIf="speakServ.voicesGerman.length > 1">
+                    <div class="settings-btn-box">
                         <div class="sub-headline-settings">Stimme</div>
-                        <!--
-                            <mat-button-toggle-group [disabled]="speakServ.settingSpeechIsRunning"
-                            value="{{(setting.voice) ? (setting.voice) : '1'}}">
-                            <mat-button-toggle (click)="selectVoice('0')" class="color-white bg-c-1 border-round-left"
-                                value="1">1</mat-button-toggle>
-                            <mat-button-toggle (click)="selectVoice('1')" class="color-white bg-c-1" value="2">2
-                            </mat-button-toggle>
-                            <mat-button-toggle (click)="selectVoice('2')" class="color-white bg-c-1 border-round-right"
-                                value="3">3</mat-button-toggle>
-                        </mat-button-toggle-group>
-                        -->
-
-
-                        <mat-form-field appearance="fill">
-                            <mat-label>{{speakServ.selection ? speakServ.selection : 'Stimme/Sprache'}}</mat-label>
-                            <mat-select>
-                                <mat-option *ngFor="let voice of speakServ.voicesGerman"
-                                    (click)="selectVoice(voice.name)">{{voice.name}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        <div *ngIf="speakServ.voicesGerman.length > 1">
+                            <mat-form-field appearance="fill">
+                                <mat-label>{{speakServ.selection ? speakServ.selection : 'Stimme/Sprache'}}</mat-label>
+                                <mat-select>
+                                    <mat-option *ngFor="let voice of speakServ.voicesGerman"
+                                        (click)="selectVoice(voice.name)">{{voice.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="speakServ.voicesGerman.length <= 1">
+                           <mat-icon class="setting-speech-voice-info-icon color-main" aria-hidden="false" aria-label="Example home icon" fontIcon="help_outline"
+                            (click)="infoSpeech()"></mat-icon>  
+                        </div>
                     </div>
                 </div>
 
