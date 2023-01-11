@@ -56,6 +56,7 @@ import { ReadWordComponent } from './exercise/read/read-word/read-word.component
 import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.component';
 import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wrong-answer-again.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DialogErrorsComponent } from './dialog-errors/dialog-errors.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {MatSelectModule} from '@angular/material/select';
     ReadEndscreenComponent,
     ReadWordComponent,
     ReadPhonemeComponent,
-    WrongAnswerAgainComponent
+    WrongAnswerAgainComponent,
+    DialogErrorsComponent
   ],
   imports: [
     BrowserAnimationsModule,

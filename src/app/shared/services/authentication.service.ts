@@ -12,6 +12,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogErrorsComponent } from 'src/app/dialog-errors/dialog-errors.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +44,8 @@ export class AuthenticationService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone,
+    public dialog: MatDialog, // NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when 
   logged in and setting up null when logged out */
@@ -73,7 +76,8 @@ export class AuthenticationService {
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -88,7 +92,8 @@ export class AuthenticationService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -110,7 +115,8 @@ export class AuthenticationService {
         window.alert('Password reset email sent, check your inbox.');
       })
       .catch((error) => {
-        window.alert(error);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -142,7 +148,8 @@ export class AuthenticationService {
         this.checkIfAdditionalUserDataExist();
       })
       .catch((error) => {
-        window.alert(error);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -188,7 +195,8 @@ export class AuthenticationService {
         this.SendVerificationMail();
         this.userDataMailChanged = true;
       }).catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -198,7 +206,8 @@ export class AuthenticationService {
       .then(() => {
         this.SignOut();
       }).catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -207,7 +216,8 @@ export class AuthenticationService {
     updateProfile(this.userData, { displayName: userName })
       .then(() => {
       }).catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -216,7 +226,8 @@ export class AuthenticationService {
     updateProfile(this.userData, { photoURL: src })
       .then(() => {
       }).catch((error) => {
-        window.alert(error.message);
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
@@ -230,8 +241,8 @@ export class AuthenticationService {
         this.onAuthStateChanged();
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+        dialogRef.componentInstance.error = error;
       });
   }
 
