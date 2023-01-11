@@ -34,7 +34,7 @@
                             max="100">
                         </mat-slider>
                     </div>
-                    <div class="settings-btn-box">
+                    <div class="settings-btn-box" *ngIf="speakServ.voicesGerman.length > 1">
                         <div class="sub-headline-settings">Stimme</div>
                         <!--
                             <mat-button-toggle-group [disabled]="speakServ.settingSpeechIsRunning"
@@ -52,7 +52,7 @@
                         <mat-form-field appearance="fill">
                             <mat-label>{{speakServ.selection ? speakServ.selection : 'Stimme/Sprache'}}</mat-label>
                             <mat-select>
-                                <mat-option *ngFor="let voice of speakServ.voicesArray"
+                                <mat-option *ngFor="let voice of speakServ.voicesGerman"
                                     (click)="selectVoice(voice.name)">{{voice.name}}</mat-option>
                             </mat-select>
                         </mat-form-field>
