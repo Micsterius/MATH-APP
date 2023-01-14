@@ -22,7 +22,7 @@ export class TriumphComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private speakService: SpeakingService
+    public speakService: SpeakingService
   ) {
     this.actualUser = JSON.parse(localStorage.getItem('user'));
     this.getMedals();

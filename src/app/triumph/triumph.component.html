@@ -14,7 +14,7 @@
             <div class="trophy-nbr bg-c-1 color-white">{{userInfos.bronzeCoins}}</div>
         </div>
     </div>
-    <div class="home-btn-box" [routerLink]="['']">
+    <div class="home-btn-box" [routerLink]="['']" (click)="speakService.stop()">
         <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back"></mat-icon>
     </div>
 </div>

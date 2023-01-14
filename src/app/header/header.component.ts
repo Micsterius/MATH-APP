@@ -27,10 +27,10 @@ export class HeaderComponent implements OnInit {
   themeBurgundy() {
     document.documentElement.style.setProperty('--main-color', '#870A30');
     document.documentElement.style.setProperty('--secondary-color', '#F2C5E0');
-    document.documentElement.style.setProperty('--background-color', '#EC8FD0');
+    document.documentElement.style.setProperty('--background-color', '#ECD5E6');
     localStorage.setItem('mainColor', '#870A30');
     localStorage.setItem('secColor', '#F2C5E0');
-    localStorage.setItem('backgroundColor', '#EC8FD0');
+    localStorage.setItem('backgroundColor', '#ECD5E6');
   }
 
   themeBlue() {
