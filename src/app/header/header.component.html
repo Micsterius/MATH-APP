@@ -11,7 +11,7 @@
                         <mat-icon mat-icon-button [matMenuTriggerFor]="color" fontIcon="format_color_fill">
                         </mat-icon>
                     </div>
-                    <mat-menu #color="matMenu">
+                    <mat-menu class="menu-color" #color="matMenu" xPosition="before">
                         <button class="btn-burgundy" (click)="themeBurgundy()" mat-menu-item>Burgundy</button>
                         <button class="btn-blue" (click)="themeBlue()" mat-menu-item>Violett</button>
                         <button class="btn-orange" (click)="themeOrange()" mat-menu-item>Orange</button>

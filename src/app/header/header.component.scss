@@ -124,3 +124,7 @@ mat-card-title {
     background-color: #42324f;
     color: white;
 }
+
+::ng-deep .mat-menu-content{
+    padding:0px !important;
+  }
