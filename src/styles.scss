@@ -9,6 +9,14 @@
     --body-background-color: #EC8FD0;
 }
 
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    height: 100vh;
+    background-color: var(--body-background-color);
+    ;
+}
+
 .bg-c-1 {
     background-color: var(--background-color);
 }
@@ -53,13 +61,6 @@
     font-weight: 500 !important;
 }
 
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    height: 100vh;
-    background-color: var(--body-background-color);;
-}
-
 .button-box {
     display: flex;
     flex-direction: column;
@@ -93,8 +94,6 @@ body {
 .curs-point {
     cursor: pointer;
 }
-
-
 
 .btn-auth {
     min-width: 200px;
@@ -339,7 +338,6 @@ mat-icon {
 .rounded-corners {
     border-radius: 8px 8px 0 0;
 }
-
 
 .rounded-corners-bottom {
     border-radius: 0 0 8px 8px;

@@ -17,7 +17,6 @@ import { environment } from 'src/environments/environment';
 })
 export class ReadPhonemeComponent implements OnInit {
 
-
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
 
@@ -32,7 +31,6 @@ export class ReadPhonemeComponent implements OnInit {
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
   syllableSmall: string = '';
-  syllableBig: string = '';
   allExercises: any[] = [];
   showExercise: boolean = false;
   nextIsAvailable: boolean = false;
@@ -58,40 +56,21 @@ export class ReadPhonemeComponent implements OnInit {
     private trophyService: TrophyService,
     private authService: AuthenticationService
   ) {
+    this.loadSetting();
+    this.actualUser = JSON.parse(localStorage.getItem('user'));
+    this.loadPhenome();
+  }
+  
+  ngOnInit(): void {
+  }
+
+  loadSetting() {
     this.setting = JSON.parse(localStorage.getItem('setting'));
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
     if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
     }
-    this.loadPhenome()
-    //this.setNewExercises()
   }
-
-
-  /* async setNewExercises(){
-     const readingRef = collection(this.db, "lesen");
-     await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ho'), {
-       answerFour: "ho / Ho", answerThree: "ha / HA", answerTwo: "he / He", answerOne: "hu / HU",
-       callOne: 'husten', callTwo: 'heben', callThree: 'Hand', callFour: 'hose',
-       callRight: 'hose', right: 'ho / Ho' });
-   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'ha'), {
-     answerFour: "hi / HI", answerThree: "ha / HA", answerTwo: "hu / HU", answerOne: "ho / HO",
-     callOne: 'holen', callTwo: 'hupen', callThree: 'hamster', callFour: 'hinten',
-     callRight: 'hamster', right: 'ha / HA' });
-   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'he'), {
-     answerFour: "he / HE", answerThree: "hi / HI", answerTwo: "ha / HA", answerOne: "ho / HO",
-     callOne: 'hof', callTwo: 'hallo', callThree: 'hieb', callFour: 'hefe',
-     callRight: 'hefe', right: 'he / HE' });
-   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hu'), {
-     answerFour: "ha / HA", answerThree: "he / HE", answerTwo: "ho / HO", answerOne: "hu / Hu",
-     callOne: 'huf', callTwo: 'honig', callThree: 'herz', callFour: 'hase',
-     callRight: 'huf', right: "hu / Hu" });
-   await setDoc(doc(readingRef, 'laute', 'uebung-hoeren', 'hi'), {
-     answerFour: "hi / HI", answerThree: "hei / HEI", answerTwo: "ha / HA", answerOne: "hu / Hu",
-     callOne: 'hupen', callTwo: 'hafen', callThree: 'heilen', callFour: 'hinein',
-     callRight: 'hinein', right: 'hi / HI' });
-   }*/
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
@@ -120,8 +99,7 @@ export class ReadPhonemeComponent implements OnInit {
   }
 
   loadExercise() {
-    let excercise = this.allExercises[this.currentQuestion]
-    this.syllableSmall = excercise.right; //variable to read
+    this.syllableSmall = this.allExercises[this.currentQuestion].right; //variable to read
     this.loadAnswers();
     this.showExercise = true;
   }
@@ -139,10 +117,9 @@ export class ReadPhonemeComponent implements OnInit {
   }
 
   checkAnswer(selection) {
-    let rightAnswer = this.allExercises[this.currentQuestion].right;
     this.answerIsGiven = true;
 
-    if (selection == rightAnswer) {
+    if (this.rightAnswerIsClicked(selection)) {
       this.mathServ.playSound('success');
       this.numberOfCorrectAnswers++;
       this.updateProgressbar();
@@ -150,13 +127,13 @@ export class ReadPhonemeComponent implements OnInit {
     }
     else {
       this.mathServ.playSound('wrong')
-      setTimeout(() => {
-        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate);
-      }, 1500);
+      setTimeout(() => this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate), 1500);
     };
-    setTimeout(() => {
-      this.nextIsAvailable = true;
-    }, 1500);
+    setTimeout(() => this.nextIsAvailable = true, 1500); //time for playing write/wrong sound of 1500ms is necessary
+  }
+
+  rightAnswerIsClicked(selection) {
+    return selection == this.allExercises[this.currentQuestion].right
   }
 
   nextExercise() {
@@ -167,12 +144,8 @@ export class ReadPhonemeComponent implements OnInit {
     this.loadExercise();
   }
 
-
-  ngOnInit(): void {
-  }
-
   helpPhoneme() {
-    if (this.syllableSmall.length == 7) {
+    if (this.syllableSmall.length == 7) { //length of 7 means syllable with 2 letters => an / AN (4xletter, 2x space, 1x /)
       let syllable = this.syllableSmall.slice(0, 2);
       let arrayOfLetters = syllable.split("")
       let helpText = `Das Wort beginnt mit einem ${arrayOfLetters[0]} und danach kommt ein ${arrayOfLetters[1]}`

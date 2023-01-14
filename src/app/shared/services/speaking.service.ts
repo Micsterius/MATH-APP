@@ -8,7 +8,6 @@ export class SpeakingService {
   rate = 0.5;
   volume: number = 100;
   speaker: number = 1;
-  voice;
   voiceName;
   voicesArray;
   speechIsRunning: boolean = false;

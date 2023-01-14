@@ -32,18 +32,11 @@ export class WriteExerciseComponent implements OnInit {
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
   word: string = '';
-  syllableBig: string = '';
   allExercises: any[] = [];
   showExercise: boolean = false;
   nextIsAvailable: boolean = false;
 
-  answerSyllableOne: string = '';
-  answerSyllableTwo: string = '';
-  answerSyllableThree: string = '';
-  answerSyllableFour: string = '';
-
   speakRate: number = 0.5;
-
   arrayOfMixedLetters: string[] = [];
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
@@ -51,12 +44,9 @@ export class WriteExerciseComponent implements OnInit {
   @ViewChild("answerButtonThree") answerButtonThree: ElementRef;
   @ViewChild("answerButtonFour") answerButtonFour: ElementRef;
 
-
-
   answer = [];
   actualUser: User;
   arrayOfLetters = [];
-
 
   constructor(
     private router: Router,
@@ -67,35 +57,18 @@ export class WriteExerciseComponent implements OnInit {
     private writingService: WriteService,
     private authService: AuthenticationService
   ) {
-    // this.setNewExercisesWordsWriting()
     this.setting = JSON.parse(localStorage.getItem('setting'));
     this.actualUser = JSON.parse(localStorage.getItem('user'))
     if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
     }
-    this.loadWords()/**/
-
+    this.loadWords()
   }
-  /*
-    async setNewExercisesWordsWriting() {
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Unten'), {
-        right: 'Unten'
-      });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Ufer'), {
-        right: 'Ufer'
-      });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Uhr'), {
-        right: 'Uhr'
-      });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Uhu'), {
-        right: 'Uhu'
-      });
-      await setDoc(doc(this.db, "schreiben", 'worte', 'uebung-worte', 'Umher'), {
-        right: 'Umher'
-      });
-    }
-*/
+
+  ngOnInit(): void {
+  }
+
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
     if (numberOfAnswersToSolveCorrect == '10') this.numberOfAnswersToSolveCorrect = 10;
@@ -141,9 +114,8 @@ export class WriteExerciseComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    if (event.previousContainer === event.container) moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -157,23 +129,29 @@ export class WriteExerciseComponent implements OnInit {
     let letters = this.answer.toString()
     let answer = letters.replace(/[,]/g, '')
     if (this.word == answer) {
-      this.checkButtonDisable = true;
-      this.mathServ.playSound('success');
-      this.numberOfCorrectAnswers++;
-      this.updateProgressbar();
-      this.answerIsGiven = true;
-      setTimeout(() => {
-        this.nextIsAvailable = true;
-      }, 1500);
+      this.answerIsRight();
+      setTimeout(() => this.nextIsAvailable = true, 1500);
       if (this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
     }
     else {
-      this.mathServ.playSound('wrong');
-      this.currentQuestion++
-      this.answer.length = 0;
-      this.arrayOfMixedLetters = this.word.split("")
-      this.mixLetters()
+      this.answerIsWrong()
     }
+  }
+
+  answerIsRight() {
+    this.checkButtonDisable = true;
+    this.mathServ.playSound('success');
+    this.numberOfCorrectAnswers++;
+    this.updateProgressbar();
+    this.answerIsGiven = true;
+  }
+
+  answerIsWrong() {
+    this.mathServ.playSound('wrong');
+    this.currentQuestion++
+    this.answer.length = 0;
+    this.arrayOfMixedLetters = this.word.split("")
+    this.mixLetters()
   }
 
   nextExercise() {
@@ -183,10 +161,6 @@ export class WriteExerciseComponent implements OnInit {
     this.currentQuestion++;
     this.loadExercise();
     this.checkButtonDisable = false;
-  }
-
-
-  ngOnInit(): void {
   }
 
   updateProgressbar() {

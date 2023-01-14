@@ -75,10 +75,7 @@ export class AuthenticationService {
           }
         });
       })
-      .catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      .catch((error) => this.openErrorDialog(error));
   }
 
   // Sign up with email/password
@@ -91,10 +88,7 @@ export class AuthenticationService {
         this.SendVerificationMail();
         this.SetUserData(result.user);
       })
-      .catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      .catch((error) => this.openErrorDialog(error));
   }
 
   // Send email verfificaiton when new user sign up
@@ -114,10 +108,7 @@ export class AuthenticationService {
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
       })
-      .catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      .catch((error) => this.openErrorDialog(error));
   }
 
   // Returns true when user is looged in and email is verified
@@ -140,17 +131,19 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user)
-
+        //necessary because login with google don't fill the parameter
         this.userData = {
           uid: result.user.uid,
           displayName: result.user.displayName
         }
         this.checkIfAdditionalUserDataExist();
       })
-      .catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      .catch((error) => this.openErrorDialog(error));
+  }
+
+  openErrorDialog(error) {
+    let dialogRef = this.dialog.open(DialogErrorsComponent, {})
+    dialogRef.componentInstance.error = error;
   }
 
   /* Setting up user data when sign in with username/password, 
@@ -194,10 +187,7 @@ export class AuthenticationService {
       .then(() => {
         this.SendVerificationMail();
         this.userDataMailChanged = true;
-      }).catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      }).catch((error) => this.openErrorDialog(error));
   }
 
   //change user data pw in firestore
@@ -205,30 +195,21 @@ export class AuthenticationService {
     updatePassword(this.userData, newPassword)
       .then(() => {
         this.SignOut();
-      }).catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      }).catch((error) => this.openErrorDialog(error));
   }
 
   //change user data name in firestore
   changeUserDataName(userName) {
     updateProfile(this.userData, { displayName: userName })
       .then(() => {
-      }).catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      }).catch((error) => this.openErrorDialog(error));
   }
 
   //change user data img in firestore
   changeUserDataImg(src) {
     updateProfile(this.userData, { photoURL: src })
       .then(() => {
-      }).catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      }).catch((error) => this.openErrorDialog(error));
   }
 
   /** SIGN IN ANONYM */
@@ -240,10 +221,7 @@ export class AuthenticationService {
         this.sayHelloToGuest = true;
         this.onAuthStateChanged();
       })
-      .catch((error) => {
-        let dialogRef = this.dialog.open(DialogErrorsComponent, {})
-        dialogRef.componentInstance.error = error;
-      });
+      .catch((error) => this.openErrorDialog(error));
   }
 
   onAuthStateChanged() {

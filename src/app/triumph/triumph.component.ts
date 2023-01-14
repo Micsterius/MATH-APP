@@ -45,7 +45,6 @@ export class TriumphComponent implements OnInit {
   }
 
   async getMedals() {
-
     let docRef = doc(this.db, "more-user-infos", this.actualUser.uid);
     let docSnap = await getDoc(docRef);
     if (docSnap.exists()) {

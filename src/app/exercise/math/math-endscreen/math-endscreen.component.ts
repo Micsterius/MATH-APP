@@ -18,13 +18,15 @@ export class MathEndscreenComponent implements OnInit {
     public trophyService: TrophyService,
     public generalService: GeneralService,
     public speakService: SpeakingService) {
+    //if user earned a trophy, it will be shown in endscreen for 3s
     if (this.trophyService.trophyEarned) this.speakService.speak(`Gut gemacht. Du hast dir eine ${this.trophyService.currentCoin} Münze verdient.`, 1)
     setTimeout(() => this.trophyService.trophyEarned = false, 3000);
-    this.generalService.inExercise = false;
+    this.generalService.inExercise = false; //Headerimages will be shown
   }
 
   ngOnInit(): void {
   }
+
   navigateToArithmetic() {
     this.router.navigate(['/arithmetic'])
     this.generalService.inExercise = true;

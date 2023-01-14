@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
 import { User } from 'firebase/auth';
-import { getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { MathService } from 'src/app/shared/services/math.service';
 import { SpeakingService } from 'src/app/shared/services/speaking.service';
@@ -31,20 +31,15 @@ export class MentalArithmeticComponent implements OnInit {
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
-  imageArrayNumberOne: string[] = [];
-  imageArrayNumberTwo: string[] = [];
 
   min: number = 2;
   max: number = 7;
-  showImages: number = 2;
   result: number;
   temporaryOperatorChoice: string;
 
   wrongAnswers: any[] = [];
 
   currentQuestion: number = 0;
-
-  chosenOperator: number = 1;
   workingOperator: number = 1;
 
   answerIsGiven: boolean = false;
@@ -62,8 +57,25 @@ export class MentalArithmeticComponent implements OnInit {
     public speakServ: SpeakingService,
     private trophyService: TrophyService,
     private authService: AuthenticationService) {
-    this.wrongAnswers.length = 0;
     this.actualUser = JSON.parse(localStorage.getItem('user'))
+    this.loadSettingsFromLocalStorage()
+    this.setStartValues()
+    this.newArithmetic();
+  }
+
+
+  ngOnInit(): void {
+  }
+
+  //these values will be set to start
+  setStartValues() {
+    this.wrongAnswers.length = 0;
+    this.mathServ.numberOfMathProblems = 1;
+    this.mathServ.numberOfRightAnswers = 0;
+  }
+
+  //If settings are saved in local storage it will be get here
+  loadSettingsFromLocalStorage() {
     this.setting = JSON.parse(localStorage.getItem('setting'))
     if (!this.setting) this.setStandardSetting();
     this.temporaryOperatorChoice = this.setting.mathOperator
@@ -71,9 +83,6 @@ export class MentalArithmeticComponent implements OnInit {
     this.showPictures();
     this.findAreaOfNumbers(this.setting.areaOfNumbersForArithmetic);
     this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
-    this.mathServ.numberOfMathProblems = 1;
-    this.mathServ.numberOfRightAnswers = 0;
-    this.newArithmetic();
   }
 
   helptext() {
@@ -83,6 +92,7 @@ export class MentalArithmeticComponent implements OnInit {
     }
   }
 
+  //the helptext is only usefull, if the images of amount are active
   helpSpeakPictures() {
     return (this.setting.showPicturesForAmount == 'yes' || this.setting.showPicturesForAmount == 'partly')
   }
@@ -94,9 +104,6 @@ export class MentalArithmeticComponent implements OnInit {
       'numberOfAnswersToSolveCorrect': '10',
       'areaOfNumbersForArithmetic': 'small'
     }
-  }
-
-  ngOnInit(): void {
   }
 
   showPictures() {
@@ -149,14 +156,7 @@ export class MentalArithmeticComponent implements OnInit {
 
   arrangeNumbersOnPosition(x, y) {
     if (this.minusOperationIsGiven()) {
-      if (x >= y) {
-        this.numberOne = x;
-        this.numberTwo = y;
-      }
-      else {
-        this.numberOne = y;
-        this.numberTwo = x;
-      }
+      this.arrangeNumberForMinusOperation(x, y)
     }
     else {
       this.numberOne = x;
@@ -165,6 +165,18 @@ export class MentalArithmeticComponent implements OnInit {
     this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, this.setting.mathOperator)
   }
 
+  arrangeNumberForMinusOperation(x, y) {
+    if (x >= y) {
+      this.numberOne = x;
+      this.numberTwo = y;
+    }
+    else {
+      this.numberOne = y;
+      this.numberTwo = x;
+    }
+  }
+
+  //If both operation is selected, it has to be looked for if plus or minus was the last operator
   changeOperator() {
     if (this.temporaryOperatorChoice == 'both') {
       if (this.plusOperationIsGiven()) {
@@ -195,44 +207,35 @@ export class MentalArithmeticComponent implements OnInit {
   }
 
   calcRightAnswer(x, y) {
-    if (this.minusOperationIsGiven()) {
-      this.arrangeForMinusOperation(x, y)
-    }
+    if (this.minusOperationIsGiven()) this.arrangeForMinusOperation(x, y)
     else {
-      let result = x + y;
-      this.mathServ.result = result;
+      this.mathServ.result = x + y;
       this.mathServ.generateRandomizedAnswers();
     }
   }
 
   arrangeForMinusOperation(x, y) {
-    if (x >= y) {
-      let result = x - y;
-      this.mathServ.result = result;
-      this.mathServ.generateRandomizedAnswers();
-    }
-    else {
-      let result = y - x;
-      this.mathServ.result = result;
-      this.mathServ.generateRandomizedAnswers();
-    }
+    if (x >= y) this.mathServ.result = x - y;
+    else this.mathServ.result = y - x;
+    this.mathServ.generateRandomizedAnswers();
   }
 
   checkAnswer(selection) {
-    let rightAnswer = this.mathServ.result;
     this.answerIsGiven = true;
-    if (selection == rightAnswer) {
+    if (this.rightAnswerIsClicked(selection)) {
       this.mathServ.playSound('success');
       this.mathServ.numberOfRightAnswers++;
       this.updateProgressbar();
-      setTimeout(() => {
-        this.showEndscreen();
-      }, 500)
+      setTimeout(() => this.showEndscreen(), 500)
     }
     else {
       this.mathServ.playSound('wrong')
       this.pushMathProblemInWrongAnswersArray()
     }
+  }
+
+  rightAnswerIsClicked(selection) {
+    return selection == this.mathServ.result
   }
 
   pushMathProblemInWrongAnswersArray() {

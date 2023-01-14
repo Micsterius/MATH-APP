@@ -19,19 +19,11 @@ export class WrongAnswerAgainComponent implements OnInit {
   showBothPictures: boolean = false;
   showOnePictures: boolean = false;
   operator: string = '+';
-  imageArrayNumberOne: string[] = [];
-  imageArrayNumberTwo: string[] = [];
-
-  min: number = 2;
-  max: number = 7;
-  showImages: number = 2;
 
   wrongAnswers: any[] = [];
 
   currentQuestion: number = 0;
   numberOfRightAnswers: number = 0;
-
-  numberOfMathProblems: number = 1;
 
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
@@ -82,18 +74,14 @@ export class WrongAnswerAgainComponent implements OnInit {
     this.mathServ.fillArrayOfImageAmount(this.numberOne, this.numberTwo, operatorForAmount)
   }
 
-  transformOperator(){
-    if(this.operator == '+') return 'plus'
+  transformOperator() {
+    if (this.operator == '+') return 'plus'
     else return 'minus'
   }
 
-
-
   checkAnswer(selection) {
-    let rightAnswer = this.mathServ.result;
     this.answerIsGiven = true;
-
-    if (selection == rightAnswer) {
+    if (this.rightAnswerIsClicked(selection)) {
       this.mathServ.playSound('success');
       this.numberOfRightAnswers++;
       this.updateProgressbar();
@@ -102,9 +90,13 @@ export class WrongAnswerAgainComponent implements OnInit {
     }
     else {
       this.mathServ.playSound('wrong');
-      this.pushMathProblemInWrongAnswersArray();
-      this.wrongAnswers.shift();
+      this.pushMathProblemInWrongAnswersArray(); //push this wrong answers to the array on the last position
+      this.wrongAnswers.shift(); //delete the wrong answer in the array to have this answer only on the end
     };
+  }
+
+  rightAnswerIsClicked(selection) {
+    return selection == this.mathServ.result
   }
 
   pushMathProblemInWrongAnswersArray() {
@@ -159,6 +151,7 @@ export class WrongAnswerAgainComponent implements OnInit {
     }
   }
 
+  //the helptext is only usefull, if the images of amount are active
   helpSpeakPictures() {
     return (this.setting.showPicturesForAmount == 'yes' || this.setting.showPicturesForAmount == 'partly')
   }

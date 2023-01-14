@@ -43,6 +43,14 @@ export class SettingsComponent implements OnInit {
     public mathServ: MathService,
     private generalService: GeneralService
   ) {
+    this.loadSetting();
+    this.generalService.inExercise = false;
+  }
+
+  ngOnInit(): void {
+  }
+
+  loadSetting() {
     let setting = JSON.parse(localStorage.getItem('setting'));
     if (setting) {
       this.areaOfNumbersForArithmetic = setting.areaOfNumbersForArithmetic;
@@ -53,11 +61,7 @@ export class SettingsComponent implements OnInit {
       this.rangeValueRate = Number(setting.rangeValueRate)
       this.voice = setting.voice
       if (this.setting.areaOfNumbersForArithmetic == 'high') this.disableBtnAmount = true;
-      this.generalService.inExercise = false;
     }
-  }
-
-  ngOnInit(): void {
   }
 
   getRangeVolume() {
@@ -67,11 +71,10 @@ export class SettingsComponent implements OnInit {
 
   getRangeRate() {
     this.actualizeSettingObj();
-    this.speakServ.speak('Willkommen', this.rangeValueRate/100)
+    this.speakServ.speak('Willkommen', this.rangeValueRate / 100)
   }
 
   selectVoice(name) {
-   /* let voice = Number(nbr)*/
     this.voice = name
     this.speakServ.changeVoice(name)
     this.speakServ.speakSettings('Hallo', 1)
@@ -79,7 +82,7 @@ export class SettingsComponent implements OnInit {
     this.speakServ.selection = name;
   }
 
-  infoSpeech(){
+  infoSpeech() {
     let text = 'Leider stellt dein Browser nur eine deutsche Stimme zur Verfügung. Wenn du eine andere Stimme willst, öffne die App mit dem Browser Microsoft Edge'
     this.speakServ.speakSettingsInfo(text, 0.9)
   }

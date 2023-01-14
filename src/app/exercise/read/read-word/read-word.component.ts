@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { initializeApp } from 'firebase/app';
-import { collection,getFirestore, onSnapshot, query } from 'firebase/firestore';
+import { collection, getFirestore, onSnapshot, query } from 'firebase/firestore';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { MathService } from 'src/app/shared/services/math.service';
 import { ReadingService } from 'src/app/shared/services/reading.service';
@@ -29,7 +29,6 @@ export class ReadWordComponent implements OnInit {
   answerIsGiven: boolean = false;
   progressBarValue: number = 0;
   word: string = '';
-  syllableBig: string = '';
   allExercises: any[] = [];
   showExercise: boolean = false;
   nextIsAvailable: boolean = false;
@@ -40,8 +39,6 @@ export class ReadWordComponent implements OnInit {
   answerSyllableFour: string = '';
 
   speakRate: number = 0.5;
-
-  loadFinished: boolean = false;
   actualUser: User;
 
   @ViewChild("answerButtonOne") answerButtonOne: ElementRef;
@@ -57,45 +54,21 @@ export class ReadWordComponent implements OnInit {
     private trophyService: TrophyService,
     private authService: AuthenticationService
   ) {
-    //  this.setNewExercisesWords()
-    this.setting = JSON.parse(localStorage.getItem('setting'));
-    this.actualUser = JSON.parse(localStorage.getItem('user'))
+    this.loadSettings();
+    this.actualUser = JSON.parse(localStorage.getItem('user'));
+    this.loadWords();
+  }
 
+  ngOnInit(): void {
+  }
+
+  loadSettings() {
+    this.setting = JSON.parse(localStorage.getItem('setting'));
     if (this.setting) {
       this.findNumberOfAnswersToSolveCorrect(this.setting.numberOfAnswersToSolveCorrect);
       this.speakRate = this.setting.rangeValueRate
     }
-    this.loadWords()
-
   }
-
-  /*async setNewExercisesWords() {
-    await setDoc(doc(this.db, "lesen", 'worte', 'uebung-worte', 'Wagen'), {
-      answerFour: "4", answerThree: "3", answerTwo: "2", answerOne: "1",
-      callOne: 'Wandel', callTwo: 'Was', callThree: 'Wagen', callFour: 'Wer',
-      callRight: 'Wagen', right: '3'
-    });
-    await setDoc(doc(this.db, "lesen", 'worte', 'uebung-worte', 'Vorne'), {
-      answerFour: "4", answerThree: "3", answerTwo: "2", answerOne: "1",
-      callOne: 'Vase', callTwo: 'Vorne', callThree: 'Voran', callFour: 'Vage',
-      callRight: 'Vorne', right: '2'
-    });
-    await setDoc(doc(this.db, "lesen", 'worte', 'uebung-worte', 'Unten'), {
-      answerFour: "4", answerThree: "3", answerTwo: "2", answerOne: "1",
-      callOne: 'Ufer', callTwo: 'Unser', callThree: 'Umstand', callFour: 'Unten',
-      callRight: 'Unten', right: '4'
-    });
-    await setDoc(doc(this.db, "lesen", 'worte', 'uebung-worte', 'Üben'), {
-      answerFour: "4", answerThree: "3", answerTwo: "2", answerOne: "1",
-      callOne: 'Übel', callTwo: 'Überraschung', callThree: 'Üben', callFour: 'Über',
-      callRight: 'Üben', right: "3"
-    });
-    await setDoc(doc(this.db, "lesen", 'worte', 'uebung-worte', 'Ändern'), {
-      answerFour: "4", answerThree: "3", answerTwo: "2", answerOne: "1",
-      callOne: 'Ändern', callTwo: 'Ärmel', callThree: 'Ärger', callFour: 'ähnlich',
-      callRight: 'Ändern', right: '1'
-    });
-  }*/
 
   findNumberOfAnswersToSolveCorrect(numberOfAnswersToSolveCorrect) {
     if (numberOfAnswersToSolveCorrect == '5') this.numberOfAnswersToSolveCorrect = 5;
@@ -143,25 +116,23 @@ export class ReadWordComponent implements OnInit {
   }
 
   checkAnswer(selection) {
-    let rightAnswer = this.allExercises[this.currentQuestion].right;
     this.answerIsGiven = true;
 
-    if (selection == rightAnswer) {
+    if (this.rightAnswerIsClicked(selection)) {
       this.mathServ.playSound('success');
       this.numberOfCorrectAnswers++;
       this.updateProgressbar();
       if (this.numberOfCorrectAnswers == this.numberOfAnswersToSolveCorrect) this.showEndscreen()
-      console.log(this.currentQuestion)
     }
     else {
       this.mathServ.playSound('wrong')
-      setTimeout(() => {
-        this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate / 100);
-      }, 1500);
+      setTimeout(() => this.speakServ.speak(this.allExercises[this.currentQuestion].callRight, this.speakRate / 100), 1500);
     };
-    setTimeout(() => {
-      this.nextIsAvailable = true;
-    }, 1500);
+    setTimeout(() => this.nextIsAvailable = true, 1500);
+  }
+
+  rightAnswerIsClicked(selection) {
+    return selection == this.allExercises[this.currentQuestion].right;
   }
 
   nextExercise() {
@@ -170,10 +141,6 @@ export class ReadWordComponent implements OnInit {
     this.resetAnswerButtons();
     this.currentQuestion++;
     this.loadExercise();
-  }
-
-
-  ngOnInit(): void {
   }
 
   updateProgressbar() {
@@ -207,7 +174,7 @@ export class ReadWordComponent implements OnInit {
     this.readServ.numberOfRightAnswersReading = this.numberOfCorrectAnswers
     this.currentQuestion++
     this.readServ.numberOfTasks = this.currentQuestion
-    if(this.authService.additionUserDataExist()) this.earnTrophy();// guests don't get trophys because guests don't have additionUserData
+    if (this.authService.additionUserDataExist()) this.earnTrophy();// guests don't get trophys because guests don't have additionUserData
     else {
       let infoText = 'Bitte registriere dich, um für deine Leistung Münzen zu erhalten.'
       this.speakServ.speak(infoText, 1)
