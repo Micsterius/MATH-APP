@@ -21,18 +21,22 @@ export class StartsceenComponent implements OnInit {
     {
       'nameOne': 'Kopfrechnen',
       'linkOne': 'arithmetic',
+      'icon': 'calculate'
     },
     {
       'nameOne': 'Silben lesen',
       'linkOne': 'reading-phenomene',
+      'icon': 'local_library'
     },
     {
       'nameOne': 'Wörter lesen',
       'linkOne': 'reading-words',
+      'icon': 'local_library'
     },
     {
       'nameOne': 'Wörter schreiben',
       'linkOne': 'writing-words',
+      'icon': 'edit'
     }
   ]
 

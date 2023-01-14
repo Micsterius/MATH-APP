@@ -5,15 +5,19 @@
         <swiper [navigation]="true" [pagination]="true" class="mySwiper">
             <ng-template swiperSlide *ngFor="let button of buttons">
                 <div class="button-box">
-                    <button (click)="saveCurrentExercise(button.linkOne)" class="bg-c-1 color-white"
-                        [routerLink]="[button.linkOne]">{{button.nameOne}}</button>
+                    <button (click)="saveCurrentExercise(button.linkOne)" class="bg-c-1 color-white btn-start-exercise"
+                        [routerLink]="[button.linkOne]">{{button.nameOne}} <mat-icon>{{button.icon}}
+                        </mat-icon></button>
                 </div>
             </ng-template>
         </swiper>
     </div>
 
     <div class="button-box">
-        <button class="bg-c-1 color-white" [routerLink]="['settings']">Einstellungen</button>
-        <button class="bg-c-1 color-white" [routerLink]="['triumph']">Erfolge</button>
+        <button class="bg-c-1 color-white btn-start-exercise" [routerLink]="['settings']">Einstellungen<mat-icon>settings_suggest
+        </mat-icon></button>
+        <button class="bg-c-1 color-white btn-start-exercise" [routerLink]="['triumph']">Erfolge<mat-icon>emoji_events
+        </mat-icon></button>
     </div>
 </div>
+
