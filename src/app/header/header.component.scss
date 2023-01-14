@@ -128,3 +128,14 @@ mat-card-title {
 ::ng-deep .mat-menu-content{
     padding:0px !important;
   }
+
+  .header-startscreen-menu-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    div{
+        margin-left: 4px;
+        font-size: 18px;
+    }
+  }
