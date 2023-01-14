@@ -14,19 +14,19 @@
             fontIcon="volume_up"></mat-icon>
     </div>
     <div class="answer-main-container">
-        <div class="example-container">
+        <div class="exercise-container">
             <div cdkDropList cdkDropListOrientation="horizontal" #answerList="cdkDropList" [cdkDropListData]="answer"
-                [cdkDropListConnectedTo]="[letterList]" class="example-list" (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of answer" cdkDrag
+                [cdkDropListConnectedTo]="[letterList]" class="exercise-list answer-container" (cdkDropListDropped)="drop($event)">
+                <div class="exercise-box bg-c-2" *ngFor="let item of answer" cdkDrag
                     (click)="speakServ.speak(item, speakRate/100)">
                     {{item}}</div>
             </div>
         </div>
-        <div class="example-container">
+        <div class="exercise-container">
             <div cdkDropList cdkDropListOrientation="horizontal" #letterList="cdkDropList"
-                [cdkDropListData]="arrayOfMixedLetters" [cdkDropListConnectedTo]="[answerList]" class="example-list"
+                [cdkDropListData]="arrayOfMixedLetters" [cdkDropListConnectedTo]="[answerList]" class="exercise-list answer-container"
                 (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let item of arrayOfMixedLetters" cdkDrag
+                <div class="exercise-box bg-c-2" *ngFor="let item of arrayOfMixedLetters" cdkDrag
                     (click)="speakServ.speak(item, speakRate/100)">{{item}}</div>
             </div>
             <div class="check-arrow" *ngIf="arrayOfMixedLetters.length == 0 && !checkButtonDisable"
