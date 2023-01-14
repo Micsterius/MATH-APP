@@ -15,12 +15,14 @@ import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.
 import { ReadWordComponent } from './exercise/read/read-word/read-word.component';
 import { WriteEndscreenComponent } from './exercise/write/write-endscreen/write-endscreen.component';
 import { WriteExerciseComponent } from './exercise/write/write-exercise/write-exercise.component';
+import { ImprintComponent } from './imprint/imprint.component';
 // route guard
 
 
 
 const routes: Routes = [
   { path: '', component: StartsceenComponent},
+  { path: 'imprint', component: ImprintComponent},
   { path: 'register-user', component: SignUpComponent },
   { path: 'personal', component: PersonalComponent },
   { path: 'forgot-password', component: ForgetPasswordComponent },

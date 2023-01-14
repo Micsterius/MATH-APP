@@ -57,6 +57,7 @@ import { ReadPhonemeComponent } from './exercise/read/read-phoneme/read-phoneme.
 import { WrongAnswerAgainComponent } from './exercise/math/wrong-answer-again/wrong-answer-again.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogErrorsComponent } from './dialog-errors/dialog-errors.component';
+import { ImprintComponent } from './imprint/imprint.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DialogErrorsComponent } from './dialog-errors/dialog-errors.component';
     ReadWordComponent,
     ReadPhonemeComponent,
     WrongAnswerAgainComponent,
-    DialogErrorsComponent
+    DialogErrorsComponent,
+    ImprintComponent
   ],
   imports: [
     BrowserAnimationsModule,
