@@ -155,6 +155,7 @@ export class WriteExerciseComponent implements OnInit {
   }
 
   nextExercise() {
+    this.speakServ.stop()
     this.answer.length = 0
     this.answerIsGiven = false;
     this.nextIsAvailable = false;
