@@ -29,9 +29,8 @@ export class SpeakingService {
   async loadAllVoices() {
     const allVoicesObtained = new Promise(function (resolve, reject) {
       let voices = window.speechSynthesis.getVoices();
-      if (voices.length !== 0) {
-        resolve(voices);
-      } else {
+      if (voices.length !== 0) resolve(voices);
+      else {
         window.speechSynthesis.addEventListener("voiceschanged", function () {
           voices = window.speechSynthesis.getVoices();
           resolve(voices);
@@ -40,12 +39,12 @@ export class SpeakingService {
     });
     allVoicesObtained.then(voices => {
       this.voicesArray = voices;
-      console.log(this.voicesArray)
       this.findAllGermanVoices()
     });
   }
 
   findAllGermanVoices() {
+    this.voicesGerman.length = 0;
     this.voicesArray.forEach(voice => {
       let voiceName = voice.name.split(' ', 5)
       let check = voiceName.some(text => text == 'German' || text == 'Deutsch' || text == 'german' || text == 'deutsch' || text == 'Katja' || text == 'Jan' || text == 'Conrad' || text == 'Ingrid' || text == 'Amala' || text == 'Jonas')
