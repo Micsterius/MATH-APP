@@ -10,7 +10,7 @@
                         <div class="sub-headline-settings">
                             Anzahl Aufgaben richtig zu lösen
                         </div>
-                        <mat-button-toggle-group
+                        <mat-button-toggle-group class="no-border"
                             value="{{(setting.numberOfAnswersToSolveCorrect) ? (setting.numberOfAnswersToSolveCorrect) : '10'}}">
                             <mat-button-toggle (click)="getNumberOfAnswersToSolveCorrect('5')"
                                 class="color-white bg-c-1 border-round-left" value="5">5</mat-button-toggle>
@@ -58,7 +58,7 @@
                         <div class="sub-headline-settings">
                             Rechnen mit Zahlen
                         </div>
-                        <mat-button-toggle-group
+                        <mat-button-toggle-group class="no-border"
                             value="{{(setting.areaOfNumbersForArithmetic) ? (setting.areaOfNumbersForArithmetic) : 'middle'}}">
                             <mat-button-toggle (click)="getAreaOfNumbersForArithmetic('small')"
                                 class="color-white bg-c-1 border-round-left" value="small">2 -
@@ -74,7 +74,7 @@
                         <div class="sub-headline-settings">
                             Mengen bildlich darstellen
                         </div>
-                        <mat-button-toggle-group
+                        <mat-button-toggle-group class="no-border"
                             value="{{(setting.showPicturesForAmount) ? (setting.showPicturesForAmount) : 'yes'}}">
                             <mat-button-toggle [disabled]="disableBtnAmount" (click)="getShowPicturesForAmount('yes')"
                                 class="color-white bg-c-1 border-round-left" value="yes">Ja</mat-button-toggle>
@@ -89,7 +89,7 @@
                         <div class="sub-headline-settings">
                             Rechenarten
                         </div>
-                        <mat-button-toggle-group value="{{(setting.mathOperator) ? (setting.mathOperator) : 'plus'}}">
+                        <mat-button-toggle-group value="{{(setting.mathOperator) ? (setting.mathOperator) : 'plus'}}" class="no-border">
                             <mat-button-toggle (click)="getOperator('plus')"
                                 class="color-white bg-c-1 border-round-left" value="plus">+</mat-button-toggle>
                             <mat-button-toggle (click)="getOperator('minus')" class="color-white bg-c-1" value="minus">-

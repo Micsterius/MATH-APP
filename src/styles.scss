@@ -1,23 +1,22 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 :root {
-    --main-color: #870A30;
+    --main-color: #294571;
     --main-color-rgb: 250, 39, 89;
-    --secondary-color: #F2C5E0;
+    --secondary-color: #afa1bd;
     --secondary-color-rgb: 255, 235, 240;
-    --background-color: #870A30;
-    --body-background-color: #EC8FD0;
+    --background-color: #faf3fe;
 }
 
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;
-    background-color: var(--body-background-color);
+    background-color: var(--background-color);
 }
 
 .bg-c-1 {
-    background-color: var(--background-color);
+    background-color: var(--main-color);
 }
 
 .bg-c-2 {
@@ -393,8 +392,4 @@ mat-icon {
         cursor: pointer;
         background-color: var(--main-color);
     }
-}
-
-.background-head-imgs{
-    background-image: radial-gradient(#EDE3FF 5%, #870A30 60%); 
 }

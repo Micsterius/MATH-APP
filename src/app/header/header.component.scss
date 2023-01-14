@@ -1,10 +1,10 @@
-.main-header-container{
+.main-header-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.mat-card-box-header{
+.mat-card-box-header {
     width: 100%;
 }
 
@@ -56,9 +56,10 @@ mat-card-title {
     align-items: center;
     padding-top: 12px;
     padding-bottom: 12px;
+    background-image: radial-gradient(var(--secondary-color) 5%, var(--main-color) 60%);
 }
 
-.icon-header-home{
+.icon-header-home {
     position: absolute;
     left: 24px;
     top: 50%;
@@ -74,7 +75,8 @@ mat-card-title {
         }
     }
 }
-.icon-header-home{
+
+.icon-header-home {
     position: absolute;
     left: 24px;
     top: 50%;
@@ -91,52 +93,34 @@ mat-card-title {
     }
 }
 
-.icon-header-menu{
+.icon-header-menu {
+    display: flex;
     position: absolute;
     right: 24px;
     top: 50%;
     transform: translate(0%, -50%);
 }
 
-@keyframes backgroundColorPalette {
-    0% {
-      color: rgba($color: #3946a8, $alpha: 1.0);;
-    }
-    10% {
-        color: rgba($color: #3946a8, $alpha: 0.8);
-    }
-    20% {
-        color: rgba($color: #3946a8, $alpha: 0.6);
-    }
-    30% {
-        color: rgba($color: #3946a8, $alpha: 0.4);
-    }
-    40% {
-        color: rgba($color: #3946a8, $alpha: 0.2);
-    }
-    50% {
-        color: rgba($color: #3946a8, $alpha: 0.0);
-    }
-    60% {
-        color: rgba($color: #3946a8, $alpha: 0.2);
-    }
-    70% {
-        color: rgba($color: #3946a8, $alpha: 0.4);
-    }
-    80% {
-        color: rgba($color: #3946a8, $alpha: 0.6);
-    }
-    90% {
-        color: rgba($color: #3946a8, $alpha: 0.8);
-    }
-    100% {
-        color: rgba($color: #3946a8, $alpha: 1.0);
-    }
-  }
+.mg16 {
+    margin-right: 16px;
+}
 
-.flash-icon{
-    animation-name: backgroundColorPalette;
-    animation-duration: 0.8s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+.btn-burgundy {
+    background-color: #870A30;
+    color: white;
+}
+
+.btn-blue {
+    background-color: #294571;
+    color: white;
+}
+
+.btn-orange {
+    background-color: #fe8801;
+    color: white;
+}
+
+.btn-darkviolett {
+    background-color: #42324f;
+    color: white;
 }

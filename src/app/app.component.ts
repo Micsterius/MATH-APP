@@ -30,11 +30,11 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    this.loadColor();
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
     if (window.innerWidth < 350 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
     if (window.innerHeight < 700 && !this.dialogScreenSizeIsOpen) this.openDialogScreenSize()
-
     if (window.innerWidth >= 350 && window.innerHeight >= 700) this.closeDialog()
   }
 
@@ -61,5 +61,23 @@ export class AppComponent {
     this.speakService.stop();
     this.generalService.timeStampDialogScreenSize = 0;
     this.router.navigate(['']) // navigate to startscreen
+  }
+
+  getMainColor() {
+    return localStorage.getItem('mainColor');
+  }
+
+  getSecColor() {
+    return localStorage.getItem('secColor');
+  }
+
+  getBackgroundColor() {
+    return localStorage.getItem('backgroundColor')
+  }
+
+  loadColor() {
+    document.documentElement.style.setProperty('--main-color', this.getMainColor());
+    document.documentElement.style.setProperty('--secondary-color', this.getSecColor());
+    document.documentElement.style.setProperty('--background-color', this.getBackgroundColor());
   }
 }

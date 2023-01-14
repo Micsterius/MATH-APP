@@ -6,26 +6,38 @@
                     <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
                 </div>
                 <mat-card-title class="color-white">Lern App</mat-card-title>
-                <div class="icon-header-menu color-white">
-                    <mat-icon [ngClass]="{'flash-icon': generalService.highlightSettingsButton}" mat-icon-button
-                        [matMenuTriggerFor]="menu" fontIcon="settings" *ngIf="authService.userData as user">
-                    </mat-icon>
+                <div class="icon-header-menu">
+                    <div class="color-white mg16">
+                        <mat-icon mat-icon-button [matMenuTriggerFor]="color" fontIcon="format_color_fill">
+                        </mat-icon>
+                    </div>
+                    <mat-menu #color="matMenu">
+                        <button class="btn-burgundy" (click)="themeBurgundy()" mat-menu-item>Burgundy</button>
+                        <button class="btn-blue" (click)="themeBlue()" mat-menu-item>Violett</button>
+                        <button class="btn-orange" (click)="themeOrange()" mat-menu-item>Orange</button>
+                        <button class="btn-darkviolett" (click)="themeDarkViolett()" mat-menu-item>DarkViolett</button>
+                    </mat-menu>
+                    <div class="color-white">
+                        <mat-icon [ngClass]="{'flash-icon': generalService.highlightSettingsButton}" mat-icon-button
+                            [matMenuTriggerFor]="menu" fontIcon="settings" *ngIf="authService.userData as user">
+                        </mat-icon>
+                    </div>
+                    <mat-menu #menu="matMenu" xPosition="before">
+                        <button mat-menu-item>
+                            <mat-icon>person</mat-icon>
+                            <span routerLink="/personal">Dein Profil</span>
+                        </button>
+                        <button mat-menu-item (click)="authService.SignOut()">
+                            <mat-icon>logout</mat-icon>
+                            <span>Ausloggen</span>
+                        </button>
+                    </mat-menu>
                 </div>
-                <mat-menu #menu="matMenu" xPosition="before">
-                    <button mat-menu-item>
-                        <mat-icon>person</mat-icon>
-                        <span routerLink="/personal">Dein Profil</span>
-                    </button>
-                    <button mat-menu-item (click)="authService.SignOut()">
-                        <mat-icon>logout</mat-icon>
-                        <span>Ausloggen</span>
-                    </button>
-                </mat-menu>
             </div>
         </mat-card>
     </div>
 
-    <div class="head-imgs background-head-imgs bg-c-1-light w450" *ngIf="!generalService.inExercise">
+    <div class="head-imgs bg-c-1-light w450" *ngIf="!generalService.inExercise">
         <img src="./assets/img/counting-1.png" class="card-img-top" id="header-img">
         <img src="./assets/img/counting-2.png" class="card-img-top" id="header-img2">
         <img src="./assets/img/counting-3.png" class="card-img-top" id="header-img3">

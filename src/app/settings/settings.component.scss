@@ -62,7 +62,7 @@ mat-button-toggle {
         font-size: 36px;
         color: white;
         border-radius: 100%;
-        background-color: #E91E63;
+        background-color: var(--main-color);
     }
 
     &:hover {
@@ -79,17 +79,17 @@ mat-button-toggle {
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #FA2759;
+    background-color: var(--main-color);
     width: 10px;
     height: 10px;
 }
 
 .swiper-button-next{
-    color: #FA2759;
+    color: var(--main-color);
 }
 
 .swiper-button-prev{
-    color: #FA2759;
+    color: var(--main-color);
 }
 
 .my-swiper {
@@ -123,15 +123,15 @@ mat-button-toggle {
 }
 
 .mat-accent .mat-slider-track-fill {
-    background-color: #E91E63 !important;
+    background-color: var(--main-color) !important;
 }
 
 .mat-slider-thumb-label {
-    background-color: #E91E63 !important;
+    background-color: var(--main-color) !important;
 }
 
 .mat-slider-thumb {
-    background-color: #E91E63 !important;
+    background-color: var(--main-color) !important;
 }
 
 .opacity-05{
@@ -151,4 +151,8 @@ mat-button-toggle {
     height: 50px;
     width: 50px;
     font-size: 50px;
+}
+
+.no-border{
+    border: none !important;
 }

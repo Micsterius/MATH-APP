@@ -16,17 +16,17 @@ h1 {
 }
 
 .swiper-pagination-bullet-active {
-    background-color: #FA2759;
+    background-color: var(--main-color);
     width: 10px;
     height: 10px;
 }
 
 .swiper-button-next{
-    color: #FA2759;
+    color: var(--main-color);
 }
 
 .swiper-button-prev{
-    color: #FA2759;
+    color: var(--main-color);
 }
 
 .my-swiper {
