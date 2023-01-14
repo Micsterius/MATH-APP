@@ -36,8 +36,6 @@ export class AuthenticationService {
   name = new FormControl('', [Validators.required, Validators.maxLength(5)]);
   phone = new FormControl('', [Validators.required, Validators.pattern('[- +()0-9]+')]);
   showLoginArea: boolean = true;
-  sayHelloToUser: boolean = false;
-  sayHelloToGuest: boolean = false;
   userDataMailChanged: boolean = false;
 
   constructor(
@@ -71,7 +69,6 @@ export class AuthenticationService {
           if (user) {
             await this.checkIfAdditionalUserDataExist()
             this.showLoginArea = false;
-            this.sayHelloToUser = true;
           }
         });
       })
@@ -121,7 +118,6 @@ export class AuthenticationService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       this.showLoginArea = false;
-      this.sayHelloToUser = true;
     });
   }
 
@@ -218,7 +214,6 @@ export class AuthenticationService {
       .then(() => {
         // Signed in..
         this.showLoginArea = false;
-        this.sayHelloToGuest = true;
         this.onAuthStateChanged();
       })
       .catch((error) => this.openErrorDialog(error));
