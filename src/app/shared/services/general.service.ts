@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GeneralService {
-  highlightSettingsButton: boolean = false;
   currentExercise: string = '';
   inExercise: boolean = false;
   timeStampDialogScreenSize = 0;
