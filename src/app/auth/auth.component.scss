@@ -1,7 +1,96 @@
-.auth-container-total{
+.auth-container-total {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
+}
+
+.login-icon {
+    position: absolute;
+    left: 20%;
+    top: 20%;
+
+    @media (max-width: 1200px) {
+        left: 72px;
+        top: 54px;
+    }
+
+    @media (max-width: 650px) {
+        left: 36px;
+        top: 24px;
+    }
+
+    @media (max-width: 450px) {
+        top: 0px;
+    }
+}
+
+.login-icon img {
+    height: 200px;
+    object-fit: cover;
+
+    @media (max-width: 500px) {
+        height: 140px;
+    }
+}
+
+.login-icon-1 {
+    position: absolute;
+    right: 20%;
+    top: 20%;
+
+    @media (max-width: 900px) {
+        right: 8%;
+    }
+
+    @media (max-width: 500px) {
+        right: 12px;
+        top: 12px;
+    }
+}
+
+.login-icon-2 {
+    position: absolute;
+    right: 20%;
+    bottom: 15%;
+
+    @media (max-width: 900px) {
+        right: 10%;
+    }
+
+    @media (max-width: 550px) {
+        right: 5%;
+    }
+
+    @media (max-width: 500px) {
+        right: 8px;
+        bottom: 12px;
+    }
+}
+
+.login-icon-3 {
+    position: absolute;
+    bottom: 20%;
+    left: 30%;
+
+    @media (max-width: 1200px) {
+        left: 15%;
+    }
+    @media (max-width: 600px) {
+        left: 5%;
+    }
+    @media (max-width: 500px) {
+        left: 24px;
+        bottom: 8px;
+    }
+}
+
+.login-icon-nbr {
+    height: 150px;
+    object-fit: cover;
+
+    @media (max-width: 700px) {
+        height: 100px;
+    }
 }
